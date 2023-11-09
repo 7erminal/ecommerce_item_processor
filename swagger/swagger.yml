@@ -1,0 +1,1400 @@
+swagger: "2.0"
+info:
+  title: beego Test API
+  description: |
+    beego has a very cool tools to autogenerate documents for your API
+  version: 1.0.0
+  termsOfService: http://beego.me/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /categories/:
+    get:
+      tags:
+      - categories
+      description: |-
+        get Categories
+        <br>
+      operationId: CategoriesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categories'
+        "403":
+          description: ""
+    post:
+      tags:
+      - categories
+      description: |-
+        create Categories
+        <br>
+      operationId: CategoriesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Categories content
+        required: true
+        schema:
+          $ref: '#/definitions/models.CategoriesDTO'
+      responses:
+        "201":
+          description: '{int} models.Categories'
+        "403":
+          description: body is empty
+  /categories/{id}:
+    get:
+      tags:
+      - categories
+      description: |-
+        get Categories by id
+        <br>
+      operationId: CategoriesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categories'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - categories
+      description: |-
+        update the Categories
+        <br>
+      operationId: CategoriesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Categories content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Categories'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categories'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - categories
+      description: |-
+        delete the Categories
+        <br>
+      operationId: CategoriesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /currencies/:
+    get:
+      tags:
+      - currencies
+      description: |-
+        get Currencies
+        <br>
+      operationId: CurrenciesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Currencies'
+        "403":
+          description: ""
+    post:
+      tags:
+      - currencies
+      description: |-
+        create Currencies
+        <br>
+      operationId: CurrenciesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Currencies content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Currencies'
+      responses:
+        "201":
+          description: '{int} models.Currencies'
+        "403":
+          description: body is empty
+  /currencies/{id}:
+    get:
+      tags:
+      - currencies
+      description: |-
+        get Currencies by id
+        <br>
+      operationId: CurrenciesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Currencies'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - currencies
+      description: |-
+        update the Currencies
+        <br>
+      operationId: CurrenciesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Currencies content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Currencies'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Currencies'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - currencies
+      description: |-
+        delete the Currencies
+        <br>
+      operationId: CurrenciesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /features/:
+    get:
+      tags:
+      - features
+      description: |-
+        get Features
+        <br>
+      operationId: FeaturesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Features'
+        "403":
+          description: ""
+    post:
+      tags:
+      - features
+      description: |-
+        create Features
+        <br>
+      operationId: FeaturesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Features content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Features'
+      responses:
+        "201":
+          description: '{int} models.Features'
+        "403":
+          description: body is empty
+  /features/{id}:
+    get:
+      tags:
+      - features
+      description: |-
+        get Features by id
+        <br>
+      operationId: FeaturesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Features'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - features
+      description: |-
+        update the Features
+        <br>
+      operationId: FeaturesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Features content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Features'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Features'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - features
+      description: |-
+        delete the Features
+        <br>
+      operationId: FeaturesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /item-features/:
+    get:
+      tags:
+      - item-features
+      description: |-
+        get Item_features
+        <br>
+      operationId: Item_featuresController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_features'
+        "403":
+          description: ""
+    post:
+      tags:
+      - item-features
+      description: |-
+        create Item_features
+        <br>
+      operationId: Item_featuresController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Item_features content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_features'
+      responses:
+        "201":
+          description: '{int} models.Item_features'
+        "403":
+          description: body is empty
+  /item-features/{id}:
+    get:
+      tags:
+      - item-features
+      description: |-
+        get Item_features by id
+        <br>
+      operationId: Item_featuresController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_features'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - item-features
+      description: |-
+        update the Item_features
+        <br>
+      operationId: Item_featuresController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Item_features content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_features'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_features'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - item-features
+      description: |-
+        delete the Item_features
+        <br>
+      operationId: Item_featuresController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /item-images/:
+    get:
+      tags:
+      - item-images
+      description: |-
+        get Item_images
+        <br>
+      operationId: Item_imagesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_images'
+        "403":
+          description: ""
+    post:
+      tags:
+      - item-images
+      description: |-
+        create Item_images
+        <br>
+      operationId: Item_imagesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Item_images content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_images'
+      responses:
+        "201":
+          description: '{int} models.Item_images'
+        "403":
+          description: body is empty
+  /item-images/{id}:
+    get:
+      tags:
+      - item-images
+      description: |-
+        get Item_images by id
+        <br>
+      operationId: Item_imagesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_images'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - item-images
+      description: |-
+        update the Item_images
+        <br>
+      operationId: Item_imagesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Item_images content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_images'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_images'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - item-images
+      description: |-
+        delete the Item_images
+        <br>
+      operationId: Item_imagesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /item-purposes/:
+    get:
+      tags:
+      - item-purposes
+      description: |-
+        get Item_purposes
+        <br>
+      operationId: Item_purposesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_purposes'
+        "403":
+          description: ""
+    post:
+      tags:
+      - item-purposes
+      description: |-
+        create Item_purposes
+        <br>
+      operationId: Item_purposesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Item_purposes content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_purposes'
+      responses:
+        "201":
+          description: '{int} models.Item_purposes'
+        "403":
+          description: body is empty
+  /item-purposes/{id}:
+    get:
+      tags:
+      - item-purposes
+      description: |-
+        get Item_purposes by id
+        <br>
+      operationId: Item_purposesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_purposes'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - item-purposes
+      description: |-
+        update the Item_purposes
+        <br>
+      operationId: Item_purposesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Item_purposes content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_purposes'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_purposes'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - item-purposes
+      description: |-
+        delete the Item_purposes
+        <br>
+      operationId: Item_purposesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /items/:
+    get:
+      tags:
+      - items
+      description: |-
+        get Items
+        <br>
+      operationId: ItemsController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Items'
+        "403":
+          description: ""
+    post:
+      tags:
+      - items
+      description: |-
+        create Items
+        <br>
+      operationId: ItemsController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Items content
+        required: true
+        schema:
+          $ref: '#/definitions/models.ItemsDTO'
+      responses:
+        "201":
+          description: '{int} models.ItemsResponseDTO'
+        "403":
+          description: body is empty
+  /items/{id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Items by id
+        <br>
+      operationId: ItemsController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Items'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - items
+      description: |-
+        update the Items
+        <br>
+      operationId: ItemsController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Items content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Items'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Items'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - items
+      description: |-
+        delete the Items
+        <br>
+      operationId: ItemsController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+  /purposes/:
+    get:
+      tags:
+      - purposes
+      description: |-
+        get Purposes
+        <br>
+      operationId: PurposesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Purposes'
+        "403":
+          description: ""
+    post:
+      tags:
+      - purposes
+      description: |-
+        create Purposes
+        <br>
+      operationId: PurposesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Purposes content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Purposes'
+      responses:
+        "201":
+          description: '{int} models.Purposes'
+        "403":
+          description: body is empty
+  /purposes/{id}:
+    get:
+      tags:
+      - purposes
+      description: |-
+        get Purposes by id
+        <br>
+      operationId: PurposesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Purposes'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - purposes
+      description: |-
+        update the Purposes
+        <br>
+      operationId: PurposesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Purposes content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Purposes'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Purposes'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - purposes
+      description: |-
+        delete the Purposes
+        <br>
+      operationId: PurposesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
+definitions:
+  models.Categories:
+    title: Categories
+    type: object
+    properties:
+      CategoryId:
+        type: integer
+        format: int64
+      CategoryName:
+        type: string
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ImagePath:
+        type: string
+      ModifiedBy:
+        type: integer
+        format: int64
+  models.CategoriesDTO:
+    title: CategoriesDTO
+    type: object
+    properties:
+      CategoryName:
+        type: string
+      ImagePath:
+        type: string
+  models.Currencies:
+    title: Currencies
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      Currency:
+        type: string
+      CurrencyId:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ModifiedBy:
+        type: integer
+        format: int64
+      Symbol:
+        type: string
+  models.Features:
+    title: Features
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      Description:
+        type: string
+      FeatureId:
+        type: integer
+        format: int64
+      FeatureName:
+        type: string
+      ImagePath:
+        type: string
+      ModifiedBy:
+        type: integer
+        format: int64
+  models.Item_features:
+    title: Item_features
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      FeatureId:
+        type: integer
+        format: int64
+      Id:
+        type: integer
+        format: int64
+      ItemId:
+        type: integer
+        format: int64
+      ModifiedBy:
+        type: integer
+        format: int64
+  models.Item_images:
+    title: Item_images
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ImagePath:
+        type: string
+      IsDefault:
+        type: integer
+        format: int64
+      ItemId:
+        type: integer
+        format: int64
+      ItemImageId:
+        type: integer
+        format: int64
+      ModifiedBy:
+        type: integer
+        format: int64
+  models.Item_prices:
+    title: Item_prices
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      AltItemPrice:
+        type: number
+        format: float
+      CreatedBy:
+        type: integer
+        format: int64
+      Currency:
+        $ref: '#/definitions/models.Currencies'
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ItemPrice:
+        type: number
+        format: float
+      ItemPriceId:
+        type: integer
+        format: int64
+      ModifiedBy:
+        type: integer
+        format: int64
+      ShowAltPrice:
+        type: boolean
+  models.Item_purposes:
+    title: Item_purposes
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ItemId:
+        type: integer
+        format: int64
+      ItemPurposeId:
+        type: integer
+        format: int64
+      ModifiedBy:
+        type: integer
+        format: int64
+      PurposeId:
+        type: integer
+        format: int64
+  models.Item_quantity:
+    title: Item_quantity
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ItemId:
+        type: integer
+        format: int64
+      ItemQuantityId:
+        type: integer
+        format: int64
+      ModifiedBy:
+        type: integer
+        format: int64
+      Quantity:
+        type: integer
+        format: int64
+  models.Items:
+    title: Items
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      AvailableColors:
+        type: string
+      AvailableSizes:
+        type: string
+      Category:
+        $ref: '#/definitions/models.Categories'
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      Description:
+        type: string
+      ItemId:
+        type: integer
+        format: int64
+      ItemName:
+        type: string
+      ItemPrice:
+        $ref: '#/definitions/models.Item_prices'
+      ModifiedBy:
+        type: integer
+        format: int64
+      Quantity:
+        type: integer
+        format: int64
+  models.ItemsDTO:
+    title: ItemsDTO
+    type: object
+    properties:
+      AvailableColors:
+        type: array
+        items:
+          type: string
+      AvailableSizes:
+        type: array
+        items:
+          type: string
+      Category:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      Description:
+        type: string
+      ItemName:
+        type: string
+      ItemPrice:
+        type: number
+        format: float
+      Quantity:
+        type: integer
+        format: int64
+  models.Object:
+    title: Object
+    type: object
+    properties:
+      ObjectId:
+        type: string
+      PlayerName:
+        type: string
+      Score:
+        type: integer
+        format: int64
+  models.Profile:
+    title: Profile
+    type: object
+    properties:
+      Address:
+        type: string
+      Age:
+        type: integer
+        format: int64
+      Email:
+        type: string
+      Gender:
+        type: string
+  models.Purposes:
+    title: Purposes
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      Description:
+        type: string
+      ImagePath:
+        type: string
+      ModifiedBy:
+        type: integer
+        format: int64
+      Purpose:
+        type: string
+      PurposeId:
+        type: integer
+        format: int64
+  models.User:
+    title: User
+    type: object
+    properties:
+      Id:
+        type: string
+      Password:
+        type: string
+      Profile:
+        $ref: '#/definitions/models.Profile'
+      Username:
+        type: string
+tags:
+- name: categories
+  description: |
+    CategoriesController operations for Categories
+- name: features
+  description: |
+    FeaturesController operations for Features
+- name: purposes
+  description: |
+    PurposesController operations for Purposes
+- name: currencies
+  description: |
+    CurrenciesController operations for Currencies
+- name: items
+  description: |
+    ItemsController operations for Items
+- name: item-images
+  description: |
+    Item_imagesController operations for Item_images
+- name: item-purposes
+  description: |
+    Item_purposesController operations for Item_purposes
+- name: item-features
+  description: |
+    Item_featuresController operations for Item_features
