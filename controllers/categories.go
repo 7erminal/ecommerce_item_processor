@@ -44,7 +44,7 @@ func (c *CategoriesController) Post() {
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
 		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
-		logs.Info("Failed to get the file ", err)
+		logs.Error("Failed to get the file ", err)
 		c.ServeJSON()
 		return
 	}
@@ -76,6 +76,7 @@ func (c *CategoriesController) Post() {
 		c.Ctx.Output.SetStatus(201)
 		c.Data["json"] = v
 	} else {
+		logs.Error(err.Error())
 		c.Data["json"] = err.Error()
 	}
 	c.ServeJSON()

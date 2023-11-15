@@ -36,6 +36,7 @@ func (c *ItemsController) URLMapping() {
 func (c *ItemsController) Post() {
 	var t models.ItemsDTO
 	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+	logs.Info("Received ", t)
 
 	creator := t.CreatedBy
 
@@ -70,25 +71,30 @@ func (c *ItemsController) Post() {
 						resp := models.ItemsResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
 						c.Data["json"] = resp
 					} else {
+						logs.Error(err.Error())
 						resp := models.ItemsResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 						c.Data["json"] = resp
 					}
 
 				} else {
+					logs.Error(err.Error())
 					resp := models.ItemsResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 					c.Data["json"] = resp
 				}
 			} else {
+				logs.Error(err.Error())
 				resp := models.ItemsResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 		} else {
 			// resp := models.ItemsResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 			// c.Data["json"] = resp
+			logs.Error(err.Error())
 			c.Data["json"] = err.Error()
 		}
 
 	} else {
+		logs.Error(err.Error())
 		resp := models.ItemsResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 		// c.Data["json"] = err.Error()

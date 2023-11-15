@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -38,6 +39,7 @@ func (c *Item_featuresController) Post() {
 		c.Ctx.Output.SetStatus(201)
 		c.Data["json"] = v
 	} else {
+		logs.Error(err.Error())
 		c.Data["json"] = err.Error()
 	}
 	c.ServeJSON()

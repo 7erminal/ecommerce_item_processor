@@ -15,6 +15,7 @@ func main() {
 		logs.Error("%s", err)
 	}
 	orm.RegisterDataBase("default", "mysql", sqlConn)
+	logs.SetLogger(logs.AdapterFile, `{"filename":"application.log"}`)
 
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true

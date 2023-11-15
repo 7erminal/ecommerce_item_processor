@@ -61,12 +61,16 @@ paths:
         <br>
       operationId: CategoriesController.Post
       parameters:
-      - in: body
-        name: body
+      - in: formData
+        name: CategoryName
         description: body for Categories content
         required: true
-        schema:
-          $ref: '#/definitions/models.CategoriesDTO'
+        type: string
+      - in: formData
+        name: Image
+        description: body for Categories content
+        required: true
+        type: file
       responses:
         "201":
           description: '{int} models.Categories'
@@ -311,12 +315,21 @@ paths:
         <br>
       operationId: FeaturesController.Post
       parameters:
-      - in: body
-        name: body
-        description: body for Features content
+      - in: formData
+        name: FeatureName
+        description: body for Categories content
         required: true
-        schema:
-          $ref: '#/definitions/models.Features'
+        type: string
+      - in: formData
+        name: Description
+        description: body for Categories content
+        required: true
+        type: string
+      - in: formData
+        name: Image
+        description: body for Categories content
+        required: true
+        type: file
       responses:
         "201":
           description: '{int} models.Features'
@@ -936,12 +949,21 @@ paths:
         <br>
       operationId: PurposesController.Post
       parameters:
-      - in: body
-        name: body
-        description: body for Purposes content
+      - in: formData
+        name: PurposeName
+        description: body for Categories content
         required: true
-        schema:
-          $ref: '#/definitions/models.Purposes'
+        type: string
+      - in: formData
+        name: Description
+        description: body for Categories content
+        required: true
+        type: string
+      - in: formData
+        name: Image
+        description: body for Categories content
+        required: true
+        type: file
       responses:
         "201":
           description: '{int} models.Purposes'
