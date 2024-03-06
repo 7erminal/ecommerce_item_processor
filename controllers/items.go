@@ -66,24 +66,24 @@ func (c *ItemsController) Post() {
 					qu := models.Item_quantity{ItemId: v.ItemId, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 					if _, err := models.AddItem_quantity(&qu); err == nil {
-						c.Ctx.Output.SetStatus(201)
+						c.Ctx.Output.SetStatus(200)
 
-						resp := models.ItemsResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
+						resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
 						c.Data["json"] = resp
 					} else {
 						logs.Error(err.Error())
-						resp := models.ItemsResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+						resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 						c.Data["json"] = resp
 					}
 
 				} else {
 					logs.Error(err.Error())
-					resp := models.ItemsResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+					resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 					c.Data["json"] = resp
 				}
 			} else {
 				logs.Error(err.Error())
-				resp := models.ItemsResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+				resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 		} else {
@@ -95,7 +95,7 @@ func (c *ItemsController) Post() {
 
 	} else {
 		logs.Error(err.Error())
-		resp := models.ItemsResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 		// c.Data["json"] = err.Error()
 	}
@@ -115,9 +115,11 @@ func (c *ItemsController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItemsById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = v
+		resp := models.ItemResponseDTO{StatusCode: 200, Item: v, StatusDesc: "Item fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
@@ -178,9 +180,11 @@ func (c *ItemsController) GetAll() {
 
 	l, err := models.GetAllItems(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = l
+		resp := models.ItemsResponseDTO{StatusCode: 200, Items: &l, StatusDesc: "Items fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
@@ -189,20 +193,88 @@ func (c *ItemsController) GetAll() {
 // @Title Put
 // @Description update the Items
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.Items	true		"body for Items content"
+// @Param	body		body 	models.ItemsDTO	true		"body for Items content"
 // @Success 200 {object} models.Items
 // @Failure 403 :id is not int
 // @router /:id [put]
 func (c *ItemsController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v := models.Items{ItemId: id}
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if err := models.UpdateItemsById(&v); err == nil {
-		c.Data["json"] = "OK"
+	var t models.ItemsDTO
+	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+
+	creator := t.CreatedBy
+
+	// Structure Available Sizes
+	aSizes := strings.Join(t.AvailableSizes, ",")
+
+	// Structure Available Colors
+	aColors := strings.Join(t.AvailableColors, ",")
+
+	p, err := models.GetCategoriesById(int64(t.Category))
+
+	if err == nil {
+		iv, err := models.GetItemsById(id)
+		if err != nil {
+			resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+			c.Data["json"] = resp
+		} else {
+			// Get Currency
+			cr, cerr := models.GetCurrenciesById(int64(1))
+
+			if cerr == nil {
+				// Add price for item
+				it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: 0, ShowAltPrice: false, Currency: cr, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
+
+				logs.Info("Modifying price for item")
+
+				if err := models.UpdateItem_pricesById(&it); err == nil {
+					// Add item if getting category and price addition does not result in an error
+					v := models.Items{ItemId: id, ItemName: t.ItemName, Description: t.Description, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
+
+					if err := models.UpdateItemsById(&v); err == nil {
+						// Add quantity for item
+
+						iq, err := models.GetItem_quantityByItemId(id)
+						if err != nil {
+						} else {
+							qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, ItemId: v.ItemId, Quantity: t.Quantity, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
+
+							if err := models.UpdateItem_quantityById(&qu); err == nil {
+								c.Ctx.Output.SetStatus(200)
+
+								resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully updated"}
+								c.Data["json"] = resp
+							} else {
+								logs.Error(err.Error())
+								resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+								c.Data["json"] = resp
+							}
+						}
+
+					} else {
+						logs.Error(err.Error())
+						resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+						c.Data["json"] = resp
+					}
+				} else {
+					logs.Error(err.Error())
+					resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+					c.Data["json"] = resp
+				}
+			} else {
+				resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+				c.Data["json"] = resp
+			}
+		}
+
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error(err.Error())
+		resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+		// c.Data["json"] = err.Error()
 	}
+
 	c.ServeJSON()
 }
 
@@ -216,10 +288,46 @@ func (c *ItemsController) Put() {
 func (c *ItemsController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	if err := models.DeleteItems(id); err == nil {
-		c.Data["json"] = "OK"
-	} else {
-		c.Data["json"] = err.Error()
+
+	q, gerr := models.GetItem_quantityByItemId(id)
+
+	if gerr == nil {
+		logs.Info("Quantity ID is ", q.ItemQuantityId)
+		if qerr := models.DeleteItem_quantity(q.ItemQuantityId); qerr == nil {
+			logs.Info("Quantity deleted ")
+		} else {
+			panic(qerr)
+		}
 	}
+
+	i, ierr := models.GetItemsById(id)
+
+	if ierr == nil {
+		logs.Info("Item retrieved ")
+		if ii, iierr := models.GetItem_imagesByItemId(id); iierr == nil {
+			logs.Info("Item images returned are ")
+			logs.Info(ii)
+			for _, ib := range *ii {
+				if imerr := models.DeleteItem_images(ib.ItemImageId); imerr == nil {
+					logs.Info("Item images deleted")
+					logs.Info("Item is ", i.ItemName)
+					if err := models.DeleteItems(id); err == nil {
+						if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
+							logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
+							logs.Info("Item Deleted ", id)
+							c.Data["json"] = "OK"
+						} else {
+							panic(qerr)
+						}
+					} else {
+						c.Data["json"] = err.Error()
+					}
+				} else {
+					panic(imerr)
+				}
+			}
+		}
+	}
+
 	c.ServeJSON()
 }

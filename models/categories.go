@@ -46,7 +46,7 @@ func GetCategoriesById(id int64) (v *Categories, err error) {
 // GetAllCategories retrieves all Categories matches certain condition. Returns empty list if
 // no records exist
 func GetAllCategories(query map[string]string, fields []string, sortby []string, order []string,
-	offset int64, limit int64) (ml []interface{}, err error) {
+	offset int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(Categories))
 	// query k=v
@@ -96,7 +96,7 @@ func GetAllCategories(query map[string]string, fields []string, sortby []string,
 
 	var l []Categories
 	qs = qs.OrderBy(sortFields...).RelatedSel()
-	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
+	if _, err = qs.All(&l, fields...); err == nil {
 		if len(fields) == 0 {
 			for _, v := range l {
 				ml = append(ml, v)

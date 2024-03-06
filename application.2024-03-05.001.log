@@ -1,0 +1,66 @@
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/04 17:06:29.835  [I] [parser.go:413]  generate router from comments
+2024/03/04 17:06:29.836  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 17:06:36.621  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    210.083µs| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/04 17:06:36.626  [I] [items.go:39]  Received  {Glowbin spice mix mixture of cashew nuts and chilli pepper 20 [12 14 15] [brown yellow] 200 54 1}
+2024/03/04 17:06:36.688  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/04 17:06:36.688  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/04 17:06:36.725  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  99.423792ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/04 17:06:36.745  [I] [item_images.go:40]  Data received is  20
+2024/03/04 17:06:36.745  [I] [item_images.go:43]  Data received is  {0x140001bac90 <nil>}
+2024/03/04 17:06:36.746  [I] [item_images.go:40]  Data received is  20
+2024/03/04 17:06:36.746  [I] [item_images.go:43]  Data received is  {0x140001d1170 <nil>}
+2024/03/04 17:06:36.746  [I] [item_images.go:40]  Data received is  20
+2024/03/04 17:06:36.747  [I] [item_images.go:43]  Data received is  {0x140001fe600 <nil>}
+2024/03/04 17:06:36.758  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  13.757292ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/04 17:06:36.776  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  31.610125ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/04 17:06:36.778  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  32.570958ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/04 17:06:37.038  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.619459ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:06:37.038  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.697833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:06:37.050  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     24.409ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:06:37.060  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.856542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:06:37.061  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.070875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:06:37.065  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.073417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:11:13.425  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  37.507542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:11:13.455  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    20.5195ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:13:40.560  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  33.236209ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:13:40.573  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.218834ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:13:40.840  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    668.291µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/04 17:13:40.842  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    988.834µs|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 17:14:03.700  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.285458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:14:03.714  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.495791ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:14:19.847  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    16.1155ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:14:19.866  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    7.44125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:15:01.377  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.580083ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:15:01.431  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  35.845084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:15:01.582  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    866.542µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/04 17:16:17.543  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  43.054209ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:16:17.559  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.102417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:16:17.907  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    641.083µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/04 17:16:17.908  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.555125ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 17:20:12.363  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 145.952375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 17:20:12.455  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  59.074584ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 17:20:13.473  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   3.283083ms|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/04 17:20:13.483  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.825792ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 19:47:07.309  [I] [parser.go:413]  generate router from comments
+2024/03/04 19:47:07.312  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 19:52:30.318  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/04 19:52:30.319  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 19:53:04.211  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/04 19:53:04.211  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 20:03:42.235  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/04 20:03:42.236  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 20:11:50.423  [I] [parser.go:413]  generate router from comments
+2024/03/04 20:11:50.425  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 20:12:00.397  [I] [parser.go:413]  generate router from comments
+2024/03/04 20:12:00.397  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 20:14:48.603  [I] [parser.go:413]  generate router from comments
+2024/03/04 20:14:48.605  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 23:41:59.706  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 141.286916ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 23:41:59.731  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.267958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 23:41:59.965  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    622.542µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/04 23:41:59.966  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.170208ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 23:41:59.969  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   4.421666ms|   match|[97;44m GET     [0m /uploads/circle3.png
+2024/03/04 23:41:59.973  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.090292ms|   match|[97;44m GET     [0m /uploads/circle.jpeg
+2024/03/04 23:53:00.914  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 145.237458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 23:53:01.154  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.143667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/

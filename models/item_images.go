@@ -45,6 +45,18 @@ func GetItem_imagesById(id int64) (v *Item_images, err error) {
 	return nil, err
 }
 
+// GetItem_imagesByItemId retrieves Item_images by Item Id. Returns error if
+// Id doesn't exist
+func GetItem_imagesByItemId(id int64) (v *[]Item_images, err error) {
+	o := orm.NewOrm()
+	// v = &Item_images{ItemId: id}
+	var l []Item_images
+	if _, err := o.QueryTable(new(Item_images)).Filter("ItemId", id).RelatedSel().All(&l); err == nil {
+		return &l, nil
+	}
+	return nil, err
+}
+
 // GetAllItem_images retrieves all Item_images matches certain condition. Returns empty list if
 // no records exist
 func GetAllItem_images(query map[string]string, fields []string, sortby []string, order []string,
@@ -124,6 +136,7 @@ func GetAllItem_images(query map[string]string, fields []string, sortby []string
 func UpdateItem_imagesById(m *Item_images) (err error) {
 	o := orm.NewOrm()
 	v := Item_images{ItemImageId: m.ItemImageId}
+
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -143,6 +156,21 @@ func DeleteItem_images(id int64) (err error) {
 	if err = o.Read(&v); err == nil {
 		var num int64
 		if num, err = o.Delete(&Item_images{ItemImageId: id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
+		}
+	}
+	return
+}
+
+// DeleteItem_images deletes Item_images by Item Id and returns error if
+// the record to be deleted doesn't exist
+func DeleteItem_imagesByItemId(id int64) (err error) {
+	o := orm.NewOrm()
+	v := Item_images{ItemId: id}
+	// ascertain id exists in the database
+	if err = o.Read(&v); err == nil {
+		var num int64
+		if num, err = o.Delete(&Item_images{ItemId: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

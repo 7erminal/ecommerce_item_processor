@@ -4,9 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -32,14 +35,61 @@ func (c *Item_imagesController) URLMapping() {
 // @Failure 403 body is empty
 // @router / [post]
 func (c *Item_imagesController) Post() {
-	var v models.Item_images
-	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
+	// var v models.Item_images
+
+	logs.Info("Data received is ", c.Ctx.Input.Query("ItemID"))
+
+	file, header, err := c.GetFile("Image")
+	logs.Info("Data received is ", file)
+
+	if err != nil {
+		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
+		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
+		logs.Error("Failed to get the file ", err)
+		c.ServeJSON()
+		return
+	}
+	defer file.Close()
+
+	// Save the uploaded file
+	fileName := header.Filename
+	logs.Info("File Name Extracted is ", fileName)
+	filePath := "/uploads/" + fileName // Define your file path
+	logs.Info("File Path Extracted is ", filePath)
+	err = c.SaveToFile("Image", "."+filePath)
+	if err != nil {
+		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
+		logs.Error("Error saving file", err)
+		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
+		errorMessage := "Error: Failed to save the image file"
+
+		resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+
+		c.Data["json"] = resp
+		c.ServeJSON()
+		return
+	}
+
+	itemImageId, errr := strconv.ParseInt(c.Ctx.Input.Query("ItemID"), 0, 64)
+
+	if errr != nil {
+		panic(errr)
+	}
+
+	logs.Info("Saving ... ", filePath)
+	// json.Unmarshal(c.Ctx.Input.RequestBody, &v)
+	v := models.Item_images{ItemId: itemImageId, ImagePath: filePath, IsDefault: 0, CreatedBy: 1, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
+
 	if _, err := models.AddItem_images(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+
+		resp := models.ItemImageResponseDTO{StatusCode: 200, ItemImage: &v, StatusDesc: "Images uploaded successfully"}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = err.Error()
+		resp := models.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	}
+
 	c.ServeJSON()
 }
 
@@ -53,11 +103,12 @@ func (c *Item_imagesController) Post() {
 func (c *Item_imagesController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v, err := models.GetItem_imagesById(id)
+	v, err := models.GetItem_imagesByItemId(id)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = v
+		var resp = models.ItemImagesResponseDTO2{StatusCode: 200, ItemImages: v, StatusDesc: "Images fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

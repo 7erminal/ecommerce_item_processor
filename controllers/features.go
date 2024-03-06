@@ -69,7 +69,9 @@ func (c *FeaturesController) Post() {
 
 	if _, err := models.AddFeatures(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+
+		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: &v, StatusDesc: "Category has been added successfully"}
+		c.Data["json"] = resp
 	} else {
 		c.Data["json"] = err.Error()
 	}
@@ -153,10 +155,12 @@ func (c *FeaturesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		var resp = models.FeaturesResponseDTO{StatusCode: 200, Features: &l, StatusDesc: "Features fetched successfully"}
+
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
-}
+} 
 
 // Put ...
 // @Title Put

@@ -1,0 +1,128 @@
+2024/03/04 05:29:12.606  [I] [parser.go:413]  generate router from comments
+2024/03/04 05:29:12.609  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 05:29:29.537  [I] [parser.go:413]  generate router from comments
+2024/03/04 05:29:29.538  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 05:29:36.490  [I] [parser.go:413]  generate router from comments
+2024/03/04 05:29:36.491  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 05:30:10.212  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  32.623417ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:30:10.230  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.389541ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:31:43.865  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.338875ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:31:43.869  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    842.625µs|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:31:44.075  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.790666ms|   match|[97;44m GET     [0m /uploads/circle3.png
+2024/03/04 05:32:04.835  [I] [categories.go:40]  Data received is  
+2024/03/04 05:32:04.941  [D] [router.go:955]  |            ::1|[97;42m 201 [0m| 111.585542ms|   match|[97;46m POST    [0m /v1/categories   r:/v1/categories/
+2024/03/04 05:32:05.027  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.813875ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:32:05.033  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.891959ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:32:10.974  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.208541ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:32:10.981  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.2125ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:32:12.479  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.770833ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:32:12.485  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.528041ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:33:04.096  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  25.124208ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:33:04.103  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.172875ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:34:23.077  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.770583ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:34:23.084  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    2.87525ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:34:33.742  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    7.86325ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:34:33.751  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.337041ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:34:47.731  [I] [purposes.go:37]  Data received is  Green
+2024/03/04 05:34:47.765  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  37.396083ms|   match|[97;46m POST    [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:34:47.799  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.324208ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:34:47.804  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      1.324ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:34:47.855  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.672458ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:34:54.863  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    380.833µs| nomatch|[90;47m OPTIONS [0m /v1/categories/
+2024/03/04 05:34:54.870  [D] [router.go:955]  |            ::1|[97;43m 404 [0m|   4.521583ms| nomatch|[97;41m DELETE  [0m /v1/categories/
+2024/03/04 05:34:55.095  [D] [router.go:955]  |            ::1|[97;43m 404 [0m|      355.5µs| nomatch|[97;41m DELETE  [0m /v1/categories/
+2024/03/04 05:34:55.332  [D] [router.go:955]  |            ::1|[97;43m 404 [0m|     211.75µs| nomatch|[97;41m DELETE  [0m /v1/categories/
+2024/03/04 05:37:06.990  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   27.80975ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:37:06.998  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.408917ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:37:07.102  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    980.167µs|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:39:34.827  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.070166ms| nomatch|[90;47m OPTIONS [0m /v1/features/
+2024/03/04 05:39:34.837  [D] [router.go:955]  |            ::1|[97;43m 404 [0m|   3.783458ms| nomatch|[97;41m DELETE  [0m /v1/features/
+2024/03/04 05:40:00.294  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    3.89025ms|   match|[97;44m GET     [0m /swagger/favicon-32x32.png
+2024/03/04 05:40:48.239  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  70.172084ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:40:48.249  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    882.917µs|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:40:48.601  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.372875ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:40:49.884  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.967292ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:40:49.888  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.935917ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:41:10.064  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.924917ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:41:10.073  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.409708ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:41:33.049  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.033416ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:41:33.054  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      1.785ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:41:33.191  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.001791ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:41:49.928  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.163541ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:41:49.936  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.395042ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:41:54.502  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    472.209µs| nomatch|[90;47m OPTIONS [0m /v1/features/
+2024/03/04 05:41:54.519  [D] [router.go:955]  |            ::1|[97;43m 404 [0m|  14.449916ms| nomatch|[97;41m DELETE  [0m /v1/features/
+2024/03/04 05:42:09.963  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.433084ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:42:09.977  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.430875ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:44:12.055  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  44.604791ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:44:12.062  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.188625ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:44:12.223  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.194042ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:46:20.987  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   19.04475ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:46:20.994  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.565792ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:46:21.093  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.311916ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:46:27.425  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     189.75µs| nomatch|[90;47m OPTIONS [0m /v1/features/1
+2024/03/04 05:46:27.484  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  56.463875ms|   match|[97;41m DELETE  [0m /v1/features/1   r:/v1/features/:id
+2024/03/04 05:46:27.538  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     4.7775ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:46:27.543  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|        704µs|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:46:33.348  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     243.25µs| nomatch|[90;47m OPTIONS [0m /v1/purposes/1
+2024/03/04 05:46:33.372  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.308791ms|   match|[97;41m DELETE  [0m /v1/purposes/1   r:/v1/purposes/:id
+2024/03/04 05:46:33.430  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.713958ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:46:33.436  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.292375ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:48:10.910  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  37.229166ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:48:10.917  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.065292ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:48:10.996  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    570.292µs|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/04 05:48:14.438  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.619291ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:48:14.449  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    1.81025ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:48:35.349  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.363875ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:48:35.354  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     1.8035ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:48:46.737  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.048667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/04 05:48:46.780  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.544417ms|   match|[97;44m GET     [0m /uploads/circle.jpeg
+2024/03/04 05:48:54.755  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.205417ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:48:54.763  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.813708ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:50:31.484  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.094167ms| nomatch|[90;47m OPTIONS [0m /v1/purposes/2
+2024/03/04 05:50:31.529  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  39.303042ms|   match|[97;41m DELETE  [0m /v1/purposes/2   r:/v1/purposes/:id
+2024/03/04 05:50:31.588  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.256083ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:50:31.592  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    815.875µs|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:51:10.944  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.555917ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:51:10.952  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.608916ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:51:15.163  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    404.834µs| nomatch|[90;47m OPTIONS [0m /v1/features/2
+2024/03/04 05:51:15.191  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.469417ms|   match|[97;41m DELETE  [0m /v1/features/2   r:/v1/features/:id
+2024/03/04 05:51:15.226  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.886667ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:51:15.230  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.237334ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:51:42.565  [I] [purposes.go:37]  Data received is  Red
+2024/03/04 05:51:42.611  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  46.966916ms|   match|[97;46m POST    [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:51:42.660  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      4.141ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:51:42.667  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      1.709ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 05:51:52.869  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.286458ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 05:51:52.893  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.189042ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 06:23:58.827  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/04 06:23:58.828  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 06:45:12.343  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  59.216709ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/04 06:45:12.368  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.791792ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/04 06:45:14.342  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   29.26275ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:45:27.791  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.843125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:46:15.037  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.077875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:46:19.873  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.167167ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:46:24.890  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  35.089209ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:47:14.999  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   10.28475ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:51:48.045  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      18.19ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:53:03.969  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.101625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:53:12.915  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.896917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:53:21.967  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.044083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:54:10.940  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.633334ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:54:51.614  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.800958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/04 06:55:18.629  [I] [parser.go:413]  generate router from comments
+2024/03/04 06:55:18.632  [I] [server.go:241]  http server Running on http://:8081
+2024/03/04 06:55:46.053  [C] [config.go:190]  the request url is  /v1/items
+2024/03/04 06:55:46.053  [C] [config.go:191]  Handler crashed with error runtime error: invalid memory address or nil pointer dereference
+2024/03/04 06:55:46.053  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:770
+2024/03/04 06:55:46.054  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:261
+2024/03/04 06:55:46.054  [C] [config.go:197]  /usr/local/go/src/runtime/signal_unix.go:881
+2024/03/04 06:55:46.054  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers/items.go:183
+2024/03/04 06:55:46.054  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/04 06:55:46.054  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/04 06:55:46.054  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/04 06:55:46.056  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/04 06:55:46.056  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/04 06:55:46.056  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/04 06:55:46.056  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

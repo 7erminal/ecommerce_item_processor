@@ -44,6 +44,17 @@ func GetItem_quantityById(id int64) (v *Item_quantity, err error) {
 	return nil, err
 }
 
+// GetItem_quantityById retrieves Item_quantity by Item Id. Returns error if
+// Id doesn't exist
+func GetItem_quantityByItemId(id int64) (v *Item_quantity, err error) {
+	o := orm.NewOrm()
+	v = &Item_quantity{ItemId: id}
+	if err = o.QueryTable(new(Item_quantity)).Filter("ItemId", id).RelatedSel().One(v); err == nil {
+		return v, nil
+	}
+	return nil, err
+}
+
 // GetAllItem_quantity retrieves all Item_quantity matches certain condition. Returns empty list if
 // no records exist
 func GetAllItem_quantity(query map[string]string, fields []string, sortby []string, order []string,

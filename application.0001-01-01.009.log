@@ -1,0 +1,17 @@
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/06 22:26:00.519  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.319208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:26:00.531  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.507375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:32:26.154  [I] [parser.go:413]  generate router from comments
+2024/03/06 22:32:26.156  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 22:32:31.497  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    375.375µs| nomatch|[90;47m OPTIONS [0m /v1/items/23
+2024/03/06 22:32:31.518  [C] [config.go:190]  the request url is  /v1/items/23
+2024/03/06 22:32:31.518  [C] [config.go:191]  Handler crashed with error <QuerySeter> no row found
+2024/03/06 22:32:31.518  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:770
+2024/03/06 22:32:31.518  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers/items.go:302
+2024/03/06 22:32:31.518  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/06 22:32:31.518  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/06 22:32:31.518  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/06 22:32:31.518  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/06 22:32:31.518  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/06 22:32:31.518  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/06 22:32:31.518  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

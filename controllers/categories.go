@@ -41,6 +41,8 @@ func (c *CategoriesController) Post() {
 
 	file, header, err := c.GetFile("Image")
 
+	logs.Info("File is ", file)
+
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
 		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
@@ -74,7 +76,9 @@ func (c *CategoriesController) Post() {
 
 	if _, err := models.AddCategories(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+
+		var resp = models.CategoryResponseDTO{StatusCode: 200, Categories: &v, StatusDesc: "Category has been added successfully"}
+		c.Data["json"] = resp
 	} else {
 		logs.Error(err.Error())
 		c.Data["json"] = err.Error()
@@ -118,7 +122,7 @@ func (c *CategoriesController) GetAll() {
 	var sortby []string
 	var order []string
 	var query = make(map[string]string)
-	var limit int64 = 10
+	// var limit int64 = 10
 	var offset int64
 
 	// fields: col1,col2,entity.col3
@@ -126,9 +130,9 @@ func (c *CategoriesController) GetAll() {
 		fields = strings.Split(v, ",")
 	}
 	// limit: 10 (default is 10)
-	if v, err := c.GetInt64("limit"); err == nil {
-		limit = v
-	}
+	// if v, err := c.GetInt64("limit"); err == nil {
+	// 	limit = v
+	// }
 	// offset: 0 (default is 0)
 	if v, err := c.GetInt64("offset"); err == nil {
 		offset = v
@@ -155,11 +159,12 @@ func (c *CategoriesController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllCategories(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllCategories(query, fields, sortby, order, offset)
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		resp := models.CategoriesResponseDTO{StatusCode: 200, Categories: &l, StatusDesc: "Categories fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

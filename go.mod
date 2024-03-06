@@ -6,7 +6,10 @@ require github.com/beego/beego/v2 v2.0.1
 
 require github.com/smartystreets/goconvey v1.6.4
 
-require github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
+require (
+	github.com/astaxie/beego v1.12.3 // indirect
+	github.com/gopherjs/gopherjs v0.0.0-20181017120253-0766667cb4d1 // indirect
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect

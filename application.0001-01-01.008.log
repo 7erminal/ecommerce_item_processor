@@ -1,0 +1,1212 @@
+2024/03/06 07:01:13.475  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 223.771166ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 07:01:13.582  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  83.599875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 07:01:13.668  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.089125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 07:01:13.698  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   11.08675ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 07:01:14.330  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.242959ms|   match|[97;44m GET     [0m /v1/item-images/null   r:/v1/item-images/:id
+2024/03/06 07:01:14.337  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.310334ms|   match|[97;44m GET     [0m /v1/items/null   r:/v1/items/:id
+2024/03/06 09:17:49.007  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     61.844ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:17:49.043  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.335542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:17:49.401  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.560875ms|   match|[97;44m GET     [0m /v1/items/null   r:/v1/items/:id
+2024/03/06 09:17:49.405  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    8.10925ms|   match|[97;44m GET     [0m /v1/item-images/null   r:/v1/item-images/:id
+2024/03/06 09:18:01.579  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.415333ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:18:01.609  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     23.264ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:18:01.735  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.469167ms|   match|[97;44m GET     [0m /v1/items/null   r:/v1/items/:id
+2024/03/06 09:18:01.747  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.115458ms|   match|[97;44m GET     [0m /v1/item-images/null   r:/v1/item-images/:id
+2024/03/06 09:19:49.876  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  36.319417ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:19:49.952  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     58.851ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:19:51.593  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  54.064959ms|   match|[97;44m GET     [0m /v1/items/null   r:/v1/items/:id
+2024/03/06 09:19:51.593  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.593958ms|   match|[97;44m GET     [0m /v1/item-images/null   r:/v1/item-images/:id
+2024/03/06 09:20:06.847  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.733792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:20:06.860  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.377917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:20:07.037  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.377917ms|   match|[97;44m GET     [0m /v1/item-images/null   r:/v1/item-images/:id
+2024/03/06 09:20:07.039  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.210875ms|   match|[97;44m GET     [0m /v1/items/null   r:/v1/items/:id
+2024/03/06 09:20:24.874  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.860625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:20:24.909  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.647875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:20:24.988  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    3.00275ms|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/06 09:20:24.989  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    3.48775ms|   match|[97;44m GET     [0m /uploads/circle3.png
+2024/03/06 09:20:24.989  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     4.2775ms|   match|[97;44m GET     [0m /uploads/circle.jpeg
+2024/03/06 09:20:24.991  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   5.580333ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/06 09:20:26.252  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.141875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:20:26.264  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.509542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:20:26.387  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.597959ms|   match|[97;44m GET     [0m /v1/items/null   r:/v1/items/:id
+2024/03/06 09:20:26.387  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.942625ms|   match|[97;44m GET     [0m /v1/item-images/null   r:/v1/item-images/:id
+2024/03/06 09:22:01.354  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  41.496875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:22:01.387  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.464125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:22:01.798  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  69.641125ms|   match|[97;44m GET     [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 09:22:01.799  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     84.109ms|   match|[97;44m GET     [0m /v1/item-images/20   r:/v1/item-images/:id
+2024/03/06 09:23:03.385  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  40.139917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:23:03.411  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.028417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:23:03.614  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.691667ms|   match|[97;44m GET     [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 09:23:03.615  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    5.86775ms|   match|[97;44m GET     [0m /v1/item-images/20   r:/v1/item-images/:id
+2024/03/06 09:24:50.343  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  60.089875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:24:50.360  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.590375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:24:50.592  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.094417ms|   match|[97;44m GET     [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 09:24:50.593  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     3.3185ms|   match|[97;44m GET     [0m /v1/item-images/20   r:/v1/item-images/:id
+2024/03/06 09:27:40.323  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.552125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:27:40.350  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.504666ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:27:48.500  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.692792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:27:48.512  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.221209ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:27:48.666  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.715417ms|   match|[97;44m GET     [0m /v1/item-images/11   r:/v1/item-images/:id
+2024/03/06 09:27:48.667  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.920083ms|   match|[97;44m GET     [0m /v1/items/11   r:/v1/items/:id
+2024/03/06 09:27:55.308  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    467.875µs| nomatch|[90;47m OPTIONS [0m /v1/items/11
+2024/03/06 09:27:55.473  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 164.259958ms|   match|[97;41m DELETE  [0m /v1/items/11   r:/v1/items/:id
+2024/03/06 09:27:55.506  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.202625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:27:55.511  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.675375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:27:59.859  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    623.583µs| nomatch|[90;47m OPTIONS [0m /v1/items/12
+2024/03/06 09:27:59.903  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.524042ms|   match|[97;41m DELETE  [0m /v1/items/12   r:/v1/items/:id
+2024/03/06 09:27:59.945  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.316917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:27:59.954  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.718416ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:08.036  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     292.75µs| nomatch|[90;47m OPTIONS [0m /v1/items/13
+2024/03/06 09:28:08.097  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  58.794125ms|   match|[97;41m DELETE  [0m /v1/items/13   r:/v1/items/:id
+2024/03/06 09:28:08.138  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.317167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:08.159  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.390625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:11.038  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    256.833µs| nomatch|[90;47m OPTIONS [0m /v1/items/14
+2024/03/06 09:28:11.086  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  46.946083ms|   match|[97;41m DELETE  [0m /v1/items/14   r:/v1/items/:id
+2024/03/06 09:28:11.125  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     4.5615ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:11.130  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.290375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:13.567  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    291.625µs| nomatch|[90;47m OPTIONS [0m /v1/items/15
+2024/03/06 09:28:13.630  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  61.868708ms|   match|[97;41m DELETE  [0m /v1/items/15   r:/v1/items/:id
+2024/03/06 09:28:13.664  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.402959ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:13.669  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.339917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:16.037  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    328.416µs| nomatch|[90;47m OPTIONS [0m /v1/items/16
+2024/03/06 09:28:16.097  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  58.083166ms|   match|[97;41m DELETE  [0m /v1/items/16   r:/v1/items/:id
+2024/03/06 09:28:16.146  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.324959ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:16.153  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.373167ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:18.485  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    196.459µs| nomatch|[90;47m OPTIONS [0m /v1/items/17
+2024/03/06 09:28:18.538  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.069584ms|   match|[97;41m DELETE  [0m /v1/items/17   r:/v1/items/:id
+2024/03/06 09:28:18.584  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    2.19925ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:18.586  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    869.917µs|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:20.965  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    593.958µs| nomatch|[90;47m OPTIONS [0m /v1/items/18
+2024/03/06 09:28:21.034  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      61.02ms|   match|[97;41m DELETE  [0m /v1/items/18   r:/v1/items/:id
+2024/03/06 09:28:21.083  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    1.54775ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:21.089  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.652125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:28:23.259  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    346.291µs| nomatch|[90;47m OPTIONS [0m /v1/items/19
+2024/03/06 09:28:23.307  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  46.164417ms|   match|[97;41m DELETE  [0m /v1/items/19   r:/v1/items/:id
+2024/03/06 09:28:23.353  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.444959ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:28:23.358  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.167875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:29:58.925  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.292875ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:29:58.936  [I] [items.go:39]  Received  {Kori special spice special spice with mixture of things 20 [large  extra large] [] 45 40 1}
+2024/03/06 09:29:58.974  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:29:58.974  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:29:58.993  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  61.544292ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:29:59.007  [I] [item_images.go:40]  Data received is  21
+2024/03/06 09:29:59.007  [I] [item_images.go:43]  Data received is  {0x1400028d230 <nil>}
+2024/03/06 09:29:59.008  [I] [item_images.go:40]  Data received is  21
+2024/03/06 09:29:59.008  [I] [item_images.go:43]  Data received is  {0x140000ceab0 <nil>}
+2024/03/06 09:29:59.011  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   6.810417ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:29:59.016  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   9.431875ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:31:22.378  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.657625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:31:22.395  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   10.03975ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:32:26.237  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.756917ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:32:26.251  [I] [items.go:39]  Received  {Kori brown spice brown spice prepared with local grains 18 [small  medium] [brown] 204 12 1}
+2024/03/06 09:32:26.271  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:32:26.271  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:32:26.294  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  46.753417ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:32:26.312  [I] [item_images.go:40]  Data received is  22
+2024/03/06 09:32:26.312  [I] [item_images.go:43]  Data received is  {0x1400030c600 <nil>}
+2024/03/06 09:32:26.312  [I] [item_images.go:40]  Data received is  22
+2024/03/06 09:32:26.312  [I] [item_images.go:43]  Data received is  {0x14000224750 <nil>}
+2024/03/06 09:32:26.319  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|      18.49ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:32:26.319  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|     18.504ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:32:26.374  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.997542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:32:26.380  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.504291ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:32:30.297  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    7.58875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:32:30.312  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    9.39475ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:32:30.457  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.919875ms|   match|[97;44m GET     [0m /v1/items/21   r:/v1/items/:id
+2024/03/06 09:32:30.459  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.325708ms|   match|[97;44m GET     [0m /v1/item-images/21   r:/v1/item-images/:id
+2024/03/06 09:32:30.477  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.0525ms|   match|[97;44m GET     [0m /uploads/chocolateSpice.jpeg
+2024/03/06 09:32:38.586  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.233584ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:32:38.603  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.525792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:32:40.472  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.915958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:32:40.485  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   10.56525ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:32:40.660  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  50.207083ms|   match|[97;44m GET     [0m /v1/items/22   r:/v1/items/:id
+2024/03/06 09:32:40.661  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.295917ms|   match|[97;44m GET     [0m /v1/item-images/22   r:/v1/item-images/:id
+2024/03/06 09:34:12.672  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.135708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:34:12.692  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.907833ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:41:29.171  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.073666ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:41:29.191  [I] [items.go:39]  Received  {Yellow Sweet Spice Yellow sweet spice 20 [small] [] 34 5 1}
+2024/03/06 09:41:29.332  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:41:29.333  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:41:29.456  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   275.6605ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:41:29.478  [I] [item_images.go:40]  Data received is  23
+2024/03/06 09:41:29.479  [I] [item_images.go:43]  Data received is  {0x1400030cdb0 <nil>}
+2024/03/06 09:41:29.491  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  19.548917ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:41:29.495  [I] [item_images.go:40]  Data received is  23
+2024/03/06 09:41:29.495  [I] [item_images.go:43]  Data received is  {0x14000224d80 <nil>}
+2024/03/06 09:41:29.508  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  35.284958ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:41:29.951  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.740459ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:41:29.988  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.963584ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:41:50.341  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.945458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:41:50.360  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     12.816ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:42:19.191  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.446041ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:42:31.399  [I] [categories.go:40]  Data received is  Kori
+2024/03/06 09:42:31.400  [I] [categories.go:44]  File is  {0x1400028c240 <nil>}
+2024/03/06 09:42:31.436  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|     42.922ms|   match|[97;46m POST    [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:42:31.457  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    1.68325ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:42:31.533  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.504583ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 09:42:38.634  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.011667ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/06 09:42:38.638  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.840458ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/06 09:42:39.772  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.580084ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:42:39.782  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.296709ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:42:41.192  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.254958ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/06 09:42:41.198  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.771958ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/06 09:42:42.190  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.724042ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:42:42.201  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.720417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:43:28.819  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.954584ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:43:28.824  [I] [items.go:39]  Received  {Kori Curry Curry powder made the kori way 21 [medium] [yellow] 80 15 1}
+2024/03/06 09:43:28.849  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:43:28.849  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:43:28.859  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|    36.7945ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:43:28.870  [I] [item_images.go:40]  Data received is  24
+2024/03/06 09:43:28.870  [I] [item_images.go:43]  Data received is  {0x1400030cc60 <nil>}
+2024/03/06 09:43:28.873  [I] [item_images.go:40]  Data received is  24
+2024/03/06 09:43:28.873  [I] [item_images.go:43]  Data received is  {0x1400030c0c0 <nil>}
+2024/03/06 09:43:28.876  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   7.530208ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:43:28.877  [I] [item_images.go:40]  Data received is  24
+2024/03/06 09:43:28.877  [I] [item_images.go:43]  Data received is  {0x14000224600 <nil>}
+2024/03/06 09:43:28.883  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   13.98725ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:43:28.892  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  22.956916ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:44:08.249  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.506583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:44:08.265  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.298667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:44:08.423  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|        604µs|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 09:44:12.232  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.534416ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:44:12.242  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.198542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:44:12.380  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.831375ms|   match|[97;44m GET     [0m /v1/items/24   r:/v1/items/:id
+2024/03/06 09:44:12.380  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     6.9595ms|   match|[97;44m GET     [0m /v1/item-images/24   r:/v1/item-images/:id
+2024/03/06 09:44:12.403  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.765833ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 09:44:18.781  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.951458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:44:18.808  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.428041ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:44:18.975  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  54.346959ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 09:45:04.307  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.005625ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:45:04.318  [I] [items.go:39]  Received  {Kori Greens Spice made with greens 21 [medium] [] 33 20 1}
+2024/03/06 09:45:04.345  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:45:04.345  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:45:04.363  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  49.751167ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:45:04.385  [I] [item_images.go:40]  Data received is  25
+2024/03/06 09:45:04.385  [I] [item_images.go:43]  Data received is  {0x14000224b70 <nil>}
+2024/03/06 09:45:04.388  [I] [item_images.go:40]  Data received is  25
+2024/03/06 09:45:04.388  [I] [item_images.go:43]  Data received is  {0x140000ce3c0 <nil>}
+2024/03/06 09:45:04.389  [I] [item_images.go:40]  Data received is  25
+2024/03/06 09:45:04.389  [I] [item_images.go:43]  Data received is  {0x1400028c540 <nil>}
+2024/03/06 09:45:04.394  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  13.211458ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:45:04.395  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  10.047791ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:45:04.471  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  86.590792ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:49:49.010  [I] [parser.go:413]  generate router from comments
+2024/03/06 09:49:49.017  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 09:50:46.328  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.067792ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:50:46.339  [I] [items.go:39]  Received  {Kori Greens Spice made with greens 21 [medium] [] 33 20 1}
+2024/03/06 09:50:46.404  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:50:46.404  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:50:46.437  [D] [router.go:955]  |            ::1|[97;42m 201 [0m| 102.003333ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:50:46.464  [I] [item_images.go:40]  Data received is  26
+2024/03/06 09:50:46.464  [I] [item_images.go:43]  Data received is  {0x14000252d80 <nil>}
+2024/03/06 09:50:46.464  [I] [item_images.go:56]  File Name Extracted is  GreenHotSpice.jpeg
+2024/03/06 09:50:46.464  [I] [item_images.go:58]  File Path Extracted is  /uploads/GreenHotSpice.jpeg
+2024/03/06 09:50:46.464  [I] [item_images.go:40]  Data received is  26
+2024/03/06 09:50:46.464  [I] [item_images.go:43]  Data received is  {0x14000252e70 <nil>}
+2024/03/06 09:50:46.464  [I] [item_images.go:56]  File Name Extracted is  GreenHotSpice.jpeg
+2024/03/06 09:50:46.464  [I] [item_images.go:58]  File Path Extracted is  /uploads/GreenHotSpice.jpeg
+2024/03/06 09:50:46.464  [I] [item_images.go:40]  Data received is  26
+2024/03/06 09:50:46.464  [I] [item_images.go:43]  Data received is  {0x1400020e660 <nil>}
+2024/03/06 09:50:46.464  [I] [item_images.go:56]  File Name Extracted is  GreenHotSpice.jpeg
+2024/03/06 09:50:46.464  [I] [item_images.go:58]  File Path Extracted is  /uploads/GreenHotSpice.jpeg
+2024/03/06 09:50:46.465  [I] [item_images.go:79]  Saving ...  /uploads/GreenHotSpice.jpeg
+2024/03/06 09:50:46.465  [I] [item_images.go:79]  Saving ...  /uploads/GreenHotSpice.jpeg
+2024/03/06 09:50:46.465  [I] [item_images.go:79]  Saving ...  /uploads/GreenHotSpice.jpeg
+2024/03/06 09:50:46.468  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   6.567709ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:50:46.486  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  25.439084ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:50:46.487  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  25.802708ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:53:51.618  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  83.235042ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:53:51.645  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.038875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:53:52.120  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   8.343583ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 09:54:18.711  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.754792ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:54:18.718  [I] [items.go:39]  Received  {Blue Spice Blue Spice 17 [] [] 78 2 1}
+2024/03/06 09:54:18.755  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:54:18.755  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:54:18.805  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  90.130291ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:54:18.815  [I] [item_images.go:40]  Data received is  27
+2024/03/06 09:54:18.815  [I] [item_images.go:43]  Data received is  {0x1400036e300 <nil>}
+2024/03/06 09:54:18.815  [I] [item_images.go:56]  File Name Extracted is  berries.jpeg
+2024/03/06 09:54:18.815  [I] [item_images.go:58]  File Path Extracted is  /uploads/berries.jpeg
+2024/03/06 09:54:18.816  [I] [item_images.go:79]  Saving ...  /uploads/berries.jpeg
+2024/03/06 09:54:18.819  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|       5.05ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:54:18.820  [I] [item_images.go:40]  Data received is  27
+2024/03/06 09:54:18.820  [I] [item_images.go:43]  Data received is  {0x14000253470 <nil>}
+2024/03/06 09:54:18.820  [I] [item_images.go:56]  File Name Extracted is  berries.jpeg
+2024/03/06 09:54:18.820  [I] [item_images.go:58]  File Path Extracted is  /uploads/berries.jpeg
+2024/03/06 09:54:18.820  [I] [item_images.go:79]  Saving ...  /uploads/berries.jpeg
+2024/03/06 09:54:18.824  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   9.175209ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:56:06.570  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 111.470375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:56:06.651  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  39.222208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:56:07.041  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    820.958µs|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 09:57:15.682  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.202041ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 09:57:15.689  [I] [items.go:39]  Received  {Kori Packaged spice mix special mix with variety of spices to make your dish taste good 21 [] [] 54 23 1}
+2024/03/06 09:57:15.810  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 09:57:15.810  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 09:57:15.869  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|    182.955ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 09:57:15.895  [I] [item_images.go:40]  Data received is  28
+2024/03/06 09:57:15.895  [I] [item_images.go:43]  Data received is  {0x14000253890 <nil>}
+2024/03/06 09:57:15.895  [I] [item_images.go:56]  File Name Extracted is  semiGroundBrownSpice.jpeg
+2024/03/06 09:57:15.895  [I] [item_images.go:58]  File Path Extracted is  /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 09:57:15.895  [I] [item_images.go:40]  Data received is  28
+2024/03/06 09:57:15.895  [I] [item_images.go:43]  Data received is  {0x1400045a600 <nil>}
+2024/03/06 09:57:15.895  [I] [item_images.go:56]  File Name Extracted is  brownNutsSpice.jpeg
+2024/03/06 09:57:15.895  [I] [item_images.go:58]  File Path Extracted is  /uploads/brownNutsSpice.jpeg
+2024/03/06 09:57:15.896  [I] [item_images.go:79]  Saving ...  /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 09:57:15.896  [I] [item_images.go:79]  Saving ...  /uploads/brownNutsSpice.jpeg
+2024/03/06 09:57:15.896  [I] [item_images.go:40]  Data received is  28
+2024/03/06 09:57:15.896  [I] [item_images.go:43]  Data received is  {0x1400020eb70 <nil>}
+2024/03/06 09:57:15.896  [I] [item_images.go:56]  File Name Extracted is  curry.jpeg
+2024/03/06 09:57:15.896  [I] [item_images.go:58]  File Path Extracted is  /uploads/curry.jpeg
+2024/03/06 09:57:15.899  [I] [item_images.go:79]  Saving ...  /uploads/curry.jpeg
+2024/03/06 09:57:15.903  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|   9.888334ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:57:15.906  [I] [item_images.go:40]  Data received is  28
+2024/03/06 09:57:15.906  [I] [item_images.go:43]  Data received is  {0x1400036e300 <nil>}
+2024/03/06 09:57:15.906  [I] [item_images.go:56]  File Name Extracted is  SpicySpicyBrown.jpeg
+2024/03/06 09:57:15.906  [I] [item_images.go:58]  File Path Extracted is  /uploads/SpicySpicyBrown.jpeg
+2024/03/06 09:57:15.909  [I] [item_images.go:79]  Saving ...  /uploads/SpicySpicyBrown.jpeg
+2024/03/06 09:57:15.916  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|     21.175ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:57:15.918  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  23.644584ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:57:15.997  [D] [router.go:955]  |            ::1|[97;42m 201 [0m| 102.336708ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 09:57:35.191  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    214.422ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:57:35.284  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  59.217125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:57:35.851  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.487458ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 09:57:37.320  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.536125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:57:37.336  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.253041ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:57:37.519  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   18.59475ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 09:57:37.528  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   16.89125ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 09:57:37.542  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.418375ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 09:57:37.545  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.244542ms|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 09:57:37.553  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.512417ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 09:57:37.572  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   33.64725ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 09:58:03.123  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.562792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 09:58:03.179  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  30.359625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 09:58:03.541  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.061167ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 09:58:03.543  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.003958ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 09:58:03.603  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    443.292µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 09:58:03.603  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.18375ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 09:58:03.603  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     1.0825ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 09:58:03.603  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.239167ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 10:03:30.413  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  70.451458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 10:03:30.435  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.223791ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 10:03:30.864  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.848958ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 10:03:30.867  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.266167ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 10:03:30.892  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.608958ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 10:03:30.918  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    132.375µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 10:03:30.919  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    658.167µs|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 10:03:30.931  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  11.640125ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 11:01:49.862  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 245.254708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 11:01:49.966  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  51.879209ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 11:01:52.948  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  65.345541ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 11:01:52.967  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  85.897583ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 11:01:53.120  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.441125ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 11:01:53.175  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    562.792µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 11:01:53.180  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     40.875µs|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 11:01:53.180  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.655458ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 13:34:01.625  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 115.258542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 13:34:01.943  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  31.489917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 13:34:02.509  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.456167ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 13:34:02.527  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.893875ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 13:34:02.659  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    972.458µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 13:34:02.675  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     29.916µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 13:34:02.676  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    341.459µs|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 13:34:02.677  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     17.917µs|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 13:38:33.195  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 107.265292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 13:38:33.283  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   30.04525ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 13:38:33.660  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.063667ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 13:38:33.661  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.804917ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 13:51:09.477  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  99.766208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 13:51:09.528  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  32.331125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 13:51:10.940  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  56.508292ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 13:51:10.940  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  56.887542ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 15:26:01.503  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  73.625625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 15:26:01.541  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.328333ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 15:26:02.140  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   11.75725ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 15:26:02.152  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.842625ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 15:26:02.157  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    953.167µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 15:26:02.157  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    760.959µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 15:26:02.159  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    682.334µs|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 15:26:02.471  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    104.541µs|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 15:32:36.994  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.101084ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 15:32:37.013  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.897834ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 15:32:37.379  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.337709ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 15:32:37.382  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.878875ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 16:56:40.456  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 121.940125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 16:56:40.540  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  38.223542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 16:56:42.682  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     38.452ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 16:56:42.701  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    58.5725ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 16:56:42.873  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.332708ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 16:56:42.981  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     43.125µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 16:56:42.982  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    504.708µs|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 16:56:42.987  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    895.959µs|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 16:58:34.274  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 100.931875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 16:58:34.508  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.713916ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 16:58:34.864  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.927375ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 16:58:34.868  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.133167ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:00:50.107  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    104.538ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:00:50.219  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  37.775125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:00:50.676  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.887125ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:00:50.684  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.042584ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:03:09.090  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  61.920167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:03:09.114  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.344583ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:03:09.534  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.455375ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:03:09.543  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.032458ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:04:04.759  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     20.085ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:04:04.781  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.551834ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:04:04.997  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    6.28875ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:04:05.001  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    8.64675ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:04:10.949  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.611583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:04:10.961  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.777625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:04:11.077  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.362292ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:04:11.077  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.813375ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:06:05.009  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  47.514459ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:06:05.029  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.923667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:06:05.222  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.211375ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:06:05.224  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.742792ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:06:11.002  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.066958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:06:11.024  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.379209ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:06:11.140  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.432875ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:06:11.141  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      6.231ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:06:28.422  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.109375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:06:28.431  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.818333ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:06:28.603  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      3.354ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:06:28.604  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.406709ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:06:37.059  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.910583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:06:37.069  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.937083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:06:37.167  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.837125ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:06:37.175  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    11.0025ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:08:49.022  [I] [parser.go:413]  generate router from comments
+2024/03/06 17:08:49.029  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 17:08:58.041  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  38.409083ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:08:58.127  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  60.342375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:08:58.891  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  52.879667ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:08:59.019  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 178.735458ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:09:30.793  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  56.946125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:09:30.874  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  73.782084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:09:31.511  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.494292ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:09:31.545  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   47.69575ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:09:49.312  [I] [parser.go:413]  generate router from comments
+2024/03/06 17:09:49.316  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 17:09:58.475  [I] [parser.go:413]  generate router from comments
+2024/03/06 17:09:58.476  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 17:11:16.004  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 116.932084ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:11:16.117  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  99.599542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:11:16.512  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  41.194167ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:11:16.594  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 123.484375ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:11:19.552  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.829125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:11:19.564  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    9.22325ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:11:19.755  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.081792ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:11:19.761  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.793625ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:11:27.809  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.419875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:11:27.823  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     8.1705ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:11:28.041  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.841917ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:11:28.048  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.662708ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:11:33.401  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    6.85925ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:11:33.413  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.816375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:11:33.533  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    6.68575ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:11:33.536  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.738333ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:12:48.330  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   68.97775ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:12:48.353  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.507167ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:12:48.697  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.289042ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:12:48.713  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  43.016583ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:12:53.725  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.907209ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:12:53.744  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.914667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:12:53.854  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.388959ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:12:53.855  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      3.895ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:13:55.112  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  63.397042ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:13:55.132  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.725708ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:13:55.492  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.507125ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:13:55.505  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   17.37675ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:14:05.568  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   14.39925ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:14:05.607  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.557208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:14:05.900  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    5.65175ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:14:05.902  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.024375ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:14:14.386  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   22.91575ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:14:14.396  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.050042ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:14:14.713  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.743958ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:14:14.715  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   14.85625ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:14:52.949  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.644375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:14:52.963  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.735084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:14:53.106  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.048792ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:14:53.106  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.504208ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:41:29.258  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.767333ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:41:29.285  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.386833ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:41:29.921  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  45.842542ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:41:29.943  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  51.095625ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:41:30.542  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  20.189208ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 17:41:30.582  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|      126.5µs|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 17:41:30.586  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.323792ms|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 17:41:30.705  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   7.941625ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 17:45:04.058  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  45.667917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:45:04.085  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.611709ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:45:04.764  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.912875ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:45:04.770  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   45.72125ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:45:53.122  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  44.142792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:45:53.160  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.336292ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:45:53.440  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.255458ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:45:53.443  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.543167ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:47:04.791  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.777417ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:47:04.802  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.799458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:47:05.021  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.311292ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:47:05.021  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.591458ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:47:20.564  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.226792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:47:20.573  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.521959ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:47:20.686  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.149792ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:47:20.687  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.816042ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:47:32.707  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.446667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:47:32.744  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.226125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:47:33.028  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   47.25275ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:47:33.038  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  61.279708ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:48:48.159  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  35.479584ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:48:48.178  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.554083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:48:48.416  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    3.80825ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:48:48.417  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.472417ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:57:22.156  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  72.028208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:57:22.189  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.184334ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:57:22.557  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    9.93125ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:57:22.558  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.559167ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:57:45.879  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.173916ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:57:45.889  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.064375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:57:46.085  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.570292ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 17:57:46.086  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.080334ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:59:03.950  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  37.263958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 17:59:03.968  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     14.549ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 17:59:04.270  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  30.353625ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 17:59:04.283  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  38.999375ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 18:10:49.538  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   95.65675ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:10:49.569  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.244792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:10:50.334  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     36.295ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 18:10:50.346  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.523875ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 18:14:40.298  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  52.555583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:14:40.373  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   34.35825ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:14:40.989  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.614375ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 18:14:40.996  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     23.145ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 18:19:23.941  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  44.845167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:23.959  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.378084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:24.183  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    954.292µs|   match|[97;44m GET     [0m /uploads/circle.jpeg
+2024/03/06 18:19:24.185  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.302125ms|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/06 18:19:24.186  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    3.67725ms|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/06 18:19:24.197  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  12.777291ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 18:19:27.259  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     7.6925ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:27.265  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.791458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:27.469  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.718958ms|   match|[97;44m GET     [0m /v1/items/27   r:/v1/items/:id
+2024/03/06 18:19:27.472  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.210083ms|   match|[97;44m GET     [0m /v1/item-images/27   r:/v1/item-images/:id
+2024/03/06 18:19:27.486  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    476.417µs|   match|[97;44m GET     [0m /uploads/berries.jpeg
+2024/03/06 18:19:32.835  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.137375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:32.859  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.660791ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:34.652  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.338667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:34.675  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.642125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:34.803  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.555959ms|   match|[97;44m GET     [0m /v1/item-images/26   r:/v1/item-images/:id
+2024/03/06 18:19:34.804  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.487209ms|   match|[97;44m GET     [0m /v1/items/26   r:/v1/items/:id
+2024/03/06 18:19:34.829  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     3.3375ms|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 18:19:40.627  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.857792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:40.640  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.451292ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:43.250  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.930958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:43.261  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.369417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:43.391  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.394042ms|   match|[97;44m GET     [0m /v1/items/23   r:/v1/items/:id
+2024/03/06 18:19:43.395  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.964458ms|   match|[97;44m GET     [0m /v1/item-images/23   r:/v1/item-images/:id
+2024/03/06 18:19:45.897  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.739167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:45.905  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.583334ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:48.512  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.895459ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:48.530  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.681459ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:19:48.647  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.372667ms|   match|[97;44m GET     [0m /v1/items/22   r:/v1/items/:id
+2024/03/06 18:19:48.648  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.210292ms|   match|[97;44m GET     [0m /v1/item-images/22   r:/v1/item-images/:id
+2024/03/06 18:19:56.688  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.276042ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:19:56.717  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.471792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:20:00.309  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     6.1805ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:20:00.319  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.799291ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:20:00.463  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.129667ms|   match|[97;44m GET     [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 18:20:00.466  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.435875ms|   match|[97;44m GET     [0m /v1/item-images/20   r:/v1/item-images/:id
+2024/03/06 18:20:02.499  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    7.74775ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:20:02.515  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     10.816ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:20:04.048  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.601542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:20:04.060  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.086458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:20:04.216  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      6.804ms|   match|[97;44m GET     [0m /v1/items/28   r:/v1/items/:id
+2024/03/06 18:20:04.217  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    7.02625ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/06 18:20:08.313  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.306791ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:20:08.323  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    5.33525ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:21:53.778  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.608917ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 18:21:53.796  [I] [items.go:39]  Received  {Seb's special Sweet and sour blend of magical spices to keep your meat hot and tasty. Barbecue style!!! 20 [] [] 23 128 1}
+2024/03/06 18:21:53.896  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 18:21:53.896  [I] [items.go:59]  Adding price to item to create at a go
+2024/03/06 18:21:54.022  [D] [router.go:955]  |            ::1|[97;42m 201 [0m| 238.083459ms|   match|[97;46m POST    [0m /v1/items   r:/v1/items/
+2024/03/06 18:21:54.099  [I] [item_images.go:40]  Data received is  29
+2024/03/06 18:21:54.099  [I] [item_images.go:40]  Data received is  29
+2024/03/06 18:21:54.099  [I] [item_images.go:43]  Data received is  {0x14000282300 <nil>}
+2024/03/06 18:21:54.099  [I] [item_images.go:56]  File Name Extracted is  KoriPackagedSpice.webp
+2024/03/06 18:21:54.099  [I] [item_images.go:58]  File Path Extracted is  /uploads/KoriPackagedSpice.webp
+2024/03/06 18:21:54.099  [I] [item_images.go:40]  Data received is  29
+2024/03/06 18:21:54.099  [I] [item_images.go:43]  Data received is  {0x140003e02a0 <nil>}
+2024/03/06 18:21:54.100  [I] [item_images.go:56]  File Name Extracted is  GreenHotSpice.jpeg
+2024/03/06 18:21:54.100  [I] [item_images.go:58]  File Path Extracted is  /uploads/GreenHotSpice.jpeg
+2024/03/06 18:21:54.100  [I] [item_images.go:43]  Data received is  {0x14000348c60 <nil>}
+2024/03/06 18:21:54.100  [I] [item_images.go:56]  File Name Extracted is  groundChickenYellowSpice.jpeg
+2024/03/06 18:21:54.100  [I] [item_images.go:58]  File Path Extracted is  /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:21:54.099  [I] [item_images.go:40]  Data received is  29
+2024/03/06 18:21:54.100  [I] [item_images.go:43]  Data received is  {0x140003e0300 <nil>}
+2024/03/06 18:21:54.100  [I] [item_images.go:56]  File Name Extracted is  gingerYellowSpice.jpeg
+2024/03/06 18:21:54.100  [I] [item_images.go:58]  File Path Extracted is  /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:21:54.101  [I] [item_images.go:79]  Saving ...  /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:21:54.102  [I] [item_images.go:79]  Saving ...  /uploads/GreenHotSpice.jpeg
+2024/03/06 18:21:54.102  [I] [item_images.go:79]  Saving ...  /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:21:54.102  [I] [item_images.go:79]  Saving ...  /uploads/KoriPackagedSpice.webp
+2024/03/06 18:21:54.118  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  32.819083ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 18:21:54.131  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  49.997458ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 18:21:54.227  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|    142.421ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 18:21:54.228  [D] [router.go:955]  |            ::1|[97;42m 201 [0m| 143.977416ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 18:21:54.236  [I] [item_images.go:40]  Data received is  29
+2024/03/06 18:21:54.237  [I] [item_images.go:43]  Data received is  {0x140001db9e0 <nil>}
+2024/03/06 18:21:54.237  [I] [item_images.go:56]  File Name Extracted is  semiGroundBrownSpice.jpeg
+2024/03/06 18:21:54.237  [I] [item_images.go:58]  File Path Extracted is  /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:21:54.239  [I] [item_images.go:79]  Saving ...  /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:21:54.248  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  15.465208ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 18:21:54.252  [I] [item_images.go:40]  Data received is  29
+2024/03/06 18:21:54.253  [I] [item_images.go:43]  Data received is  {0x140001db350 <nil>}
+2024/03/06 18:21:54.253  [I] [item_images.go:56]  File Name Extracted is  spicyYellow.jpeg
+2024/03/06 18:21:54.253  [I] [item_images.go:58]  File Path Extracted is  /uploads/spicyYellow.jpeg
+2024/03/06 18:21:54.287  [I] [item_images.go:79]  Saving ...  /uploads/spicyYellow.jpeg
+2024/03/06 18:21:54.317  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  83.723916ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 18:21:54.553  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.405333ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:21:54.579  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.395375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:21:58.114  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.722958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:21:58.130  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.392625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:21:58.448  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.380167ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:21:58.450  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  79.678542ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:21:58.460  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.188834ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:21:58.466  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.953167ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:21:58.472  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.251584ms|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:21:58.474  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.050958ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:25:51.266  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.906667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:25:51.288  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.101125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:25:51.909  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.123708ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:25:51.910  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.678792ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:25:52.128  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     1.3185ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:25:52.128  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    475.666µs|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:25:52.128  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.688875ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:25:52.139  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    101.417µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:28:00.277  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  25.950292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:28:00.312  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  30.450792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:28:01.001  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  25.811958ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:28:01.002  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.076458ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:28:01.016  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.438875ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:28:01.016  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    189.625µs|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:28:01.017  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.062416ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:28:01.018  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     67.291µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:28:01.034  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.080459ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:29:13.498  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.529708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:29:13.511  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     8.8175ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:29:13.724  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   17.80325ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:29:13.725  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.961292ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:29:13.785  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    838.083µs|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:29:13.786  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|      966.5µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:29:13.786  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    981.667µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:29:13.787  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.388291ms|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:29:13.788  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.873791ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:35:14.049  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  46.683541ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:35:14.102  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  34.259208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:35:14.474  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.960291ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:35:14.475  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.325917ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:35:14.692  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    438.875µs|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:35:14.692  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    336.333µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:35:14.692  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    171.416µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:35:14.696  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     51.584µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:35:14.696  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|          9µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:36:13.236  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.613083ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:36:13.262  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.566458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:36:13.487  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.185291ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:36:13.491  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      6.005ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:36:25.482  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.413292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:36:25.494  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.305166ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:36:25.612  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     3.3265ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:36:25.614  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.842458ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:36:42.890  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.113709ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:36:42.957  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    59.0165ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:36:43.203  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.015083ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:36:43.204  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.443917ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:36:43.322  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  31.142375ms|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:36:43.322  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    299.625µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:36:43.322  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.19825ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:36:43.322  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.392083ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:36:43.322  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  46.682167ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:37:22.064  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  31.719542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:37:22.084  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.387916ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:37:22.284  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.274375ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:37:22.292  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.313542ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:38:32.563  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  209.30525ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:38:32.623  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.041875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:38:34.101  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.827208ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:38:34.102  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    8.30625ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:38:34.826  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    8.80875ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:38:34.841  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     69.792µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:38:34.836  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    134.833µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:38:34.841  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.782917ms|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:38:34.841  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.218708ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:43:33.497  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 149.767167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:43:33.578  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  35.142833ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:43:34.442  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  32.811916ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:43:34.446  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  35.495375ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:43:34.524  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     2.9055ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:43:34.524  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    2.87975ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:43:34.526  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    686.417µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:43:34.568  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     31.416µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:43:34.570  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    685.833µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:43:38.849  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.473542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:43:38.869  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.704083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:43:39.153  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 111.820875ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:43:39.157  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   107.7195ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:43:56.084  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  32.670625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:43:56.103  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.679875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:43:56.373  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     4.3115ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:43:56.374  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.865083ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:47:37.595  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 118.114667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:47:37.666  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   52.67875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:47:38.212  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   17.06325ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:47:38.214  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.037625ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:47:38.365  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    673.959µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 18:47:38.365  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     35.042µs|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 18:47:38.365  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.270792ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 18:47:38.367  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     44.792µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 18:47:38.367  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     85.125µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 18:47:41.864  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.307292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:47:41.876  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.216125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:47:42.056  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.869584ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:47:42.058  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.188458ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:49:17.019  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  95.480125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:49:17.204  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 166.317916ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:49:17.782  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.928584ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:49:17.784  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  30.821167ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:49:45.048  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.526833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:49:45.063  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.260042ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:49:57.916  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  25.713375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 18:49:57.934  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.267542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 18:49:58.300  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.297292ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 18:49:58.301  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.474292ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 18:54:33.864  [I] [parser.go:413]  generate router from comments
+2024/03/06 18:54:33.866  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 19:31:07.195  [I] [parser.go:413]  generate router from comments
+2024/03/06 19:31:07.219  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 19:32:07.539  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  83.978333ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:32:07.634  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.866042ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:32:08.088  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.963625ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:32:08.135  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  50.145583ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:32:08.422  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.161625ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 19:32:08.426  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   6.066917ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 19:32:08.429  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   8.328458ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 19:32:08.431  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.798375ms|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 19:32:08.431  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.29325ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 19:32:08.433  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    131.084µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 19:32:33.884  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     12.679ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:32:33.909  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.394625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:32:34.129  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.404792ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:32:34.131  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.408625ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:34:07.217  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    35.8575ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:34:07.358  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.587458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:34:07.606  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    4.08525ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:34:07.608  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.103208ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:34:13.861  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.002083ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:34:13.871  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.198166ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:34:14.033  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.015167ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:34:14.038  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.327375ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:34:32.676  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     8.5525ms| nomatch|[90;47m OPTIONS [0m /v1/items/29
+2024/03/06 19:34:32.789  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 19:34:32.790  [I] [items.go:224]  Modifying price for item
+2024/03/06 19:34:32.792  [E] [items.go:250]  <QuerySeter> no row found
+2024/03/06 19:34:32.792  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 104.991584ms|   match|[97;43m PUT     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:34:53.953  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.805792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:34:53.970  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.065333ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:34:54.422  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|       9.13ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:34:54.424  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.438334ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:38:58.151  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  50.723667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:38:58.175  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.141542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:38:58.552  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    6.72125ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:38:58.553  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     8.5445ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:39:38.780  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.811417ms| nomatch|[90;47m OPTIONS [0m /v1/items/29
+2024/03/06 19:39:38.907  [E] [items.go:260]  <QuerySeter> no row found
+2024/03/06 19:39:38.909  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  62.073042ms|   match|[97;43m PUT     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:41:19.016  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  44.046917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 19:41:19.029  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.064458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 19:41:19.269  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    8.95775ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 19:41:19.273  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.403166ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 19:41:19.369  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   4.428667ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 19:41:19.369  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   6.460583ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 19:41:19.372  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   3.636833ms|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 19:41:19.375  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     43.042µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 19:41:19.376  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     97.167µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 19:41:19.377  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     40.708µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 20:16:39.350  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 112.439375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:16:39.404  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   38.00675ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:16:39.917  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.374125ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:16:39.937  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  31.103208ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:16:40.279  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.003791ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 20:16:40.281  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|       42.5µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 20:16:40.286  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     511.25µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 20:16:40.288  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    114.375µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 20:16:40.289  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     73.333µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 20:16:40.293  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    117.709µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 20:16:44.811  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   12.55575ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:16:44.842  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   25.51875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:16:45.017  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.602959ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:16:45.019  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.597709ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:20:43.434  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.980208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:20:43.498  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  52.275417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:20:43.841  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.011042ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:20:43.846  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.786125ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:20:46.452  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.354375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:20:46.468  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.499084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:20:46.595  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.461791ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:20:46.595  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.447084ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:21:34.661  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  37.505125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:21:34.689  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.390917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:21:34.897  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.858042ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:21:34.899  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.977541ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:21:37.027  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.987459ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:21:37.041  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.238708ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:21:37.143  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    4.29725ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:21:37.144  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.816542ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:31:28.145  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/06 20:31:28.149  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 20:31:43.219  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.998792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:31:43.242  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    17.7965ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:31:43.589  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.943542ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:31:43.633  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  50.090125ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:31:43.664  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     127.25µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 20:31:43.664  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|      80.75µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 20:31:43.664  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     43.125µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 20:31:43.665  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    862.583µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 20:31:43.665  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.091125ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 20:31:43.666  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.999417ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 20:31:48.548  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.330417ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:31:48.575  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.674084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:31:48.818  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.007583ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:31:48.821  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.568084ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:33:48.743  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 105.826458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:33:48.801  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.847459ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:33:49.104  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     6.1015ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:33:49.104  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.323542ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:33:51.045  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.238292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:33:51.118  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     955.25µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/06 20:33:51.119  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.675833ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 20:33:51.119  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.523958ms|   match|[97;44m GET     [0m /uploads/circle3.png
+2024/03/06 20:34:10.008  [I] [parser.go:413]  generate router from comments
+2024/03/06 20:34:10.012  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 20:34:14.805  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.410292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:35:37.973  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  76.215125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:35:38.105  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  82.599208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:35:45.058  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.564917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:35:45.062  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.709833ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:35:47.429  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   5.071458ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 20:35:47.432  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    4.68575ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 20:35:47.440  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|      10.62ms|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/06 20:35:48.996  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.002708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:36:40.013  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.050667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:36:52.825  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   49.01025ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:37:36.200  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.972542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:37:38.536  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      8.913ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:37:38.563  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.446208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:37:40.212  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.963541ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:37:40.219  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.488334ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:37:40.350  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.750167ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:37:40.389  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  52.858208ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:38:52.039  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   21.07475ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:38:52.064  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    15.1445ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:38:52.241  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    157.208µs| nomatch|[90;47m OPTIONS [0m /v1/categories
+2024/03/06 20:38:52.249  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.636542ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:38:52.251  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|       9.81ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:39:05.712  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  25.724625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:39:05.728  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.864792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:39:06.039  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.017209ms| nomatch|[90;47m OPTIONS [0m /v1/categories
+2024/03/06 20:39:06.045  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.538792ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:39:06.047  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.289166ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:39:07.691  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.877667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:39:07.710  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.669459ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:39:07.830  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    165.208µs| nomatch|[90;47m OPTIONS [0m /v1/categories
+2024/03/06 20:39:07.895  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   64.63125ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:39:07.895  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  63.773459ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:41:01.085  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.315084ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:41:01.105  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.881208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:41:01.731  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.289875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:41:01.738  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.153042ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:41:01.790  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  68.551416ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:42:01.108  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    41.3755ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:42:01.122  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.891791ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:42:01.375  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.664916ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:42:01.384  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.672916ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:42:01.392  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.324541ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:43:46.134  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.640625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:43:46.174  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.641958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:43:46.425  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.451583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:43:46.436  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.402042ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:43:46.438  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.740208ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:44:13.216  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  32.176208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:44:13.235  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     15.027ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:44:13.759  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.209042ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:44:13.759  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.377791ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:44:13.790  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  39.155291ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:44:30.316  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.117458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:44:30.336  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.247125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:44:30.465  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.300959ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:44:30.468  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.784583ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:44:30.502  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  39.111667ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:44:44.807  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.796041ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:44:44.816  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.238125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:44:44.970  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.551792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:44:45.000  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  34.375625ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:44:45.005  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  39.013125ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:44:45.014  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.504667ms|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 20:44:45.015  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   3.235583ms|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 20:44:45.015  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    235.292µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 20:44:45.016  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   3.814292ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 20:44:45.052  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  39.368792ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 20:44:45.058  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|  45.434333ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 20:45:08.192  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  61.900834ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:45:08.223  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.650583ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:45:08.515  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    3.94775ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:45:08.525  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   10.52425ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:45:08.526  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.292833ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:48:02.197  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  47.059792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:48:02.223  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.269958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:48:02.889  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.998958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:48:02.890  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.069167ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:48:02.985  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 112.569958ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:51:09.294  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  62.168375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:51:09.342  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.615417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:51:09.873  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.1255ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:51:09.879  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.154375ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:51:09.883  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.213792ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:52:20.126  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  34.586667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:52:20.154  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.473375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:52:20.368  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.674834ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:52:20.376  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.387417ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:52:20.378  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.386666ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:52:50.040  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  57.694041ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:52:50.140  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  34.073583ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:52:50.638  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   33.39475ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:52:50.645  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.751333ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:52:50.797  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 192.369333ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:53:11.412  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.643375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:53:11.425  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    8.45175ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:53:11.587  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.300375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:53:11.592  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.540792ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:53:11.594  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.662083ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:57:35.227  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  44.668959ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:57:35.245  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.001458ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:57:35.639  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.572875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:57:35.648  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     10.884ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:57:35.733  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  94.517209ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:58:57.080  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.553667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:58:57.104  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.930875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:58:57.287  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.481459ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:58:57.293  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.286625ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:58:57.294  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.025209ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:59:02.450  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.803291ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:59:02.481  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.992042ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:59:02.593  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.6565ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:59:02.598  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.816042ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:59:02.620  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    668.458µs|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 20:59:02.621  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    838.916µs|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 20:59:02.621  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    747.167µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 20:59:02.620  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    787.958µs|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 20:59:02.621  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    522.209µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 20:59:02.624  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    210.375µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 20:59:02.643  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     53.265ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:59:21.027  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.056583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:59:21.049  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.718083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 20:59:21.321  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   19.47275ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 20:59:21.330  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.464917ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 20:59:21.388  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  84.215375ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 20:59:42.647  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.085792ms| nomatch|[90;47m OPTIONS [0m /v1/items/29
+2024/03/06 20:59:42.686  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 20:59:42.687  [I] [items.go:224]  Modifying price for item
+2024/03/06 20:59:42.699  [E] [items.go:250]  <QuerySeter> no row found
+2024/03/06 20:59:42.699  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  40.708417ms|   match|[97;43m PUT     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:09:17.009  [I] [parser.go:413]  generate router from comments
+2024/03/06 21:09:17.017  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 21:09:51.721  [I] [parser.go:413]  generate router from comments
+2024/03/06 21:09:51.727  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 21:13:26.322  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/06 21:13:26.333  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 21:31:29.292  [I] [parser.go:413]  generate router from comments
+2024/03/06 21:31:29.302  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 21:31:56.152  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  31.736667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:31:56.187  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.547833ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:31:56.816  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.142042ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:31:56.865  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   67.82025ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:31:56.868  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  70.181292ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:31:56.905  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    151.334µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 21:31:56.906  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    901.875µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 21:31:56.906  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    275.084µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 21:31:56.907  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.73725ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 21:31:56.908  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.284166ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 21:31:56.909  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   4.098875ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 21:32:07.131  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    411.541µs| nomatch|[90;47m OPTIONS [0m /v1/items/29
+2024/03/06 21:32:07.172  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 21:32:07.173  [I] [items.go:229]  Modifying price for item
+2024/03/06 21:32:07.331  [D] [router.go:955]  |            ::1|[97;42m 201 [0m| 196.235333ms|   match|[97;43m PUT     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:32:22.312  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.710417ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:32:22.329  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.536292ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:32:22.507  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.722709ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:32:22.519  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.169542ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:32:22.541  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  36.378833ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:39:02.999  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 150.369959ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:39:03.063  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    47.5115ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:39:03.987  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.821584ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:39:04.003  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     23.911ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:39:04.065  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  85.202583ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:40:29.400  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.992083ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:40:29.431  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.584416ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:40:29.905  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.682917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:40:29.926  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.900167ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:40:29.992  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  88.740625ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:41:30.104  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  56.846833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:41:30.124  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.606291ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:41:30.378  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.442542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:41:30.391  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.922917ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:41:30.393  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.211167ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:42:10.921  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.142917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:42:10.945  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.398375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:42:11.039  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    606.292µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/06 21:42:11.043  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.590667ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 21:42:14.172  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.136708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:42:14.197  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.511334ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:42:14.370  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.075167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:42:14.377  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.654875ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:42:14.443  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  75.341083ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:42:36.466  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     476.75µs| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 21:42:36.515  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 21:42:36.518  [I] [items.go:229]  Modifying price for item
+2024/03/06 21:42:36.563  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  91.246917ms|   match|[97;43m PUT     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:43:27.995  [I] [parser.go:413]  generate router from comments
+2024/03/06 21:43:28.000  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 21:43:49.175  [I] [parser.go:413]  generate router from comments
+2024/03/06 21:43:49.176  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 21:43:53.178  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    12.7485ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:43:53.205  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.986125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:43:53.405  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.159292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:43:53.425  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   20.54975ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:43:53.432  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  28.343584ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:44:28.425  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.761166ms| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 21:44:28.463  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 21:44:28.463  [I] [items.go:229]  Modifying price for item
+2024/03/06 21:44:28.485  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  56.792041ms|   match|[97;43m PUT     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:44:28.531  [I] [item_images.go:40]  Data received is  25
+2024/03/06 21:44:28.533  [I] [item_images.go:43]  Data received is  {0x14000282540 <nil>}
+2024/03/06 21:44:28.533  [I] [item_images.go:56]  File Name Extracted is  KoriKoriRawGroundSpice.webp
+2024/03/06 21:44:28.533  [I] [item_images.go:58]  File Path Extracted is  /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:44:28.542  [I] [item_images.go:79]  Saving ...  /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:44:28.542  [I] [item_images.go:40]  Data received is  25
+2024/03/06 21:44:28.542  [I] [item_images.go:43]  Data received is  {0x140002827e0 <nil>}
+2024/03/06 21:44:28.542  [I] [item_images.go:56]  File Name Extracted is  SpicySpicyBrown.jpeg
+2024/03/06 21:44:28.542  [I] [item_images.go:58]  File Path Extracted is  /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:44:28.548  [I] [item_images.go:79]  Saving ...  /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:44:28.559  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  31.252666ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 21:44:28.560  [D] [router.go:955]  |            ::1|[97;42m 201 [0m|  32.987417ms|   match|[97;46m POST    [0m /v1/item-images   r:/v1/item-images/
+2024/03/06 21:44:28.581  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      1.248ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:44:28.587  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.514417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:44:28.713  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.762375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:44:28.715  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.777208ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:44:28.738  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.746084ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:44:28.746  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    789.708µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:44:28.748  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.120084ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:44:45.997  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.271208ms| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 21:44:46.054  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 21:44:46.054  [I] [items.go:229]  Modifying price for item
+2024/03/06 21:44:46.081  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  75.143792ms|   match|[97;43m PUT     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:44:46.269  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    932.125µs|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:44:46.274  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.620708ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:44:46.382  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.742875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:44:46.385  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.655959ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:44:46.391  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.079042ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:44:46.405  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    125.791µs|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:44:46.406  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     65.291µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:46:43.158  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 166.823667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:46:43.240  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  34.725542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:46:43.809  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.163416ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:46:43.813  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    9.42875ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:46:43.850  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  45.234583ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:46:43.887  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     32.166µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:46:43.887  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    480.834µs|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:47:41.780  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   233.7295ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:47:41.842  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  35.081917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:47:42.133  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.891292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:47:42.143  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    9.13025ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:47:42.146  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   12.14575ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:47:42.203  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.830542ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:47:42.203  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     67.167µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:47:57.952  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.896209ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:47:57.976  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.621667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:47:58.226  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.329667ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:47:58.235  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.170208ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:47:58.242  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.646375ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:49:46.374  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.187875ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:49:46.417  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.065625ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:49:47.206  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.806833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:49:47.210  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     8.9065ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:49:47.241  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.16575ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:49:47.241  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    578.709µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:49:47.275  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    73.9735ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:50:48.754  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.118458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:50:48.788  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     9.7555ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:50:49.079  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.119125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:50:49.088  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     11.202ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 21:50:49.131  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  53.547584ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 21:50:49.151  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.173041ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 21:50:49.153  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    113.334µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 21:50:55.343  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.749291ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:50:55.356  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.608375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:51:07.951  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.332625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:51:07.962  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.251542ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:51:08.152  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.821166ms|   match|[97;44m GET     [0m /v1/item-images/27   r:/v1/item-images/:id
+2024/03/06 21:51:08.152  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  20.057583ms|   match|[97;44m GET     [0m /v1/items/27   r:/v1/items/:id
+2024/03/06 21:51:08.160  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  27.643416ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:51:08.164  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    2.21725ms|   match|[97;44m GET     [0m /uploads/berries.jpeg
+2024/03/06 21:51:53.705  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.713208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:51:53.742  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.872459ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:52:22.644  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    21.8935ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:52:22.658  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.415875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:52:22.819  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.942792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:52:22.852  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  38.354542ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:52:22.861  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|        844µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 21:52:22.861  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    800.583µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 21:52:22.862  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.770125ms|   match|[97;44m GET     [0m /uploads/groundChickenYellowSpice.jpeg
+2024/03/06 21:52:22.862  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|       42.5µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 21:52:22.864  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   3.513291ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 21:52:22.865  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   5.141333ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 21:52:22.892  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  78.056583ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:53:21.372  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 143.983375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:53:21.527  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.781875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:53:22.333  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.872834ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:53:22.338  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  31.073542ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:53:22.390  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  82.494875ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:54:32.539  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.316833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:54:32.573  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.342958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:54:32.743  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.4455ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:54:32.749  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.490416ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:54:32.751  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.410625ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:57:39.078  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  79.924958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:57:39.097  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.897958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:57:39.436  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.481958ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:57:39.453  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     20.138ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:57:39.541  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  107.81025ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:57:43.739  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.522209ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:57:43.754  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.262917ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:57:44.008  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  57.893208ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:57:44.009  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  58.506291ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:57:44.113  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 162.729292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:59:37.206  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     97.017ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:59:37.245  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.210417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:59:37.505  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   11.60075ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:59:37.514  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.543917ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 21:59:37.517  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.682958ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:59:50.883  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.216208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:59:50.898  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.891916ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 21:59:50.992  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.330167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 21:59:51.007  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    15.2865ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 21:59:51.031  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  38.771417ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:00:49.210  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  40.372166ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:00:49.226  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.192792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:00:49.404  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.045458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:00:49.411  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.514167ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:00:49.415  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.129666ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:05:51.284  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  73.673833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:05:51.347  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  26.157209ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:05:51.634  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.034208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:05:51.641  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.976417ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:05:51.645  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   7.714667ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:10:08.174  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  86.299375ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:10:08.193  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.150208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:10:08.548  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.357292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:10:08.559  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.754167ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:10:08.562  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.239875ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:10:30.834  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.852291ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:10:30.840  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.666083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:10:31.039  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.742292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:10:31.042  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.486333ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:10:31.090  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  55.631667ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:11:08.949  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  54.362833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:11:08.977  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  14.775208ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:11:09.168  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.784417ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:11:09.182  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.923584ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:11:09.255  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  87.954916ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:12:13.926  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.154583ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:12:14.028  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  37.542292ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:12:14.338  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.777792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:12:14.342  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.309583ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:12:14.379  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.372709ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:12:22.883  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    217.791µs| nomatch|[90;47m OPTIONS [0m /v1/items/29
+2024/03/06 22:12:22.922  [I] [currencies.go:43]  Currency returned is  &{1 ₵ Cedi 1 0001-01-01 00:00:00 +0000 UTC 2023-10-30 11:00:31 +0000 GMT 1 0}
+2024/03/06 22:12:22.924  [I] [items.go:229]  Modifying price for item
+2024/03/06 22:12:22.992  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 105.223583ms|   match|[97;43m PUT     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:12:23.041  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    1.48225ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:12:23.047  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.487833ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:12:23.120  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.846333ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:12:23.123  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.035083ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:12:23.132  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.616167ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:12:56.224  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 118.169167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:12:56.322  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  49.150083ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:12:56.580  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.502666ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:12:56.585  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.707583ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:12:56.617  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  42.128375ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:13:07.453  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  16.910458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:13:07.465  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.954667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:13:11.658  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    263.167µs| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 22:13:11.728  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  67.495125ms|   match|[97;41m DELETE  [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:13:11.784  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.247291ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:13:11.790  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.078792ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:13:17.707  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    274.791µs| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 22:13:17.760  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  50.396125ms|   match|[97;41m DELETE  [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:13:17.788  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.799917ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:13:17.811  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     16.789ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:13:23.468  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     297.25µs| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 22:13:23.525  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    55.6175ms|   match|[97;41m DELETE  [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:13:23.612  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.387333ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:13:23.618  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.460375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:13:32.694  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    8.39175ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:13:32.711  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    11.2995ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:14:08.291  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  21.961708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:14:08.308  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  10.818375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:14:08.461  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.254833ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:14:08.472  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  13.025792ms|   match|[97;44m GET     [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:14:08.485  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  24.733792ms|   match|[97;44m GET     [0m /v1/item-images/25   r:/v1/item-images/:id
+2024/03/06 22:14:08.506  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    458.125µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 22:14:08.506  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.11375ms|   match|[97;44m GET     [0m /uploads/SpicySpicyBrown.jpeg
+2024/03/06 22:14:08.506  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     30.375µs|   match|[97;44m GET     [0m /uploads/KoriKoriRawGroundSpice.webp
+2024/03/06 22:14:20.997  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.125375ms| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 22:14:21.066  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  64.397375ms|   match|[97;41m DELETE  [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:14:21.122  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.786708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:14:21.131  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.393584ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:16:10.293  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     4.0005ms| nomatch|[90;47m OPTIONS [0m /v1/items/20
+2024/03/06 22:16:10.403  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 100.342041ms|   match|[97;41m DELETE  [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 22:16:10.713  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    22.5025ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:16:10.724  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.955375ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:19:08.228  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  52.728792ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:19:08.250  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  11.125667ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:19:08.407  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.262292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:19:08.420  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     15.809ms|   match|[97;44m GET     [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 22:19:08.449  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  43.457959ms|   match|[97;44m GET     [0m /v1/item-images/20   r:/v1/item-images/:id
+2024/03/06 22:19:13.424  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    197.792µs| nomatch|[90;47m OPTIONS [0m /v1/items/20
+2024/03/06 22:19:13.495  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  69.463167ms|   match|[97;41m DELETE  [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 22:19:13.546  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.546584ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:19:13.556  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.411875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:25:49.258  [I] [parser.go:413]  generate router from comments
+2024/03/06 22:25:49.268  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 22:25:53.939  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.718542ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:25:53.976  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.697875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:25:54.346  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     19.122ms|   match|[97;44m GET     [0m /v1/item-images/23   r:/v1/item-images/:id
+2024/03/06 22:25:54.349  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  22.953167ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:25:54.358  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   31.45475ms|   match|[97;44m GET     [0m /v1/items/23   r:/v1/items/:id
+2024/03/06 22:25:54.382  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   2.628459ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/06 22:26:00.378  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    259.667µs| nomatch|[90;47m OPTIONS [0m /v1/items/23
+2024/03/06 22:26:00.408  [I] [items.go:295]  Quantity ID is  17
+2024/03/06 22:26:00.446  [I] [items.go:297]  Quantity deleted 
+2024/03/06 22:26:00.450  [I] [items.go:308]  Item is  Yellow Sweet Spice
+2024/03/06 22:26:00.460  [C] [config.go:190]  the request url is  /v1/items/23
+2024/03/06 22:26:00.460  [C] [config.go:191]  Handler crashed with error Error 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`ecommerce`.`items`, CONSTRAINT `items_ibfk_2` FOREIGN KEY (`item_price_id`) REFERENCES `item_prices` (`item_price_id`) ON UPDATE CASCADE)
+2024/03/06 22:26:00.460  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:770
+2024/03/06 22:26:00.460  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers/items.go:312
+2024/03/06 22:26:00.460  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/06 22:26:00.460  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/06 22:26:00.460  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/06 22:26:00.460  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/06 22:26:00.460  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/06 22:26:00.460  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/06 22:26:00.460  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

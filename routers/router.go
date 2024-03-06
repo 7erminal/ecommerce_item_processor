@@ -13,7 +13,10 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 )
 
+
 func init() {
+	beego.SetStaticPath("/uploads", "uploads")
+
 	ns := beego.NewNamespace("/v1",
 		// beego.NSNamespace("/object",
 		// 	beego.NSInclude(

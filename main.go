@@ -7,6 +7,8 @@ import (
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 	_ "github.com/go-sql-driver/mysql"
+
+	"github.com/beego/beego/v2/server/web/filter/cors"
 )
 
 func main() {
@@ -16,6 +18,14 @@ func main() {
 	}
 	orm.RegisterDataBase("default", "mysql", sqlConn)
 	logs.SetLogger(logs.AdapterFile, `{"filename":"application.log"}`)
+
+	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Content-Type"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
