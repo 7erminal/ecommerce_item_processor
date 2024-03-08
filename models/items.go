@@ -18,6 +18,7 @@ type Items struct {
 	ItemPrice       *Item_prices `orm:"rel(fk)" orm:"omitempty"`
 	AvailableSizes  string       `orm:"size(250)" orm:"omitempty"`
 	AvailableColors string       `orm:"size(250)" orm:"omitempty"`
+	ImagePath       string       `orm:"size(250)" orm:"omitempty"`
 	Quantity        int          `orm:"omitempty"`
 	Active          int          `orm:"omitempty"`
 	DateCreated     time.Time    `orm:"type(datetime)" orm:"omitempty"`

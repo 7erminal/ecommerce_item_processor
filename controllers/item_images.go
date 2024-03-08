@@ -70,7 +70,7 @@ func (c *Item_imagesController) Post() {
 		return
 	}
 
-	itemImageId, errr := strconv.ParseInt(c.Ctx.Input.Query("ItemID"), 0, 64)
+	itemId, errr := strconv.ParseInt(c.Ctx.Input.Query("ItemID"), 0, 64)
 
 	if errr != nil {
 		panic(errr)
@@ -78,10 +78,18 @@ func (c *Item_imagesController) Post() {
 
 	logs.Info("Saving ... ", filePath)
 	// json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	v := models.Item_images{ItemId: itemImageId, ImagePath: filePath, IsDefault: 0, CreatedBy: 1, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
+	v := models.Item_images{ItemId: itemId, ImagePath: filePath, IsDefault: 0, CreatedBy: 1, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
 
 	if _, err := models.AddItem_images(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
+		c.Ctx.Output.SetStatus(200)
+
+		i := models.Items{ItemId: itemId, ImagePath: filePath}
+
+		if err := models.UpdateItemsById(&i); err != nil {
+			logs.Error(err.Error())
+			resp := models.ItemResponseDTO{StatusCode: 302, Item: &i, StatusDesc: err.Error()}
+			c.Data["json"] = resp
+		}
 
 		resp := models.ItemImageResponseDTO{StatusCode: 200, ItemImage: &v, StatusDesc: "Images uploaded successfully"}
 		c.Data["json"] = resp
@@ -171,7 +179,8 @@ func (c *Item_imagesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		c.Data["json"] = l
+		var resp = models.ItemImagesResponseDTO{StatusCode: 200, ItemImages: &l, StatusDesc: "Images fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

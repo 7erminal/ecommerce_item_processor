@@ -1289,6 +1289,8 @@ definitions:
         format: datetime
       Description:
         type: string
+      ImagePath:
+        type: string
       ItemId:
         type: integer
         format: int64
