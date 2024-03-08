@@ -61,16 +61,12 @@ paths:
         <br>
       operationId: CategoriesController.Post
       parameters:
-      - in: formData
-        name: CategoryName
+      - in: body
+        name: body
         description: body for Categories content
         required: true
-        type: string
-      - in: formData
-        name: Image
-        description: body for Categories content
-        required: true
-        type: file
+        schema:
+          $ref: '#/definitions/models.CategoriesDTO'
       responses:
         "201":
           description: '{int} models.Categories'
@@ -315,21 +311,12 @@ paths:
         <br>
       operationId: FeaturesController.Post
       parameters:
-      - in: formData
-        name: FeatureName
-        description: body for Categories content
+      - in: body
+        name: body
+        description: body for Features content
         required: true
-        type: string
-      - in: formData
-        name: Description
-        description: body for Categories content
-        required: true
-        type: string
-      - in: formData
-        name: Image
-        description: body for Categories content
-        required: true
-        type: file
+        schema:
+          $ref: '#/definitions/models.Features'
       responses:
         "201":
           description: '{int} models.Features'
@@ -874,7 +861,7 @@ paths:
         description: body for Items content
         required: true
         schema:
-          $ref: '#/definitions/models.Items'
+          $ref: '#/definitions/models.ItemsDTO'
       responses:
         "200":
           description: ""
@@ -900,6 +887,27 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /items/quantity/{id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Item_quantity by Item id
+        <br>
+      operationId: ItemsController.Get Item Quantity
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_quantity'
+        "403":
+          description: :id is empty
   /purposes/:
     get:
       tags:
@@ -949,21 +957,12 @@ paths:
         <br>
       operationId: PurposesController.Post
       parameters:
-      - in: formData
-        name: PurposeName
-        description: body for Categories content
+      - in: body
+        name: body
+        description: body for Purposes content
         required: true
-        type: string
-      - in: formData
-        name: Description
-        description: body for Categories content
-        required: true
-        type: string
-      - in: formData
-        name: Image
-        description: body for Categories content
-        required: true
-        type: file
+        schema:
+          $ref: '#/definitions/models.Purposes'
       responses:
         "201":
           description: '{int} models.Purposes'

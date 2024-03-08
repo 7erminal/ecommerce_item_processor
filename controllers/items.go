@@ -21,6 +21,7 @@ type ItemsController struct {
 func (c *ItemsController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
+	c.Mapping("GetItemQuantity", c.GetItemQuantity)
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
@@ -119,6 +120,27 @@ func (c *ItemsController) GetOne() {
 		c.Data["json"] = resp
 	} else {
 		resp := models.ItemResponseDTO{StatusCode: 200, Item: v, StatusDesc: "Item fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemQuantity ...
+// @Title Get Item Quantity
+// @Description get Item_quantity by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.Item_quantity
+// @Failure 403 :id is empty
+// @router /quantity/:id [get]
+func (c *ItemsController) GetItemQuantity() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItem_quantityByItemId(id)
+	if err != nil {
+		resp := models.ItemQuantityResponseDTO{StatusCode: 301, Quantity: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		resp := models.ItemQuantityResponseDTO{StatusCode: 200, Quantity: v, StatusDesc: "Quantity fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

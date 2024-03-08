@@ -1,0 +1,108 @@
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/06 22:52:22.085  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    4.23675ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:52:22.111  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.277125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:53:49.240  [I] [parser.go:413]  generate router from comments
+2024/03/06 22:53:49.241  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 22:53:56.682  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    401.083µs| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 22:53:56.754  [I] [items.go:306]  Item retrieved 
+2024/03/06 22:53:56.758  [I] [items.go:308]  Item images returned are 
+2024/03/06 22:53:56.758  [I] [items.go:309]  &[{13 25 /uploads/GreenHotSpice.jpeg 0 1 2024-03-06 09:45:04 +0000 GMT 2024-03-06 09:45:04 +0000 GMT 1 0} {14 25 /uploads/GreenHotSpice.jpeg 0 1 2024-03-06 09:45:04 +0000 GMT 2024-03-06 09:45:04 +0000 GMT 1 0} {15 25 /uploads/GreenHotSpice.jpeg 0 1 2024-03-06 09:45:04 +0000 GMT 2024-03-06 09:45:04 +0000 GMT 1 0} {31 25 /uploads/KoriKoriRawGroundSpice.webp 0 1 2024-03-06 21:44:29 +0000 GMT 2024-03-06 21:44:29 +0000 GMT 1 0} {32 25 /uploads/SpicySpicyBrown.jpeg 0 1 2024-03-06 21:44:29 +0000 GMT 2024-03-06 21:44:29 +0000 GMT 1 0}]
+2024/03/06 22:53:56.824  [I] [items.go:311]  Item images deleted
+2024/03/06 22:53:56.824  [I] [items.go:312]  Item is  Kori Greens
+2024/03/06 22:53:56.890  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 202.288416ms|   match|[97;41m DELETE  [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:53:57.499  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.811625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:53:57.526  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.235958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:03.138  [I] [parser.go:413]  generate router from comments
+2024/03/06 22:58:03.146  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 22:58:08.620  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    159.833µs| nomatch|[90;47m OPTIONS [0m /v1/items/25
+2024/03/06 22:58:08.658  [I] [items.go:306]  Item retrieved 
+2024/03/06 22:58:08.661  [I] [items.go:308]  Item images returned are 
+2024/03/06 22:58:08.661  [I] [items.go:309]  &[{13 25 /uploads/GreenHotSpice.jpeg 0 1 2024-03-06 09:45:04 +0000 GMT 2024-03-06 09:45:04 +0000 GMT 1 0} {14 25 /uploads/GreenHotSpice.jpeg 0 1 2024-03-06 09:45:04 +0000 GMT 2024-03-06 09:45:04 +0000 GMT 1 0} {15 25 /uploads/GreenHotSpice.jpeg 0 1 2024-03-06 09:45:04 +0000 GMT 2024-03-06 09:45:04 +0000 GMT 1 0} {31 25 /uploads/KoriKoriRawGroundSpice.webp 0 1 2024-03-06 21:44:29 +0000 GMT 2024-03-06 21:44:29 +0000 GMT 1 0} {32 25 /uploads/SpicySpicyBrown.jpeg 0 1 2024-03-06 21:44:29 +0000 GMT 2024-03-06 21:44:29 +0000 GMT 1 0}]
+2024/03/06 22:58:08.683  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:08.683  [I] [items.go:313]  Item is  Kori Greens
+2024/03/06 22:58:08.693  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:08.693  [I] [items.go:313]  Item is  Kori Greens
+2024/03/06 22:58:08.697  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:08.697  [I] [items.go:313]  Item is  Kori Greens
+2024/03/06 22:58:08.699  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:08.699  [I] [items.go:313]  Item is  Kori Greens
+2024/03/06 22:58:08.703  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:08.703  [I] [items.go:313]  Item is  Kori Greens
+2024/03/06 22:58:08.708  [I] [items.go:316]  Deleting Item price:  20
+2024/03/06 22:58:08.708  [I] [items.go:317]  Item Deleted  25
+2024/03/06 22:58:08.708  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     86.727ms|   match|[97;41m DELETE  [0m /v1/items/25   r:/v1/items/:id
+2024/03/06 22:58:08.923  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.677541ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:08.946  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.400958ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:09.105  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     72.084µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/06 22:58:09.109  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    1.18725ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/06 22:58:16.161  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    222.125µs| nomatch|[90;47m OPTIONS [0m /v1/items/20
+2024/03/06 22:58:16.187  [I] [items.go:306]  Item retrieved 
+2024/03/06 22:58:16.190  [I] [items.go:308]  Item images returned are 
+2024/03/06 22:58:16.190  [I] [items.go:309]  &[{1 20 /uploads/circle.jpeg 0 1 2024-03-04 17:06:37 +0000 GMT 2024-03-04 17:06:37 +0000 GMT 1 0} {2 20 /uploads/circle.jpeg 0 1 2024-03-04 17:06:37 +0000 GMT 2024-03-04 17:06:37 +0000 GMT 1 0} {3 20 /uploads/circle.jpeg 0 1 2024-03-04 17:06:37 +0000 GMT 2024-03-04 17:06:37 +0000 GMT 1 0}]
+2024/03/06 22:58:16.204  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:16.205  [I] [items.go:313]  Item is  Glowbin spice mix
+2024/03/06 22:58:16.214  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:16.215  [I] [items.go:313]  Item is  Glowbin spice mix
+2024/03/06 22:58:16.220  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:16.220  [I] [items.go:313]  Item is  Glowbin spice mix
+2024/03/06 22:58:16.229  [I] [items.go:316]  Deleting Item price:  15
+2024/03/06 22:58:16.229  [I] [items.go:317]  Item Deleted  20
+2024/03/06 22:58:16.229  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  66.629125ms|   match|[97;41m DELETE  [0m /v1/items/20   r:/v1/items/:id
+2024/03/06 22:58:16.275  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.604083ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:16.286  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.1265ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:20.632  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    262.084µs| nomatch|[90;47m OPTIONS [0m /v1/items/22
+2024/03/06 22:58:20.662  [I] [items.go:306]  Item retrieved 
+2024/03/06 22:58:20.664  [I] [items.go:308]  Item images returned are 
+2024/03/06 22:58:20.664  [I] [items.go:309]  &[{6 22 /uploads/spiceNuts.jpeg 0 1 2024-03-06 09:32:26 +0000 GMT 2024-03-06 09:32:26 +0000 GMT 1 0} {7 22 /uploads/spiceNuts.jpeg 0 1 2024-03-06 09:32:26 +0000 GMT 2024-03-06 09:32:26 +0000 GMT 1 0}]
+2024/03/06 22:58:20.673  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:20.673  [I] [items.go:313]  Item is  Kori brown spice
+2024/03/06 22:58:20.683  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:20.683  [I] [items.go:313]  Item is  Kori brown spice
+2024/03/06 22:58:20.692  [I] [items.go:316]  Deleting Item price:  17
+2024/03/06 22:58:20.692  [I] [items.go:317]  Item Deleted  22
+2024/03/06 22:58:20.692  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   59.27775ms|   match|[97;41m DELETE  [0m /v1/items/22   r:/v1/items/:id
+2024/03/06 22:58:20.747  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.916458ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:20.752  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.550875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:24.681  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    191.625µs| nomatch|[90;47m OPTIONS [0m /v1/items/24
+2024/03/06 22:58:24.716  [I] [items.go:306]  Item retrieved 
+2024/03/06 22:58:24.717  [I] [items.go:308]  Item images returned are 
+2024/03/06 22:58:24.717  [I] [items.go:309]  &[{10 24 /uploads/curry.jpeg 0 1 2024-03-06 09:43:29 +0000 GMT 2024-03-06 09:43:29 +0000 GMT 1 0} {11 24 /uploads/curry.jpeg 0 1 2024-03-06 09:43:29 +0000 GMT 2024-03-06 09:43:29 +0000 GMT 1 0} {12 24 /uploads/curry.jpeg 0 1 2024-03-06 09:43:29 +0000 GMT 2024-03-06 09:43:29 +0000 GMT 1 0}]
+2024/03/06 22:58:24.723  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:24.723  [I] [items.go:313]  Item is  Kori Curry
+2024/03/06 22:58:24.729  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:24.729  [I] [items.go:313]  Item is  Kori Curry
+2024/03/06 22:58:24.733  [I] [items.go:312]  Item images deleted
+2024/03/06 22:58:24.733  [I] [items.go:313]  Item is  Kori Curry
+2024/03/06 22:58:24.740  [I] [items.go:316]  Deleting Item price:  19
+2024/03/06 22:58:24.740  [I] [items.go:317]  Item Deleted  24
+2024/03/06 22:58:24.740  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    57.4885ms|   match|[97;41m DELETE  [0m /v1/items/24   r:/v1/items/:id
+2024/03/06 22:58:24.786  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.159208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:24.789  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.280875ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:30.141  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   16.70175ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:30.154  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   8.508084ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:31.967  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.749292ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:31.979  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     6.7285ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 22:58:32.077  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   11.83225ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/06 22:58:32.109  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  44.797125ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/06 22:58:32.111  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  45.660916ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/06 22:58:32.117  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|    210.709µs|   match|[97;44m GET     [0m /uploads/KoriPackagedSpice.webp
+2024/03/06 22:58:32.118  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|         39µs|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/06 22:58:32.118  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|         37µs|   match|[97;44m GET     [0m /uploads/spicyYellow.jpeg
+2024/03/06 22:58:32.119  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.477833ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/06 22:58:32.120  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   1.518625ms|   match|[97;44m GET     [0m /uploads/semiGroundBrownSpice.jpeg
+2024/03/06 23:42:25.607  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/06 23:42:25.609  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 23:42:30.353  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     81.625µs| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 23:54:20.032  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/06 23:54:20.032  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 23:54:22.339  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    185.208µs| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 23:57:32.423  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      1.692ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 23:57:34.003  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/06 23:57:34.003  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 23:58:05.997  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/06 23:58:05.997  [I] [server.go:241]  http server Running on http://:8081
+2024/03/06 23:58:07.431  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    131.625µs| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 23:58:07.480  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  48.312125ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 23:59:16.951  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.354375ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/06 23:59:17.028  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  72.560041ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/06 23:59:18.793  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  12.556042ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
