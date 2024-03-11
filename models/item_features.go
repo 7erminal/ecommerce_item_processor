@@ -11,14 +11,14 @@ import (
 )
 
 type Item_features struct {
-	Id           int64 `orm:"auto"`
-	ItemId       int64
-	FeatureId    int
-	Active       int
-	DateCreated  time.Time `orm:"type(datetime)"`
-	DateModified time.Time `orm:"type(datetime)"`
-	CreatedBy    int
-	ModifiedBy   int
+	ItemFeatureId int64     `orm:"auto"`
+	Item          *Items    `orm:"rel(fk)"`
+	Feature       *Features `orm:"rel(fk)"`
+	Active        int
+	DateCreated   time.Time `orm:"type(datetime)"`
+	DateModified  time.Time `orm:"type(datetime)"`
+	CreatedBy     int
+	ModifiedBy    int
 }
 
 func init() {
@@ -37,9 +37,20 @@ func AddItem_features(m *Item_features) (id int64, err error) {
 // Id doesn't exist
 func GetItem_featuresById(id int64) (v *Item_features, err error) {
 	o := orm.NewOrm()
-	v = &Item_features{Id: id}
-	if err = o.QueryTable(new(Item_features)).Filter("Id", id).RelatedSel().One(v); err == nil {
+	v = &Item_features{ItemFeatureId: id}
+	if err = o.QueryTable(new(Item_features)).Filter("ItemFeatureId", id).RelatedSel().One(v); err == nil {
 		return v, nil
+	}
+	return nil, err
+}
+
+// GetItem_featuresByItemId retrieves Item_features by Id. Returns error if
+// Id doesn't exist
+func GetItem_featuresByItemId(id int64) (v *[]Item_features, err error) {
+	o := orm.NewOrm()
+	var l []Item_features
+	if _, err = o.QueryTable(new(Item_features)).Filter("Item", Items{ItemId: id}).RelatedSel().All(&l); err == nil {
+		return &l, nil
 	}
 	return nil, err
 }
@@ -122,7 +133,7 @@ func GetAllItem_features(query map[string]string, fields []string, sortby []stri
 // the record to be updated doesn't exist
 func UpdateItem_featuresById(m *Item_features) (err error) {
 	o := orm.NewOrm()
-	v := Item_features{Id: m.Id}
+	v := Item_features{ItemFeatureId: m.ItemFeatureId}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -137,11 +148,11 @@ func UpdateItem_featuresById(m *Item_features) (err error) {
 // the record to be deleted doesn't exist
 func DeleteItem_features(id int64) (err error) {
 	o := orm.NewOrm()
-	v := Item_features{Id: id}
+	v := Item_features{ItemFeatureId: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&Item_features{Id: id}); err == nil {
+		if num, err = o.Delete(&Item_features{ItemFeatureId: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

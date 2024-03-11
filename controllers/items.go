@@ -22,6 +22,8 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetItemQuantity", c.GetItemQuantity)
+	c.Mapping("GetItemFeatures", c.GetItemFeatures)
+	c.Mapping("GetItemPurposes", c.GetItemPurposes)
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
@@ -129,7 +131,7 @@ func (c *ItemsController) GetOne() {
 // @Title Get Item Quantity
 // @Description get Item_quantity by Item id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.Item_quantity
+// @Success 200 {object} models.ItemQuantityResponseDTO
 // @Failure 403 :id is empty
 // @router /quantity/:id [get]
 func (c *ItemsController) GetItemQuantity() {
@@ -141,6 +143,49 @@ func (c *ItemsController) GetItemQuantity() {
 		c.Data["json"] = resp
 	} else {
 		resp := models.ItemQuantityResponseDTO{StatusCode: 200, Quantity: v, StatusDesc: "Quantity fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemFeatures ...
+// @Title Get Item Features
+// @Description get Item_features by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ItemFeaturesResponseDTO
+// @Failure 403 :id is empty
+// @router /features/:id [get]
+func (c *ItemsController) GetItemFeatures() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItem_featuresByItemId(id)
+	if err != nil {
+		resp := models.ItemFeaturesResponseDTO{StatusCode: 301, ItemFeatures: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		logs.Info("Item features fetched are ", v)
+		resp := models.ItemFeaturesResponseDTO{StatusCode: 200, ItemFeatures: v, StatusDesc: "Features fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemPurposes ...
+// @Title Get Item Purposes
+// @Description get Item_purposes by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ItemPurposesResponseDTO
+// @Failure 403 :id is empty
+// @router /purposes/:id [get]
+func (c *ItemsController) GetItemPurposes() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItem_purposesByItemId(id)
+	if err != nil {
+		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

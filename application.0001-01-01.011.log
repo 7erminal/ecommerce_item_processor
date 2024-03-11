@@ -1,0 +1,23 @@
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/11 04:41:03.555  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     2.3965ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/11 04:41:03.574  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  19.498333ms|   match|[97;44m GET     [0m /v1/items/purposes/29   r:/v1/items/purposes/:id
+2024/03/11 04:41:03.574  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     19.828ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/11 04:41:03.580  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   27.15775ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/11 04:43:01.748  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  51.335208ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/11 04:43:01.769  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   9.475542ms|   match|[97;44m GET     [0m /v1/features   r:/v1/features/
+2024/03/11 04:43:01.778  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   5.436708ms|   match|[97;44m GET     [0m /v1/purposes   r:/v1/purposes/
+2024/03/11 04:43:01.819  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   38.48075ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/11 04:43:02.088  [C] [config.go:190]  the request url is  /v1/items/features/29
+2024/03/11 04:43:02.090  [C] [config.go:191]  Handler crashed with error wrong object type `*[]models.Item_features2` for rows scan, need *[]*item_processor/models.Item_features or *[]item_processor/models.Item_features
+2024/03/11 04:43:02.090  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:770
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/client/orm/db.go:977
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/client/orm/orm_queryset.go:244
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/models/item_features.go:52
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers/items.go:161
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/11 04:43:02.091  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/11 04:43:02.093  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/11 04:43:02.094  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/11 04:43:02.094  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/11 04:43:02.094  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

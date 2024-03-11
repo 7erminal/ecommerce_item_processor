@@ -441,10 +441,10 @@ paths:
         description: body for Item_features content
         required: true
         schema:
-          $ref: '#/definitions/models.Item_features'
+          $ref: '#/definitions/models.ItemFeatureRequestDTO'
       responses:
-        "201":
-          description: '{int} models.Item_features'
+        "200":
+          description: '{int} models.ItemFeatureResponseDTO'
         "403":
           description: body is empty
   /item-features/{id}:
@@ -691,10 +691,10 @@ paths:
         description: body for Item_purposes content
         required: true
         schema:
-          $ref: '#/definitions/models.Item_purposes'
+          $ref: '#/definitions/models.ItemPurposeRequestDTO'
       responses:
         "201":
-          description: '{int} models.Item_purposes'
+          description: '{int} models.ItemPurposeResponseDTO'
         "403":
           description: body is empty
   /item-purposes/{id}:
@@ -887,6 +887,48 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /items/features/{id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Item_features by Item id
+        <br>
+      operationId: ItemsController.Get Item Features
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemFeaturesResponseDTO'
+        "403":
+          description: :id is empty
+  /items/purposes/{id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Item_purposes by Item id
+        <br>
+      operationId: ItemsController.Get Item Purposes
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemPurposesResponseDTO'
+        "403":
+          description: :id is empty
   /items/quantity/{id}:
     get:
       tags:
@@ -905,7 +947,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/models.Item_quantity'
+            $ref: '#/definitions/models.ItemQuantityResponseDTO'
         "403":
           description: :id is empty
   /purposes/:
@@ -1034,6 +1076,12 @@ paths:
         "403":
           description: id is empty
 definitions:
+  677.<nil>.Item_features:
+    title: Item_features
+    type: object
+  1789.<nil>.Item_purposes:
+    title: Item_purposes
+    type: object
   models.Categories:
     title: Categories
     type: object
@@ -1135,13 +1183,11 @@ definitions:
       DateModified:
         type: string
         format: datetime
-      FeatureId:
-        type: integer
-        format: int64
-      Id:
-        type: integer
-        format: int64
-      ItemId:
+      Feature:
+        $ref: '#/definitions/models.Features'
+      Item:
+        $ref: '#/definitions/models.Items'
+      ItemFeatureId:
         type: integer
         format: int64
       ModifiedBy:
@@ -1225,18 +1271,16 @@ definitions:
       DateModified:
         type: string
         format: datetime
-      ItemId:
-        type: integer
-        format: int64
+      Item:
+        $ref: '#/definitions/models.Items'
       ItemPurposeId:
         type: integer
         format: int64
       ModifiedBy:
         type: integer
         format: int64
-      PurposeId:
-        type: integer
-        format: int64
+      Purpose:
+        $ref: '#/definitions/models.Purposes'
   models.Item_quantity:
     title: Item_quantity
     type: object
@@ -1265,6 +1309,55 @@ definitions:
       Quantity:
         type: integer
         format: int64
+  models.ItemFeatureRequestDTO:
+    title: ItemFeatureRequestDTO
+    type: object
+    properties:
+      FeatureId:
+        type: string
+      ItemId:
+        type: string
+  models.ItemFeaturesResponseDTO:
+    title: ItemFeaturesResponseDTO
+    type: object
+    properties:
+      ItemFeatures:
+        $ref: '#/definitions/677.<nil>.Item_features'
+      StatusCode:
+        type: integer
+        format: int64
+      StatusDesc:
+        type: string
+  models.ItemPurposeRequestDTO:
+    title: ItemPurposeRequestDTO
+    type: object
+    properties:
+      ItemId:
+        type: string
+      PurposeId:
+        type: string
+  models.ItemPurposesResponseDTO:
+    title: ItemPurposesResponseDTO
+    type: object
+    properties:
+      ItemPurposes:
+        $ref: '#/definitions/1789.<nil>.Item_purposes'
+      StatusCode:
+        type: integer
+        format: int64
+      StatusDesc:
+        type: string
+  models.ItemQuantityResponseDTO:
+    title: ItemQuantityResponseDTO
+    type: object
+    properties:
+      Quantity:
+        $ref: '#/definitions/models.Item_quantity'
+      StatusCode:
+        type: integer
+        format: int64
+      StatusDesc:
+        type: string
   models.Items:
     title: Items
     type: object

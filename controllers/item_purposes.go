@@ -6,6 +6,7 @@ import (
 	"item_processor/models"
 	"strconv"
 	"strings"
+	"time"
 
 	beego "github.com/beego/beego/v2/server/web"
 )
@@ -27,18 +28,30 @@ func (c *Item_purposesController) URLMapping() {
 // Post ...
 // @Title Post
 // @Description create Item_purposes
-// @Param	body		body 	models.Item_purposes	true		"body for Item_purposes content"
-// @Success 201 {int} models.Item_purposes
+// @Param	body		body 	models.ItemPurposeRequestDTO	true		"body for Item_purposes content"
+// @Success 201 {int} models.ItemPurposeResponseDTO
 // @Failure 403 body is empty
 // @router / [post]
 func (c *Item_purposesController) Post() {
-	var v models.Item_purposes
+	var v models.ItemPurposeRequestDTO
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if _, err := models.AddItem_purposes(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
-	} else {
-		c.Data["json"] = err.Error()
+
+	itemid, _ := strconv.ParseInt(v.ItemId, 0, 64)
+	purposeid, _ := strconv.ParseInt(v.PurposeId, 0, 64)
+
+	if it, err := models.GetItemsById(itemid); err == nil {
+		if ft, err := models.GetPurposesById(purposeid); err == nil {
+			iff := models.Item_purposes{Item: it, Purpose: ft, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+
+			if _, err := models.AddItem_purposes(&iff); err == nil {
+				c.Ctx.Output.SetStatus(200)
+				resp := models.ItemPurposeResponseDTO{StatusCode: 200, ItemPurpose: &iff, StatusDesc: "Item purpose added successfully"}
+				c.Data["json"] = resp
+			} else {
+				resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: nil, StatusDesc: err.Error()}
+				c.Data["json"] = resp
+			}
+		}
 	}
 	c.ServeJSON()
 }

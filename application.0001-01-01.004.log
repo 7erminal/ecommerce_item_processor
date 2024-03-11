@@ -1,0 +1,8 @@
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/11 03:48:31.493  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/11 03:48:31.493  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/11 03:48:31.493  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/11 03:48:31.493  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/11 03:48:31.493  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/11 03:48:31.493  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/11 03:48:31.493  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

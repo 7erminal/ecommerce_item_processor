@@ -604,13 +604,13 @@
                         "description": "body for Item_features content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Item_features"
+                            "$ref": "#/definitions/models.ItemFeatureRequestDTO"
                         }
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "{int} models.Item_features"
+                    "200": {
+                        "description": "{int} models.ItemFeatureResponseDTO"
                     },
                     "403": {
                         "description": "body is empty"
@@ -950,13 +950,13 @@
                         "description": "body for Item_purposes content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Item_purposes"
+                            "$ref": "#/definitions/models.ItemPurposeRequestDTO"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Item_purposes"
+                        "description": "{int} models.ItemPurposeResponseDTO"
                     },
                     "403": {
                         "description": "body is empty"
@@ -1137,6 +1137,64 @@
                 }
             }
         },
+        "/items/features/{id}": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get Item_features by Item id\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Features",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ItemFeaturesResponseDTO"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
+        "/items/purposes/{id}": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get Item_purposes by Item id\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Purposes",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ItemPurposesResponseDTO"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
         "/items/quantity/{id}": {
             "get": {
                 "tags": [
@@ -1157,7 +1215,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Item_quantity"
+                            "$ref": "#/definitions/models.ItemQuantityResponseDTO"
                         }
                     },
                     "403": {
@@ -1430,6 +1488,14 @@
         }
     },
     "definitions": {
+        "1789.\u003cnil\u003e.Item_purposes": {
+            "title": "Item_purposes",
+            "type": "object"
+        },
+        "677.\u003cnil\u003e.Item_features": {
+            "title": "Item_features",
+            "type": "object"
+        },
         "models.Categories": {
             "title": "Categories",
             "type": "object",
@@ -1549,6 +1615,78 @@
                 }
             }
         },
+        "models.ItemFeatureRequestDTO": {
+            "title": "ItemFeatureRequestDTO",
+            "type": "object",
+            "properties": {
+                "FeatureId": {
+                    "type": "string"
+                },
+                "ItemId": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ItemFeaturesResponseDTO": {
+            "title": "ItemFeaturesResponseDTO",
+            "type": "object",
+            "properties": {
+                "ItemFeatures": {
+                    "$ref": "#/definitions/677.\u003cnil\u003e.Item_features"
+                },
+                "StatusCode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "StatusDesc": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ItemPurposeRequestDTO": {
+            "title": "ItemPurposeRequestDTO",
+            "type": "object",
+            "properties": {
+                "ItemId": {
+                    "type": "string"
+                },
+                "PurposeId": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ItemPurposesResponseDTO": {
+            "title": "ItemPurposesResponseDTO",
+            "type": "object",
+            "properties": {
+                "ItemPurposes": {
+                    "$ref": "#/definitions/1789.\u003cnil\u003e.Item_purposes"
+                },
+                "StatusCode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "StatusDesc": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ItemQuantityResponseDTO": {
+            "title": "ItemQuantityResponseDTO",
+            "type": "object",
+            "properties": {
+                "Quantity": {
+                    "$ref": "#/definitions/models.Item_quantity"
+                },
+                "StatusCode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "StatusDesc": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Item_features": {
             "title": "Item_features",
             "type": "object",
@@ -1569,15 +1707,13 @@
                     "type": "string",
                     "format": "datetime"
                 },
-                "FeatureId": {
-                    "type": "integer",
-                    "format": "int64"
+                "Feature": {
+                    "$ref": "#/definitions/models.Features"
                 },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
+                "Item": {
+                    "$ref": "#/definitions/models.Items"
                 },
-                "ItemId": {
+                "ItemFeatureId": {
                     "type": "integer",
                     "format": "int64"
                 },
@@ -1692,9 +1828,8 @@
                     "type": "string",
                     "format": "datetime"
                 },
-                "ItemId": {
-                    "type": "integer",
-                    "format": "int64"
+                "Item": {
+                    "$ref": "#/definitions/models.Items"
                 },
                 "ItemPurposeId": {
                     "type": "integer",
@@ -1704,9 +1839,8 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "PurposeId": {
-                    "type": "integer",
-                    "format": "int64"
+                "Purpose": {
+                    "$ref": "#/definitions/models.Purposes"
                 }
             }
         },

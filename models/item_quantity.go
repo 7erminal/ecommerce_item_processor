@@ -48,7 +48,6 @@ func GetItem_quantityById(id int64) (v *Item_quantity, err error) {
 // Id doesn't exist
 func GetItem_quantityByItemId(id int64) (v *Item_quantity, err error) {
 	o := orm.NewOrm()
-	v = &Item_quantity{ItemId: id}
 	if err = o.QueryTable(new(Item_quantity)).Filter("ItemId", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}

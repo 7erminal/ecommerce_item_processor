@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"strings"
 
+	"time"
+
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
@@ -28,20 +30,42 @@ func (c *Item_featuresController) URLMapping() {
 // Post ...
 // @Title Post
 // @Description create Item_features
-// @Param	body		body 	models.Item_features	true		"body for Item_features content"
-// @Success 201 {int} models.Item_features
+// @Param	body		body 	models.ItemFeatureRequestDTO	true		"body for Item_features content"
+// @Success 200 {int} models.ItemFeatureResponseDTO
 // @Failure 403 body is empty
 // @router / [post]
 func (c *Item_featuresController) Post() {
-	var v models.Item_features
+	var v models.ItemFeatureRequestDTO
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	if _, err := models.AddItem_features(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
-		c.Data["json"] = v
+
+	itemid, _ := strconv.ParseInt(v.ItemId, 0, 64)
+	featureid, _ := strconv.ParseInt(v.FeatureId, 0, 64)
+
+	if it, err := models.GetItemsById(itemid); err == nil {
+		if ft, err := models.GetFeaturesById(featureid); err == nil {
+			iff := models.Item_features{Item: it, Feature: ft, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+
+			if _, err := models.AddItem_features(&iff); err == nil {
+				c.Ctx.Output.SetStatus(200)
+
+				resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: &iff, StatusDesc: "Item feature added successfully"}
+				c.Data["json"] = resp
+			} else {
+				logs.Error(err.Error())
+				resp := models.ItemFeatureResponseDTO{StatusCode: 301, ItemFeature: nil, StatusDesc: err.Error()}
+				c.Data["json"] = resp
+			}
+		} else {
+			logs.Error(err.Error())
+			resp := models.ItemFeatureResponseDTO{StatusCode: 301, ItemFeature: nil, StatusDesc: err.Error()}
+			c.Data["json"] = resp
+		}
 	} else {
 		logs.Error(err.Error())
-		c.Data["json"] = err.Error()
+		resp := models.ItemFeatureResponseDTO{StatusCode: 301, ItemFeature: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	}
+
 	c.ServeJSON()
 }
 
@@ -57,9 +81,11 @@ func (c *Item_featuresController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_featuresById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = v
+		resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: v, StatusDesc: "Item feature fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
@@ -138,7 +164,7 @@ func (c *Item_featuresController) GetAll() {
 func (c *Item_featuresController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v := models.Item_features{Id: id}
+	v := models.Item_features{ItemFeatureId: id}
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 	if err := models.UpdateItem_featuresById(&v); err == nil {
 		c.Data["json"] = "OK"
