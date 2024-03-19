@@ -11,11 +11,11 @@ import (
 )
 
 type Categories struct {
-	CategoryId   int64     `orm:"auto" orm:"omitempty"`
+	CategoryId   int64     `orm:"auto;omitempty"`
 	CategoryName string    `orm:"size(40)"`
 	ImagePath    string    `orm:"size(250)"`
-	DateCreated  time.Time `orm:"type(datetime)" orm:"omitempty"`
-	DateModified time.Time `orm:"type(datetime)" orm:"omitempty"`
+	DateCreated  time.Time `orm:"type(datetime);omitempty"`
+	DateModified time.Time `orm:"type(datetime);omitempty"`
 	CreatedBy    int       `orm:"omitempty"`
 	ModifiedBy   int       `orm:"omitempty"`
 }

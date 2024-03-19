@@ -1865,8 +1865,7 @@
                     "format": "datetime"
                 },
                 "ItemId": {
-                    "type": "integer",
-                    "format": "int64"
+                    "$ref": "#/definitions/models.Items"
                 },
                 "ItemQuantityId": {
                     "type": "integer",

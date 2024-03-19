@@ -1298,8 +1298,7 @@ definitions:
         type: string
         format: datetime
       ItemId:
-        type: integer
-        format: int64
+        $ref: '#/definitions/models.Items'
       ItemQuantityId:
         type: integer
         format: int64

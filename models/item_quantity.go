@@ -11,8 +11,8 @@ import (
 )
 
 type Item_quantity struct {
-	ItemQuantityId int64 `orm:"auto"`
-	ItemId         int64
+	ItemQuantityId int64  `orm:"auto"`
+	ItemId         *Items `orm:"rel(fk)"`
 	Quantity       int
 	Active         int
 	DateCreated    time.Time `orm:"type(datetime)"`

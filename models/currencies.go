@@ -12,12 +12,12 @@ import (
 )
 
 type Currencies struct {
-	CurrencyId   int64     `orm:"auto" orm:"omitempty"`
+	CurrencyId   int64     `orm:"auto;omitempty"`
 	Symbol       string    `orm:"size(20)"`
 	Currency     string    `orm:"size(50)"`
 	Active       int       `orm:"omitempty"`
-	DateCreated  time.Time `orm:"type(datetime)" orm:"omitempty"`
-	DateModified time.Time `orm:"type(datetime)" orm:"omitempty"`
+	DateCreated  time.Time `orm:"type(datetime);omitempty"`
+	DateModified time.Time `orm:"type(datetime);omitempty"`
 	CreatedBy    int       `orm:"omitempty"`
 	ModifiedBy   int       `orm:"omitempty"`
 }

@@ -66,7 +66,7 @@ func (c *ItemsController) Post() {
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item
-					qu := models.Item_quantity{ItemId: v.ItemId, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+					qu := models.Item_quantity{ItemId: &v, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 					if _, err := models.AddItem_quantity(&qu); err == nil {
 						c.Ctx.Output.SetStatus(200)
@@ -305,7 +305,7 @@ func (c *ItemsController) Put() {
 						iq, err := models.GetItem_quantityByItemId(id)
 						if err != nil {
 						} else {
-							qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, ItemId: v.ItemId, Quantity: t.Quantity, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
+							qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, ItemId: &v, Quantity: t.Quantity, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
 
 							if err := models.UpdateItem_quantityById(&qu); err == nil {
 								c.Ctx.Output.SetStatus(200)
