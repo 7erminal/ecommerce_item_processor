@@ -1,2 +1,19 @@
-2024/03/19 06:45:25.777  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
-2024/03/19 06:45:25.778  [I] [server.go:241]  http server Running on http://:8082
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/21 13:48:55.303  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.720542ms|   match|[97;44m GET     [0m /v1/item-images/21   r:/v1/item-images/:id
+2024/03/21 13:48:55.303  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.923083ms|   match|[97;44m GET     [0m /v1/items/21   r:/v1/items/:id
+2024/03/21 13:53:17.728  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/21 13:53:17.728  [I] [server.go:241]  http server Running on http://:8082
+2024/03/21 13:53:24.022  [D] [items.go:140]  Item ID to get quantity is  21
+2024/03/21 13:53:24.023  [I] [item_quantity.go:53]  About to go to the db to get quantity for  21
+2024/03/21 13:53:24.071  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  50.201417ms|   match|[97;44m GET     [0m /v1/items/quantity/21   r:/v1/items/quantity/:id
+2024/03/21 13:53:43.844  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    307.125µs| nomatch|[90;47m OPTIONS [0m /v1/items/21
+2024/03/21 13:53:43.845  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     27.792µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/21
+2024/03/21 13:53:43.845  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     21.875µs| nomatch|[90;47m OPTIONS [0m /v1/items/quantity/21
+2024/03/21 13:53:43.846  [D] [items.go:140]  Item ID to get quantity is  21
+2024/03/21 13:53:43.846  [I] [item_quantity.go:53]  About to go to the db to get quantity for  21
+2024/03/21 13:53:43.864  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  18.519625ms|   match|[97;44m GET     [0m /v1/items/21   r:/v1/items/:id
+2024/03/21 13:53:43.882  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  36.168667ms|   match|[97;44m GET     [0m /v1/items/quantity/21   r:/v1/items/quantity/:id
+2024/03/21 13:53:43.883  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   36.62675ms|   match|[97;44m GET     [0m /v1/item-images/21   r:/v1/item-images/:id
+2024/03/21 13:53:59.440  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     1.3225ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/21 13:53:59.440  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.864084ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/21 13:53:59.441  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.913166ms|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg

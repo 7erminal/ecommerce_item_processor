@@ -1,0 +1,50 @@
+2024/03/19 06:45:25.777  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/19 06:45:25.778  [I] [server.go:241]  http server Running on http://:8082
+2024/03/21 11:52:40.949  [I] [parser.go:85]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers no changed
+2024/03/21 11:52:40.949  [I] [server.go:241]  http server Running on http://:8082
+2024/03/21 11:53:13.704  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    1.01375ms| nomatch|[90;47m OPTIONS [0m /v1/categories
+2024/03/21 11:53:13.704  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    108.417µs| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/21 11:53:13.780  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  66.892625ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/21 11:53:13.786  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.275083ms|   match|[97;44m GET     [0m /uploads/circle3.png
+2024/03/21 11:53:13.788  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    823.458µs|   match|[97;44m GET     [0m /uploads/circle2.jpeg
+2024/03/21 11:53:13.789  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|     50.791µs|   match|[97;44m GET     [0m /uploads/spiceNuts.jpeg
+2024/03/21 11:53:13.789  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.750625ms|   match|[97;44m GET     [0m /uploads/circle.jpeg
+2024/03/21 11:53:13.795  [D] [router.go:955]  |            ::1|[90;47m 304 [0m|   6.567333ms|   match|[97;44m GET     [0m /uploads/Kori_theMaking.jpeg
+2024/03/21 11:53:13.827  [D] [router.go:955]  |            ::1|[97;42m 200 [0m| 115.019417ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/21 11:53:13.831  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     31.125µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/21
+2024/03/21 11:53:13.831  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     33.959µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/23
+2024/03/21 11:53:13.832  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     32.625µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/26
+2024/03/21 11:53:13.832  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|      69.75µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/27
+2024/03/21 11:53:13.833  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     28.625µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/28
+2024/03/21 11:53:13.833  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     97.542µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/29
+2024/03/21 11:53:13.849  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.270667ms|   match|[97;44m GET     [0m /v1/item-images/21   r:/v1/item-images/:id
+2024/03/21 11:53:13.850  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  15.637083ms|   match|[97;44m GET     [0m /v1/item-images/23   r:/v1/item-images/:id
+2024/03/21 11:53:13.853  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   2.652292ms|   match|[97;44m GET     [0m /uploads/chocolateSpice.jpeg
+2024/03/21 11:53:13.855  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.186666ms|   match|[97;44m GET     [0m /uploads/curry.jpeg
+2024/03/21 11:53:13.856  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     1.0335ms|   match|[97;44m GET     [0m /uploads/berries.jpeg
+2024/03/21 11:53:13.857  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    419.833µs|   match|[97;44m GET     [0m /uploads/brownNutsSpice.jpeg
+2024/03/21 11:53:13.857  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   3.144292ms|   match|[97;44m GET     [0m /uploads/GreenHotSpice.jpeg
+2024/03/21 11:53:13.858  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.037708ms|   match|[97;44m GET     [0m /uploads/gingerYellowSpice.jpeg
+2024/03/21 11:53:13.859  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  23.197459ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/21 11:53:13.866  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    29.8645ms|   match|[97;44m GET     [0m /v1/item-images/26   r:/v1/item-images/:id
+2024/03/21 11:53:13.867  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  32.114584ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/21 11:53:13.872  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  36.307167ms|   match|[97;44m GET     [0m /v1/item-images/27   r:/v1/item-images/:id
+2024/03/21 11:53:35.842  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    336.125µs| nomatch|[90;47m OPTIONS [0m /v1/items/23
+2024/03/21 11:53:35.842  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    124.042µs| nomatch|[90;47m OPTIONS [0m /v1/items/quantity/23
+2024/03/21 11:53:35.842  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    155.709µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/23
+2024/03/21 11:53:35.844  [C] [config.go:190]  the request url is  /v1/items/quantity/23
+2024/03/21 11:53:35.844  [C] [config.go:191]  Handler crashed with error reflect: call of reflect.Value.Type on zero Value
+2024/03/21 11:53:35.844  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:770
+2024/03/21 11:53:35.845  [C] [config.go:197]  /usr/local/go/src/reflect/value.go:2699
+2024/03/21 11:53:35.845  [C] [config.go:197]  /usr/local/go/src/reflect/value.go:2694
+2024/03/21 11:53:35.845  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/client/orm/db.go:968
+2024/03/21 11:53:35.845  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/client/orm/orm_queryset.go:251
+2024/03/21 11:53:35.845  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/models/item_quantity.go:51
+2024/03/21 11:53:35.846  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers/items.go:140
+2024/03/21 11:53:35.846  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/21 11:53:35.846  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/21 11:53:35.846  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/21 11:53:35.846  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/21 11:53:35.846  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/21 11:53:35.846  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/21 11:53:35.846  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

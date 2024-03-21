@@ -8,11 +8,12 @@ import (
 	"time"
 
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 )
 
 type Item_quantity struct {
 	ItemQuantityId int64  `orm:"auto"`
-	ItemId         *Items `orm:"rel(fk)"`
+	Item           *Items `orm:"rel(fk)"`
 	Quantity       int
 	Active         int
 	DateCreated    time.Time `orm:"type(datetime)"`
@@ -48,7 +49,9 @@ func GetItem_quantityById(id int64) (v *Item_quantity, err error) {
 // Id doesn't exist
 func GetItem_quantityByItemId(id int64) (v *Item_quantity, err error) {
 	o := orm.NewOrm()
-	if err = o.QueryTable(new(Item_quantity)).Filter("ItemId", id).RelatedSel().One(v); err == nil {
+	v = &Item_quantity{Item: &Items{ItemId: id}}
+	logs.Info("About to go to the db to get quantity for ", id)
+	if err = o.QueryTable(new(Item_quantity)).Filter("Item", Items{ItemId: id}).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

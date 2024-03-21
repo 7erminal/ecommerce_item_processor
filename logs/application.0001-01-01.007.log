@@ -1,0 +1,37 @@
+0001/01/01 00:00:00.000  [M] [log.go:268]  [HTTP] http: superfluous response.WriteHeader call from github.com/beego/beego/v2/server/web/context.(*Response).WriteHeader (context.go:230)
+2024/03/21 11:57:36.619  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     8.1395ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/21 11:57:36.621  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|    7.90575ms|   match|[97;44m GET     [0m /v1/items/29   r:/v1/items/:id
+2024/03/21 11:57:54.284  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.699542ms| nomatch|[90;47m OPTIONS [0m /v1/categories
+2024/03/21 11:57:54.284  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   1.044125ms| nomatch|[90;47m OPTIONS [0m /v1/items
+2024/03/21 11:57:54.312  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  17.783708ms|   match|[97;44m GET     [0m /v1/categories   r:/v1/categories/
+2024/03/21 11:57:54.326  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  31.055666ms|   match|[97;44m GET     [0m /v1/items   r:/v1/items/
+2024/03/21 11:57:54.371  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     41.041µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/23
+2024/03/21 11:57:54.371  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     52.792µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/21
+2024/03/21 11:57:54.381  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     45.042µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/26
+2024/03/21 11:57:54.382  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     437.75µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/27
+2024/03/21 11:57:54.382  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     28.083µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/28
+2024/03/21 11:57:54.392  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     42.875µs| nomatch|[90;47m OPTIONS [0m /v1/item-images/29
+2024/03/21 11:57:54.392  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     5.2305ms|   match|[97;44m GET     [0m /v1/item-images/27   r:/v1/item-images/:id
+2024/03/21 11:57:54.393  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   6.155666ms|   match|[97;44m GET     [0m /v1/item-images/28   r:/v1/item-images/:id
+2024/03/21 11:57:54.404  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|   4.286042ms|   match|[97;44m GET     [0m /v1/item-images/29   r:/v1/item-images/:id
+2024/03/21 11:57:54.467  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  81.588083ms|   match|[97;44m GET     [0m /v1/item-images/26   r:/v1/item-images/:id
+2024/03/21 11:57:54.468  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|  75.928375ms|   match|[97;44m GET     [0m /v1/item-images/23   r:/v1/item-images/:id
+2024/03/21 11:57:54.468  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     76.498ms|   match|[97;44m GET     [0m /v1/item-images/21   r:/v1/item-images/:id
+2024/03/21 11:57:57.579  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     434.25µs| nomatch|[90;47m OPTIONS [0m /v1/items/28
+2024/03/21 11:57:57.579  [D] [router.go:955]  |            ::1|[97;42m 200 [0m|     99.792µs| nomatch|[90;47m OPTIONS [0m /v1/items/quantity/28
+2024/03/21 11:57:57.581  [C] [config.go:190]  the request url is  /v1/items/quantity/28
+2024/03/21 11:57:57.581  [C] [config.go:191]  Handler crashed with error reflect: call of reflect.Value.Type on zero Value
+2024/03/21 11:57:57.581  [C] [config.go:197]  /usr/local/go/src/runtime/panic.go:770
+2024/03/21 11:57:57.581  [C] [config.go:197]  /usr/local/go/src/reflect/value.go:2699
+2024/03/21 11:57:57.581  [C] [config.go:197]  /usr/local/go/src/reflect/value.go:2694
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/client/orm/db.go:968
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/client/orm/orm_queryset.go:251
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/models/item_quantity.go:51
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/Desktop/projects/golang/ecommerce_item_processor/controllers/items.go:140
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/controller.go:220
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:879
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/filter.go:81
+2024/03/21 11:57:57.581  [C] [config.go:197]  /Users/bedeabbe/go/pkg/mod/github.com/beego/beego/v2@v2.0.1/server/web/router.go:664
+2024/03/21 11:57:57.581  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:3137
+2024/03/21 11:57:57.581  [C] [config.go:197]  /usr/local/go/src/net/http/server.go:2039
+2024/03/21 11:57:57.581  [C] [config.go:197]  /usr/local/go/src/runtime/asm_arm64.s:1222

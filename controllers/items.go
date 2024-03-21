@@ -66,7 +66,7 @@ func (c *ItemsController) Post() {
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item
-					qu := models.Item_quantity{ItemId: &v, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+					qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 					if _, err := models.AddItem_quantity(&qu); err == nil {
 						c.Ctx.Output.SetStatus(200)
@@ -137,8 +137,11 @@ func (c *ItemsController) GetOne() {
 func (c *ItemsController) GetItemQuantity() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
+	logs.Debug("Item ID to get quantity is ", id)
+	// q, err := models.GetItemsById(id)
 	v, err := models.GetItem_quantityByItemId(id)
 	if err != nil {
+		logs.Error("Error fetching quantity of item ... ", err.Error())
 		resp := models.ItemQuantityResponseDTO{StatusCode: 301, Quantity: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
@@ -305,7 +308,7 @@ func (c *ItemsController) Put() {
 						iq, err := models.GetItem_quantityByItemId(id)
 						if err != nil {
 						} else {
-							qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, ItemId: &v, Quantity: t.Quantity, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
+							qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
 
 							if err := models.UpdateItem_quantityById(&qu); err == nil {
 								c.Ctx.Output.SetStatus(200)
