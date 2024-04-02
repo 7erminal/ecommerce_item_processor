@@ -368,6 +368,9 @@ func (c *ItemsController) Delete() {
 		} else {
 			panic(qerr)
 		}
+	} else {
+		logs.Error("An error occurred")
+		logs.Error(gerr)
 	}
 
 	i, ierr := models.GetItemsById(id)
@@ -381,22 +384,30 @@ func (c *ItemsController) Delete() {
 				if imerr := models.DeleteItem_images(ib.ItemImageId); imerr == nil {
 					logs.Info("Item images deleted")
 					logs.Info("Item is ", i.ItemName)
-					if err := models.DeleteItems(id); err == nil {
-						if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
-							logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
-							logs.Info("Item Deleted ", id)
-							c.Data["json"] = "OK"
-						} else {
-							panic(qerr)
-						}
-					} else {
-						c.Data["json"] = err.Error()
-					}
 				} else {
 					panic(imerr)
 				}
 			}
+
+			if err := models.DeleteItems(id); err == nil {
+				if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
+					logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
+					logs.Info("Item Deleted ", id)
+					c.Data["json"] = "OK"
+				} else {
+					panic(qerr)
+				}
+			} else {
+				c.Data["json"] = err.Error()
+			}
+
+		} else {
+			logs.Error("An error occurred")
+			logs.Error(iierr)
 		}
+	} else {
+		logs.Error("An error occurred")
+		logs.Error(ierr)
 	}
 
 	c.ServeJSON()
