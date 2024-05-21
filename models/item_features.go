@@ -55,6 +55,17 @@ func GetItem_featuresByItemId(id int64) (v *[]Item_features, err error) {
 	return nil, err
 }
 
+// GetItem_featuresByItemId retrieves Item_features by Id. Returns error if
+// Id doesn't exist
+func GetItem_featuresByFeatureId(id int64) (v *[]Item_features, err error) {
+	o := orm.NewOrm()
+	var l []Item_features
+	if _, err = o.QueryTable(new(Item_features)).Filter("Feature", Items{ItemId: id}).RelatedSel().All(&l); err == nil {
+		return &l, nil
+	}
+	return nil, err
+}
+
 // GetAllItem_features retrieves all Item_features matches certain condition. Returns empty list if
 // no records exist
 func GetAllItem_features(query map[string]string, fields []string, sortby []string, order []string,

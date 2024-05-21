@@ -44,12 +44,23 @@ func GetItem_purposesById(id int64) (v *Item_purposes, err error) {
 	return nil, err
 }
 
-// GetItem_purposesByItemId retrieves Item_features by Id. Returns error if
+// GetItem_purposesByItemId retrieves Item_purposes by item Id. Returns error if
 // Id doesn't exist
 func GetItem_purposesByItemId(id int64) (v *[]Item_purposes, err error) {
 	o := orm.NewOrm()
 	var l []Item_purposes
 	if _, err = o.QueryTable(new(Item_purposes)).Filter("Item", id).RelatedSel().All(&l); err == nil {
+		return &l, nil
+	}
+	return nil, err
+}
+
+// GetItem_purposesByItemId retrieves Item_purposes by purpose Id. Returns error if
+// Id doesn't exist
+func GetItem_purposesByPurposeId(id int64) (v *[]Item_purposes, err error) {
+	o := orm.NewOrm()
+	var l []Item_purposes
+	if _, err = o.QueryTable(new(Item_purposes)).Filter("Purpose", id).RelatedSel().All(&l); err == nil {
 		return &l, nil
 	}
 	return nil, err

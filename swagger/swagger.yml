@@ -539,6 +539,27 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /item-features/features/{id}:
+    get:
+      tags:
+      - item-features
+      description: |-
+        get Item_features by Item id
+        <br>
+      operationId: Item_featuresController.Get Item Features
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemFeaturesResponseDTO'
+        "403":
+          description: :id is empty
   /item-images/:
     get:
       tags:
@@ -789,6 +810,27 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /item-purposes/purposes/{id}:
+    get:
+      tags:
+      - item-purposes
+      description: |-
+        get Item_purposes by Item id
+        <br>
+      operationId: Item_purposesController.Get Item Purposes
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemPurposesResponseDTO'
+        "403":
+          description: :id is empty
   /items/:
     get:
       tags:

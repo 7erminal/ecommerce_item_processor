@@ -23,6 +23,7 @@ func (c *Item_purposesController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
+	c.Mapping("GetItemPurposesByPurpose", c.GetItemPurposesByPurpose)
 }
 
 // Post ...
@@ -71,6 +72,27 @@ func (c *Item_purposesController) GetOne() {
 		c.Data["json"] = err.Error()
 	} else {
 		c.Data["json"] = v
+	}
+	c.ServeJSON()
+}
+
+// GetItemPurposesByPurpose ...
+// @Title Get Item Purposes
+// @Description get Item_purposes by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ItemPurposesResponseDTO
+// @Failure 403 :id is empty
+// @router /purposes/:id [get]
+func (c *Item_purposesController) GetItemPurposesByPurpose() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItem_purposesByPurposeId(id)
+	if err != nil {
+		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: v, StatusDesc: "Purposes fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
