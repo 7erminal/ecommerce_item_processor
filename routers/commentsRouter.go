@@ -142,6 +142,15 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"],
+        beego.ControllerComments{
+            Method: "ChangeVisibility",
+            Router: `/change-visibility/:id`,
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["item_processor/controllers:Item_featuresController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_featuresController"],
         beego.ControllerComments{
             Method: "Post",
@@ -525,6 +534,15 @@ func init() {
             Method: "Delete",
             Router: `/:id`,
             AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:PurposesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:PurposesController"],
+        beego.ControllerComments{
+            Method: "ChangeVisibility",
+            Router: `/change-visibility/:id`,
+            AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

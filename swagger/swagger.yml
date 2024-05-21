@@ -387,6 +387,33 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /features/change-visibility/{id}:
+    put:
+      tags:
+      - features
+      description: |-
+        update the Features
+        <br>
+      operationId: FeaturesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Features content
+        required: true
+        schema:
+          $ref: '#/definitions/requests.VisibilityRequestDTO'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Features'
+        "403":
+          description: :id is not int
   /item-features/:
     get:
       tags:
@@ -1075,11 +1102,38 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /purposes/change-visibility/{id}:
+    put:
+      tags:
+      - purposes
+      description: |-
+        update the Purposes
+        <br>
+      operationId: PurposesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Purposes content
+        required: true
+        schema:
+          $ref: '#/definitions/requests.VisibilityRequestDTO'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Purposes'
+        "403":
+          description: :id is not int
 definitions:
   677.<nil>.Item_features:
     title: Item_features
     type: object
-  1789.<nil>.Item_purposes:
+  1682.<nil>.Item_purposes:
     title: Item_purposes
     type: object
   models.Categories:
@@ -1167,6 +1221,8 @@ definitions:
       ModifiedBy:
         type: integer
         format: int64
+      Visible:
+        type: boolean
   models.Item_features:
     title: Item_features
     type: object
@@ -1340,7 +1396,7 @@ definitions:
     type: object
     properties:
       ItemPurposes:
-        $ref: '#/definitions/1789.<nil>.Item_purposes'
+        $ref: '#/definitions/1682.<nil>.Item_purposes'
       StatusCode:
         type: integer
         format: int64
@@ -1476,6 +1532,8 @@ definitions:
       PurposeId:
         type: integer
         format: int64
+      Visible:
+        type: boolean
   models.User:
     title: User
     type: object
@@ -1488,6 +1546,15 @@ definitions:
         $ref: '#/definitions/models.Profile'
       Username:
         type: string
+  requests.VisibilityRequestDTO:
+    title: VisibilityRequestDTO
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      Visibility:
+        type: boolean
 tags:
 - name: categories
   description: |

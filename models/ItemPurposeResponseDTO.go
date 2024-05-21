@@ -1,13 +1,13 @@
 package models
 
 type ItemPurposeResponseDTO struct {
-	StatusCode  int            `orm: "omitempty"`
-	ItemPurpose *Item_purposes `orm: "omitempty"`
-	StatusDesc  string         `orm:"size(255)"`
+	StatusCode  int
+	ItemPurpose *Item_purposes
+	StatusDesc  string
 }
 
 type ItemPurposesResponseDTO struct {
-	StatusCode   int              `orm: "omitempty"`
-	ItemPurposes *[]Item_purposes `orm: "omitempty"`
-	StatusDesc   string           `orm:"size(255)"`
+	StatusCode   int
+	ItemPurposes *[]Item_purposes
+	StatusDesc   string
 }

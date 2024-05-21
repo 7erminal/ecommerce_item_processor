@@ -445,6 +445,44 @@
                 }
             }
         },
+        "/features/change-visibility/{id}": {
+            "put": {
+                "tags": [
+                    "features"
+                ],
+                "description": "update the Features\n\u003cbr\u003e",
+                "operationId": "FeaturesController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Features content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.VisibilityRequestDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Features"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            }
+        },
         "/features/{id}": {
             "get": {
                 "tags": [
@@ -1397,6 +1435,44 @@
                 }
             }
         },
+        "/purposes/change-visibility/{id}": {
+            "put": {
+                "tags": [
+                    "purposes"
+                ],
+                "description": "update the Purposes\n\u003cbr\u003e",
+                "operationId": "PurposesController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Purposes content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.VisibilityRequestDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Purposes"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            }
+        },
         "/purposes/{id}": {
             "get": {
                 "tags": [
@@ -1488,7 +1564,7 @@
         }
     },
     "definitions": {
-        "1789.\u003cnil\u003e.Item_purposes": {
+        "1682.\u003cnil\u003e.Item_purposes": {
             "title": "Item_purposes",
             "type": "object"
         },
@@ -1612,6 +1688,9 @@
                 "ModifiedBy": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "Visible": {
+                    "type": "boolean"
                 }
             }
         },
@@ -1660,7 +1739,7 @@
             "type": "object",
             "properties": {
                 "ItemPurposes": {
-                    "$ref": "#/definitions/1789.\u003cnil\u003e.Item_purposes"
+                    "$ref": "#/definitions/1682.\u003cnil\u003e.Item_purposes"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2047,6 +2126,9 @@
                 "PurposeId": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "Visible": {
+                    "type": "boolean"
                 }
             }
         },
@@ -2065,6 +2147,19 @@
                 },
                 "Username": {
                     "type": "string"
+                }
+            }
+        },
+        "requests.VisibilityRequestDTO": {
+            "title": "VisibilityRequestDTO",
+            "type": "object",
+            "properties": {
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Visibility": {
+                    "type": "boolean"
                 }
             }
         }

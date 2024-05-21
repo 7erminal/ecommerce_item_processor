@@ -14,6 +14,7 @@ type Purposes struct {
 	PurposeId    int64     `orm:"auto" orm:"omitempty"`
 	Purpose      string    `orm:"size(40)"`
 	ImagePath    string    `orm:"size(250)"`
+	Visible      bool      `orm:"omitempty"`
 	Description  string    `orm:"size(250)" orm:"omitempty"`
 	Active       int       `orm:"omitempty"`
 	DateCreated  time.Time `orm:"type(datetime)" orm:"omitempty"`

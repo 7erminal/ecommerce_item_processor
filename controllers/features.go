@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/requests"
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
@@ -160,7 +162,7 @@ func (c *FeaturesController) GetAll() {
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
-} 
+}
 
 // Put ...
 // @Title Put
@@ -177,6 +179,32 @@ func (c *FeaturesController) Put() {
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 	if err := models.UpdateFeaturesById(&v); err == nil {
 		c.Data["json"] = "OK"
+	} else {
+		c.Data["json"] = err.Error()
+	}
+	c.ServeJSON()
+}
+
+// Put ...
+// @Title Put
+// @Description update the Features
+// @Param	id		path 	string	true		"The id you want to update"
+// @Param	body		body 	requests.VisibilityRequestDTO	true		"body for Features content"
+// @Success 200 {object} models.Features
+// @Failure 403 :id is not int
+// @router /change-visibility/:id [put]
+func (c *FeaturesController) ChangeVisibility() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v := requests.VisibilityRequestDTO{Id: id}
+	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
+	if q, err := models.GetFeaturesById(id); err == nil {
+		t := models.Features{FeatureId: id, Visible: v.Visibility, FeatureName: q.FeatureName, ImagePath: q.ImagePath, Description: q.Description, Active: q.Active, DateCreated: q.DateCreated, DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+		if err := models.UpdateFeaturesById(&t); err == nil {
+			c.Data["json"] = "OK"
+		} else {
+			c.Data["json"] = err.Error()
+		}
 	} else {
 		c.Data["json"] = err.Error()
 	}
