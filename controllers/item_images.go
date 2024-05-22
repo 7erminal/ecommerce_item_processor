@@ -83,16 +83,21 @@ func (c *Item_imagesController) Post() {
 	if _, err := models.AddItem_images(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
 
-		i := models.Items{ItemId: itemId, ImagePath: filePath}
+		if k, err := models.GetItemsById(itemId); err == nil {
+			i := models.Items{ItemId: itemId, ImagePath: filePath, ItemName: k.ItemName, Category: k.Category, Description: k.Description, ItemPrice: k.ItemPrice, AvailableSizes: k.AvailableSizes, AvailableColors: k.AvailableColors, Quantity: k.Quantity, DateCreated: k.DateCreated, DateModified: k.DateModified, CreatedBy: k.CreatedBy, ModifiedBy: k.ModifiedBy, Active: k.Active}
 
-		if err := models.UpdateItemsById(&i); err != nil {
-			logs.Error(err.Error())
-			resp := models.ItemResponseDTO{StatusCode: 302, Item: &i, StatusDesc: err.Error()}
+			if err := models.UpdateItemsById(&i); err != nil {
+				logs.Error(err.Error())
+				resp := models.ItemResponseDTO{StatusCode: 302, Item: &i, StatusDesc: err.Error()}
+				c.Data["json"] = resp
+			}
+
+			resp := models.ItemImageResponseDTO{StatusCode: 200, ItemImage: &v, StatusDesc: "Images uploaded successfully"}
+			c.Data["json"] = resp
+		} else {
+			resp := models.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		}
-
-		resp := models.ItemImageResponseDTO{StatusCode: 200, ItemImage: &v, StatusDesc: "Images uploaded successfully"}
-		c.Data["json"] = resp
 	} else {
 		resp := models.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp

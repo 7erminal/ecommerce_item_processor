@@ -293,38 +293,44 @@ func (c *ItemsController) Put() {
 			cr, cerr := models.GetCurrenciesById(int64(1))
 
 			if cerr == nil {
-				// Add price for item
-				it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: 0, ShowAltPrice: false, Currency: cr, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
+				if ip, err := models.GetItem_pricesById(iv.ItemPrice.ItemPriceId); err == nil {
+					// Add price for item
+					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: 0, ShowAltPrice: false, Currency: cr, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
 
-				logs.Info("Modifying price for item")
+					logs.Info("Modifying price for item")
 
-				if err := models.UpdateItem_pricesById(&it); err == nil {
-					// Add item if getting category and price addition does not result in an error
-					v := models.Items{ItemId: id, ItemName: t.ItemName, Description: t.Description, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
+					if err := models.UpdateItem_pricesById(&it); err == nil {
+						// Add item if getting category and price addition does not result in an error
+						v := models.Items{ItemId: id, ItemName: t.ItemName, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
 
-					if err := models.UpdateItemsById(&v); err == nil {
-						// Add quantity for item
+						if err := models.UpdateItemsById(&v); err == nil {
+							// Add quantity for item
 
-						iq, err := models.GetItem_quantityByItemId(id)
-						if err != nil {
-						} else {
-							qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, Active: 1, ModifiedBy: creator, DateModified: time.Now()}
-
-							if err := models.UpdateItem_quantityById(&qu); err == nil {
-								c.Ctx.Output.SetStatus(200)
-
-								resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully updated"}
-								c.Data["json"] = resp
+							iq, err := models.GetItem_quantityByItemId(id)
+							if err != nil {
 							} else {
-								logs.Error(err.Error())
-								resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
-								c.Data["json"] = resp
-							}
-						}
+								qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
 
+								if err := models.UpdateItem_quantityById(&qu); err == nil {
+									c.Ctx.Output.SetStatus(200)
+
+									resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully updated"}
+									c.Data["json"] = resp
+								} else {
+									logs.Error(err.Error())
+									resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+									c.Data["json"] = resp
+								}
+							}
+
+						} else {
+							logs.Error(err.Error())
+							resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+							c.Data["json"] = resp
+						}
 					} else {
 						logs.Error(err.Error())
-						resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+						resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 						c.Data["json"] = resp
 					}
 				} else {
