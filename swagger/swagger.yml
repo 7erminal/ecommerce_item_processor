@@ -1172,10 +1172,10 @@ paths:
         "403":
           description: :id is not int
 definitions:
-  677.<nil>.Item_features:
+  511.<nil>.Item_features:
     title: Item_features
     type: object
-  1682.<nil>.Item_purposes:
+  1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
   models.Categories:
@@ -1419,7 +1419,7 @@ definitions:
     type: object
     properties:
       ItemFeatures:
-        $ref: '#/definitions/677.<nil>.Item_features'
+        $ref: '#/definitions/511.<nil>.Item_features'
       StatusCode:
         type: integer
         format: int64
@@ -1438,7 +1438,7 @@ definitions:
     type: object
     properties:
       ItemPurposes:
-        $ref: '#/definitions/1682.<nil>.Item_purposes'
+        $ref: '#/definitions/1388.<nil>.Item_purposes'
       StatusCode:
         type: integer
         format: int64

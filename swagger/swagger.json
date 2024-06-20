@@ -1622,11 +1622,11 @@
         }
     },
     "definitions": {
-        "1682.\u003cnil\u003e.Item_purposes": {
+        "1388.\u003cnil\u003e.Item_purposes": {
             "title": "Item_purposes",
             "type": "object"
         },
-        "677.\u003cnil\u003e.Item_features": {
+        "511.\u003cnil\u003e.Item_features": {
             "title": "Item_features",
             "type": "object"
         },
@@ -1769,7 +1769,7 @@
             "type": "object",
             "properties": {
                 "ItemFeatures": {
-                    "$ref": "#/definitions/677.\u003cnil\u003e.Item_features"
+                    "$ref": "#/definitions/511.\u003cnil\u003e.Item_features"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -1797,7 +1797,7 @@
             "type": "object",
             "properties": {
                 "ItemPurposes": {
-                    "$ref": "#/definitions/1682.\u003cnil\u003e.Item_purposes"
+                    "$ref": "#/definitions/1388.\u003cnil\u003e.Item_purposes"
                 },
                 "StatusCode": {
                     "type": "integer",

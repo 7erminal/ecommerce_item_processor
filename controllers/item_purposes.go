@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/beego/beego/v2/core/logs"
 	beego "github.com/beego/beego/v2/server/web"
 )
 
@@ -91,6 +92,7 @@ func (c *Item_purposesController) GetItemPurposesByPurpose() {
 		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
+		logs.Info("Item purposes are ", v)
 		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}

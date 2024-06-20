@@ -5,30 +5,30 @@ import (
 )
 
 type Item_features2 struct {
-	ItemFeatureId int64 `orm:"auto"`
+	ItemFeatureId int64
 	ItemId        *Items
 	FeatureId     *Features
 	Active        int
-	DateCreated   time.Time `orm:"type(datetime)"`
-	DateModified  time.Time `orm:"type(datetime)"`
+	DateCreated   time.Time
+	DateModified  time.Time
 	CreatedBy     int
 	ModifiedBy    int
 }
 
 type ItemFeatureResponseDTO struct {
-	StatusCode  int            `orm: "omitempty"`
-	ItemFeature *Item_features `orm: "omitempty"`
-	StatusDesc  string         `orm:"size(255)"`
+	StatusCode  int
+	ItemFeature *Item_features
+	StatusDesc  string
 }
 
 type ItemFeaturesResponseDTO struct {
-	StatusCode   int              `orm: "omitempty"`
-	ItemFeatures *[]Item_features `orm: "omitempty"`
-	StatusDesc   string           `orm:"size(255)"`
+	StatusCode   int
+	ItemFeatures *[]Item_features
+	StatusDesc   string
 }
 
 type ItemFeaturesResponse2DTO struct {
-	StatusCode   int               `orm: "omitempty"`
-	ItemFeatures *[]Item_features2 `orm: "omitempty"`
-	StatusDesc   string            `orm:"size(255)"`
+	StatusCode   int
+	ItemFeatures *[]Item_features2
+	StatusDesc   string
 }
