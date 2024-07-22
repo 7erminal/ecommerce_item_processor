@@ -103,7 +103,7 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 
 	var l []Items
 	qs = qs.OrderBy(sortFields...).RelatedSel()
-	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
+	if _, err = qs.All(&l, fields...); err == nil {
 		if len(fields) == 0 {
 			for _, v := range l {
 				ml = append(ml, v)
