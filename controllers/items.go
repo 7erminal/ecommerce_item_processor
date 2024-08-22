@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/requests"
+	"item_processor/structs/responses"
 	"strconv"
 	"strings"
 	"time"
@@ -32,12 +34,12 @@ func (c *ItemsController) URLMapping() {
 // Post ...
 // @Title Post
 // @Description create Items
-// @Param	body		body 	models.ItemsDTO	true		"body for Items content"
-// @Success 201 {int} models.ItemsResponseDTO
+// @Param	body		body 	requests.AddItemRequest	true		"body for Items content"
+// @Success 201 {int} responses.ItemsResponseDTO
 // @Failure 403 body is empty
 // @router / [post]
 func (c *ItemsController) Post() {
-	var t models.ItemsDTO
+	var t requests.AddItemRequest
 	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
 	logs.Info("Received ", t)
 
@@ -62,7 +64,7 @@ func (c *ItemsController) Post() {
 			logs.Info("Adding price to item to create at a go")
 			if _, err := models.AddItem_prices(&it); err == nil {
 				// Add item if getting category and price addition does not result in an error
-				v := models.Items{ItemName: t.ItemName, Description: t.Description, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
+				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item
@@ -71,22 +73,22 @@ func (c *ItemsController) Post() {
 					if _, err := models.AddItem_quantity(&qu); err == nil {
 						c.Ctx.Output.SetStatus(200)
 
-						resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
+						resp := responses.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
 						c.Data["json"] = resp
 					} else {
 						logs.Error(err.Error())
-						resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+						resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 						c.Data["json"] = resp
 					}
 
 				} else {
 					logs.Error(err.Error())
-					resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+					resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 					c.Data["json"] = resp
 				}
 			} else {
 				logs.Error(err.Error())
-				resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+				resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 		} else {
@@ -98,7 +100,7 @@ func (c *ItemsController) Post() {
 
 	} else {
 		logs.Error(err.Error())
-		resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 		// c.Data["json"] = err.Error()
 	}

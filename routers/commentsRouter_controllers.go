@@ -52,6 +52,51 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["item_processor/controllers:CountriesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:CountriesController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: "/",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:CountriesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:CountriesController"],
+        beego.ControllerComments{
+            Method: "GetAll",
+            Router: "/",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:CountriesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:CountriesController"],
+        beego.ControllerComments{
+            Method: "GetOne",
+            Router: "/:id",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:CountriesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:CountriesController"],
+        beego.ControllerComments{
+            Method: "Put",
+            Router: "/:id",
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:CountriesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:CountriesController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: "/:id",
+            AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["item_processor/controllers:CurrenciesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:CurrenciesController"],
         beego.ControllerComments{
             Method: "Post",
@@ -386,6 +431,51 @@ func init() {
             Params: nil})
 
     beego.GlobalControllerRouter["item_processor/controllers:Item_quantityController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_quantityController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: "/:id",
+            AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: "/",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"],
+        beego.ControllerComments{
+            Method: "GetAll",
+            Router: "/",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"],
+        beego.ControllerComments{
+            Method: "GetOne",
+            Router: "/:id",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"],
+        beego.ControllerComments{
+            Method: "Put",
+            Router: "/:id",
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"],
         beego.ControllerComments{
             Method: "Delete",
             Router: "/:id",

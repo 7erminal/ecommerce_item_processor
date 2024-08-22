@@ -67,6 +67,11 @@ func init() {
 				&controllers.Item_featuresController{},
 			),
 		),
+		beego.NSNamespace("/item-reviews",
+			beego.NSInclude(
+				&controllers.Item_reviewsController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

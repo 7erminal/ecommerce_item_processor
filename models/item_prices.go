@@ -11,16 +11,18 @@ import (
 )
 
 type Item_prices struct {
-	ItemPriceId  int64 `orm:"auto"`
-	ItemPrice    float32
-	AltItemPrice float32
-	ShowAltPrice bool
-	Currency     *Currencies `orm:"rel(fk)"`
-	Active       int
-	DateCreated  time.Time `orm:"type(datetime)"`
-	DateModified time.Time `orm:"type(datetime)"`
-	CreatedBy    int
-	ModifiedBy   int
+	ItemPriceId   int64 `orm:"auto"`
+	ItemPrice     float32
+	AltItemPrice  float32
+	ShowAltPrice  bool
+	Discount      string
+	Discount_type string
+	Currency      *Currencies `orm:"rel(fk)"`
+	Active        int
+	DateCreated   time.Time `orm:"type(datetime)"`
+	DateModified  time.Time `orm:"type(datetime)"`
+	CreatedBy     int
+	ModifiedBy    int
 }
 
 func init() {
