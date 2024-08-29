@@ -53,6 +53,46 @@ func GetItemsById(id int64) (v *Items, err error) {
 	return nil, err
 }
 
+// GetItemsByPurposeId retrieves Items by purpose Id. Returns error if
+// purpose Id doesn't exist
+func GetItemsByPurposeId(id int64) (v *[]Items, err error) {
+	o := orm.NewOrm()
+	v = &[]Items{}
+
+	if ft, err := GetPurposesById(id); err == nil {
+		if _, err := o.QueryTable(new(Items)).RelatedSel().Filter("Item_purposes__Purpose", ft).All(v); err == nil {
+			return v, nil
+		}
+	}
+	return nil, err
+}
+
+// GetItemsByFeatureId retrieves Items by Feature Id. Returns error if
+// Feature Id doesn't exist
+func GetItemsByFeatureId(id int64) (v *[]Items, err error) {
+	o := orm.NewOrm()
+	v = &[]Items{}
+	if ft, err := GetFeaturesById(id); err == nil {
+		if _, err = o.QueryTable(new(Items)).RelatedSel().Filter("Item_features__Feature", ft).All(v); err == nil {
+			return v, nil
+		}
+	}
+	return nil, err
+}
+
+// GetItemsByItemId retrieves Items by Item Id. Returns error if
+// Item Id doesn't exist
+func GetItemsWithItem(id int64) (v *[]Items, err error) {
+	o := orm.NewOrm()
+	v = &[]Items{}
+	if ft, err := GetItemsById(id); err == nil {
+		if _, err = o.QueryTable(new(Items)).RelatedSel().Filter("Item_features__Item", ft).All(v); err == nil {
+			return v, nil
+		}
+	}
+	return nil, err
+}
+
 // GetAllItems retrieves all Items matches certain condition. Returns empty list if
 // no records exist
 func GetAllItems(query map[string]string, fields []string, sortby []string, order []string,

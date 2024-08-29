@@ -41,30 +41,33 @@ func (c *FeaturesController) Post() {
 
 	file, header, err := c.GetFile("Image")
 
+	var filePath string = ""
+
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
 		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
 		logs.Info("Failed to get the file ", err)
-		c.ServeJSON()
-		return
-	}
-	defer file.Close()
+		// c.ServeJSON()
+		// return
+	} else {
+		defer file.Close()
 
-	// Save the uploaded file
-	fileName := header.Filename
-	filePath := "/uploads/" + fileName // Define your file path
-	err = c.SaveToFile("Image", "."+filePath)
-	if err != nil {
-		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
-		logs.Error("Error saving file", err)
-		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
-		errorMessage := "Error: Failed to save the image file"
+		// Save the uploaded file
+		fileName := header.Filename
+		filePath = "/uploads/" + fileName // Define your file path
+		err = c.SaveToFile("Image", "."+filePath)
+		if err != nil {
+			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
+			logs.Error("Error saving file", err)
+			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
+			errorMessage := "Error: Failed to save the image file"
 
-		resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+			resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
 
-		c.Data["json"] = resp
-		c.ServeJSON()
-		return
+			c.Data["json"] = resp
+			c.ServeJSON()
+			return
+		}
 	}
 
 	v := models.Features{FeatureName: c.Ctx.Input.Query("FeatureName"), ImagePath: filePath, Description: c.Ctx.Input.Query("Description"), Active: 1, CreatedBy: 1}

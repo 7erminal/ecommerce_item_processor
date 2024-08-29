@@ -560,6 +560,27 @@ paths:
             $ref: '#/definitions/models.ItemFeaturesResponseDTO'
         "403":
           description: :id is empty
+  /item-features/features/item/{id}:
+    get:
+      tags:
+      - item-features
+      description: |-
+        get Item_features by Item id
+        <br>
+      operationId: Item_featuresController.Get Item Features
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemFeaturesResponseDTO'
+        "403":
+          description: :id is empty
   /item-images/:
     get:
       tags:
@@ -815,9 +836,30 @@ paths:
       tags:
       - item-purposes
       description: |-
-        get Item_purposes by Item id
+        get Item_purposes by Purpose id
         <br>
       operationId: Item_purposesController.Get Item Purposes
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemPurposesResponseDTO'
+        "403":
+          description: :id is empty
+  /item-purposes/purposes/item/{id}:
+    get:
+      tags:
+      - item-purposes
+      description: |-
+        get Item_purposes by Item id
+        <br>
+      operationId: Item_purposesController.Get Item Purposes By Item
       parameters:
       - in: path
         name: id
@@ -1081,7 +1123,7 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
-  /items/features/{id}:
+  /items/features/feature/{id}:
     get:
       tags:
       - items
@@ -1099,10 +1141,10 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/models.ItemFeaturesResponseDTO'
+            $ref: '#/definitions/models.ItemsResponseDTO2'
         "403":
           description: :id is empty
-  /items/purposes/{id}:
+  /items/purposes/purpose/{id}:
     get:
       tags:
       - items
@@ -1120,7 +1162,7 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/models.ItemPurposesResponseDTO'
+            $ref: '#/definitions/models.ItemsResponseDTO2'
         "403":
           description: :id is empty
   /items/quantity/{id}:
@@ -1302,6 +1344,9 @@ definitions:
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
+    type: object
+  53969.<nil>.Items:
+    title: Items
     type: object
   models.Categories:
     title: Categories
@@ -1716,6 +1761,17 @@ definitions:
       Quantity:
         type: integer
         format: int64
+  models.ItemsResponseDTO2:
+    title: ItemsResponseDTO2
+    type: object
+    properties:
+      Items:
+        $ref: '#/definitions/53969.<nil>.Items'
+      StatusCode:
+        type: integer
+        format: int64
+      StatusDesc:
+        type: string
   models.Object:
     title: Object
     type: object
@@ -1847,6 +1903,8 @@ definitions:
       Category:
         type: integer
         format: int64
+      Country:
+        type: string
       CreatedBy:
         type: integer
         format: int64

@@ -9,5 +9,6 @@ type AddItemRequest struct {
 	AvailableColors []string
 	Quantity        int
 	ItemPrice       float32
+	Country         string
 	CreatedBy       int
 }

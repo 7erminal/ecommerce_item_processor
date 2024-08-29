@@ -43,36 +43,39 @@ func (c *CategoriesController) Post() {
 
 	logs.Info("File is ", file)
 
+	var filePath string = ""
+
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
 		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
 		logs.Error("Failed to get the file ", err)
-		c.ServeJSON()
-		return
-	}
-	defer file.Close()
+		// c.ServeJSON()
+		// return
+	} else {
+		defer file.Close()
 
-	// Save the uploaded file
-	fileName := header.Filename
-	filePath := "/uploads/" + fileName // Define your file path
-	err = c.SaveToFile("Image", "."+filePath)
-	if err != nil {
-		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
-		logs.Error("Error saving file", err)
-		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
-		errorMessage := "Error: Failed to save the image file"
+		// Save the uploaded file
+		fileName := header.Filename
+		filePath = "/uploads/" + fileName // Define your file path
+		err = c.SaveToFile("Image", "."+filePath)
+		if err != nil {
+			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
+			logs.Error("Error saving file", err)
+			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
+			errorMessage := "Error: Failed to save the image file"
 
-		resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+			resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
 
-		c.Data["json"] = resp
-		c.ServeJSON()
-		return
+			c.Data["json"] = resp
+			c.ServeJSON()
+			return
+		}
 	}
 
 	// c.Data["json"] = map[string]string{"message": "Image uploaded successfully!"}
 	// c.ServeJSON()
 
-	v := models.Categories{CategoryName: c.Ctx.Input.Query("CategoryName"), ImagePath: filePath, CreatedBy: 1, DateCreated: time.Now(), DateModified: time.Now()}
+	v := models.Categories{CategoryName: c.Ctx.Input.Query("CategoryName"), Icon: c.Ctx.Input.Query("Icon"), ImagePath: filePath, CreatedBy: 1, DateCreated: time.Now(), DateModified: time.Now()}
 
 	if _, err := models.AddCategories(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)

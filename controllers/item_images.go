@@ -84,11 +84,12 @@ func (c *Item_imagesController) Post() {
 		c.Ctx.Output.SetStatus(200)
 
 		if k, err := models.GetItemsById(itemId); err == nil {
-			i := models.Items{ItemId: itemId, ImagePath: filePath, ItemName: k.ItemName, Category: k.Category, Description: k.Description, ItemPrice: k.ItemPrice, AvailableSizes: k.AvailableSizes, AvailableColors: k.AvailableColors, Quantity: k.Quantity, DateCreated: k.DateCreated, DateModified: k.DateModified, CreatedBy: k.CreatedBy, ModifiedBy: k.ModifiedBy, Active: k.Active}
+			// i := models.Items{ItemId: itemId, ImagePath: filePath, ItemName: k.ItemName, Category: k.Category, Description: k.Description, ItemPrice: k.ItemPrice, AvailableSizes: k.AvailableSizes, AvailableColors: k.AvailableColors, Quantity: k.Quantity, DateCreated: k.DateCreated, DateModified: k.DateModified, CreatedBy: k.CreatedBy, ModifiedBy: k.ModifiedBy, Active: k.Active}
+			k.ImagePath = filePath
 
-			if err := models.UpdateItemsById(&i); err != nil {
+			if err := models.UpdateItemsById(k); err != nil {
 				logs.Error(err.Error())
-				resp := models.ItemResponseDTO{StatusCode: 302, Item: &i, StatusDesc: err.Error()}
+				resp := models.ItemResponseDTO{StatusCode: 302, Item: k, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 

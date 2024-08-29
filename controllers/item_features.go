@@ -26,6 +26,7 @@ func (c *Item_featuresController) URLMapping() {
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
 	c.Mapping("GetItemFeaturesByFeature", c.GetItemFeaturesByFeature)
+	c.Mapping("GetItemFeaturesByItem", c.GetItemFeaturesByItem)
 }
 
 // Post ...
@@ -103,6 +104,30 @@ func (c *Item_featuresController) GetItemFeaturesByFeature() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_featuresByFeatureId(id)
 	if err != nil {
+		resp := models.ItemFeaturesResponseDTO{StatusCode: 301, ItemFeatures: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		logs.Info("Item features fetched are ", v)
+		resp := models.ItemFeaturesResponseDTO{StatusCode: 200, ItemFeatures: v, StatusDesc: "Features fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemFeaturesByFeature ...
+// @Title Get Item Features
+// @Description get Item_features by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ItemFeaturesResponseDTO
+// @Failure 403 :id is empty
+// @router /features/item/:id [get]
+func (c *Item_featuresController) GetItemFeaturesByItem() {
+	idStr := c.Ctx.Input.Param(":id")
+	logs.Info("about to go get item features ", idStr)
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItem_featuresByItemId(id)
+	if err != nil {
+		logs.Info("No item features ", idStr)
 		resp := models.ItemFeaturesResponseDTO{StatusCode: 301, ItemFeatures: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {

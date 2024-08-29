@@ -24,6 +24,7 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetItemQuantity", c.GetItemQuantity)
+	// c.Mapping("GetItemFeaturesByItem", c.GetItemFeaturesByItem)
 	c.Mapping("GetItemFeatures", c.GetItemFeatures)
 	c.Mapping("GetItemPurposes", c.GetItemPurposes)
 	c.Mapping("GetAll", c.GetAll)
@@ -42,6 +43,7 @@ func (c *ItemsController) Post() {
 	var t requests.AddItemRequest
 	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
 	logs.Info("Received ", t)
+	logs.Info("Item country received is ", t.Country)
 
 	creator := t.CreatedBy
 
@@ -63,8 +65,9 @@ func (c *ItemsController) Post() {
 
 			logs.Info("Adding price to item to create at a go")
 			if _, err := models.AddItem_prices(&it); err == nil {
+				country, _ := models.GetCountriesByCode(t.Country)
 				// Add item if getting category and price addition does not result in an error
-				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
+				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item
@@ -153,23 +156,45 @@ func (c *ItemsController) GetItemQuantity() {
 	c.ServeJSON()
 }
 
+// // GetItemFeaturesByItem ...
+// // @Title Get Item Features by item
+// // @Description get Item_features by Item id
+// // @Param	id		path 	string	true		"The key for staticblock"
+// // @Success 200 {object} models.ItemsResponseDTO2
+// // @Failure 403 :id is empty
+// // @router /features/item/:id [get]
+// func (c *ItemsController) GetItemFeaturesByItem() {
+// 	idStr := c.Ctx.Input.Param(":id")
+// 	id, _ := strconv.ParseInt(idStr, 0, 64)
+// 	v, err := models.GetItemsWithItem(id)
+// 	if err != nil {
+// 		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+// 		c.Data["json"] = resp
+// 	} else {
+// 		logs.Info("Item features fetched are ", v)
+// 		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
+// 		c.Data["json"] = resp
+// 	}
+// 	c.ServeJSON()
+// }
+
 // GetItemFeatures ...
 // @Title Get Item Features
 // @Description get Item_features by Item id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ItemFeaturesResponseDTO
+// @Success 200 {object} models.ItemsResponseDTO2
 // @Failure 403 :id is empty
-// @router /features/:id [get]
+// @router /features/feature/:id [get]
 func (c *ItemsController) GetItemFeatures() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v, err := models.GetItem_featuresByItemId(id)
+	v, err := models.GetItemsByFeatureId(id)
 	if err != nil {
-		resp := models.ItemFeaturesResponseDTO{StatusCode: 301, ItemFeatures: nil, StatusDesc: err.Error()}
+		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item features fetched are ", v)
-		resp := models.ItemFeaturesResponseDTO{StatusCode: 200, ItemFeatures: v, StatusDesc: "Features fetched successfully"}
+		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -179,18 +204,18 @@ func (c *ItemsController) GetItemFeatures() {
 // @Title Get Item Purposes
 // @Description get Item_purposes by Item id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ItemPurposesResponseDTO
+// @Success 200 {object} models.ItemsResponseDTO2
 // @Failure 403 :id is empty
-// @router /purposes/:id [get]
+// @router /purposes/purpose/:id [get]
 func (c *ItemsController) GetItemPurposes() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v, err := models.GetItem_purposesByItemId(id)
+	v, err := models.GetItemsByPurposeId(id)
 	if err != nil {
-		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: v, StatusDesc: "Purposes fetched successfully"}
+		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

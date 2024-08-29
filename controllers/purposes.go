@@ -26,7 +26,7 @@ func (c *PurposesController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
-	c.Mapping("Delete", c.ChangeVisibility)
+	c.Mapping("ChangeVisibility", c.ChangeVisibility)
 }
 
 // Post ...
@@ -41,30 +41,34 @@ func (c *PurposesController) Post() {
 
 	file, header, err := c.GetFile("Image")
 
+	var filePath string = ""
+
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
 		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
 		logs.Info("Failed to get the file ", err)
-		c.ServeJSON()
-		return
-	}
-	defer file.Close()
+		// c.ServeJSON()
+		// return
+	} else {
+		defer file.Close()
 
-	// Save the uploaded file
-	fileName := header.Filename
-	filePath := "/uploads/" + fileName // Define your file path
-	err = c.SaveToFile("Image", "."+filePath)
-	if err != nil {
-		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
-		logs.Error("Error saving file", err)
-		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
-		errorMessage := "Error: Failed to save the image file"
+		// Save the uploaded file
+		fileName := header.Filename
+		filePath = "/uploads/" + fileName // Define your file path
+		err = c.SaveToFile("Image", "."+filePath)
 
-		resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+		if err != nil {
+			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
+			logs.Error("Error saving file", err)
+			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
+			errorMessage := "Error: Failed to save the image file"
 
-		c.Data["json"] = resp
-		c.ServeJSON()
-		return
+			resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+
+			c.Data["json"] = resp
+			c.ServeJSON()
+			return
+		}
 	}
 
 	v := models.Purposes{Purpose: c.Ctx.Input.Query("PurposeName"), ImagePath: filePath, Description: c.Ctx.Input.Query("Description"), Active: 1, CreatedBy: 1}
@@ -195,6 +199,7 @@ func (c *PurposesController) Put() {
 // @Failure 403 :id is not int
 // @router /change-visibility/:id [put]
 func (c *PurposesController) ChangeVisibility() {
+	logs.Info("Change visibility request received")
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v := requests.VisibilityRequestDTO{Id: id}
@@ -220,7 +225,9 @@ func (c *PurposesController) ChangeVisibility() {
 // @Failure 403 id is empty
 // @router /:id [delete]
 func (c *PurposesController) Delete() {
+	logs.Info("Request delete purpose")
 	idStr := c.Ctx.Input.Param(":id")
+	logs.Info("Delete purpose request received ", idStr)
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	if err := models.DeletePurposes(id); err == nil {
 		c.Data["json"] = "OK"

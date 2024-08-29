@@ -45,6 +45,17 @@ func GetCountriesById(id int64) (v *Countries, err error) {
 	return nil, err
 }
 
+// GetCountriesByCode retrieves Countries by Code. Returns error if
+// Code doesn't exist
+func GetCountriesByCode(countryCode string) (v *Countries, err error) {
+	o := orm.NewOrm()
+	v = &Countries{CountryCode: countryCode}
+	if err = o.QueryTable(new(Countries)).Filter("CountryCode", countryCode).RelatedSel().One(v); err == nil {
+		return v, nil
+	}
+	return nil, err
+}
+
 // GetAllCountries retrieves all Countries matches certain condition. Returns empty list if
 // no records exist
 func GetAllCountries(query map[string]string, fields []string, sortby []string, order []string,
