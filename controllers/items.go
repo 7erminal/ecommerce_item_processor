@@ -328,7 +328,7 @@ func (c *ItemsController) Put() {
 
 					if err := models.UpdateItem_pricesById(&it); err == nil {
 						// Add item if getting category and price addition does not result in an error
-						v := models.Items{ItemId: id, ItemName: t.ItemName, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
+						v := models.Items{ItemId: id, ItemName: t.ItemName, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: iv.Country, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
 
 						if err := models.UpdateItemsById(&v); err == nil {
 							// Add quantity for item

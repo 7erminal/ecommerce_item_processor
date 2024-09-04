@@ -483,6 +483,26 @@
                 }
             }
         },
+        "/features/items": {
+            "get": {
+                "tags": [
+                    "features"
+                ],
+                "description": "get Features\n\u003cbr\u003e",
+                "operationId": "FeaturesController.Get All Features and their items",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.FeaturesResponseFDTO"
+                        }
+                    },
+                    "403": {
+                        "description": "is empty"
+                    }
+                }
+            }
+        },
         "/features/{id}": {
             "get": {
                 "tags": [
@@ -1762,6 +1782,26 @@
                 }
             }
         },
+        "/purposes/items": {
+            "get": {
+                "tags": [
+                    "purposes"
+                ],
+                "description": "get Features\n\u003cbr\u003e",
+                "operationId": "PurposesController.Get All Purposes and their items",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.PurposesResponseFDTO"
+                        }
+                    },
+                    "403": {
+                        "description": "is empty"
+                    }
+                }
+            }
+        },
         "/purposes/{id}": {
             "get": {
                 "tags": [
@@ -1861,7 +1901,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "53969.\u003cnil\u003e.Items": {
+        "54462.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2028,6 +2068,10 @@
                     "type": "boolean"
                 }
             }
+        },
+        "models.FeaturesResponseFDTO": {
+            "title": "FeaturesResponseFDTO",
+            "type": "object"
         },
         "models.ItemFeatureRequestDTO": {
             "title": "ItemFeatureRequestDTO",
@@ -2450,7 +2494,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/53969.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/54462.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2537,6 +2581,10 @@
                     "type": "boolean"
                 }
             }
+        },
+        "models.PurposesResponseFDTO": {
+            "title": "PurposesResponseFDTO",
+            "type": "object"
         },
         "models.User": {
             "title": "User",

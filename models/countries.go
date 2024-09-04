@@ -39,7 +39,7 @@ func AddCountries(m *Countries) (id int64, err error) {
 func GetCountriesById(id int64) (v *Countries, err error) {
 	o := orm.NewOrm()
 	v = &Countries{CountryId: id}
-	if err = o.QueryTable(new(Countries)).Filter("Id", id).RelatedSel().One(v); err == nil {
+	if err = o.QueryTable(new(Countries)).Filter("CountryId", id).RelatedSel().One(v); err == nil {
 		return v, nil
 	}
 	return nil, err

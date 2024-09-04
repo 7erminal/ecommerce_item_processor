@@ -414,6 +414,21 @@ paths:
             $ref: '#/definitions/models.Features'
         "403":
           description: :id is not int
+  /features/items:
+    get:
+      tags:
+      - features
+      description: |-
+        get Features
+        <br>
+      operationId: FeaturesController.Get All Features and their items
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.FeaturesResponseFDTO'
+        "403":
+          description: is empty
   /item-features/:
     get:
       tags:
@@ -1338,6 +1353,21 @@ paths:
             $ref: '#/definitions/models.Purposes'
         "403":
           description: :id is not int
+  /purposes/items:
+    get:
+      tags:
+      - purposes
+      description: |-
+        get Features
+        <br>
+      operationId: PurposesController.Get All Purposes and their items
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.PurposesResponseFDTO'
+        "403":
+          description: is empty
 definitions:
   511.<nil>.Item_features:
     title: Item_features
@@ -1345,7 +1375,7 @@ definitions:
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  53969.<nil>.Items:
+  54462.<nil>.Items:
     title: Items
     type: object
   models.Categories:
@@ -1465,6 +1495,9 @@ definitions:
         format: int64
       Visible:
         type: boolean
+  models.FeaturesResponseFDTO:
+    title: FeaturesResponseFDTO
+    type: object
   models.Item_features:
     title: Item_features
     type: object
@@ -1766,7 +1799,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/53969.<nil>.Items'
+        $ref: '#/definitions/54462.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -1826,6 +1859,9 @@ definitions:
         format: int64
       Visible:
         type: boolean
+  models.PurposesResponseFDTO:
+    title: PurposesResponseFDTO
+    type: object
   models.User:
     title: User
     type: object

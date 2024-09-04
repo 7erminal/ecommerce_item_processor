@@ -46,6 +46,25 @@ func GetFeaturesById(id int64) (v *Features, err error) {
 	return nil, err
 }
 
+// GetItemsByFeatureId retrieves Items by Feature Id. Returns error if
+// Feature Id doesn't exist
+func GetAllFeaturesWithTheirItems() (v []orm.Params, err error) {
+	o := orm.NewOrm()
+	var results []orm.Params
+
+	sql := `
+        select * from features f 
+		left join item_features ifa on f.feature_id = ifa.feature_id 
+		left join items i on ifa.item_id = i.item_id
+    `
+
+	if _, err = o.Raw(sql).Values(&results); err == nil {
+		return results, nil
+	}
+
+	return nil, err
+}
+
 // GetAllFeatures retrieves all Features matches certain condition. Returns empty list if
 // no records exist
 func GetAllFeatures(query map[string]string, fields []string, sortby []string, order []string,

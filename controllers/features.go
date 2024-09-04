@@ -3,8 +3,10 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	helperFunc "item_processor/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
+	"item_processor/structs/responses"
 	"net/http"
 	"strconv"
 	"strings"
@@ -26,6 +28,7 @@ func (c *FeaturesController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
+	c.Mapping("GetAllFeaturesAndTheirItems", c.GetAllFeaturesAndTheirItems)
 }
 
 // Post ...
@@ -75,7 +78,7 @@ func (c *FeaturesController) Post() {
 	if _, err := models.AddFeatures(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
 
-		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: &v, StatusDesc: "Category has been added successfully"}
+		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: &v, StatusDesc: "Feature has been added successfully"}
 		c.Data["json"] = resp
 	} else {
 		c.Data["json"] = err.Error()
@@ -91,13 +94,41 @@ func (c *FeaturesController) Post() {
 // @Failure 403 :id is empty
 // @router /:id [get]
 func (c *FeaturesController) GetOne() {
+	logs.Info("Getting one ")
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetFeaturesById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		var resp = models.FeatureResponseDTO{StatusCode: 301, Feature: nil, StatusDesc: "Error fetching feature"}
+		logs.Info("Error fetching feature ", err.Error())
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = v
+		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: v, StatusDesc: "Feature fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetAllFeaturesAndTheirItems ...
+// @Title Get All Features and their items
+// @Description get Features
+// @Success 200 {object} models.FeaturesResponseFDTO
+// @Failure 403 is empty
+// @router /items [get]
+func (c *FeaturesController) GetAllFeaturesAndTheirItems() {
+	logs.Info("Getting all ")
+	v, err := models.GetAllFeaturesWithTheirItems()
+
+	if err != nil {
+		var resp = responses.FeaturesResponseFDTO{StatusCode: 301, Features: nil, StatusDesc: "Failed to fetch features"}
+		logs.Error("Error getting features", err.Error())
+		c.Data["json"] = resp
+	} else {
+		logs.Info("Data is ", v)
+		modified := helperFunc.ConvertParamsToFeatures(v)
+
+		var resp = responses.FeaturesResponseFDTO{StatusCode: 200, Features: &modified, StatusDesc: "Features fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

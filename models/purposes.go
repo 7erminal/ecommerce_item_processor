@@ -46,6 +46,25 @@ func GetPurposesById(id int64) (v *Purposes, err error) {
 	return nil, err
 }
 
+// GetItemsByPurposesId retrieves Items by Purpose Id. Returns error if
+// Purpose Id doesn't exist
+func GetAllPurposesWithTheirItems() (v []orm.Params, err error) {
+	o := orm.NewOrm()
+	var results []orm.Params
+
+	sql := `
+        select * from purposes f 
+		left join item_purposes ifa on f.purpose_id = ifa.purpose_id 
+		left join items i on ifa.item_id = i.item_id
+    `
+
+	if _, err = o.Raw(sql).Values(&results); err == nil {
+		return results, nil
+	}
+
+	return nil, err
+}
+
 // GetAllPurposes retrieves all Purposes matches certain condition. Returns empty list if
 // no records exist
 func GetAllPurposes(query map[string]string, fields []string, sortby []string, order []string,

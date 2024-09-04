@@ -3,8 +3,10 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	helperFunc "item_processor/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
+	"item_processor/structs/responses"
 	"net/http"
 	"strconv"
 	"strings"
@@ -97,9 +99,35 @@ func (c *PurposesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetPurposesById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		var resp = models.PurposeResponseDTO{StatusCode: 301, Purpose: nil, StatusDesc: "Error fetching purpose"}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = v
+		var resp = models.PurposeResponseDTO{StatusCode: 200, Purpose: v, StatusDesc: "Purpose has been added successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetAllPurposesAndTheirItems ...
+// @Title Get All Purposes and their items
+// @Description get Features
+// @Success 200 {object} models.PurposesResponseFDTO
+// @Failure 403 is empty
+// @router /items [get]
+func (c *PurposesController) GetAllPurposesAndTheirItems() {
+	logs.Info("Getting all ")
+	v, err := models.GetAllPurposesWithTheirItems()
+
+	if err != nil {
+		var resp = responses.PurposesResponseFDTO{StatusCode: 301, Purposes: nil, StatusDesc: "Failed to fetch purposes"}
+		logs.Error("Error getting purposes", err.Error())
+		c.Data["json"] = resp
+	} else {
+		logs.Info("Data is ", v)
+		modified := helperFunc.ConvertParamsToPurposes(v)
+
+		var resp = responses.PurposesResponseFDTO{StatusCode: 200, Purposes: &modified, StatusDesc: "Purposes fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

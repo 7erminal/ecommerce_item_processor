@@ -82,7 +82,7 @@ func GetItemsByFeatureId(id int64) (v *[]Items, err error) {
 
 // GetItemsByItemId retrieves Items by Item Id. Returns error if
 // Item Id doesn't exist
-func GetItemsWithItem(id int64) (v *[]Items, err error) {
+func GetItemsFromFeaturesWithItem(id int64) (v *[]Items, err error) {
 	o := orm.NewOrm()
 	v = &[]Items{}
 	if ft, err := GetItemsById(id); err == nil {
