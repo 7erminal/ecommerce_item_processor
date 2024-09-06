@@ -1138,6 +1138,27 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /items/categories/{id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Item_features by Item id
+        <br>
+      operationId: ItemsController.Get Item Features
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.ItemsResponseDTO2'
+        "403":
+          description: :id is empty
   /items/features/feature/{id}:
     get:
       tags:
@@ -1375,7 +1396,7 @@ definitions:
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  54462.<nil>.Items:
+  54849.<nil>.Items:
     title: Items
     type: object
   models.Categories:
@@ -1799,7 +1820,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/54462.<nil>.Items'
+        $ref: '#/definitions/54849.<nil>.Items'
       StatusCode:
         type: integer
         format: int64

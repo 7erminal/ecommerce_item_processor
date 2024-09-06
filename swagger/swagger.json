@@ -1484,6 +1484,35 @@
                 }
             }
         },
+        "/items/categories/{id}": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get Item_features by Item id\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Features",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.ItemsResponseDTO2"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
         "/items/features/feature/{id}": {
             "get": {
                 "tags": [
@@ -1901,7 +1930,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "54462.\u003cnil\u003e.Items": {
+        "54849.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2494,7 +2523,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/54462.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/54849.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",

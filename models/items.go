@@ -80,6 +80,19 @@ func GetItemsByFeatureId(id int64) (v *[]Items, err error) {
 	return nil, err
 }
 
+// GetItemsByFeatureId retrieves Items by Feature Id. Returns error if
+// Feature Id doesn't exist
+func GetItemsByCategoryId(id int64) (v *[]Items, err error) {
+	o := orm.NewOrm()
+	v = &[]Items{}
+	if ft, err := GetCategoriesById(id); err == nil {
+		if _, err = o.QueryTable(new(Items)).RelatedSel().Filter("Category", ft).All(v); err == nil {
+			return v, nil
+		}
+	}
+	return nil, err
+}
+
 // GetItemsByItemId retrieves Items by Item Id. Returns error if
 // Item Id doesn't exist
 func GetItemsFromFeaturesWithItem(id int64) (v *[]Items, err error) {

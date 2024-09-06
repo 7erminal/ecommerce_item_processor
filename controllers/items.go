@@ -30,6 +30,7 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
+	c.Mapping("GetItemsByCategory", c.GetItemsByCategory)
 }
 
 // Post ...
@@ -195,6 +196,28 @@ func (c *ItemsController) GetItemFeatures() {
 	} else {
 		logs.Info("Item features fetched are ", v)
 		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemsByCategory ...
+// @Title Get Item Features
+// @Description get Item_features by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.ItemsResponseDTO2
+// @Failure 403 :id is empty
+// @router /categories/:id [get]
+func (c *ItemsController) GetItemsByCategory() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItemsByCategoryId(id)
+	if err != nil {
+		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		logs.Info("Items fetched are ", v)
+		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
