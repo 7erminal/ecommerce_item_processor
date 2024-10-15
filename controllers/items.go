@@ -98,8 +98,10 @@ func (c *ItemsController) Post() {
 		} else {
 			// resp := models.ItemsResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 			// c.Data["json"] = resp
-			logs.Error(err.Error())
-			c.Data["json"] = err.Error()
+			resp := responses.ItemResponseDTO{StatusCode: 307, Item: nil, StatusDesc: cerr.Error()}
+			c.Data["json"] = resp
+			logs.Error(cerr.Error())
+			c.Data["json"] = resp
 		}
 
 	} else {
@@ -358,6 +360,19 @@ func (c *ItemsController) Put() {
 
 							iq, err := models.GetItem_quantityByItemId(id)
 							if err != nil {
+								resp := models.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
+								c.Data["json"] = resp
+								qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+								if _, err := models.AddItem_quantity(&qu); err == nil {
+									c.Ctx.Output.SetStatus(200)
+
+									resp := responses.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
+									c.Data["json"] = resp
+								} else {
+									logs.Error(err.Error())
+									resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+									c.Data["json"] = resp
+								}
 							} else {
 								qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
 
