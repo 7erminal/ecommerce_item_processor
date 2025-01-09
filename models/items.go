@@ -28,6 +28,7 @@ type Items struct {
 	CreatedBy       int          `orm:"omitempty"`
 	ModifiedBy      int          `orm:"omitempty"`
 	Country         *Countries   `orm:"rel(fk);column(country)"`
+	Branch          *Branches    `orm:"rel(fk);column(branch)"`
 }
 
 func init() {

@@ -61,15 +61,24 @@ paths:
         <br>
       operationId: CategoriesController.Post
       parameters:
-      - in: body
-        name: body
-        description: body for Categories content
+      - in: formData
+        name: Image
+        description: Category Image
         required: true
-        schema:
-          $ref: '#/definitions/models.CategoriesDTO'
+        type: file
+      - in: formData
+        name: CategoryName
+        description: Category name
+        required: true
+        type: string
+      - in: formData
+        name: Icon
+        description: Category icon
+        required: true
+        type: string
       responses:
-        "201":
-          description: '{int} models.Categories'
+        "200":
+          description: '{int} models.CategoryResponseDTO'
         "403":
           description: body is empty
   /categories/{id}:
@@ -126,131 +135,6 @@ paths:
         delete the Categories
         <br>
       operationId: CategoriesController.Delete
-      parameters:
-      - in: path
-        name: id
-        description: The id you want to delete
-        required: true
-        type: string
-      responses:
-        "200":
-          description: '{string} delete success!'
-        "403":
-          description: id is empty
-  /currencies/:
-    get:
-      tags:
-      - currencies
-      description: |-
-        get Currencies
-        <br>
-      operationId: CurrenciesController.Get All
-      parameters:
-      - in: query
-        name: query
-        description: Filter. e.g. col1:v1,col2:v2 ...
-        type: string
-      - in: query
-        name: fields
-        description: Fields returned. e.g. col1,col2 ...
-        type: string
-      - in: query
-        name: sortby
-        description: Sorted-by fields. e.g. col1,col2 ...
-        type: string
-      - in: query
-        name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
-        type: string
-      - in: query
-        name: limit
-        description: Limit the size of result set. Must be an integer
-        type: string
-      - in: query
-        name: offset
-        description: Start position of result set. Must be an integer
-        type: string
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.Currencies'
-        "403":
-          description: ""
-    post:
-      tags:
-      - currencies
-      description: |-
-        create Currencies
-        <br>
-      operationId: CurrenciesController.Post
-      parameters:
-      - in: body
-        name: body
-        description: body for Currencies content
-        required: true
-        schema:
-          $ref: '#/definitions/models.Currencies'
-      responses:
-        "201":
-          description: '{int} models.Currencies'
-        "403":
-          description: body is empty
-  /currencies/{id}:
-    get:
-      tags:
-      - currencies
-      description: |-
-        get Currencies by id
-        <br>
-      operationId: CurrenciesController.Get One
-      parameters:
-      - in: path
-        name: id
-        description: The key for staticblock
-        required: true
-        type: string
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.Currencies'
-        "403":
-          description: :id is empty
-    put:
-      tags:
-      - currencies
-      description: |-
-        update the Currencies
-        <br>
-      operationId: CurrenciesController.Put
-      parameters:
-      - in: path
-        name: id
-        description: The id you want to update
-        required: true
-        type: string
-      - in: body
-        name: body
-        description: body for Currencies content
-        required: true
-        schema:
-          $ref: '#/definitions/models.Currencies'
-      responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/models.Currencies'
-        "403":
-          description: :id is not int
-    delete:
-      tags:
-      - currencies
-      description: |-
-        delete the Currencies
-        <br>
-      operationId: CurrenciesController.Delete
       parameters:
       - in: path
         name: id
@@ -1396,9 +1280,35 @@ definitions:
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  54849.<nil>.Items:
+  59306.<nil>.Items:
     title: Items
     type: object
+  models.Branches:
+    title: Branches
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      Branch:
+        type: string
+      BranchId:
+        type: integer
+        format: int64
+      Country:
+        $ref: '#/definitions/models.Countries'
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ModifiedBy:
+        type: integer
+        format: int64
   models.Categories:
     title: Categories
     type: object
@@ -1424,14 +1334,6 @@ definitions:
       ModifiedBy:
         type: integer
         format: int64
-  models.CategoriesDTO:
-    title: CategoriesDTO
-    type: object
-    properties:
-      CategoryName:
-        type: string
-      ImagePath:
-        type: string
   models.Countries:
     title: Countries
     type: object
@@ -1753,6 +1655,8 @@ definitions:
         type: string
       AvailableSizes:
         type: string
+      Branch:
+        $ref: '#/definitions/models.Branches'
       Category:
         $ref: '#/definitions/models.Categories'
       Country:
@@ -1820,7 +1724,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/54849.<nil>.Items'
+        $ref: '#/definitions/59306.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -1949,6 +1853,9 @@ definitions:
     title: AddItemRequest
     type: object
     properties:
+      AltItemPrice:
+        type: number
+        format: float
       AvailableColors:
         type: array
         items:
@@ -1957,6 +1864,8 @@ definitions:
         type: array
         items:
           type: string
+      Branch:
+        type: string
       Category:
         type: integer
         format: int64
@@ -2008,9 +1917,6 @@ tags:
 - name: purposes
   description: |
     PurposesController operations for Purposes
-- name: currencies
-  description: |
-    CurrenciesController operations for Currencies
 - name: items
   description: |
     ItemsController operations for Items

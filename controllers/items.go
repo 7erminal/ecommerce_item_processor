@@ -62,13 +62,15 @@ func (c *ItemsController) Post() {
 
 		if cerr == nil {
 			// Add price for item
-			it := models.Item_prices{ItemPrice: t.ItemPrice, AltItemPrice: 0, ShowAltPrice: false, Currency: cr, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+			it := models.Item_prices{ItemPrice: t.ItemPrice, AltItemPrice: t.AltItemPrice, ShowAltPrice: false, Currency: cr, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 			logs.Info("Adding price to item to create at a go")
 			if _, err := models.AddItem_prices(&it); err == nil {
 				country, _ := models.GetCountriesByCode(t.Country)
+				br, _ := strconv.ParseInt(t.Branch, 10, 64)
+				branch, _ := models.GetBranchesById(br)
 				// Add item if getting category and price addition does not result in an error
-				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
+				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country, Branch: branch, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item

@@ -44,6 +44,17 @@ func GetBranchesById(id int64) (v *Branches, err error) {
 	return nil, err
 }
 
+// GetBranchesById retrieves Branches by Id. Returns error if
+// Id doesn't exist
+func GetBranchesByName(name string) (v *Branches, err error) {
+	o := orm.NewOrm()
+	v = &Branches{Branch: name}
+	if err = o.QueryTable(new(Branches)).Filter("Branch", name).RelatedSel().One(v); err == nil {
+		return v, nil
+	}
+	return nil, err
+}
+
 // GetAllBranches retrieves all Branches matches certain condition. Returns empty list if
 // no records exist
 func GetAllBranches(query map[string]string, fields []string, sortby []string, order []string,

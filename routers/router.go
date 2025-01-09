@@ -17,16 +17,6 @@ func init() {
 	beego.SetStaticPath("/uploads", "uploads")
 
 	ns := beego.NewNamespace("/v1",
-		// beego.NSNamespace("/object",
-		// 	beego.NSInclude(
-		// 		&controllers.ObjectController{},
-		// 	),
-		// ),
-		// beego.NSNamespace("/user",
-		// 	beego.NSInclude(
-		// 		&controllers.UserController{},
-		// 	),
-		// ),
 		beego.NSNamespace("/categories",
 			beego.NSInclude(
 				&controllers.CategoriesController{},
@@ -40,11 +30,6 @@ func init() {
 		beego.NSNamespace("/purposes",
 			beego.NSInclude(
 				&controllers.PurposesController{},
-			),
-		),
-		beego.NSNamespace("/currencies",
-			beego.NSInclude(
-				&controllers.CurrenciesController{},
 			),
 		),
 		beego.NSNamespace("/items",

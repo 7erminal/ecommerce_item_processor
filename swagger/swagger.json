@@ -80,18 +80,30 @@
                 "operationId": "CategoriesController.Post",
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for Categories content",
+                        "in": "formData",
+                        "name": "Image",
+                        "description": "Category Image",
                         "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.CategoriesDTO"
-                        }
+                        "type": "file"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "CategoryName",
+                        "description": "Category name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "Icon",
+                        "description": "Category icon",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "{int} models.Categories"
+                    "200": {
+                        "description": "{int} models.CategoryResponseDTO"
                     },
                     "403": {
                         "description": "body is empty"
@@ -169,179 +181,6 @@
                 ],
                 "description": "delete the Categories\n\u003cbr\u003e",
                 "operationId": "CategoriesController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "403": {
-                        "description": "id is empty"
-                    }
-                }
-            }
-        },
-        "/currencies/": {
-            "get": {
-                "tags": [
-                    "currencies"
-                ],
-                "description": "get Currencies\n\u003cbr\u003e",
-                "operationId": "CurrenciesController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.Currencies"
-                        }
-                    },
-                    "403": {
-                        "description": ""
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "currencies"
-                ],
-                "description": "create Currencies\n\u003cbr\u003e",
-                "operationId": "CurrenciesController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for Currencies content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Currencies"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.Currencies"
-                    },
-                    "403": {
-                        "description": "body is empty"
-                    }
-                }
-            }
-        },
-        "/currencies/{id}": {
-            "get": {
-                "tags": [
-                    "currencies"
-                ],
-                "description": "get Currencies by id\n\u003cbr\u003e",
-                "operationId": "CurrenciesController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.Currencies"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "currencies"
-                ],
-                "description": "update the Currencies\n\u003cbr\u003e",
-                "operationId": "CurrenciesController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for Currencies content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.Currencies"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.Currencies"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is not int"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "currencies"
-                ],
-                "description": "delete the Currencies\n\u003cbr\u003e",
-                "operationId": "CurrenciesController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -1930,9 +1769,45 @@
             "title": "Item_features",
             "type": "object"
         },
-        "54849.\u003cnil\u003e.Items": {
+        "59306.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
+        },
+        "models.Branches": {
+            "title": "Branches",
+            "type": "object",
+            "properties": {
+                "Active": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Branch": {
+                    "type": "string"
+                },
+                "BranchId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Country": {
+                    "$ref": "#/definitions/models.Countries"
+                },
+                "CreatedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "DateCreated": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "DateModified": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "ModifiedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
         },
         "models.Categories": {
             "title": "Categories",
@@ -1966,18 +1841,6 @@
                 "ModifiedBy": {
                     "type": "integer",
                     "format": "int64"
-                }
-            }
-        },
-        "models.CategoriesDTO": {
-            "title": "CategoriesDTO",
-            "type": "object",
-            "properties": {
-                "CategoryName": {
-                    "type": "string"
-                },
-                "ImagePath": {
-                    "type": "string"
                 }
             }
         },
@@ -2428,6 +2291,9 @@
                 "AvailableSizes": {
                     "type": "string"
                 },
+                "Branch": {
+                    "$ref": "#/definitions/models.Branches"
+                },
                 "Category": {
                     "$ref": "#/definitions/models.Categories"
                 },
@@ -2523,7 +2389,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/54849.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/59306.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2708,6 +2574,10 @@
             "title": "AddItemRequest",
             "type": "object",
             "properties": {
+                "AltItemPrice": {
+                    "type": "number",
+                    "format": "float"
+                },
                 "AvailableColors": {
                     "type": "array",
                     "items": {
@@ -2719,6 +2589,9 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "Branch": {
+                    "type": "string"
                 },
                 "Category": {
                     "type": "integer",
@@ -2793,10 +2666,6 @@
         {
             "name": "purposes",
             "description": "PurposesController operations for Purposes\n"
-        },
-        {
-            "name": "currencies",
-            "description": "CurrenciesController operations for Currencies\n"
         },
         {
             "name": "items",

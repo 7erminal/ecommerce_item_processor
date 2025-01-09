@@ -8,6 +8,6 @@ type CategoriesResponseDTO struct {
 
 type CategoryResponseDTO struct {
 	StatusCode int
-	Categories *Categories
+	Category   *Categories
 	StatusDesc string
 }

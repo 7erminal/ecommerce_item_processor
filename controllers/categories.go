@@ -30,8 +30,10 @@ func (c *CategoriesController) URLMapping() {
 // Post ...
 // @Title Post
 // @Description create Categories
-// @Param	body		body 	models.CategoriesDTO	true		"body for Categories content"
-// @Success 201 {int} models.Categories
+// @Param	Image		formData 	file	true		"Category Image"
+// @Param	CategoryName		formData 	string	true		"Category name"
+// @Param	Icon		formData 	string	true		"Category icon"
+// @Success 200 {int} models.CategoryResponseDTO
 // @Failure 403 body is empty
 // @router / [post]
 func (c *CategoriesController) Post() {
@@ -80,7 +82,7 @@ func (c *CategoriesController) Post() {
 	if _, err := models.AddCategories(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
 
-		var resp = models.CategoryResponseDTO{StatusCode: 200, Categories: &v, StatusDesc: "Category has been added successfully"}
+		var resp = models.CategoryResponseDTO{StatusCode: 200, Category: &v, StatusDesc: "Category has been added successfully"}
 		c.Data["json"] = resp
 	} else {
 		logs.Error(err.Error())
@@ -101,10 +103,10 @@ func (c *CategoriesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetCategoriesById(id)
 	if err != nil {
-		var resp = models.CategoryResponseDTO{StatusCode: 301, Categories: nil, StatusDesc: "Error fetching category " + err.Error()}
+		var resp = models.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
 		c.Data["json"] = resp
 	} else {
-		var resp = models.CategoryResponseDTO{StatusCode: 200, Categories: v, StatusDesc: "Category has been fetched successfully"}
+		var resp = models.CategoryResponseDTO{StatusCode: 200, Category: v, StatusDesc: "Category has been fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
