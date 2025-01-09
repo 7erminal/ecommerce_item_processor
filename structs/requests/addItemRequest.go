@@ -11,6 +11,6 @@ type AddItemRequest struct {
 	ItemPrice       float32
 	AltItemPrice    float32
 	Country         string
-	Branch          string
+	Branch          int64
 	CreatedBy       int
 }

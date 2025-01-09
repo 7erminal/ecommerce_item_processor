@@ -2591,7 +2591,8 @@
                     }
                 },
                 "Branch": {
-                    "type": "string"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "Category": {
                     "type": "integer",

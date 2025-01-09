@@ -1865,7 +1865,8 @@ definitions:
         items:
           type: string
       Branch:
-        type: string
+        type: integer
+        format: int64
       Category:
         type: integer
         format: int64
