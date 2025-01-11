@@ -13,7 +13,7 @@ import (
 type Branches struct {
 	BranchId     int64      `orm:"auto"`
 	Branch       string     `orm:"size(80)"`
-	Country      *Countries `orm:"rel(fk);column(country)"`
+	Country      *Countries `orm:"rel(fk);column(country_id)"`
 	Active       int        `orm:"omitempty"`
 	DateCreated  time.Time  `orm:"type(datetime);omitempty"`
 	DateModified time.Time  `orm:"type(datetime);omitempty"`

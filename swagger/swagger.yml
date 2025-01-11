@@ -1280,7 +1280,7 @@ definitions:
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  59306.<nil>.Items:
+  59309.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1724,7 +1724,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/59306.<nil>.Items'
+        $ref: '#/definitions/59309.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
