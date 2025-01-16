@@ -31,6 +31,7 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
 	c.Mapping("GetItemsByCategory", c.GetItemsByCategory)
+	c.Mapping("UpdateItemImage", c.UpdateItemImage)
 }
 
 // Post ...
