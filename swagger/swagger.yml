@@ -605,6 +605,25 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /item-images/upload-pictures:
+    post:
+      tags:
+      - item-images
+      description: |-
+        Upload a picture to items
+        <br>
+      operationId: Item_imagesController.Upload Picture
+      parameters:
+      - in: formData
+        name: Image
+        description: Item Image
+        required: true
+        type: file
+      responses:
+        "200":
+          description: '{int} responses.StringResponseFDTO'
+        "403":
+          description: body is empty
   /item-purposes/:
     get:
       tags:
@@ -1106,6 +1125,33 @@ paths:
             $ref: '#/definitions/models.ItemQuantityResponseDTO'
         "403":
           description: :id is empty
+  /items/update-item-image:id:
+    put:
+      tags:
+      - items
+      description: |-
+        update the Item's image
+        <br>
+      operationId: ItemsController.Update Item Image
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Items content
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ImageUpdateRequest'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Items'
+        "403":
+          description: :id is not int
   /purposes/:
     get:
       tags:
@@ -1899,6 +1945,12 @@ definitions:
       ReviewBy:
         type: integer
         format: int64
+  requests.ImageUpdateRequest:
+    title: ImageUpdateRequest
+    type: object
+    properties:
+      ImagePath:
+        type: string
   requests.VisibilityRequestDTO:
     title: VisibilityRequestDTO
     type: object

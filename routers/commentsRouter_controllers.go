@@ -223,6 +223,15 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["item_processor/controllers:Item_imagesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_imagesController"],
+        beego.ControllerComments{
+            Method: "UploadPictures",
+            Router: "/upload-pictures",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["item_processor/controllers:Item_pricesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_pricesController"],
         beego.ControllerComments{
             Method: "Post",
@@ -498,6 +507,15 @@ func init() {
             Method: "GetItemQuantity",
             Router: "/quantity/:id",
             AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
+        beego.ControllerComments{
+            Method: "UpdateItemImage",
+            Router: "/update-item-image:id",
+            AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})

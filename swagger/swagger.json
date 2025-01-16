@@ -746,6 +746,32 @@
                 }
             }
         },
+        "/item-images/upload-pictures": {
+            "post": {
+                "tags": [
+                    "item-images"
+                ],
+                "description": "Upload a picture to items\n\u003cbr\u003e",
+                "operationId": "Item_imagesController.Upload Picture",
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "Image",
+                        "description": "Item Image",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{int} responses.StringResponseFDTO"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
         "/item-images/{id}": {
             "get": {
                 "tags": [
@@ -1435,6 +1461,44 @@
                     },
                     "403": {
                         "description": ":id is empty"
+                    }
+                }
+            }
+        },
+        "/items/update-item-image:id": {
+            "put": {
+                "tags": [
+                    "items"
+                ],
+                "description": "update the Item's image\n\u003cbr\u003e",
+                "operationId": "ItemsController.Update Item Image",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Items content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ImageUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Items"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
                     }
                 }
             }
@@ -2638,6 +2702,15 @@
                 "ReviewBy": {
                     "type": "integer",
                     "format": "int64"
+                }
+            }
+        },
+        "requests.ImageUpdateRequest": {
+            "title": "ImageUpdateRequest",
+            "type": "object",
+            "properties": {
+                "ImagePath": {
+                    "type": "string"
                 }
             }
         },

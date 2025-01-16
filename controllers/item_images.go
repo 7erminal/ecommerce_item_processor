@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/responses"
 	"net/http"
 	"strconv"
 	"strings"
@@ -25,6 +26,7 @@ func (c *Item_imagesController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
+	c.Mapping("UploadPictures", c.UploadPictures)
 }
 
 // Post ...
@@ -54,7 +56,7 @@ func (c *Item_imagesController) Post() {
 	// Save the uploaded file
 	fileName := header.Filename
 	logs.Info("File Name Extracted is ", fileName)
-	filePath := "/uploads/" + fileName // Define your file path
+	filePath := "/uploads/items/" + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
 	err = c.SaveToFile("Image", "."+filePath)
 	if err != nil {
@@ -101,6 +103,52 @@ func (c *Item_imagesController) Post() {
 		}
 	} else {
 		resp := models.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	}
+
+	c.ServeJSON()
+}
+
+// UploadPicture ...
+// @Title Upload Picture
+// @Description Upload a picture to items
+// @Param	Image		formData 	file	true		"Item Image"
+// @Success 200 {int} responses.StringResponseFDTO
+// @Failure 403 body is empty
+// @router /upload-pictures [post]
+func (c *Item_imagesController) UploadPictures() {
+	// var v models.Item_images
+	file, header, err := c.GetFile("Image")
+	logs.Info("Data received is ", file)
+
+	if err != nil {
+		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
+		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
+		logs.Error("Failed to get the file ", err)
+		c.ServeJSON()
+		return
+	}
+	defer file.Close()
+
+	// Save the uploaded file
+	fileName := header.Filename
+	logs.Info("File Name Extracted is ", fileName)
+	filePath := "/uploads/items/" + fileName // Define your file path
+	logs.Info("File Path Extracted is ", filePath)
+	err = c.SaveToFile("Image", "."+filePath)
+	if err != nil {
+		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
+		logs.Error("Error saving file", err)
+		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
+		errorMessage := "Error: Failed to save the image file"
+
+		resp := responses.StringResponseFDTO{StatusCode: http.StatusInternalServerError, Value: &errorMessage, StatusDesc: "Internal Server Error"}
+
+		c.Data["json"] = resp
+		c.ServeJSON()
+		return
+	} else {
+		resp := responses.StringResponseFDTO{StatusCode: 200, Value: &filePath, StatusDesc: "Images uploaded successfully"}
 		c.Data["json"] = resp
 	}
 

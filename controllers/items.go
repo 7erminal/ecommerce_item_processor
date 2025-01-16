@@ -420,6 +420,44 @@ func (c *ItemsController) Put() {
 	c.ServeJSON()
 }
 
+// UpdateItemImage ...
+// @Title Update Item Image
+// @Description update the Item's image
+// @Param	id		path 	string	true		"The id you want to update"
+// @Param	body		body 	requests.ImageUpdateRequest	true		"body for Items content"
+// @Success 200 {object} models.Items
+// @Failure 403 :id is not int
+// @router /update-item-image:id [put]
+func (c *ItemsController) UpdateItemImage() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	var t requests.ImageUpdateRequest
+	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+
+	iv, err := models.GetItemsById(id)
+	if err != nil {
+		resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		iv.ImagePath = t.ImagePath
+
+		if err := models.UpdateItemsById(iv); err == nil {
+			// Add quantity for item
+
+			c.Ctx.Output.SetStatus(200)
+
+			resp := models.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
+			c.Data["json"] = resp
+
+		} else {
+			resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+			c.Data["json"] = resp
+		}
+	}
+
+	c.ServeJSON()
+}
+
 // Delete ...
 // @Title Delete
 // @Description delete the Items
