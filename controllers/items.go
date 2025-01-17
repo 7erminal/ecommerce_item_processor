@@ -428,12 +428,13 @@ func (c *ItemsController) Put() {
 // @Param	body		body 	requests.ImageUpdateRequest	true		"body for Items content"
 // @Success 200 {object} models.Items
 // @Failure 403 :id is not int
-// @router /update-item-image:id [put]
+// @router /update-item-image/:id [put]
 func (c *ItemsController) UpdateItemImage() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	var t requests.ImageUpdateRequest
 	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+	logs.Info("Request received. Image path is ", t.ImagePath, " Item id is ", idStr)
 
 	iv, err := models.GetItemsById(id)
 	if err != nil {

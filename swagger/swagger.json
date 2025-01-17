@@ -1465,7 +1465,7 @@
                 }
             }
         },
-        "/items/update-item-image:id": {
+        "/items/update-item-image/{id}": {
             "put": {
                 "tags": [
                     "items"

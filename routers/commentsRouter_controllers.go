@@ -514,7 +514,7 @@ func init() {
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
             Method: "UpdateItemImage",
-            Router: "/update-item-image:id",
+            Router: "/update-item-image/:id",
             AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,

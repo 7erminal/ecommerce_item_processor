@@ -1125,7 +1125,7 @@ paths:
             $ref: '#/definitions/models.ItemQuantityResponseDTO'
         "403":
           description: :id is empty
-  /items/update-item-image:id:
+  /items/update-item-image/{id}:
     put:
       tags:
       - items
