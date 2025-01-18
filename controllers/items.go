@@ -426,13 +426,15 @@ func (c *ItemsController) Put() {
 			if cerr == nil {
 				if ip, err := models.GetItem_pricesById(iv.ItemPrice.ItemPriceId); err == nil {
 					// Add price for item
-					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: 0, ShowAltPrice: false, Currency: cr, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
+					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, Currency: cr, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
 
 					logs.Info("Modifying price for item")
 
 					if err := models.UpdateItem_pricesById(&it); err == nil {
 						// Add item if getting category and price addition does not result in an error
-						v := models.Items{ItemId: id, ItemName: t.ItemName, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: iv.Country, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
+						country, _ := models.GetCountriesByCode(t.Country)
+						branch, _ := models.GetBranchesById(t.Branch)
+						v := models.Items{ItemId: id, ItemName: t.ItemName, Country: country, Branch: branch, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
 
 						if err := models.UpdateItemsById(&v); err == nil {
 							// Add quantity for item

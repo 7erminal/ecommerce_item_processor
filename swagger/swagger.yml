@@ -1390,13 +1390,13 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1377.<nil>.0x14000792048:
-    title: "0x14000792048"
+  1377.<nil>.0x140007f22b8:
+    title: "0x140007f22b8"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  63502.<nil>.Items:
+  63574.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1811,6 +1811,9 @@ definitions:
     title: ItemsDTO
     type: object
     properties:
+      AltPrice:
+        type: number
+        format: float
       AvailableColors:
         type: array
         items:
@@ -1819,9 +1822,14 @@ definitions:
         type: array
         items:
           type: string
+      Branch:
+        type: integer
+        format: int64
       Category:
         type: integer
         format: int64
+      Country:
+        type: string
       CreatedBy:
         type: integer
         format: int64
@@ -1840,7 +1848,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/63502.<nil>.Items'
+        $ref: '#/definitions/63574.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2035,7 +2043,7 @@ definitions:
     type: object
     properties:
       Stats:
-        $ref: '#/definitions/1377.<nil>.0x14000792048'
+        $ref: '#/definitions/1377.<nil>.0x140007f22b8'
       StatusCode:
         type: integer
         format: int64

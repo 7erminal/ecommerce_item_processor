@@ -1919,8 +1919,8 @@
         }
     },
     "definitions": {
-        "1377.\u003cnil\u003e.0x14000792048": {
-            "title": "0x14000792048",
+        "1377.\u003cnil\u003e.0x140007f22b8": {
+            "title": "0x140007f22b8",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -1931,7 +1931,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "63502.\u003cnil\u003e.Items": {
+        "63574.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2510,6 +2510,10 @@
             "title": "ItemsDTO",
             "type": "object",
             "properties": {
+                "AltPrice": {
+                    "type": "number",
+                    "format": "float"
+                },
                 "AvailableColors": {
                     "type": "array",
                     "items": {
@@ -2522,9 +2526,16 @@
                         "type": "string"
                     }
                 },
+                "Branch": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Category": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "Country": {
+                    "type": "string"
                 },
                 "CreatedBy": {
                     "type": "integer",
@@ -2551,7 +2562,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/63502.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/63574.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2830,7 +2841,7 @@
             "type": "object",
             "properties": {
                 "Stats": {
-                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x14000792048"
+                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x140007f22b8"
                 },
                 "StatusCode": {
                     "type": "integer",
