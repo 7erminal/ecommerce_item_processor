@@ -57,8 +57,8 @@ func (c *FeaturesController) Post() {
 
 		// Save the uploaded file
 		fileName := header.Filename
-		filePath = "/uploads/" + fileName // Define your file path
-		err = c.SaveToFile("Image", "."+filePath)
+		filePath = "/uploads/features/" + fileName // Define your file path
+		err = c.SaveToFile("Image", "../images/"+filePath)
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
 			logs.Error("Error saving file", err)

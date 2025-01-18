@@ -56,8 +56,8 @@ func (c *PurposesController) Post() {
 
 		// Save the uploaded file
 		fileName := header.Filename
-		filePath = "/uploads/" + fileName // Define your file path
-		err = c.SaveToFile("Image", "."+filePath)
+		filePath = "/uploads/purposes/" + fileName // Define your file path
+		err = c.SaveToFile("Image", "../images/"+filePath)
 
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
