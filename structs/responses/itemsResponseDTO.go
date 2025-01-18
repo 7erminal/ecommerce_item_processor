@@ -4,6 +4,25 @@ import (
 	"item_processor/models"
 )
 
+type ItemsBranchesStatsDTO struct {
+	BranchStats *[]models.ItemsBranchCountDTO
+}
+
+type ItemsCategoryStatsDTO struct {
+	CategoryStats *[]models.ItemsCategoryCountDTO
+}
+
+type StatsDTO struct {
+	BranchStats   *[]models.ItemsCategoryCountDTO
+	CategoryStats *[]models.ItemsCategoryCountDTO
+}
+
+type ItemsStatsResponseDTO struct {
+	StatusCode int
+	Stats      *[]models.ItemsCategoryCountDTO
+	StatusDesc string
+}
+
 type ItemsResponseDTO struct {
 	StatusCode int
 	Items      *[]interface{}

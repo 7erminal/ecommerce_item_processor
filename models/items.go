@@ -8,7 +8,18 @@ import (
 	"time"
 
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 )
+
+type ItemsBranchCountDTO struct {
+	Branch    string `orm:"column(branch)"`
+	ItemCount int64  `orm:"column(itemCount)"`
+}
+
+type ItemsCategoryCountDTO struct {
+	Category  string `orm:"column(category_name)"`
+	ItemCount int64  `orm:"column(itemCount)"`
+}
 
 type Items struct {
 	ItemId          int64        `orm:"auto"`
@@ -42,6 +53,60 @@ func AddItems(m *Items) (id int64, err error) {
 	id, err = o.Insert(m)
 	return
 }
+
+// GetItemsStatsByBranch retrieves Items stats by branch. Returns error if
+// Id doesn't exist
+func GetItemsCategoryStatsByBranch(id int64) (count_ *[]ItemsCategoryCountDTO, err error) {
+	o := orm.NewOrm()
+
+	sql := `
+        SELECT c.category_name, COUNT(i.item_id) itemCount
+        FROM categories c LEFT JOIN items i ON c.category_id = i.category_id
+		WHERE i.branch = 3
+        GROUP BY c.category_name
+    `
+	var results []ItemsCategoryCountDTO
+	if _, err := o.Raw(sql).QueryRows(&results); err == nil {
+		logs.Info("Results:: ", results)
+		// for _, result := range results {
+		// 	logs.Info("Data fetched is ", result.Branch, " :: ", result.ItemCount)
+		// }
+		return &results, nil
+	}
+	return nil, err
+}
+
+// GetItemsStatsByCategory retrieves Items stats by category. Returns error if
+// Id doesn't exist
+func GetItemsStatsByCategory() (count_ *[]ItemsCategoryCountDTO, err error) {
+	o := orm.NewOrm()
+
+	sql := `
+        SELECT c.category_name, COUNT(i.item_id) itemCount
+        FROM items i, categories c where i.category_id = c.category_id
+        GROUP BY c.category_name
+    `
+	var results []ItemsCategoryCountDTO
+	if _, err := o.Raw(sql).QueryRows(&results); err == nil {
+		logs.Info("Results:: ", results)
+		// for _, result := range results {
+		// 	logs.Info("Data fetched is ", result.Branch, " :: ", result.ItemCount)
+		// }
+		return &results, nil
+	}
+	return nil, err
+}
+
+// GetItemsStatsByBranch retrieves Items stats by branch. Returns error if
+// Id doesn't exist
+// func GetItemsStatsByCategory() (v *Items, err error) {
+// 	o := orm.NewOrm()
+// 	v = &Items{}
+// 	if err = o.QueryTable(new(Items)).Filter("ItemId", id).RelatedSel().One(v); err == nil {
+// 		return v, nil
+// 	}
+// 	return nil, err
+// }
 
 // GetItemsById retrieves Items by Id. Returns error if
 // Id doesn't exist
@@ -160,6 +225,80 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 
 	var l []Items
 	qs = qs.OrderBy(sortFields...).RelatedSel()
+	if _, err = qs.All(&l, fields...); err == nil {
+		if len(fields) == 0 {
+			for _, v := range l {
+				ml = append(ml, v)
+			}
+		} else {
+			// trim unused fields
+			for _, v := range l {
+				m := make(map[string]interface{})
+				val := reflect.ValueOf(v)
+				for _, fname := range fields {
+					m[fname] = val.FieldByName(fname).Interface()
+				}
+				ml = append(ml, m)
+			}
+		}
+		return ml, nil
+	}
+	return nil, err
+}
+
+// GetAllItems retrieves all Items matches certain condition. Returns empty list if
+// no records exist
+func GetAllItemsByBranch(branch *Branches, query map[string]string, fields []string, sortby []string, order []string,
+	offset int64, limit int64) (ml []interface{}, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable(new(Items))
+	// query k=v
+	for k, v := range query {
+		// rewrite dot-notation to Object__Attribute
+		k = strings.Replace(k, ".", "__", -1)
+		qs = qs.Filter(k, v)
+	}
+	// order by:
+	var sortFields []string
+	if len(sortby) != 0 {
+		if len(sortby) == len(order) {
+			// 1) for each sort field, there is an associated order
+			for i, v := range sortby {
+				orderby := ""
+				if order[i] == "desc" {
+					orderby = "-" + v
+				} else if order[i] == "asc" {
+					orderby = v
+				} else {
+					return nil, errors.New("Error: Invalid order. Must be either [asc|desc]")
+				}
+				sortFields = append(sortFields, orderby)
+			}
+			qs = qs.OrderBy(sortFields...)
+		} else if len(sortby) != len(order) && len(order) == 1 {
+			// 2) there is exactly one order, all the sorted fields will be sorted by this order
+			for _, v := range sortby {
+				orderby := ""
+				if order[0] == "desc" {
+					orderby = "-" + v
+				} else if order[0] == "asc" {
+					orderby = v
+				} else {
+					return nil, errors.New("Error: Invalid order. Must be either [asc|desc]")
+				}
+				sortFields = append(sortFields, orderby)
+			}
+		} else if len(sortby) != len(order) && len(order) != 1 {
+			return nil, errors.New("Error: 'sortby', 'order' sizes mismatch or 'order' size is not 1")
+		}
+	} else {
+		if len(order) != 0 {
+			return nil, errors.New("Error: unused 'order' fields")
+		}
+	}
+
+	var l []Items
+	qs = qs.Filter("Branch", branch).OrderBy(sortFields...).RelatedSel()
 	if _, err = qs.All(&l, fields...); err == nil {
 		if len(fields) == 0 {
 			for _, v := range l {

@@ -32,6 +32,8 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("Delete", c.Delete)
 	c.Mapping("GetItemsByCategory", c.GetItemsByCategory)
 	c.Mapping("UpdateItemImage", c.UpdateItemImage)
+	c.Mapping("GetItemStats", c.GetItemStats)
+	c.Mapping("GetAllByBranch", c.GetAllByBranch)
 }
 
 // Post ...
@@ -313,6 +315,81 @@ func (c *ItemsController) GetAll() {
 	c.ServeJSON()
 }
 
+// GetAllByBranch ...
+// @Title Get All Items by branch
+// @Description get Items
+// @Param	branch_id		path 	string	true		"The id you want to update"
+// @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
+// @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
+// @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
+// @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
+// @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
+// @Param	offset	query	string	false	"Start position of result set. Must be an integer"
+// @Success 200 {object} models.Items
+// @Failure 403
+// @router /branch/:branch_id [get]
+func (c *ItemsController) GetAllByBranch() {
+	branchidStr := c.Ctx.Input.Param(":branch_id")
+	branchid, _ := strconv.ParseInt(branchidStr, 0, 64)
+	var fields []string
+	var sortby []string
+	var order []string
+	var query = make(map[string]string)
+	var limit int64 = 10
+	var offset int64
+
+	// fields: col1,col2,entity.col3
+	if v := c.GetString("fields"); v != "" {
+		fields = strings.Split(v, ",")
+	}
+	// limit: 10 (default is 10)
+	if v, err := c.GetInt64("limit"); err == nil {
+		limit = v
+	}
+	// offset: 0 (default is 0)
+	if v, err := c.GetInt64("offset"); err == nil {
+		offset = v
+	}
+	// sortby: col1,col2
+	if v := c.GetString("sortby"); v != "" {
+		sortby = strings.Split(v, ",")
+	}
+	// order: desc,asc
+	if v := c.GetString("order"); v != "" {
+		order = strings.Split(v, ",")
+	}
+	// query: k:v,k:v
+	if v := c.GetString("query"); v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
+	if branch, err := models.GetBranchesById(branchid); err == nil {
+		l, err := models.GetAllItemsByBranch(branch, query, fields, sortby, order, offset, limit)
+		if err != nil {
+			resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+			c.Data["json"] = resp
+		} else {
+			resp := models.ItemsResponseDTO{StatusCode: 200, Items: &l, StatusDesc: "Items fetched successfully"}
+			c.Data["json"] = resp
+		}
+	} else {
+		logs.Error("Branch does not exist")
+		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	}
+
+	c.ServeJSON()
+}
+
 // Put ...
 // @Title Put
 // @Description update the Items
@@ -521,6 +598,29 @@ func (c *ItemsController) Delete() {
 		logs.Error("An error occurred")
 		logs.Error(ierr)
 	}
+
+	c.ServeJSON()
+}
+
+// GetItemStats ...
+// @Title Get Item Stats
+// @Description get item stats
+// @Param	branch_id		path 	string	true		"The id you want to update"
+// @Success 200 {object} responses.ItemsStatsResponseDTO
+// @Failure 403 wrong request
+// @router /get-item-stats/:branch_id [get]
+func (c *ItemsController) GetItemStats() {
+	logs.Info("Getting item stats")
+	branchidStr := c.Ctx.Input.Param(":branch_id")
+	branchid, _ := strconv.ParseInt(branchidStr, 0, 64)
+
+	itemCategoryStats := []models.ItemsCategoryCountDTO{}
+	if r, err := models.GetItemsCategoryStatsByBranch(branchid); err == nil {
+		itemCategoryStats = *r
+	}
+
+	resp := responses.ItemsStatsResponseDTO{StatusCode: 200, Stats: &itemCategoryStats, StatusDesc: "Successfully fetched stats"}
+	c.Data["json"] = resp
 
 	c.ServeJSON()
 }

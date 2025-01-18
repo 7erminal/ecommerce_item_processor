@@ -1041,6 +1041,52 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /items/branch/{branch_id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Items
+        <br>
+      operationId: ItemsController.Get All Items by branch
+      parameters:
+      - in: path
+        name: branch_id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Items'
+        "403":
+          description: ""
   /items/categories/{id}:
     get:
       tags:
@@ -1083,6 +1129,27 @@ paths:
             $ref: '#/definitions/models.ItemsResponseDTO2'
         "403":
           description: :id is empty
+  /items/get-item-stats/{branch_id}:
+    get:
+      tags:
+      - items
+      description: |-
+        get item stats
+        <br>
+      operationId: ItemsController.Get Item Stats
+      parameters:
+      - in: path
+        name: branch_id
+        description: The id you want to update
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/responses.ItemsStatsResponseDTO'
+        "403":
+          description: wrong request
   /items/purposes/purpose/{id}:
     get:
       tags:
@@ -1323,10 +1390,13 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
+  1377.<nil>.0x140006e8cf0:
+    title: "0x140006e8cf0"
+    type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  59309.<nil>.Items:
+  63502.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1770,7 +1840,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/59309.<nil>.Items'
+        $ref: '#/definitions/63502.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -1960,6 +2030,17 @@ definitions:
         format: int64
       Visibility:
         type: boolean
+  responses.ItemsStatsResponseDTO:
+    title: ItemsStatsResponseDTO
+    type: object
+    properties:
+      Stats:
+        $ref: '#/definitions/1377.<nil>.0x140006e8cf0'
+      StatusCode:
+        type: integer
+        format: int64
+      StatusDesc:
+        type: string
 tags:
 - name: categories
   description: |
