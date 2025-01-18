@@ -1919,8 +1919,8 @@
         }
     },
     "definitions": {
-        "1377.\u003cnil\u003e.0x1400079dc68": {
-            "title": "0x1400079dc68",
+        "1377.\u003cnil\u003e.0x14000792048": {
+            "title": "0x14000792048",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2830,7 +2830,7 @@
             "type": "object",
             "properties": {
                 "Stats": {
-                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x1400079dc68"
+                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x14000792048"
                 },
                 "StatusCode": {
                     "type": "integer",
