@@ -122,6 +122,9 @@ func (c *Item_imagesController) UploadPictures() {
 	file, header, err := c.GetFile("Image")
 	logs.Info("Data received is ", file)
 
+	contentType := c.Ctx.Input.Header("Content-Type")
+	logs.Info("Content-Type of incoming request:", contentType)
+
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
 		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
@@ -130,6 +133,10 @@ func (c *Item_imagesController) UploadPictures() {
 		return
 	}
 	defer file.Close()
+
+	// Check the file size
+	fileInfo := header.Size
+	logs.Info("Received file size:", fileInfo)
 
 	// Save the uploaded file
 	fileName := filepath.Base(header.Filename)
