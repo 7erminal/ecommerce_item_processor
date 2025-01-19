@@ -6,6 +6,7 @@ import (
 	"item_processor/models"
 	"item_processor/structs/responses"
 	"net/http"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -131,9 +132,9 @@ func (c *Item_imagesController) UploadPictures() {
 	defer file.Close()
 
 	// Save the uploaded file
-	fileName := header.Filename
-	logs.Info("File Name Extracted is ", fileName)
-	filePath := "/uploads/items/" + fileName // Define your file path
+	fileName := filepath.Base(header.Filename)
+	logs.Info("File Name Extracted is ", fileName, "Time now is ", time.Now().Format("20060102150405"))
+	filePath := "/uploads/items/" + time.Now().Format("20060102150405") + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
 	err = c.SaveToFile("Image", "../images"+filePath)
 	if err != nil {

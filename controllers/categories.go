@@ -5,6 +5,7 @@ import (
 	"errors"
 	"item_processor/models"
 	"net/http"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -57,8 +58,8 @@ func (c *CategoriesController) Post() {
 		defer file.Close()
 
 		// Save the uploaded file
-		fileName := header.Filename
-		filePath = "/uploads/categories/" + fileName // Define your file path
+		fileName := filepath.Base(header.Filename)
+		filePath = "/uploads/categories/" + time.Now().Format("20060102150405") + fileName // Define your file path
 		err = c.SaveToFile("Image", "../images/"+filePath)
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
