@@ -26,6 +26,7 @@ func (c *CategoriesController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
+	c.Mapping("GetCategoryByName", c.GetCategoryByName)
 }
 
 // Post ...
@@ -103,6 +104,26 @@ func (c *CategoriesController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetCategoriesById(id)
+	if err != nil {
+		var resp = models.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
+		c.Data["json"] = resp
+	} else {
+		var resp = models.CategoryResponseDTO{StatusCode: 200, Category: v, StatusDesc: "Category has been fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetCategoryByName ...
+// @Title Get Category By Name
+// @Description get Categories by name
+// @Param	name		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.Categories
+// @Failure 403 :name is empty
+// @router /name/:name [get]
+func (c *CategoriesController) GetCategoryByName() {
+	name := c.Ctx.Input.Param(":name")
+	v, err := models.GetCategoriesByName(name)
 	if err != nil {
 		var resp = models.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
 		c.Data["json"] = resp

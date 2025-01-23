@@ -146,6 +146,27 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /categories/name/{name}:
+    get:
+      tags:
+      - categories
+      description: |-
+        get Categories by name
+        <br>
+      operationId: CategoriesController.Get Category By Name
+      parameters:
+      - in: path
+        name: name
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Categories'
+        "403":
+          description: :name is empty
   /features/:
     get:
       tags:
@@ -1390,13 +1411,13 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1377.<nil>.0x14000733230:
-    title: "0x14000733230"
+  1377.<nil>.0x1400072f908:
+    title: "0x1400072f908"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  63574.<nil>.Items:
+  63977.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1805,6 +1826,9 @@ definitions:
       Quantity:
         type: integer
         format: int64
+      QuantityAlert:
+        type: integer
+        format: int64
       Weight:
         type: string
   models.ItemsDTO:
@@ -1848,7 +1872,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/63574.<nil>.Items'
+        $ref: '#/definitions/63977.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2009,6 +2033,9 @@ definitions:
       Quantity:
         type: integer
         format: int64
+      QuantityAlert:
+        type: integer
+        format: int64
       Weight:
         type: string
   requests.AddReviewRequest:
@@ -2043,7 +2070,7 @@ definitions:
     type: object
     properties:
       Stats:
-        $ref: '#/definitions/1377.<nil>.0x14000733230'
+        $ref: '#/definitions/1377.<nil>.0x1400072f908'
       StatusCode:
         type: integer
         format: int64

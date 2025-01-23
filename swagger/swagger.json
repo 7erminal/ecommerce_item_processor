@@ -111,6 +111,35 @@
                 }
             }
         },
+        "/categories/name/{name}": {
+            "get": {
+                "tags": [
+                    "categories"
+                ],
+                "description": "get Categories by name\n\u003cbr\u003e",
+                "operationId": "CategoriesController.Get Category By Name",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "name",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Categories"
+                        }
+                    },
+                    "403": {
+                        "description": ":name is empty"
+                    }
+                }
+            }
+        },
         "/categories/{id}": {
             "get": {
                 "tags": [
@@ -1919,8 +1948,8 @@
         }
     },
     "definitions": {
-        "1377.\u003cnil\u003e.0x14000733230": {
-            "title": "0x14000733230",
+        "1377.\u003cnil\u003e.0x1400072f908": {
+            "title": "0x1400072f908",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -1931,7 +1960,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "63574.\u003cnil\u003e.Items": {
+        "63977.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2501,6 +2530,10 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "QuantityAlert": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Weight": {
                     "type": "string"
                 }
@@ -2562,7 +2595,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/63574.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/63977.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2792,6 +2825,10 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "QuantityAlert": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Weight": {
                     "type": "string"
                 }
@@ -2841,7 +2878,7 @@
             "type": "object",
             "properties": {
                 "Stats": {
-                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x14000733230"
+                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x1400072f908"
                 },
                 "StatusCode": {
                     "type": "integer",

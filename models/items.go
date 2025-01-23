@@ -33,6 +33,7 @@ type Items struct {
 	Material        string       `orm:"size(400);omitempty"`
 	ImagePath       string       `orm:"size(250);omitempty"`
 	Quantity        int          `orm:"omitempty"`
+	QuantityAlert   int          `orm:"omitempty"`
 	Active          int          `orm:"omitempty"`
 	DateCreated     time.Time    `orm:"type(datetime);omitempty"`
 	DateModified    time.Time    `orm:"type(datetime);omitempty"`

@@ -71,8 +71,9 @@ func (c *ItemsController) Post() {
 			if _, err := models.AddItem_prices(&it); err == nil {
 				country, _ := models.GetCountriesByCode(t.Country)
 				branch, _ := models.GetBranchesById(t.Branch)
+
 				// Add item if getting category and price addition does not result in an error
-				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country, Branch: branch, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
+				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Country: country, Branch: branch, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item

@@ -8,6 +8,7 @@ type AddItemRequest struct {
 	AvailableSizes  []string
 	AvailableColors []string
 	Quantity        int
+	QuantityAlert   int
 	ItemPrice       float32
 	AltItemPrice    float32
 	Country         string

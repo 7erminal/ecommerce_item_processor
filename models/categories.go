@@ -44,6 +44,17 @@ func GetCategoriesById(id int64) (v *Categories, err error) {
 	return nil, err
 }
 
+// GetCategoriesByName retrieves Categories by Name. Returns error if
+// Id doesn't exist
+func GetCategoriesByName(name string) (v *Categories, err error) {
+	o := orm.NewOrm()
+	v = &Categories{CategoryName: name}
+	if err = o.QueryTable(new(Categories)).Filter("CategoryName", name).RelatedSel().One(v); err == nil {
+		return v, nil
+	}
+	return nil, err
+}
+
 // GetAllCategories retrieves all Categories matches certain condition. Returns empty list if
 // no records exist
 func GetAllCategories(query map[string]string, fields []string, sortby []string, order []string,
