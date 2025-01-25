@@ -1411,8 +1411,8 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1377.<nil>.0x1400072f908:
-    title: "0x1400072f908"
+  1377.<nil>.0x14000743b00:
+    title: "0x14000743b00"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
@@ -2070,7 +2070,7 @@ definitions:
     type: object
     properties:
       Stats:
-        $ref: '#/definitions/1377.<nil>.0x1400072f908'
+        $ref: '#/definitions/1377.<nil>.0x14000743b00'
       StatusCode:
         type: integer
         format: int64
