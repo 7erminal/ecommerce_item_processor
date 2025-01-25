@@ -617,12 +617,28 @@ func (c *ItemsController) GetItemStats() {
 	branchidStr := c.Ctx.Input.Param(":branch_id")
 	branchid, _ := strconv.ParseInt(branchidStr, 0, 64)
 
+	stats := responses.StatsDTO{}
 	itemCategoryStats := []models.ItemsCategoryCountDTO{}
-	if r, err := models.GetItemsCategoryStatsByBranch(branchid); err == nil {
+	itemBranchStats := []models.ItemsCategoryCountDTO{}
+
+	if r, err := models.GetItemsStatsByCategory(); err == nil {
 		itemCategoryStats = *r
 	}
 
-	resp := responses.ItemsStatsResponseDTO{StatusCode: 200, Stats: &itemCategoryStats, StatusDesc: "Successfully fetched stats"}
+	stats.CategoryStats = &itemCategoryStats
+
+	if r, err := models.GetItemsCategoryStatsByBranch(branchid); err == nil {
+		// for _, a := range *r {
+		// 	itemCategoryStats = append(itemCategoryStats, a)
+		// }
+		// itemCategoryStats = append(itemCategoryStats, *r...)
+
+		itemBranchStats = *r
+	}
+
+	stats.BranchStats = &itemBranchStats
+
+	resp := responses.ItemsStatsResponseDTO{StatusCode: 200, Stats: &stats, StatusDesc: "Successfully fetched stats"}
 	c.Data["json"] = resp
 
 	c.ServeJSON()

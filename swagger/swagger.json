@@ -1948,8 +1948,12 @@
         }
     },
     "definitions": {
-        "1377.\u003cnil\u003e.0x14000743b00": {
-            "title": "0x14000743b00",
+        "1231.\u003cnil\u003e.0x140007f2408": {
+            "title": "0x140007f2408",
+            "type": "object"
+        },
+        "1278.\u003cnil\u003e.0x140007f2438": {
+            "title": "0x140007f2438",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -1960,7 +1964,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "63977.\u003cnil\u003e.Items": {
+        "64271.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2595,7 +2599,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/63977.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/64271.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2878,7 +2882,7 @@
             "type": "object",
             "properties": {
                 "Stats": {
-                    "$ref": "#/definitions/1377.\u003cnil\u003e.0x14000743b00"
+                    "$ref": "#/definitions/responses.StatsDTO"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2886,6 +2890,18 @@
                 },
                 "StatusDesc": {
                     "type": "string"
+                }
+            }
+        },
+        "responses.StatsDTO": {
+            "title": "StatsDTO",
+            "type": "object",
+            "properties": {
+                "BranchStats": {
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007f2408"
+                },
+                "CategoryStats": {
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007f2438"
                 }
             }
         }

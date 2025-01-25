@@ -84,7 +84,7 @@ func GetItemsStatsByCategory() (count_ *[]ItemsCategoryCountDTO, err error) {
 
 	sql := `
         SELECT c.category_name, COUNT(i.item_id) itemCount
-        FROM items i, categories c where i.category_id = c.category_id
+        FROM categories c LEFT JOIN items i ON c.category_id = i.category_id
         GROUP BY c.category_name
     `
 	var results []ItemsCategoryCountDTO
@@ -95,6 +95,13 @@ func GetItemsStatsByCategory() (count_ *[]ItemsCategoryCountDTO, err error) {
 		// }
 		return &results, nil
 	}
+	// if _, err := o.QueryTable(new(Categories)).RelatedSel().All(results); err == nil {
+	// 	logs.Info("Results:: ", results)
+	// 	// for _, result := range results {
+	// 	// 	logs.Info("Data fetched is ", result.Branch, " :: ", result.ItemCount)
+	// 	// }
+	// 	return &results, nil
+	// }
 	return nil, err
 }
 

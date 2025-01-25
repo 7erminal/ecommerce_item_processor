@@ -19,7 +19,7 @@ type StatsDTO struct {
 
 type ItemsStatsResponseDTO struct {
 	StatusCode int
-	Stats      *[]models.ItemsCategoryCountDTO
+	Stats      *StatsDTO
 	StatusDesc string
 }
 
