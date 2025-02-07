@@ -118,6 +118,16 @@ func GetItemsStatsByCategory() (count_ *[]ItemsCategoryCountDTO, err error) {
 
 // GetItemsById retrieves Items by Id. Returns error if
 // Id doesn't exist
+func GetItemCount() (c int64, err error) {
+	o := orm.NewOrm()
+	if c, err = o.QueryTable(new(Items)).Count(); err == nil {
+		return c, nil
+	}
+	return 0, err
+}
+
+// GetItemsById retrieves Items by Id. Returns error if
+// Id doesn't exist
 func GetItemsById(id int64) (v *Items, err error) {
 	o := orm.NewOrm()
 	v = &Items{ItemId: id}
@@ -233,7 +243,7 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 
 	var l []Items
 	qs = qs.OrderBy(sortFields...).RelatedSel()
-	if _, err = qs.All(&l, fields...); err == nil {
+	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
 			for _, v := range l {
 				ml = append(ml, v)

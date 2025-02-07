@@ -1472,6 +1472,35 @@
                 }
             }
         },
+        "/items/count/": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get Item_quantity by Item id\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Quantity",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/responses.StringResponseDTO"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
         "/items/features/feature/{id}": {
             "get": {
                 "tags": [
@@ -1948,12 +1977,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x1400072c318": {
-            "title": "0x1400072c318",
+        "1231.\u003cnil\u003e.0x1400071d860": {
+            "title": "0x1400071d860",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x1400072c348": {
-            "title": "0x1400072c348",
+        "1278.\u003cnil\u003e.0x1400071d890": {
+            "title": "0x1400071d890",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -1964,7 +1993,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "64271.\u003cnil\u003e.Items": {
+        "64527.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2599,7 +2628,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/64271.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/64527.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2898,10 +2927,26 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x1400072c318"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x1400071d860"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x1400072c348"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x1400071d890"
+                }
+            }
+        },
+        "responses.StringResponseDTO": {
+            "title": "StringResponseDTO",
+            "type": "object",
+            "properties": {
+                "StatusCode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "StatusDesc": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": "string"
                 }
             }
         }

@@ -164,6 +164,28 @@ func (c *ItemsController) GetItemQuantity() {
 	c.ServeJSON()
 }
 
+// GetItemCount ...
+// @Title Get Item Quantity
+// @Description get Item_quantity by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} responses.StringResponseDTO
+// @Failure 403 :id is empty
+// @router /count/ [get]
+func (c *ItemsController) GetItemCount() {
+	// q, err := models.GetItemsById(id)
+	v, err := models.GetItemCount()
+	count := strconv.FormatInt(v, 10)
+	if err != nil {
+		logs.Error("Error fetching count of items ... ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: count, StatusDesc: "Count fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
 // // GetItemFeaturesByItem ...
 // // @Title Get Item Features by item
 // // @Description get Item_features by Item id
@@ -268,7 +290,7 @@ func (c *ItemsController) GetAll() {
 	var sortby []string
 	var order []string
 	var query = make(map[string]string)
-	var limit int64 = 10
+	var limit int64 = 100
 	var offset int64
 
 	// fields: col1,col2,entity.col3
@@ -304,6 +326,8 @@ func (c *ItemsController) GetAll() {
 			query[k] = v
 		}
 	}
+
+	logs.Info("Limit being sent is ", limit)
 
 	l, err := models.GetAllItems(query, fields, sortby, order, offset, limit)
 	if err != nil {
