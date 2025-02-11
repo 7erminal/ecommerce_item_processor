@@ -110,6 +110,30 @@ func (c *FeaturesController) GetOne() {
 	c.ServeJSON()
 }
 
+// GetOne ...
+// @Title Get One
+// @Description get Features by id
+// @Param	body		body 	requests.StringRequestDTO	true		"body for Features content"
+// @Success 200 {object} models.Features
+// @Failure 403 :id is empty
+// @router /name [post]
+func (c *FeaturesController) GetOneByName() {
+	logs.Info("Getting one by name ")
+	var t requests.StringRequestDTO
+	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+
+	v, err := models.GetFeaturesByName(t.Value)
+	if err != nil {
+		var resp = models.FeatureResponseDTO{StatusCode: 301, Feature: nil, StatusDesc: "Error fetching feature"}
+		logs.Info("Error fetching feature ", err.Error())
+		c.Data["json"] = resp
+	} else {
+		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: v, StatusDesc: "Feature fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
 // GetAllFeaturesAndTheirItems ...
 // @Title Get All Features and their items
 // @Description get Features
@@ -257,9 +281,12 @@ func (c *FeaturesController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	if err := models.DeleteFeatures(id); err == nil {
-		c.Data["json"] = "OK"
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "OK"}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error("An error occurred while deleting ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DELETING"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

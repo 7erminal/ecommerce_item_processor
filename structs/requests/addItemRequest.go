@@ -11,6 +11,7 @@ type AddItemRequest struct {
 	QuantityAlert   int
 	ItemPrice       float32
 	AltItemPrice    float32
+	ExtraCharges    float32
 	Country         string
 	Branch          int64
 	CreatedBy       int

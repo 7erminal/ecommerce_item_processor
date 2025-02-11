@@ -124,6 +124,15 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"],
+        beego.ControllerComments{
+            Method: "GetOneByName",
+            Router: "/name",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["item_processor/controllers:Item_featuresController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_featuresController"],
         beego.ControllerComments{
             Method: "Post",

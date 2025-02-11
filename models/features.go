@@ -46,6 +46,17 @@ func GetFeaturesById(id int64) (v *Features, err error) {
 	return nil, err
 }
 
+// GetFeaturesById retrieves Features by Id. Returns error if
+// Id doesn't exist
+func GetFeaturesByName(name string) (v *Features, err error) {
+	o := orm.NewOrm()
+	v = &Features{FeatureName: name}
+	if err = o.QueryTable(new(Features)).Filter("FeatureName", name).RelatedSel().One(v); err == nil {
+		return v, nil
+	}
+	return nil, err
+}
+
 // GetItemsByFeatureId retrieves Items by Feature Id. Returns error if
 // Feature Id doesn't exist
 func GetAllFeaturesWithTheirItems() (v []orm.Params, err error) {

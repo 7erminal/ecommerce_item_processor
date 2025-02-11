@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/responses"
 	"strconv"
 	"strings"
 
@@ -233,9 +234,12 @@ func (c *Item_featuresController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	if err := models.DeleteItem_features(id); err == nil {
-		c.Data["json"] = "OK"
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "OK"}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error("An error occurred while deleting ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DELETING"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

@@ -17,6 +17,7 @@ type Item_prices struct {
 	ShowAltPrice  bool
 	Discount      string
 	Discount_type string
+	ExtraCharges  float32
 	Currency      *Currencies `orm:"rel(fk)"`
 	Active        int
 	DateCreated   time.Time `orm:"type(datetime)"`

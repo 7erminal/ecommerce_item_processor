@@ -371,6 +371,37 @@
                 }
             }
         },
+        "/features/name": {
+            "post": {
+                "tags": [
+                    "features"
+                ],
+                "description": "get Features by id\n\u003cbr\u003e",
+                "operationId": "FeaturesController.Get One",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Features content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.StringRequestDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Features"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
         "/features/{id}": {
             "get": {
                 "tags": [
@@ -1977,12 +2008,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x1400071d860": {
-            "title": "0x1400071d860",
+        "1231.\u003cnil\u003e.0x140007abd28": {
+            "title": "0x140007abd28",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x1400071d890": {
-            "title": "0x1400071d890",
+        "1278.\u003cnil\u003e.0x140007abd58": {
+            "title": "0x140007abd58",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -1993,7 +2024,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "64527.\u003cnil\u003e.Items": {
+        "64887.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2371,6 +2402,10 @@
                 "Discount_type": {
                     "type": "string"
                 },
+                "ExtraCharges": {
+                    "type": "number",
+                    "format": "float"
+                },
                 "ItemPrice": {
                     "type": "number",
                     "format": "float"
@@ -2628,7 +2663,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/64527.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/64887.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2847,6 +2882,10 @@
                 "Description": {
                     "type": "string"
                 },
+                "ExtraCharges": {
+                    "type": "number",
+                    "format": "float"
+                },
                 "ItemName": {
                     "type": "string"
                 },
@@ -2893,6 +2932,15 @@
                 }
             }
         },
+        "requests.StringRequestDTO": {
+            "title": "StringRequestDTO",
+            "type": "object",
+            "properties": {
+                "Value": {
+                    "type": "string"
+                }
+            }
+        },
         "requests.VisibilityRequestDTO": {
             "title": "VisibilityRequestDTO",
             "type": "object",
@@ -2927,10 +2975,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x1400071d860"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007abd28"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x1400071d890"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007abd58"
                 }
             }
         },
