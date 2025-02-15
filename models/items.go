@@ -128,6 +128,26 @@ func GetItemCount() (c int64, err error) {
 
 // GetItemsById retrieves Items by Id. Returns error if
 // Id doesn't exist
+func GetItemCountByType(catname string) (c int64, err error) {
+	o := orm.NewOrm()
+	if c, err = o.QueryTable(new(Items)).Filter("Category__category_name", catname).Count(); err == nil {
+		return c, nil
+	}
+	return 0, err
+}
+
+// GetItemsById retrieves Items by Id. Returns error if
+// Id doesn't exist
+func GetItemCountByTypeAndBranch(catname string, branch string) (c int64, err error) {
+	o := orm.NewOrm()
+	if c, err = o.QueryTable(new(Items)).Filter("Category__category_name", catname).Filter("Branch__branch_id", branch).Count(); err == nil {
+		return c, nil
+	}
+	return 0, err
+}
+
+// GetItemsById retrieves Items by Id. Returns error if
+// Id doesn't exist
 func GetItemsById(id int64) (v *Items, err error) {
 	o := orm.NewOrm()
 	v = &Items{ItemId: id}

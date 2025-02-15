@@ -16,3 +16,8 @@ type AddItemRequest struct {
 	Branch          int64
 	CreatedBy       int
 }
+
+type GetItemCount struct {
+	Category string
+	Branch   string
+}

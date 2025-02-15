@@ -34,6 +34,9 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("UpdateItemImage", c.UpdateItemImage)
 	c.Mapping("GetItemStats", c.GetItemStats)
 	c.Mapping("GetAllByBranch", c.GetAllByBranch)
+	c.Mapping("GetItemCountByTypeAndBranch", c.GetItemCountByTypeAndBranch)
+	c.Mapping("GetItemCountByType", c.GetItemCountByType)
+	c.Mapping("GetItemCount", c.GetItemCount)
 }
 
 // Post ...
@@ -174,6 +177,57 @@ func (c *ItemsController) GetItemQuantity() {
 func (c *ItemsController) GetItemCount() {
 	// q, err := models.GetItemsById(id)
 	v, err := models.GetItemCount()
+	count := strconv.FormatInt(v, 10)
+	if err != nil {
+		logs.Error("Error fetching count of items ... ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: count, StatusDesc: "Count fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemCountByType ...
+// @Title Get Item Quantity
+// @Description get Item_quantity by Item id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} responses.StringResponseDTO
+// @Failure 403 :id is empty
+// @router /count/type/:name [get]
+func (c *ItemsController) GetItemCountByType() {
+	// q, err := models.GetItemsById(id)
+	name := c.Ctx.Input.Param(":name")
+
+	v, err := models.GetItemCountByType(name)
+	count := strconv.FormatInt(v, 10)
+	if err != nil {
+		logs.Error("Error fetching count of items ... ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: count, StatusDesc: "Count fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemCountByType ...
+// @Title Get Item Quantity
+// @Description get Item_quantity by Item id
+// @Param	body		body 	requests.GetItemCount	true		"body for Items content"
+// @Success 200 {object} responses.StringResponseDTO
+// @Failure 403 :id is empty
+// @router /count/type [post]
+func (c *ItemsController) GetItemCountByTypeAndBranch() {
+	// q, err := models.GetItemsById(id)
+	var t requests.GetItemCount
+	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+
+	logs.Info("Category is ", t.Category, " and branch is ", t.Branch)
+
+	v, err := models.GetItemCountByTypeAndBranch(t.Category, t.Branch)
 	count := strconv.FormatInt(v, 10)
 	if err != nil {
 		logs.Error("Error fetching count of items ... ", err.Error())

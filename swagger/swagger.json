@@ -1532,6 +1532,66 @@
                 }
             }
         },
+        "/items/count/type": {
+            "post": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get Item_quantity by Item id\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Quantity",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Items content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.GetItemCount"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/responses.StringResponseDTO"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
+        "/items/count/type/{name}": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get Item_quantity by Item id\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Quantity",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/responses.StringResponseDTO"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            }
+        },
         "/items/features/feature/{id}": {
             "get": {
                 "tags": [
@@ -2008,12 +2068,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x140007abd28": {
-            "title": "0x140007abd28",
+        "1231.\u003cnil\u003e.0x14000735a10": {
+            "title": "0x14000735a10",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x140007abd58": {
-            "title": "0x140007abd58",
+        "1278.\u003cnil\u003e.0x14000735a40": {
+            "title": "0x14000735a40",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2024,7 +2084,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "64887.\u003cnil\u003e.Items": {
+        "65543.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2663,7 +2723,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/64887.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/65543.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2923,6 +2983,18 @@
                 }
             }
         },
+        "requests.GetItemCount": {
+            "title": "GetItemCount",
+            "type": "object",
+            "properties": {
+                "Branch": {
+                    "type": "string"
+                },
+                "Category": {
+                    "type": "string"
+                }
+            }
+        },
         "requests.ImageUpdateRequest": {
             "title": "ImageUpdateRequest",
             "type": "object",
@@ -2975,10 +3047,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007abd28"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x14000735a10"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007abd58"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x14000735a40"
                 }
             }
         },

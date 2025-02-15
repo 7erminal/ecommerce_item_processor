@@ -1172,6 +1172,49 @@ paths:
             $ref: '#/definitions/responses.StringResponseDTO'
         "403":
           description: :id is empty
+  /items/count/type:
+    post:
+      tags:
+      - items
+      description: |-
+        get Item_quantity by Item id
+        <br>
+      operationId: ItemsController.Get Item Quantity
+      parameters:
+      - in: body
+        name: body
+        description: body for Items content
+        required: true
+        schema:
+          $ref: '#/definitions/requests.GetItemCount'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/responses.StringResponseDTO'
+        "403":
+          description: :id is empty
+  /items/count/type/{name}:
+    get:
+      tags:
+      - items
+      description: |-
+        get Item_quantity by Item id
+        <br>
+      operationId: ItemsController.Get Item Quantity
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/responses.StringResponseDTO'
+        "403":
+          description: :id is empty
   /items/features/feature/{id}:
     get:
       tags:
@@ -1454,16 +1497,16 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x140007abd28:
-    title: "0x140007abd28"
+  1231.<nil>.0x14000735a10:
+    title: "0x14000735a10"
     type: object
-  1278.<nil>.0x140007abd58:
-    title: "0x140007abd58"
+  1278.<nil>.0x14000735a40:
+    title: "0x14000735a40"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  64887.<nil>.Items:
+  65543.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1921,7 +1964,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/64887.<nil>.Items'
+        $ref: '#/definitions/65543.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2102,6 +2145,14 @@ definitions:
       ReviewBy:
         type: integer
         format: int64
+  requests.GetItemCount:
+    title: GetItemCount
+    type: object
+    properties:
+      Branch:
+        type: string
+      Category:
+        type: string
   requests.ImageUpdateRequest:
     title: ImageUpdateRequest
     type: object
@@ -2139,9 +2190,9 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x140007abd28'
+        $ref: '#/definitions/1231.<nil>.0x14000735a10'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x140007abd58'
+        $ref: '#/definitions/1278.<nil>.0x14000735a40'
   responses.StringResponseDTO:
     title: StringResponseDTO
     type: object
