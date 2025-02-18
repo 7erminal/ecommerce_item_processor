@@ -1497,11 +1497,11 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x14000735a10:
-    title: "0x14000735a10"
+  1231.<nil>.0x140006f3da0:
+    title: "0x140006f3da0"
     type: object
-  1278.<nil>.0x14000735a40:
-    title: "0x14000735a40"
+  1278.<nil>.0x140006f3dd0:
+    title: "0x140006f3dd0"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
@@ -2190,9 +2190,9 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x14000735a10'
+        $ref: '#/definitions/1231.<nil>.0x140006f3da0'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x14000735a40'
+        $ref: '#/definitions/1278.<nil>.0x140006f3dd0'
   responses.StringResponseDTO:
     title: StringResponseDTO
     type: object
