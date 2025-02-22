@@ -15,6 +15,7 @@ type Item_quantity struct {
 	ItemQuantityId int64  `orm:"auto"`
 	Item           *Items `orm:"rel(fk)"`
 	Quantity       int
+	QuantityAlert  int `orm:"omitempty"`
 	Active         int
 	DateCreated    time.Time `orm:"type(datetime)"`
 	DateModified   time.Time `orm:"type(datetime)"`

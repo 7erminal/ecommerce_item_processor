@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	"item_processor/controllers/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
 	"item_processor/structs/responses"
@@ -37,6 +38,7 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("GetItemCountByTypeAndBranch", c.GetItemCountByTypeAndBranch)
 	c.Mapping("GetItemCountByType", c.GetItemCountByType)
 	c.Mapping("GetItemCount", c.GetItemCount)
+	c.Mapping("CheckItemQuantity", c.CheckItemQuantity)
 }
 
 // Post ...
@@ -76,11 +78,11 @@ func (c *ItemsController) Post() {
 				branch, _ := models.GetBranchesById(t.Branch)
 
 				// Add item if getting category and price addition does not result in an error
-				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Country: country, Branch: branch, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
+				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country, Branch: branch, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator}
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item
-					qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+					qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 					if _, err := models.AddItem_quantity(&qu); err == nil {
 						c.Ctx.Output.SetStatus(200)
@@ -522,7 +524,7 @@ func (c *ItemsController) Put() {
 							if err != nil {
 								resp := models.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
 								c.Data["json"] = resp
-								qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+								qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 								if _, err := models.AddItem_quantity(&qu); err == nil {
 									c.Ctx.Output.SetStatus(200)
 
@@ -534,7 +536,7 @@ func (c *ItemsController) Put() {
 									c.Data["json"] = resp
 								}
 							} else {
-								qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
+								qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
 
 								if err := models.UpdateItem_quantityById(&qu); err == nil {
 									c.Ctx.Output.SetStatus(200)
@@ -718,6 +720,33 @@ func (c *ItemsController) GetItemStats() {
 
 	resp := responses.ItemsStatsResponseDTO{StatusCode: 200, Stats: &stats, StatusDesc: "Successfully fetched stats"}
 	c.Data["json"] = resp
+
+	c.ServeJSON()
+}
+
+// CheckItemQuantity ...
+// @Title Check Item Quantity
+// @Description check item quantity
+// @Param	item_id		path 	string	true		"The id you want to update"
+// @Success 200 {object} responses.StringResponseFDTO
+// @Failure 403 wrong request
+// @router /check-item-quantity/:item_id [get]
+func (c *ItemsController) CheckItemQuantity() {
+	logs.Info("Getting item stats")
+	itemidStr := c.Ctx.Input.Param(":item_id")
+	itemid, _ := strconv.ParseInt(itemidStr, 0, 64)
+
+	if item, err := models.GetItemsById(itemid); err == nil {
+		functions.CheckItemCount(item.ItemId, item.ItemName)
+
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: "OK", StatusDesc: "Successfully fetched stats"}
+		c.Data["json"] = resp
+	} else {
+		logs.Error("Error getting item ", err.Error())
+
+		resp := responses.StringResponseDTO{StatusCode: 608, Value: "ERROR", StatusDesc: "Notification send failed"}
+		c.Data["json"] = resp
+	}
 
 	c.ServeJSON()
 }

@@ -7,6 +7,7 @@ type ItemsDTO struct {
 	AvailableSizes  []string `orm:"size(250)"`
 	AvailableColors []string `orm:"size(250)"`
 	Quantity        int
+	QuantityAlert   int
 	ItemPrice       float32
 	AltPrice        float32
 	Country         string

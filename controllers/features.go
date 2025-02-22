@@ -30,6 +30,7 @@ func (c *FeaturesController) URLMapping() {
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
 	c.Mapping("GetAllFeaturesAndTheirItems", c.GetAllFeaturesAndTheirItems)
+	c.Mapping("GetOneByName", c.GetOneByName)
 }
 
 // Post ...
@@ -77,7 +78,7 @@ func (c *FeaturesController) Post() {
 	v := models.Features{FeatureName: c.Ctx.Input.Query("FeatureName"), ImagePath: filePath, Description: c.Ctx.Input.Query("Description"), Active: 1, CreatedBy: 1}
 
 	if _, err := models.AddFeatures(&v); err == nil {
-		c.Ctx.Output.SetStatus(201)
+		c.Ctx.Output.SetStatus(200)
 
 		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: &v, StatusDesc: "Feature has been added successfully"}
 		c.Data["json"] = resp
@@ -128,6 +129,7 @@ func (c *FeaturesController) GetOneByName() {
 		logs.Info("Error fetching feature ", err.Error())
 		c.Data["json"] = resp
 	} else {
+		logs.Info("Features fetched:: ", v)
 		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: v, StatusDesc: "Feature fetched successfully"}
 		c.Data["json"] = resp
 	}
@@ -175,7 +177,7 @@ func (c *FeaturesController) GetAll() {
 	var sortby []string
 	var order []string
 	var query = make(map[string]string)
-	var limit int64 = 10
+	var limit int64 = 500
 	var offset int64
 
 	// fields: col1,col2,entity.col3

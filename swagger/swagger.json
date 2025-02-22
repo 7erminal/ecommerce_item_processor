@@ -1503,6 +1503,35 @@
                 }
             }
         },
+        "/items/check-item-quantity/{item_id}": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "check item quantity\n\u003cbr\u003e",
+                "operationId": "ItemsController.Check Item Quantity",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "item_id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/responses.StringResponseFDTO"
+                        }
+                    },
+                    "403": {
+                        "description": "wrong request"
+                    }
+                }
+            }
+        },
         "/items/count/": {
             "get": {
                 "tags": [
@@ -2068,12 +2097,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x140006f3da0": {
-            "title": "0x140006f3da0",
+        "1231.\u003cnil\u003e.0x1400085e150": {
+            "title": "0x1400085e150",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x140006f3dd0": {
-            "title": "0x140006f3dd0",
+        "1278.\u003cnil\u003e.0x1400085e180": {
+            "title": "0x1400085e180",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2084,7 +2113,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "65543.\u003cnil\u003e.Items": {
+        "65554.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2553,6 +2582,10 @@
                 "Quantity": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "QuantityAlert": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -2658,10 +2691,6 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "QuantityAlert": {
-                    "type": "integer",
-                    "format": "int64"
-                },
                 "Weight": {
                     "type": "string"
                 }
@@ -2715,6 +2744,10 @@
                 "Quantity": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "QuantityAlert": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -2723,7 +2756,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/65543.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/65554.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -3047,15 +3080,31 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140006f3da0"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x1400085e150"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140006f3dd0"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x1400085e180"
                 }
             }
         },
         "responses.StringResponseDTO": {
             "title": "StringResponseDTO",
+            "type": "object",
+            "properties": {
+                "StatusCode": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "StatusDesc": {
+                    "type": "string"
+                },
+                "Value": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.StringResponseFDTO": {
+            "title": "StringResponseFDTO",
             "type": "object",
             "properties": {
                 "StatusCode": {

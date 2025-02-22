@@ -513,6 +513,15 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
+            Method: "CheckItemQuantity",
+            Router: "/check-item-quantity/:item_id",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
+        beego.ControllerComments{
             Method: "GetItemCount",
             Router: "/count/",
             AllowHTTPMethods: []string{"get"},

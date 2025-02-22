@@ -1151,6 +1151,27 @@ paths:
             $ref: '#/definitions/models.ItemsResponseDTO2'
         "403":
           description: :id is empty
+  /items/check-item-quantity/{item_id}:
+    get:
+      tags:
+      - items
+      description: |-
+        check item quantity
+        <br>
+      operationId: ItemsController.Check Item Quantity
+      parameters:
+      - in: path
+        name: item_id
+        description: The id you want to update
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/responses.StringResponseFDTO'
+        "403":
+          description: wrong request
   /items/count/:
     get:
       tags:
@@ -1497,16 +1518,16 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x140006f3da0:
-    title: "0x140006f3da0"
+  1231.<nil>.0x1400085e150:
+    title: "0x1400085e150"
     type: object
-  1278.<nil>.0x140006f3dd0:
-    title: "0x140006f3dd0"
+  1278.<nil>.0x1400085e180:
+    title: "0x1400085e180"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  65543.<nil>.Items:
+  65554.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1795,6 +1816,9 @@ definitions:
       Quantity:
         type: integer
         format: int64
+      QuantityAlert:
+        type: integer
+        format: int64
   models.Item_reviews:
     title: Item_reviews
     type: object
@@ -1918,9 +1942,6 @@ definitions:
       Quantity:
         type: integer
         format: int64
-      QuantityAlert:
-        type: integer
-        format: int64
       Weight:
         type: string
   models.ItemsDTO:
@@ -1959,12 +1980,15 @@ definitions:
       Quantity:
         type: integer
         format: int64
+      QuantityAlert:
+        type: integer
+        format: int64
   models.ItemsResponseDTO2:
     title: ItemsResponseDTO2
     type: object
     properties:
       Items:
-        $ref: '#/definitions/65543.<nil>.Items'
+        $ref: '#/definitions/65554.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2190,11 +2214,22 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x140006f3da0'
+        $ref: '#/definitions/1231.<nil>.0x1400085e150'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x140006f3dd0'
+        $ref: '#/definitions/1278.<nil>.0x1400085e180'
   responses.StringResponseDTO:
     title: StringResponseDTO
+    type: object
+    properties:
+      StatusCode:
+        type: integer
+        format: int64
+      StatusDesc:
+        type: string
+      Value:
+        type: string
+  responses.StringResponseFDTO:
+    title: StringResponseFDTO
     type: object
     properties:
       StatusCode:
