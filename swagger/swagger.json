@@ -1341,6 +1341,12 @@
                     },
                     {
                         "in": "query",
+                        "name": "search",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
                         "name": "fields",
                         "description": "Fields returned. e.g. col1,col2 ...",
                         "type": "string"
@@ -1545,6 +1551,18 @@
                         "name": "id",
                         "description": "The key for staticblock",
                         "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
                         "type": "string"
                     }
                 ],
@@ -2097,12 +2115,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x1400085e150": {
-            "title": "0x1400085e150",
+        "1231.\u003cnil\u003e.0x140007e4738": {
+            "title": "0x140007e4738",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x1400085e180": {
-            "title": "0x1400085e180",
+        "1278.\u003cnil\u003e.0x140007e4768": {
+            "title": "0x140007e4768",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2113,7 +2131,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "65554.\u003cnil\u003e.Items": {
+        "66928.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2756,7 +2774,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/65554.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/66928.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -3080,10 +3098,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x1400085e150"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007e4738"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x1400085e180"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007e4768"
                 }
             }
         },
