@@ -442,6 +442,7 @@ func (c *ItemsController) GetAll() {
 		if l == nil {
 			l = []interface{}{}
 		}
+		logs.Info("Items returned are ", l)
 		resp := models.ItemsResponseDTO{StatusCode: 200, Items: &l, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
