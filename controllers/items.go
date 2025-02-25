@@ -432,7 +432,7 @@ func (c *ItemsController) GetAll() {
 		}
 	}
 
-	logs.Info("Limit being sent is ", limit)
+	logs.Info("Limit being sent is ", limit, " query is ", query, " and search is ", search)
 
 	l, err := models.GetAllItems(query, fields, sortby, order, offset, limit, search)
 	if err != nil {
