@@ -182,6 +182,7 @@ func (c *ItemsController) GetItemCount() {
 	// q, err := models.GetItemsById(id)
 	var query = make(map[string]string)
 	var search = make(map[string]string)
+	logs.Info("Getting count")
 
 	// query: k:v,k:v
 	if v := c.GetString("query"); v != "" {
@@ -383,6 +384,8 @@ func (c *ItemsController) GetAll() {
 	var search = make(map[string]string)
 	var limit int64 = 100
 	var offset int64
+
+	logs.Info("Getting all items")
 
 	// fields: col1,col2,entity.col3
 	if v := c.GetString("fields"); v != "" {

@@ -120,20 +120,6 @@ func GetItemsStatsByCategory() (count_ *[]ItemsCategoryCountDTO, err error) {
 func GetItemCount(query map[string]string, search map[string]string) (c int64, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(Items))
-	if len(query) > 0 {
-		cond := orm.NewCondition()
-		for k, v := range query {
-			// rewrite dot-notation to Object__Attribute
-			k = strings.Replace(k, ".", "__", -1)
-			if strings.Contains(k, "isnull") {
-				qs = qs.Filter(k, (v == "true" || v == "1"))
-			} else {
-				// qs = qs.Filter(k, v)
-				cond = cond.Or(k+"__icontains", v)
-			}
-		}
-		qs = qs.SetCond(cond)
-	}
 
 	if len(search) > 0 {
 		cond := orm.NewCondition()
@@ -154,7 +140,17 @@ func GetItemCount(query map[string]string, search map[string]string) (c int64, e
 		qs = qs.SetCond(cond)
 	}
 
-	if c, err = qs.Count(); err == nil {
+	if len(query) > 0 {
+		for k, v := range query {
+			// rewrite dot-notation to Object__Attribute
+			k = strings.Replace(k, ".", "__", -1)
+			qs = qs.Filter(k, v)
+		}
+	}
+
+	logs.Info("Query is ", query, " and search is ", search)
+
+	if c, err = qs.RelatedSel().Count(); err == nil {
 		return c, nil
 	}
 	return 0, err
@@ -250,12 +246,8 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 	offset int64, limit int64, search map[string]string) (ml []interface{}, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(Items))
-	// query k=v
-	for k, v := range query {
-		// rewrite dot-notation to Object__Attribute
-		k = strings.Replace(k, ".", "__", -1)
-		qs = qs.Filter(k, v)
-	}
+
+	logs.Info("Getting items query")
 
 	if len(search) > 0 {
 		cond := orm.NewCondition()
@@ -275,6 +267,15 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 		logs.Info("Condition set ", qs)
 		qs = qs.SetCond(cond)
 	}
+
+	// query k=v
+	for k, v := range query {
+		// rewrite dot-notation to Object__Attribute
+		k = strings.Replace(k, ".", "__", -1)
+		qs = qs.Filter(k, v)
+	}
+
+	logs.Info("Query is ", query, " and search is ", search)
 
 	// order by:
 	var sortFields []string
