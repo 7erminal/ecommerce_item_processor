@@ -144,7 +144,8 @@ func (c *Item_imagesController) UploadPictures() {
 	filePath := "/uploads/items/" + time.Now().Format("20060102150405") + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
 	err = c.SaveToFile("Image", "../images"+filePath)
-	if err != nil {
+	if err != nil || header.Size < 1 {
+		filePath = ""
 		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
 		logs.Error("Error saving file", err)
 		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
