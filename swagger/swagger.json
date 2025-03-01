@@ -2115,12 +2115,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x140007ce4b0": {
-            "title": "0x140007ce4b0",
+        "1231.\u003cnil\u003e.0x140007b6fd8": {
+            "title": "0x140007b6fd8",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x140007ce4e0": {
-            "title": "0x140007ce4e0",
+        "1278.\u003cnil\u003e.0x140007b7008": {
+            "title": "0x140007b7008",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -3098,10 +3098,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007ce4b0"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007b6fd8"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007ce4e0"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007b7008"
                 }
             }
         },
