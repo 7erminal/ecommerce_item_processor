@@ -1415,6 +1415,40 @@
                 }
             }
         },
+        "/items/branch-and-category/count": {
+            "get": {
+                "tags": [
+                    "items"
+                ],
+                "description": "get item count by type and branch\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Count by Type and Branch",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "search",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/responses.StringResponseDTO"
+                        }
+                    },
+                    "403": {
+                        "description": "an error occurred"
+                    }
+                }
+            }
+        },
         "/items/branch/{branch_id}": {
             "get": {
                 "tags": [
@@ -1584,8 +1618,8 @@
                 "tags": [
                     "items"
                 ],
-                "description": "get Item_quantity by Item id\n\u003cbr\u003e",
-                "operationId": "ItemsController.Get Item Quantity",
+                "description": "get item count with type and branch\n\u003cbr\u003e",
+                "operationId": "ItemsController.Get Item Count with type and branch",
                 "parameters": [
                     {
                         "in": "body",
@@ -2115,12 +2149,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x140007b6fd8": {
-            "title": "0x140007b6fd8",
+        "1231.\u003cnil\u003e.0x14000800348": {
+            "title": "0x14000800348",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x140007b7008": {
-            "title": "0x140007b7008",
+        "1278.\u003cnil\u003e.0x14000800378": {
+            "title": "0x14000800378",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2131,7 +2165,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "66896.\u003cnil\u003e.Items": {
+        "68484.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2774,7 +2808,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/66896.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/68484.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -3098,10 +3132,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007b6fd8"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x14000800348"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007b7008"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x14000800378"
                 }
             }
         },

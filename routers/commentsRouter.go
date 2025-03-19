@@ -495,6 +495,15 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
+            Method: "GetItemCountByTypeAndBranch",
+            Router: `/branch-and-category/count`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
+        beego.ControllerComments{
             Method: "GetAllByBranch",
             Router: `/branch/:branch_id`,
             AllowHTTPMethods: []string{"get"},
@@ -531,7 +540,7 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
-            Method: "GetItemCountByTypeAndBranch",
+            Method: "GetItemCountWithTypeAndBranch",
             Router: `/count/type`,
             AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),

@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"item_processor/controllers/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
@@ -39,6 +40,7 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("GetItemCountByType", c.GetItemCountByType)
 	c.Mapping("GetItemCount", c.GetItemCount)
 	c.Mapping("CheckItemQuantity", c.CheckItemQuantity)
+	c.Mapping("GetItemCountWithTypeAndBranch", c.GetItemCountWithTypeAndBranch)
 }
 
 // Post ...
@@ -249,21 +251,21 @@ func (c *ItemsController) GetItemCountByType() {
 	c.ServeJSON()
 }
 
-// GetItemCountByType ...
-// @Title Get Item Quantity
-// @Description get Item_quantity by Item id
+// GetItemCountWithTypeAndBranch ...
+// @Title Get Item Count with type and branch
+// @Description get item count with type and branch
 // @Param	body		body 	requests.GetItemCount	true		"body for Items content"
 // @Success 200 {object} responses.StringResponseDTO
 // @Failure 403 :id is empty
 // @router /count/type [post]
-func (c *ItemsController) GetItemCountByTypeAndBranch() {
+func (c *ItemsController) GetItemCountWithTypeAndBranch() {
 	// q, err := models.GetItemsById(id)
 	var t requests.GetItemCount
 	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
 
 	logs.Info("Category is ", t.Category, " and branch is ", t.Branch)
 
-	v, err := models.GetItemCountByTypeAndBranch(t.Category, t.Branch)
+	v, err := models.GetItemCountWithTypeAndBranch(t.Category, t.Branch)
 	count := strconv.FormatInt(v, 10)
 	if err != nil {
 		logs.Error("Error fetching count of items ... ", err.Error())
@@ -271,6 +273,67 @@ func (c *ItemsController) GetItemCountByTypeAndBranch() {
 		c.Data["json"] = resp
 	} else {
 		resp := responses.StringResponseDTO{StatusCode: 200, Value: count, StatusDesc: "Count fetched successfully"}
+		c.Data["json"] = resp
+	}
+	c.ServeJSON()
+}
+
+// GetItemCountByTypeAndBranch ...
+// @Title Get Item Count by Type and Branch
+// @Description get item count by type and branch
+// @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
+// @Param	search	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
+// @Success 200 {object} responses.StringResponseDTO
+// @Failure 403 an error occurred
+// @router /branch-and-category/count [get]
+func (c *ItemsController) GetItemCountByTypeAndBranch() {
+	// q, err := models.GetItemsById(id)
+	var query = make(map[string]string)
+	var search = make(map[string]string)
+	logs.Info("Getting count")
+
+	// query: k:v,k:v
+	if v := c.GetString("query"); v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
+	// search: k:v,k:v
+	if v := c.GetString("search"); v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid search key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			search[k] = v
+		}
+	}
+
+	z, err := models.GetItemCountByTypeAndBranch(query, search)
+
+	if err != nil {
+		logs.Error("Error fetching count of items ... ", err.Error())
+		resp := responses.ItemBranchCountResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		// v, err := z.(models.ItemBranchCountDTO)
+		// if !err {
+		// 	logs.Info("Item count by branch and stuff is ", )
+		// }
+		logs.Info("Item count by branch and stuff is ", z)
+		fmt.Printf("Value of v: %+v\n", z)
+		resp := responses.ItemBranchCountResponseDTO{StatusCode: 200, Result: z, StatusDesc: "Count fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

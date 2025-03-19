@@ -77,6 +77,7 @@ func (c *FeaturesController) Post() {
 
 	v := models.Features{FeatureName: c.Ctx.Input.Query("FeatureName"), ImagePath: filePath, Description: c.Ctx.Input.Query("Description"), Active: 1, CreatedBy: 1}
 
+	
 	if _, err := models.AddFeatures(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
 

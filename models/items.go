@@ -21,6 +21,12 @@ type ItemsCategoryCountDTO struct {
 	ItemCount int64  `orm:"column(itemCount)"`
 }
 
+type ItemBranchCountDTO struct {
+	Branch    string
+	Category  string
+	ItemCount int64
+}
+
 type Items struct {
 	ItemId          int64        `orm:"auto"`
 	ItemName        string       `orm:"size(80)"`
@@ -168,12 +174,63 @@ func GetItemCountByType(catname string) (c int64, err error) {
 
 // GetItemsById retrieves Items by Id. Returns error if
 // Id doesn't exist
-func GetItemCountByTypeAndBranch(catname string, branch string) (c int64, err error) {
+func GetItemCountWithTypeAndBranch(catname string, branch string) (c int64, err error) {
 	o := orm.NewOrm()
 	if c, err = o.QueryTable(new(Items)).Filter("Category__category_name", catname).Filter("Branch__branch_id", branch).Count(); err == nil {
 		return c, nil
 	}
 	return 0, err
+}
+
+// GetItemsById retrieves Items by Id. Returns error if
+// Id doesn't exist
+func GetItemCountByTypeAndBranch(query map[string]string, search map[string]string) (c *[]ItemBranchCountDTO, err error) {
+	o := orm.NewOrm()
+	qs := o.QueryTable(new(Items))
+
+	if len(search) > 0 {
+		cond := orm.NewCondition()
+		for k, v := range search {
+			// rewrite dot-notation to Object__Attribute
+			k = strings.Replace(k, ".", "__", -1)
+			if strings.Contains(k, "isnull") {
+				qs = qs.Filter(k, (v == "true" || v == "1"))
+			} else {
+				logs.Info("Adding or statement")
+				cond = cond.Or(k+"__icontains", v)
+
+				// qs = qs.Filter(k+"__icontains", v)
+
+			}
+		}
+		logs.Info("Condition set ", qs)
+		qs = qs.SetCond(cond)
+	}
+
+	if len(query) > 0 {
+		for k, v := range query {
+			// rewrite dot-notation to Object__Attribute
+			k = strings.Replace(k, ".", "__", -1)
+			qs = qs.Filter(k, v)
+		}
+	}
+
+	logs.Info("Query is ", query, " and search is ", search)
+
+	sql := `
+        SELECT c.category_name category, b.branch, COUNT(i.item_id) item_count
+        FROM categories c LEFT JOIN items i ON c.category_id = i.category_id LEFT JOIN branches b ON i.branch = b.branch_id
+        GROUP BY c.category_name, b.branch
+    `
+	var results []ItemBranchCountDTO
+	if _, err := o.Raw(sql).QueryRows(&results); err == nil {
+		logs.Info("Results:: ", results)
+		// for _, result := range results {
+		// 	logs.Info("Data fetched is ", result.Branch, " :: ", result.ItemCount)
+		// }
+		return &results, nil
+	}
+	return nil, err
 }
 
 // GetItemsById retrieves Items by Id. Returns error if

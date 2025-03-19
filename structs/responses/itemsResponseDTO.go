@@ -34,3 +34,15 @@ type ItemResponseDTO struct {
 	Item       *models.Items
 	StatusDesc string
 }
+
+type ItemBranchCountResponseDTO struct {
+	StatusCode int
+	Result     *[]models.ItemBranchCountDTO
+	StatusDesc string
+}
+
+type ItemBranchCountDTO struct {
+	Branch    string
+	Category  string
+	ItemCount int64
+}
