@@ -282,14 +282,14 @@ func (c *ItemsController) GetItemCountWithTypeAndBranch() {
 // @Title Get Item Count by Type and Branch
 // @Description get item count by type and branch
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
-// @Param	search	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
+// @Param	groupBy	query	string	false	"BRANCH or DEVICE"
 // @Success 200 {object} responses.StringResponseDTO
 // @Failure 403 an error occurred
 // @router /branch-and-category/count [get]
 func (c *ItemsController) GetItemCountByTypeAndBranch() {
 	// q, err := models.GetItemsById(id)
 	var query = make(map[string]string)
-	var search = make(map[string]string)
+	var groupBy string
 	logs.Info("Getting count")
 
 	// query: k:v,k:v
@@ -307,20 +307,13 @@ func (c *ItemsController) GetItemCountByTypeAndBranch() {
 	}
 
 	// search: k:v,k:v
-	if v := c.GetString("search"); v != "" {
-		for _, cond := range strings.Split(v, ",") {
-			kv := strings.SplitN(cond, ":", 2)
-			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid search key/value pair")
-				c.ServeJSON()
-				return
-			}
-			k, v := kv[0], kv[1]
-			search[k] = v
-		}
+	if v := c.GetString("groupBy"); v != "" {
+		groupBy = v
 	}
 
-	z, err := models.GetItemCountByTypeAndBranch(query, search)
+	logs.Info("Sending filters::: ", query)
+
+	z, err := models.GetItemCountByTypeAndBranch(query, groupBy)
 
 	if err != nil {
 		logs.Error("Error fetching count of items ... ", err.Error())

@@ -22,9 +22,9 @@ type ItemsCategoryCountDTO struct {
 }
 
 type ItemBranchCountDTO struct {
-	Branch    string
-	Category  string
-	ItemCount int64
+	GroupBy       string
+	Category      string
+	TotalQuantity int64
 }
 
 type Items struct {
@@ -184,46 +184,238 @@ func GetItemCountWithTypeAndBranch(catname string, branch string) (c int64, err 
 
 // GetItemsById retrieves Items by Id. Returns error if
 // Id doesn't exist
-func GetItemCountByTypeAndBranch(query map[string]string, search map[string]string) (c *[]ItemBranchCountDTO, err error) {
+func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]ItemBranchCountDTO, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Items))
+	// qs := o.QueryTable(new(Items))
 
-	if len(search) > 0 {
-		cond := orm.NewCondition()
-		for k, v := range search {
-			// rewrite dot-notation to Object__Attribute
-			k = strings.Replace(k, ".", "__", -1)
-			if strings.Contains(k, "isnull") {
-				qs = qs.Filter(k, (v == "true" || v == "1"))
-			} else {
-				logs.Info("Adding or statement")
-				cond = cond.Or(k+"__icontains", v)
-
-				// qs = qs.Filter(k+"__icontains", v)
-
-			}
-		}
-		logs.Info("Condition set ", qs)
-		qs = qs.SetCond(cond)
-	}
+	branch := ""
+	fromDate := ""
+	toDate := ""
 
 	if len(query) > 0 {
 		for k, v := range query {
 			// rewrite dot-notation to Object__Attribute
 			k = strings.Replace(k, ".", "__", -1)
-			qs = qs.Filter(k, v)
+			// qs = qs.Filter(k, v)
+			logs.Info("Key is ", k, " and value is ", v)
+			if k == "Branch__branch_id" {
+				branch = v
+			}
+			if k == "DateCreated__gte" {
+				fromDate = v
+			}
+			if k == "DateCreated__lte" {
+				toDate = v
+			}
 		}
 	}
 
-	logs.Info("Query is ", query, " and search is ", search)
+	logs.Info("Query is ", query, " and search is ", groupBy)
 
 	sql := `
-        SELECT c.category_name category, b.branch, COUNT(i.item_id) item_count
-        FROM categories c LEFT JOIN items i ON c.category_id = i.category_id LEFT JOIN branches b ON i.branch = b.branch_id
-        GROUP BY c.category_name, b.branch
+        SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+		FROM categories c 
+		JOIN items i ON c.category_id = i.category_id 
+		JOIN branches b ON i.branch = b.branch_id
+		JOIN item_quantity iq ON i.item_id = iq.item_id
+		GROUP BY c.category_name, b.branch
     `
+	logs.Info("Branch is ", branch, " and group by is ", groupBy)
+	rs := o.Raw(sql)
+
+	if fromDate != "" {
+		sql = `SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+				FROM categories c 
+				JOIN items i ON c.category_id = i.category_id 
+				JOIN branches b ON i.branch = b.branch_id
+				JOIN item_quantity iq ON i.item_id = iq.item_id
+				WHERE i.date_created >= ?
+				GROUP BY c.category_name, b.branch
+			`
+		rs = o.Raw(sql, fromDate)
+
+		if fromDate != "" && toDate != "" {
+			sql = `SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+				FROM categories c 
+				JOIN items i ON c.category_id = i.category_id 
+				JOIN branches b ON i.branch = b.branch_id
+				JOIN item_quantity iq ON i.item_id = iq.item_id
+				WHERE i.date_created >= ? AND i.date_created <= ?
+				GROUP BY c.category_name, b.branch
+			`
+
+			rs = o.Raw(sql, fromDate, toDate)
+		}
+	}
+
+	if toDate != "" && fromDate == "" {
+		sql = `SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+			FROM categories c 
+			JOIN items i ON c.category_id = i.category_id 
+			JOIN branches b ON i.branch = b.branch_id
+			JOIN item_quantity iq ON i.item_id = iq.item_id
+			WHERE i.date_created <= ?
+			GROUP BY c.category_name, b.branch
+		`
+
+		rs = o.Raw(sql, toDate)
+	}
+
+	if groupBy == "DEVICE" {
+		sql = `
+			SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+			FROM categories c 
+			JOIN items i ON c.category_id = i.category_id 
+			JOIN branches b ON i.branch = b.branch_id
+			JOIN item_quantity iq ON i.item_id = iq.item_id
+			GROUP BY c.category_name, i.item_name
+		`
+
+		rs = o.Raw(sql, branch)
+
+		if fromDate != "" {
+			sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+					FROM categories c 
+					JOIN items i ON c.category_id = i.category_id 
+					JOIN item_quantity iq ON i.item_id = iq.item_id
+					WHERE i.date_created >= ?
+					GROUP BY c.category_name, i.item_name
+				`
+			rs = o.Raw(sql, fromDate)
+
+			if fromDate != "" && toDate != "" {
+				sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+					FROM categories c 
+					JOIN items i ON c.category_id = i.category_id 
+					JOIN item_quantity iq ON i.item_id = iq.item_id
+					WHERE i.date_created >= ? AND i.date_created <= ?
+					GROUP BY c.category_name, i.item_name
+				`
+
+				rs = o.Raw(sql, fromDate, toDate)
+			}
+		}
+
+		if toDate != "" && fromDate == "" {
+			sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+				FROM categories c 
+				JOIN items i ON c.category_id = i.category_id 
+				JOIN item_quantity iq ON i.item_id = iq.item_id
+				WHERE i.date_created <= ?
+				GROUP BY c.category_name, i.item_name
+			`
+
+			rs = o.Raw(sql, toDate)
+		}
+
+		if branch != "" {
+			sql = `
+				SELECT c.category_name category, i.item_name group_by, COUNT(iq.quantity) total_quantity
+				FROM categories c 
+				LEFT JOIN items i ON c.category_id = i.category_id 
+				LEFT JOIN branches b ON i.branch = b.branch_id
+				JOIN item_quantity iq ON i.item_id = iq.item_id
+				WHERE i.branch = ?
+				GROUP BY c.category_name, i.item_name
+			`
+			logs.Info("Branch is ", branch)
+			rs = o.Raw(sql, branch)
+
+			if fromDate != "" {
+				sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+						FROM categories c 
+						JOIN items i ON c.category_id = i.category_id 
+						JOIN branches b ON i.branch = b.branch_id
+						JOIN item_quantity iq ON i.item_id = iq.item_id
+						WHERE i.date_created >= ?
+						GROUP BY c.category_name, i.item_name
+					`
+				rs = o.Raw(sql, fromDate)
+
+				if fromDate != "" && toDate != "" {
+					sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+						FROM categories c 
+						JOIN items i ON c.category_id = i.category_id 
+						JOIN branches b ON i.branch = b.branch_id
+						JOIN item_quantity iq ON i.item_id = iq.item_id
+						WHERE i.date_created >= ? AND i.date_created <= ?
+						GROUP BY c.category_name, i.item_name
+					`
+
+					rs = o.Raw(sql, fromDate, toDate)
+				}
+			}
+
+			if toDate != "" && fromDate == "" {
+				sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
+					FROM categories c 
+					JOIN items i ON c.category_id = i.category_id 
+					JOIN branches b ON i.branch = b.branch_id
+					JOIN item_quantity iq ON i.item_id = iq.item_id
+					WHERE i.date_created <= ?
+					GROUP BY c.category_name, i.item_name
+				`
+
+				rs = o.Raw(sql, toDate)
+			}
+		}
+	} else {
+		if branch != "" {
+			sql = `
+				SELECT c.category_name category, b.branch group_by, COUNT(iq.quantity) total_quantity
+				FROM categories c 
+				LEFT JOIN items i ON c.category_id = i.category_id 
+				LEFT JOIN branches b ON i.branch = b.branch_id
+				JOIN item_quantity iq ON i.item_id = iq.item_id
+				WHERE i.branch = ?
+				GROUP BY c.category_name, b.branch
+			`
+			logs.Info("Branch is ", branch)
+			rs = o.Raw(sql, branch)
+
+			if fromDate != "" {
+				sql = `SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+						FROM categories c 
+						JOIN items i ON c.category_id = i.category_id 
+						JOIN branches b ON i.branch = b.branch_id
+						JOIN item_quantity iq ON i.item_id = iq.item_id
+						WHERE i.date_created >= ?
+						GROUP BY c.category_name, b.branch
+					`
+				rs = o.Raw(sql, fromDate)
+
+				if fromDate != "" && toDate != "" {
+					sql = `SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+						FROM categories c 
+						JOIN items i ON c.category_id = i.category_id 
+						JOIN branches b ON i.branch = b.branch_id
+						JOIN item_quantity iq ON i.item_id = iq.item_id
+						WHERE i.date_created >= ? AND i.date_created <= ?
+						GROUP BY c.category_name, b.branch
+					`
+
+					rs = o.Raw(sql, fromDate, toDate)
+				}
+			}
+
+			if toDate != "" && fromDate == "" {
+				sql = `SELECT c.category_name category, b.branch group_by, SUM(iq.quantity) total_quantity
+					FROM categories c 
+					JOIN items i ON c.category_id = i.category_id 
+					JOIN branches b ON i.branch = b.branch_id
+					JOIN item_quantity iq ON i.item_id = iq.item_id
+					WHERE i.date_created <= ?
+					GROUP BY c.category_name, b.branch
+				`
+
+				rs = o.Raw(sql, toDate)
+			}
+		}
+	}
+
 	var results []ItemBranchCountDTO
-	if _, err := o.Raw(sql).QueryRows(&results); err == nil {
+
+	if _, err := rs.QueryRows(&results); err == nil {
 		logs.Info("Results:: ", results)
 		// for _, result := range results {
 		// 	logs.Info("Data fetched is ", result.Branch, " :: ", result.ItemCount)

@@ -1102,8 +1102,8 @@ paths:
         description: Filter. e.g. col1:v1,col2:v2 ...
         type: string
       - in: query
-        name: search
-        description: Filter. e.g. col1:v1,col2:v2 ...
+        name: groupBy
+        description: BRANCH or DEVICE
         type: string
       responses:
         "200":
@@ -1554,16 +1554,16 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x14000800348:
-    title: "0x14000800348"
+  1231.<nil>.0x140007ab968:
+    title: "0x140007ab968"
     type: object
-  1278.<nil>.0x14000800378:
-    title: "0x14000800378"
+  1278.<nil>.0x140007ab998:
+    title: "0x140007ab998"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  68484.<nil>.Items:
+  74676.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -2024,7 +2024,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/68484.<nil>.Items'
+        $ref: '#/definitions/74676.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2250,9 +2250,9 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x14000800348'
+        $ref: '#/definitions/1231.<nil>.0x140007ab968'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x14000800378'
+        $ref: '#/definitions/1278.<nil>.0x140007ab998'
   responses.StringResponseDTO:
     title: StringResponseDTO
     type: object
