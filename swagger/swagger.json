@@ -2149,12 +2149,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x1400086b608": {
-            "title": "0x1400086b608",
+        "1231.\u003cnil\u003e.0x14000852f78": {
+            "title": "0x14000852f78",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x1400086b638": {
-            "title": "0x1400086b638",
+        "1278.\u003cnil\u003e.0x14000852fa8": {
+            "title": "0x14000852fa8",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2165,7 +2165,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "74676.\u003cnil\u003e.Items": {
+        "74821.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2661,6 +2661,9 @@
                     "type": "string",
                     "format": "datetime"
                 },
+                "Item": {
+                    "$ref": "#/definitions/models.Items"
+                },
                 "ItemReviewId": {
                     "type": "integer",
                     "format": "int64"
@@ -2672,6 +2675,10 @@
                 "Rating": {
                     "type": "number",
                     "format": "double"
+                },
+                "Reference": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "Review": {
                     "type": "string"
@@ -2743,6 +2750,9 @@
                     "type": "integer",
                     "format": "int64"
                 },
+                "Status": {
+                    "$ref": "#/definitions/models.Status"
+                },
                 "Weight": {
                     "type": "string"
                 }
@@ -2808,7 +2818,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/74676.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/74821.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -2899,6 +2909,42 @@
         "models.PurposesResponseFDTO": {
             "title": "PurposesResponseFDTO",
             "type": "object"
+        },
+        "models.Status": {
+            "title": "Status",
+            "type": "object",
+            "properties": {
+                "Active": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "CreatedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "DateCreated": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "DateModified": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "ModifiedBy": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Status": {
+                    "type": "string"
+                },
+                "StatusCode": {
+                    "type": "string"
+                },
+                "StatusId": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
         },
         "models.User": {
             "title": "User",
@@ -3055,9 +3101,17 @@
             "title": "AddReviewRequest",
             "type": "object",
             "properties": {
+                "ItemId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Rating": {
                     "type": "number",
                     "format": "double"
+                },
+                "Reference": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "Review": {
                     "type": "string"
@@ -3132,10 +3186,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x1400086b608"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x14000852f78"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x1400086b638"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x14000852fa8"
                 }
             }
         },

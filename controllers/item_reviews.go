@@ -41,10 +41,15 @@ func (c *Item_reviewsController) Post() {
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 
 	if u, err := models.GetUsersById(v.ReviewBy); err == nil {
-		var r models.Item_reviews = models.Item_reviews{Review: v.Review, Rating: v.Rating, ReviewBy: u, Active: 1, CreatedBy: int(v.ReviewBy), DateCreated: time.Now(), ModifiedBy: int(v.ReviewBy), DateModified: time.Now()}
+		item := models.Items{}
+		if item_, err := models.GetItemsById(v.ItemId); err == nil {
+			// logs.Error("Error returned after attempting to add review is ", err.Error())
+			item = *item_
+		}
+		var r models.Item_reviews = models.Item_reviews{Review: v.Review, Item: &item, Reference: int(v.Reference), Rating: v.Rating, ReviewBy: u, Active: 1, CreatedBy: int(v.ReviewBy), DateCreated: time.Now(), ModifiedBy: int(v.ReviewBy), DateModified: time.Now()}
 		if _, err := models.AddItem_reviews(&r); err == nil {
 			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &r, StatusDesc: "Review successfully added"}
-			c.Ctx.Output.SetStatus(201)
+			c.Ctx.Output.SetStatus(200)
 			c.Data["json"] = resp
 		} else {
 			logs.Error("Error returned after attempting to add review is ", err.Error())

@@ -15,8 +15,10 @@ type Item_reviews struct {
 	Review       string `orm:"size(1000)"`
 	Rating       float64
 	ReviewBy     *Users    `orm:"rel(fk);column(review_by)"`
+	Item         *Items    `orm:"rel(fk);column(item_id)"`
 	DateCreated  time.Time `orm:"type(datetime)"`
 	DateModified time.Time `orm:"type(datetime)"`
+	Reference    int
 	CreatedBy    int
 	ModifiedBy   int
 	Active       int

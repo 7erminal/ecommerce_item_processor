@@ -46,6 +46,7 @@ type Items struct {
 	ModifiedBy      int          `orm:"omitempty"`
 	Country         *Countries   `orm:"rel(fk);column(country)"`
 	Branch          *Branches    `orm:"rel(fk);column(branch)"`
+	Status          *Status      `orm:"rel(fk);column(item_status);null"`
 }
 
 func init() {

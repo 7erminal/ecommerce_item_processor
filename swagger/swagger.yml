@@ -1554,16 +1554,16 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x1400086b608:
-    title: "0x1400086b608"
+  1231.<nil>.0x14000852f78:
+    title: "0x14000852f78"
     type: object
-  1278.<nil>.0x1400086b638:
-    title: "0x1400086b638"
+  1278.<nil>.0x14000852fa8:
+    title: "0x14000852fa8"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  74676.<nil>.Items:
+  74821.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1871,6 +1871,8 @@ definitions:
       DateModified:
         type: string
         format: datetime
+      Item:
+        $ref: '#/definitions/models.Items'
       ItemReviewId:
         type: integer
         format: int64
@@ -1880,6 +1882,9 @@ definitions:
       Rating:
         type: number
         format: double
+      Reference:
+        type: integer
+        format: int64
       Review:
         type: string
       ReviewBy:
@@ -1978,6 +1983,8 @@ definitions:
       Quantity:
         type: integer
         format: int64
+      Status:
+        $ref: '#/definitions/models.Status'
       Weight:
         type: string
   models.ItemsDTO:
@@ -2024,7 +2031,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/74676.<nil>.Items'
+        $ref: '#/definitions/74821.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2087,6 +2094,32 @@ definitions:
   models.PurposesResponseFDTO:
     title: PurposesResponseFDTO
     type: object
+  models.Status:
+    title: Status
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      ModifiedBy:
+        type: integer
+        format: int64
+      Status:
+        type: string
+      StatusCode:
+        type: string
+      StatusId:
+        type: integer
+        format: int64
   models.User:
     title: User
     type: object
@@ -2197,9 +2230,15 @@ definitions:
     title: AddReviewRequest
     type: object
     properties:
+      ItemId:
+        type: integer
+        format: int64
       Rating:
         type: number
         format: double
+      Reference:
+        type: integer
+        format: int64
       Review:
         type: string
       ReviewBy:
@@ -2250,9 +2289,9 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x1400086b608'
+        $ref: '#/definitions/1231.<nil>.0x14000852f78'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x1400086b638'
+        $ref: '#/definitions/1278.<nil>.0x14000852fa8'
   responses.StringResponseDTO:
     title: StringResponseDTO
     type: object
