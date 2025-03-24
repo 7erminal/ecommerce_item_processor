@@ -332,6 +332,9 @@ func (c *ItemsController) GetItemCountByTypeAndBranch() {
 		// }
 		logs.Info("Item count by branch and stuff is ", z)
 		fmt.Printf("Value of v: %+v\n", z)
+		if z == nil {
+			z = &[]models.ItemBranchCountDTO{}
+		}
 		resp := responses.ItemBranchCountResponseDTO{StatusCode: 200, Result: z, StatusDesc: "Count fetched successfully"}
 		c.Data["json"] = resp
 	}
