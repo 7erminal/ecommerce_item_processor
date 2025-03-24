@@ -1554,16 +1554,16 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x140007d6990:
-    title: "0x140007d6990"
+  1231.<nil>.0x14000877bf0:
+    title: "0x14000877bf0"
     type: object
-  1278.<nil>.0x140007d69c0:
-    title: "0x140007d69c0"
+  1278.<nil>.0x14000877c20:
+    title: "0x14000877c20"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  74821.<nil>.Items:
+  75063.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -2031,7 +2031,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/74821.<nil>.Items'
+        $ref: '#/definitions/75063.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2289,9 +2289,9 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x140007d6990'
+        $ref: '#/definitions/1231.<nil>.0x14000877bf0'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x140007d69c0'
+        $ref: '#/definitions/1278.<nil>.0x14000877c20'
   responses.StringResponseDTO:
     title: StringResponseDTO
     type: object

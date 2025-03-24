@@ -273,7 +273,7 @@ func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]
 			GROUP BY c.category_name, i.item_name
 		`
 
-		rs = o.Raw(sql, branch)
+		rs = o.Raw(sql)
 
 		if fromDate != "" {
 			logs.Info("From date is not null. Add to query")
