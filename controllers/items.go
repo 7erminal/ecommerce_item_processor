@@ -314,7 +314,7 @@ func (c *ItemsController) GetItemCountByTypeAndBranch() {
 
 	// search: k:v,k:v
 	if v := c.GetString("groupBy"); v != "" {
-		groupBy = v
+		groupBy = strings.ToUpper(v)
 	}
 
 	logs.Info("Sending filters::: ", query)

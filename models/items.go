@@ -263,6 +263,7 @@ func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]
 	}
 
 	if groupBy == "DEVICE" {
+		logs.Info("Group by ", groupBy)
 		sql = `
 			SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
 			FROM categories c 
@@ -275,6 +276,7 @@ func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]
 		rs = o.Raw(sql, branch)
 
 		if fromDate != "" {
+			logs.Info("From date is not null. Add to query")
 			sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
 					FROM categories c 
 					JOIN items i ON c.category_id = i.category_id 
@@ -285,6 +287,7 @@ func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]
 			rs = o.Raw(sql, fromDate)
 
 			if fromDate != "" && toDate != "" {
+				logs.Info("From date and To date is not null. Add to query")
 				sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
 					FROM categories c 
 					JOIN items i ON c.category_id = i.category_id 
@@ -298,6 +301,7 @@ func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]
 		}
 
 		if toDate != "" && fromDate == "" {
+			logs.Info("To date is not null. Add to query")
 			sql = `SELECT c.category_name category, i.item_name group_by, SUM(iq.quantity) total_quantity
 				FROM categories c 
 				JOIN items i ON c.category_id = i.category_id 
@@ -310,6 +314,7 @@ func GetItemCountByTypeAndBranch(query map[string]string, groupBy string) (c *[]
 		}
 
 		if branch != "" {
+			logs.Info("Branch is not null. Add to query")
 			sql = `
 				SELECT c.category_name category, i.item_name group_by, COUNT(iq.quantity) total_quantity
 				FROM categories c 
