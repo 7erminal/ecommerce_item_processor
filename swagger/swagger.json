@@ -1415,40 +1415,6 @@
                 }
             }
         },
-        "/items/branch-and-category/count": {
-            "get": {
-                "tags": [
-                    "items"
-                ],
-                "description": "get item count by type and branch\n\u003cbr\u003e",
-                "operationId": "ItemsController.Get Item Count by Type and Branch",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "groupBy",
-                        "description": "BRANCH or DEVICE",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/responses.StringResponseDTO"
-                        }
-                    },
-                    "403": {
-                        "description": "an error occurred"
-                    }
-                }
-            }
-        },
         "/items/branch/{branch_id}": {
             "get": {
                 "tags": [
@@ -2149,12 +2115,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x14000877bf0": {
-            "title": "0x14000877bf0",
+        "1231.\u003cnil\u003e.0x14000805a28": {
+            "title": "0x14000805a28",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x14000877c20": {
-            "title": "0x14000877c20",
+        "1278.\u003cnil\u003e.0x14000805a58": {
+            "title": "0x14000805a58",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -2165,7 +2131,7 @@
             "title": "Item_features",
             "type": "object"
         },
-        "75063.\u003cnil\u003e.Items": {
+        "67202.\u003cnil\u003e.Items": {
             "title": "Items",
             "type": "object"
         },
@@ -2739,6 +2705,10 @@
                 "ItemPrice": {
                     "$ref": "#/definitions/models.Item_prices"
                 },
+                "LastOrderDate": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Material": {
                     "type": "string"
                 },
@@ -2818,7 +2788,7 @@
             "type": "object",
             "properties": {
                 "Items": {
-                    "$ref": "#/definitions/75063.\u003cnil\u003e.Items"
+                    "$ref": "#/definitions/67202.\u003cnil\u003e.Items"
                 },
                 "StatusCode": {
                     "type": "integer",
@@ -3186,10 +3156,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x14000877bf0"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x14000805a28"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x14000877c20"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x14000805a58"
                 }
             }
         },
