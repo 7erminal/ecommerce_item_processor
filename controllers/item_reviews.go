@@ -6,6 +6,8 @@ import (
 	"item_processor/models"
 	"item_processor/structs/requests"
 	"item_processor/structs/responses"
+	"net/http"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"time"
@@ -33,6 +35,12 @@ func (c *Item_reviewsController) URLMapping() {
 // @Title Post
 // @Description create Item_reviews
 // @Param	body		body 	requests.AddReviewRequest	true		"body for Item_reviews content"
+// @Param	ImagePath	query	string	false	"Image path"
+// @Param	ReviewBy	query	string	false	"ID of the user that is doing the review"
+// @Param	ItemId	query	string	false	"ID of the item"
+// @Param	Rating	query	string	false	"Rating"
+// @Param	Reference	query	string	false	"Reference. Could be an ID"
+// @Param	Review	query	string	false	"Review text"
 // @Success 201 {int} responses.ItemReviewResponseDTO
 // @Failure 403 body is empty
 // @router / [post]
@@ -40,13 +48,72 @@ func (c *Item_reviewsController) Post() {
 	var v requests.AddReviewRequest
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 
-	if u, err := models.GetUsersById(v.ReviewBy); err == nil {
+	file, header, err := c.GetFile("ImagePath")
+	var filePath string = ""
+
+	if err != nil {
+		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
+		c.Data["json"] = map[string]string{"error": "Failed to get image file."}
+		logs.Info("Failed to get the file ", err)
+		// c.ServeJSON()
+		// return
+	} else {
+		defer file.Close()
+
+		// Save the uploaded file
+		fileName := filepath.Base(header.Filename)
+		filePath = "/uploads/reviews/" + time.Now().Format("20060102150405") + fileName // Define your file path
+		err = c.SaveToFile("ImagePath", "../images/"+filePath)
+		if err != nil || header.Size < 1 {
+			filePath = ""
+			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
+			logs.Error("Error saving file", err)
+			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
+			errorMessage := "Error: Failed to save the image file"
+
+			resp := responses.ItemReviewResponseDTO{StatusCode: 601, ItemReview: nil, StatusDesc: "Error updating review. " + errorMessage}
+
+			c.Data["json"] = resp
+		}
+	}
+
+	reviewByStr := c.Ctx.Input.Query("ReviewBy")
+	reviewBy, err := strconv.ParseInt(reviewByStr, 10, 64)
+	if err != nil {
+		c.Ctx.Output.SetStatus(http.StatusBadRequest)
+		c.Data["json"] = map[string]string{"error": "Invalid ReviewBy parameter"}
+		c.ServeJSON()
+		return
+	}
+
+	itemStr := c.Ctx.Input.Query("ItemId")
+	item_, err := strconv.ParseInt(itemStr, 10, 64)
+	if err != nil {
+		c.Ctx.Output.SetStatus(http.StatusBadRequest)
+		c.Data["json"] = map[string]string{"error": "Invalid ReviewBy parameter"}
+		c.ServeJSON()
+		return
+	}
+
+	if u, err := models.GetUsersById(reviewBy); err == nil {
 		item := models.Items{}
-		if item_, err := models.GetItemsById(v.ItemId); err == nil {
+		if item_, err := models.GetItemsById(item_); err == nil {
 			// logs.Error("Error returned after attempting to add review is ", err.Error())
 			item = *item_
 		}
-		var r models.Item_reviews = models.Item_reviews{Review: v.Review, Item: &item, Reference: int(v.Reference), Rating: v.Rating, ReviewBy: u, Active: 1, CreatedBy: int(v.ReviewBy), DateCreated: time.Now(), ModifiedBy: int(v.ReviewBy), DateModified: time.Now()}
+
+		ratingStr := c.Ctx.Input.Query("Rating")
+		rating, err := strconv.ParseFloat(ratingStr, 64)
+		if err != nil {
+			logs.Error("An error occurred converting ", ratingStr, " to float ", err.Error())
+		}
+
+		referenceStr := c.Ctx.Input.Query("Reference")
+		reference, err := strconv.ParseInt(referenceStr, 10, 64)
+		if err != nil {
+			logs.Error("An error occurred converting ", referenceStr, " to int ", err.Error())
+		}
+		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: int(reference), Rating: rating, ReviewBy: u, Active: 1, CreatedBy: int(reviewBy), DateCreated: time.Now(), ModifiedBy: int(reviewBy), DateModified: time.Now()}
 		if _, err := models.AddItem_reviews(&r); err == nil {
 			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &r, StatusDesc: "Review successfully added"}
 			c.Ctx.Output.SetStatus(200)

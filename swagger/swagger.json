@@ -1224,6 +1224,42 @@
                         "schema": {
                             "$ref": "#/definitions/requests.AddReviewRequest"
                         }
+                    },
+                    {
+                        "in": "query",
+                        "name": "ImagePath",
+                        "description": "Image path",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "ReviewBy",
+                        "description": "ID of the user that is doing the review",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "ItemId",
+                        "description": "ID of the item",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "Rating",
+                        "description": "Rating",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "Reference",
+                        "description": "Reference. Could be an ID",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "Review",
+                        "description": "Review text",
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -2115,12 +2151,12 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x14000807908": {
-            "title": "0x14000807908",
+        "1231.\u003cnil\u003e.0x140007dc4f8": {
+            "title": "0x140007dc4f8",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x14000807938": {
-            "title": "0x14000807938",
+        "1278.\u003cnil\u003e.0x140007dc528": {
+            "title": "0x140007dc528",
             "type": "object"
         },
         "1388.\u003cnil\u003e.Item_purposes": {
@@ -3071,6 +3107,9 @@
             "title": "AddReviewRequest",
             "type": "object",
             "properties": {
+                "ImagePath": {
+                    "type": "string"
+                },
                 "ItemId": {
                     "type": "integer",
                     "format": "int64"
@@ -3156,10 +3195,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x14000807908"
+                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140007dc4f8"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x14000807938"
+                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140007dc528"
                 }
             }
         },

@@ -6,4 +6,5 @@ type AddReviewRequest struct {
 	ItemId    int64
 	Reference int64
 	Rating    float64
+	ImagePath string
 }
