@@ -794,15 +794,20 @@ func (c *ItemsController) GetItemStats() {
 // @Failure 403 wrong request
 // @router /check-item-quantity/:item_id [get]
 func (c *ItemsController) CheckItemQuantity() {
-	logs.Info("Getting item stats")
+	logs.Info("Checking item quantity")
 	itemidStr := c.Ctx.Input.Param(":item_id")
 	itemid, _ := strconv.ParseInt(itemidStr, 0, 64)
 
 	if item, err := models.GetItemsById(itemid); err == nil {
-		functions.CheckItemCount(item.ItemId, item.ItemName)
+		iResp := functions.CheckItemCount(item.ItemId, item.ItemName)
 
-		resp := responses.StringResponseDTO{StatusCode: 200, Value: "OK", StatusDesc: "Successfully fetched stats"}
-		c.Data["json"] = resp
+		if iResp {
+			resp := responses.StringResponseDTO{StatusCode: 200, Value: "LOW", StatusDesc: "Item quantity low"}
+			c.Data["json"] = resp
+		} else {
+			resp := responses.StringResponseDTO{StatusCode: 200, Value: "OK", StatusDesc: "Item quantity ok"}
+			c.Data["json"] = resp
+		}
 	} else {
 		logs.Error("Error getting item ", err.Error())
 

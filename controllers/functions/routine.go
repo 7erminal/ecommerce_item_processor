@@ -3,24 +3,27 @@ package functions
 import (
 	"item_processor/models"
 	"item_processor/structs/requests"
-	"strconv"
 
 	"github.com/beego/beego/v2/core/logs"
 )
 
-func CheckItemCount(itemid int64, itemName string) {
+func CheckItemCount(itemid int64, itemName string) (status bool) {
+	status = false
 	if quantity, err := models.GetItem_quantityByItemId(itemid); err == nil {
 		if quantity.Quantity <= quantity.QuantityAlert {
-			serviceName := "ORDER"
-			status := "WARNING"
-			category := "Stock"
+			// serviceName := "ORDER"
+			// status := "WARNING"
+			// category := "Stock"
 
-			quantityLeft := strconv.Itoa(quantity.Quantity)
+			// quantityLeft := strconv.Itoa(quantity.Quantity)
 
-			SendNotification(serviceName, status, category, itemName, quantityLeft, nil)
+			// SendNotification(serviceName, status, category, itemName, quantityLeft, nil)
+			return true
 
 		}
 	}
+
+	return status
 }
 
 func SendNotification(serviceName string, status string, category string, itemName string, quantityLeft string, userid *int64) {
