@@ -178,9 +178,19 @@ func (c *Item_purposesController) GetAll() {
 
 	l, err := models.GetAllItem_purposes(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		// c.Data["json"] = err.Error()
+		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = l
+		// c.Data["json"] = l
+		itemPurposes := []models.Item_purposes{}
+		for _, urs := range l {
+			m := urs.(models.Item_purposes)
+
+			itemPurposes = append(itemPurposes, m)
+		}
+		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: &itemPurposes, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

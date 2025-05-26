@@ -190,6 +190,9 @@ func (c *PurposesController) GetAll() {
 	l, err := models.GetAllPurposes(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
+		var resp = models.PurposesResponseDTO{StatusCode: 302, Purposes: &l, StatusDesc: "Failed to fetch Purposes " + err.Error()}
+
+		c.Data["json"] = resp
 	} else {
 		var resp = models.PurposesResponseDTO{StatusCode: 200, Purposes: &l, StatusDesc: "Purposes fetched successfully"}
 

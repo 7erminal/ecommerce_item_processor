@@ -983,6 +983,131 @@ paths:
           description: '{string} delete success!'
         "403":
           description: id is empty
+  /item-types/:
+    get:
+      tags:
+      - item-types
+      description: |-
+        get Item_types
+        <br>
+      operationId: Item_typesController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_types'
+        "403":
+          description: ""
+    post:
+      tags:
+      - item-types
+      description: |-
+        create Item_types
+        <br>
+      operationId: Item_typesController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Item_types content
+        required: true
+        schema:
+          $ref: '#/definitions/requests.ItemTypeRequest'
+      responses:
+        "201":
+          description: '{int} models.Item_types'
+        "403":
+          description: body is empty
+  /item-types/{id}:
+    get:
+      tags:
+      - item-types
+      description: |-
+        get Item_types by id
+        <br>
+      operationId: Item_typesController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_types'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - item-types
+      description: |-
+        update the Item_types
+        <br>
+      operationId: Item_typesController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Item_types content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Item_types'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Item_types'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - item-types
+      description: |-
+        delete the Item_types
+        <br>
+      operationId: Item_typesController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
   /items/:
     get:
       tags:
@@ -1554,16 +1679,16 @@ definitions:
   511.<nil>.Item_features:
     title: Item_features
     type: object
-  1231.<nil>.0x1400080b860:
-    title: "0x1400080b860"
+  1231.<nil>.0x14000864a38:
+    title: "0x14000864a38"
     type: object
-  1278.<nil>.0x1400080b890:
-    title: "0x1400080b890"
+  1278.<nil>.0x14000864a68:
+    title: "0x14000864a68"
     type: object
   1388.<nil>.Item_purposes:
     title: Item_purposes
     type: object
-  67202.<nil>.Items:
+  71370.<nil>.Items:
     title: Items
     type: object
   models.Branches:
@@ -1889,6 +2014,32 @@ definitions:
         type: string
       ReviewBy:
         $ref: '#/definitions/models.Users'
+  models.Item_types:
+    title: Item_types
+    type: object
+    properties:
+      Active:
+        type: integer
+        format: int64
+      CreatedBy:
+        type: integer
+        format: int64
+      DateCreated:
+        type: string
+        format: datetime
+      DateModified:
+        type: string
+        format: datetime
+      Description:
+        type: string
+      ItemTypeId:
+        type: integer
+        format: int64
+      ModifiedBy:
+        type: integer
+        format: int64
+      Name:
+        type: string
   models.ItemFeatureRequestDTO:
     title: ItemFeatureRequestDTO
     type: object
@@ -2034,7 +2185,7 @@ definitions:
     type: object
     properties:
       Items:
-        $ref: '#/definitions/67202.<nil>.Items'
+        $ref: '#/definitions/71370.<nil>.Items'
       StatusCode:
         type: integer
         format: int64
@@ -2263,6 +2414,14 @@ definitions:
     properties:
       ImagePath:
         type: string
+  requests.ItemTypeRequest:
+    title: ItemTypeRequest
+    type: object
+    properties:
+      Description:
+        type: string
+      Name:
+        type: string
   requests.StringRequestDTO:
     title: StringRequestDTO
     type: object
@@ -2294,9 +2453,9 @@ definitions:
     type: object
     properties:
       BranchStats:
-        $ref: '#/definitions/1231.<nil>.0x1400080b860'
+        $ref: '#/definitions/1231.<nil>.0x14000864a38'
       CategoryStats:
-        $ref: '#/definitions/1278.<nil>.0x1400080b890'
+        $ref: '#/definitions/1278.<nil>.0x14000864a68'
   responses.StringResponseDTO:
     title: StringResponseDTO
     type: object
@@ -2344,3 +2503,6 @@ tags:
 - name: item-reviews
   description: |
     Item_reviewsController operations for Item_reviews
+- name: item-types
+  description: |
+    Item_typesController operations for Item_types

@@ -57,6 +57,11 @@ func init() {
 				&controllers.Item_reviewsController{},
 			),
 		),
+		beego.NSNamespace("/item-types",
+			beego.NSInclude(
+				&controllers.Item_typesController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

@@ -11,3 +11,9 @@ type ItemPurposesResponseDTO struct {
 	ItemPurposes *[]Item_purposes
 	StatusDesc   string
 }
+
+type ItemTypesResponseDTO struct {
+	StatusCode int
+	ItemTypes  *[]Item_types
+	StatusDesc string
+}
