@@ -54,6 +54,9 @@ func (c *ItemsController) Post() {
 	logs.Info("Received ", t)
 	logs.Info("Item country received is ", t.Country)
 
+	errorCode := 302
+	message := "Error adding item"
+
 	creator := t.CreatedBy
 
 	// Structure Available Sizes
@@ -92,37 +95,48 @@ func (c *ItemsController) Post() {
 
 					if _, err := models.AddItem_quantity(&qu); err == nil {
 						c.Ctx.Output.SetStatus(200)
+						logs.Info("Item added successfully with ID ", v.ItemId)
+						errorCode = 200
+						message = "Item added successfully with ID " + strconv.FormatInt(v.ItemId, 10)
 
-						resp := responses.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
+						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
 						c.Data["json"] = resp
 					} else {
 						logs.Error(err.Error())
-						resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+						message = "Error adding item quantity: " + err.Error()
+						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
 						c.Data["json"] = resp
 					}
 
 				} else {
 					logs.Error(err.Error())
-					resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+					errorCode = 301
+					message = "Error adding item: " + err.Error()
+					resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
 					c.Data["json"] = resp
 				}
 			} else {
 				logs.Error(err.Error())
-				resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+				errorCode = 301
+				message = "Error adding item price: " + err.Error()
+				resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: nil, StatusDesc: message}
 				c.Data["json"] = resp
 			}
 		} else {
 			// resp := models.ItemsResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 			// c.Data["json"] = resp
-			resp := responses.ItemResponseDTO{StatusCode: 307, Item: nil, StatusDesc: cerr.Error()}
+			errorCode = 301
+			message = "Error fetching currency: " + cerr.Error()
+			resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: nil, StatusDesc: message}
 			c.Data["json"] = resp
 			logs.Error(cerr.Error())
-			c.Data["json"] = resp
 		}
 
 	} else {
 		logs.Error(err.Error())
-		resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		errorCode = 301
+		message = "Error fetching category: " + err.Error()
+		resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: nil, StatusDesc: message}
 		c.Data["json"] = resp
 		// c.Data["json"] = err.Error()
 	}
