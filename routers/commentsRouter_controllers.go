@@ -448,6 +448,15 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_reviewsController"],
+        beego.ControllerComments{
+            Method: "GetOneWithReference",
+            Router: "/get-review-with-reference/:id",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["item_processor/controllers:Item_typesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:Item_typesController"],
         beego.ControllerComments{
             Method: "Post",

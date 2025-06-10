@@ -45,7 +45,7 @@ type Items struct {
 	CreatedBy       int          `orm:"omitempty"`
 	ModifiedBy      int          `orm:"omitempty"`
 	Country         *Countries   `orm:"rel(fk);column(country)"`
-	Branch          *Branches    `orm:"rel(fk);column(branch)"`
+	Branch          *Branches    `orm:"rel(fk);column(branch);null"`
 	Status          *Status      `orm:"rel(fk);column(item_status);null"`
 	LastOrderDate   time.Time    `orm:"type(datetime);null"`
 }

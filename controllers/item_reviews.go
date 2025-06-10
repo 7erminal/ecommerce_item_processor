@@ -29,6 +29,7 @@ func (c *Item_reviewsController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
+	c.Mapping("GetOneWithReference", c.GetOneWithReference)
 }
 
 // Post ...
@@ -113,7 +114,7 @@ func (c *Item_reviewsController) Post() {
 		if err != nil {
 			logs.Error("An error occurred converting ", referenceStr, " to int ", err.Error())
 		}
-		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: int(reference), Rating: rating, ReviewBy: u, Active: 1, CreatedBy: int(reviewBy), DateCreated: time.Now(), ModifiedBy: int(reviewBy), DateModified: time.Now()}
+		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: reference, Rating: rating, ReviewBy: u, Active: 1, CreatedBy: int(reviewBy), DateCreated: time.Now(), ModifiedBy: int(reviewBy), DateModified: time.Now()}
 		if _, err := models.AddItem_reviews(&r); err == nil {
 			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &r, StatusDesc: "Review successfully added"}
 			c.Ctx.Output.SetStatus(200)
@@ -142,6 +143,31 @@ func (c *Item_reviewsController) GetOne() {
 		c.Data["json"] = err.Error()
 	} else {
 		c.Data["json"] = v
+	}
+	c.ServeJSON()
+}
+
+// GetOneByReference ...
+// @Title Get One By Reference
+// @Description get Item_reviews by id
+// @Param	id		path 	string	true		"The key for staticblock"
+// @Success 200 {object} models.Item_reviews
+// @Failure 403 :id is empty
+// @router /get-review-with-reference/:id [get]
+func (c *Item_reviewsController) GetOneWithReference() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	v, err := models.GetItem_reviewsById(id)
+	if err != nil {
+		c.Data["json"] = err.Error()
+		var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 301, ItemReview: nil, StatusDesc: "Fetching review failed"}
+		c.Ctx.Output.SetStatus(200)
+		c.Data["json"] = resp
+	} else {
+		c.Data["json"] = v
+		var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: v, StatusDesc: "Review successfully added"}
+		c.Ctx.Output.SetStatus(200)
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
@@ -206,6 +232,8 @@ func (c *Item_reviewsController) GetAll() {
 		var resp responses.ItemReviewsResponseDTO = responses.ItemReviewsResponseDTO{StatusCode: 301, ItemsReviews: nil, StatusDesc: "Unable to fetch reviews"}
 		c.Data["json"] = resp
 	} else {
+		// logs.Info("Reviews fetched successfully")
+		logs.Info("Reviews fetched successfully ", l)
 		var resp responses.ItemReviewsResponseDTO = responses.ItemReviewsResponseDTO{StatusCode: 200, ItemsReviews: &l, StatusDesc: "Reviews fetched successfully"}
 		c.Data["json"] = resp
 	}
