@@ -28,26 +28,27 @@ type ItemBranchCountDTO struct {
 }
 
 type Items struct {
-	ItemId          int64        `orm:"auto"`
-	ItemName        string       `orm:"size(80)"`
-	Description     string       `orm:"size(250);omitempty"`
-	Weight          string       `orm:"size(20);omitempty"`
-	Category        *Categories  `orm:"rel(fk)"`
-	ItemPrice       *Item_prices `orm:"rel(fk);omitempty"`
-	AvailableSizes  string       `orm:"size(250);omitempty"`
-	AvailableColors string       `orm:"size(250);omitempty"`
-	Material        string       `orm:"size(400);omitempty"`
-	ImagePath       string       `orm:"size(250);omitempty"`
-	Quantity        int          `orm:"omitempty"`
-	Active          int          `orm:"omitempty"`
-	DateCreated     time.Time    `orm:"type(datetime);omitempty"`
-	DateModified    time.Time    `orm:"type(datetime);omitempty"`
-	CreatedBy       int          `orm:"omitempty"`
-	ModifiedBy      int          `orm:"omitempty"`
-	Country         *Countries   `orm:"rel(fk);column(country)"`
-	Branch          *Branches    `orm:"rel(fk);column(branch);null"`
-	Status          *Status      `orm:"rel(fk);column(item_status);null"`
-	LastOrderDate   time.Time    `orm:"type(datetime);null"`
+	ItemId          int64          `orm:"auto"`
+	ItemName        string         `orm:"size(80)"`
+	Description     string         `orm:"size(250);omitempty"`
+	Weight          string         `orm:"size(20);omitempty"`
+	Category        *Categories    `orm:"rel(fk)"`
+	ItemPrice       *Item_prices   `orm:"rel(fk);omitempty"`
+	AvailableSizes  string         `orm:"size(250);omitempty"`
+	AvailableColors string         `orm:"size(250);omitempty"`
+	Material        string         `orm:"size(400);omitempty"`
+	ImagePath       string         `orm:"size(250);omitempty"`
+	Quantity        int            `orm:"omitempty"`
+	Active          int            `orm:"omitempty"`
+	DateCreated     time.Time      `orm:"type(datetime);omitempty"`
+	DateModified    time.Time      `orm:"type(datetime);omitempty"`
+	CreatedBy       int            `orm:"omitempty"`
+	ModifiedBy      int            `orm:"omitempty"`
+	Country         *Countries     `orm:"rel(fk);column(country)"`
+	Branch          *Branches      `orm:"rel(fk);column(branch);null"`
+	Status          *Status        `orm:"rel(fk);column(item_status);null"`
+	LastOrderDate   time.Time      `orm:"type(datetime);null"`
+	ItemQuantity    *Item_quantity `orm:"reverse(one)"`
 }
 
 func init() {
