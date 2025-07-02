@@ -13,7 +13,7 @@ import (
 
 type Item_quantity struct {
 	ItemQuantityId int64  `orm:"auto"`
-	Item           *Items `orm:"rel(fk)"`
+	Item           *Items `orm:"rel(one)"`
 	Quantity       int
 	QuantityAlert  int `orm:"omitempty"`
 	Active         int
