@@ -189,24 +189,16 @@ func GetItemCountWithTypeAndBranch(catname string, branch string) (c int64, err 
 // Id doesn't exist
 func GetItemsById(id int64) (v *Items, err error) {
 	o := orm.NewOrm()
-	item := &Items{ItemId: id}
-
-	// First read the item
-	if err := o.Read(item); err != nil {
-		return nil, err
-	}
-
-	// Now load the 1-to-1 relationship
-	if _, err := o.LoadRelated(item, "ItemQuantity"); err != nil {
-		// Handle optional relation gracefully
-		if err != orm.ErrNoRows {
-			logs.Error("Error loading ItemQuantity: ", err)
-			return nil, err
+	v = &Items{ItemId: id}
+	qs := o.QueryTable(new(Items))
+	if err = qs.Filter("ItemId", id).RelatedSel().One(v); err == nil {
+		_, err = o.LoadRelated(v, "ItemQuantity")
+		if err != nil {
+			logs.Error("Error loading related Item quantity: ", err)
 		}
-		// Relation doesn't exist - leave as nil
+		return v, nil
 	}
-
-	return item, nil
+	return nil, err
 }
 
 // GetItemsByPurposeId retrieves Items by purpose Id. Returns error if
