@@ -192,7 +192,7 @@ func GetItemsById(id int64) (v *Items, err error) {
 	v = &Items{ItemId: id}
 	qs := o.QueryTable(new(Items))
 	if err = qs.Filter("ItemId", id).RelatedSel().One(v); err == nil {
-		_, err = o.LoadRelated(v, "ItemQuantity")
+		_, err = o.LoadRelated(&v, "ItemQuantity")
 		if err != nil {
 			logs.Error("Error loading related Item quantity: ", err)
 		}
