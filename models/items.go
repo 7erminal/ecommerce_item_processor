@@ -190,7 +190,12 @@ func GetItemCountWithTypeAndBranch(catname string, branch string) (c int64, err 
 func GetItemsById(id int64) (v *Items, err error) {
 	o := orm.NewOrm()
 	v = &Items{ItemId: id}
-	if err = o.QueryTable(new(Items)).Filter("ItemId", id).RelatedSel().One(v); err == nil {
+	qs := o.QueryTable(new(Items))
+	if err = qs.Filter("ItemId", id).RelatedSel().One(v); err == nil {
+		_, err = o.LoadRelated(v, "ItemQuantity")
+		if err != nil {
+			logs.Error("Error loading related Item quantity: ", err)
+		}
 		return v, nil
 	}
 	return nil, err
