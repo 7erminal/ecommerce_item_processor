@@ -626,6 +626,18 @@ func (c *ItemsController) Put() {
 								qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
 
 								if err := models.UpdateItem_quantityById(&qu); err == nil {
+									item, err := models.GetItemsById(v.ItemId)
+									if err != nil {
+
+										logs.Error(err.Error())
+										resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										c.Data["json"] = resp
+									} else {
+										logs.Info("Item fetched successfully")
+										logs.Info("Item quantity is ", item.ItemQuantity)
+										logs.Info("Item quantity added successfully")
+									}
+
 									c.Ctx.Output.SetStatus(200)
 
 									resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully updated"}
