@@ -591,7 +591,7 @@ func (c *ItemsController) Put() {
 						// Add item if getting category and price addition does not result in an error
 						country, _ := models.GetCountriesByCode(t.Country)
 						branch, _ := models.GetBranchesById(t.Branch)
-						v := models.Items{ItemId: id, ItemName: t.ItemName, Country: country, Branch: branch, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator}
+						v := models.Items{ItemId: id, ItemName: t.ItemName, Country: country, Branch: branch, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator, CreatedBy: iv.CreatedBy, DateCreated: iv.DateCreated, Weight: t.Weight}
 
 						if err := models.UpdateItemsById(&v); err == nil {
 							// Add quantity for item
