@@ -602,9 +602,20 @@ func (c *ItemsController) Put() {
 								c.Data["json"] = resp
 								qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 								if _, err := models.AddItem_quantity(&qu); err == nil {
+									item, err := models.GetItemsById(v.ItemId)
+									if err != nil {
+
+										logs.Error(err.Error())
+										resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										c.Data["json"] = resp
+									} else {
+										logs.Info("Item fetched successfully")
+										logs.Info("Item quantity is ", item.ItemQuantity)
+										logs.Info("Item quantity added successfully")
+									}
 									c.Ctx.Output.SetStatus(200)
 
-									resp := responses.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully added"}
+									resp := responses.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully added"}
 									c.Data["json"] = resp
 								} else {
 									logs.Error(err.Error())
