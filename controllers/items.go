@@ -640,7 +640,7 @@ func (c *ItemsController) Put() {
 
 									c.Ctx.Output.SetStatus(200)
 
-									resp := models.ItemResponseDTO{StatusCode: 200, Item: &v, StatusDesc: "Item successfully updated"}
+									resp := models.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully updated"}
 									c.Data["json"] = resp
 								} else {
 									logs.Error(err.Error())
