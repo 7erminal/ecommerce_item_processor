@@ -73,6 +73,7 @@ func (c *ItemsController) Post() {
 
 		if cerr == nil {
 			// Add price for item
+			logs.Info("Adding price for item with price ", t.ItemPrice, " and alt price ", t.AltItemPrice, " and extra charges ", t.ExtraCharges)
 			it := models.Item_prices{ItemPrice: t.ItemPrice, AltItemPrice: t.AltItemPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 			logs.Info("Adding price to item to create at a go")
