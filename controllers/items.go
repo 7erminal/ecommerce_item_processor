@@ -97,10 +97,23 @@ func (c *ItemsController) Post() {
 					if _, err := models.AddItem_quantity(&qu); err == nil {
 						c.Ctx.Output.SetStatus(200)
 						logs.Info("Item added successfully with ID ", v.ItemId)
+
+						item, err := models.GetItemsById(v.ItemId)
+						if err != nil {
+
+							logs.Error(err.Error())
+							resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+							c.Data["json"] = resp
+						} else {
+							logs.Info("Item fetched successfully")
+							logs.Info("Item quantity is ", item.ItemQuantity)
+							logs.Info("Item quantity added successfully")
+						}
+
 						errorCode = 200
 						message = "Item added successfully with ID " + strconv.FormatInt(v.ItemId, 10)
 
-						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
+						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: item, StatusDesc: message}
 						c.Data["json"] = resp
 					} else {
 						logs.Error(err.Error())
@@ -584,7 +597,7 @@ func (c *ItemsController) Put() {
 			if cerr == nil {
 				if ip, err := models.GetItem_pricesById(iv.ItemPrice.ItemPriceId); err == nil {
 					// Add price for item
-					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, Currency: cr, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
+					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
 
 					logs.Info("Modifying price for item")
 
