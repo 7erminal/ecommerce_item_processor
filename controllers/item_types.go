@@ -92,7 +92,7 @@ func (c *Item_typesController) GetAll() {
 	var sortby []string
 	var order []string
 	var query = make(map[string]string)
-	var limit int64 = 20
+	var limit int64 = 100
 	var offset int64
 
 	// fields: col1,col2,entity.col3
