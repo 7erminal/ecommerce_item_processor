@@ -29,7 +29,7 @@ jobs:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
       run: |
         sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no root@184.174.33.200 << 'EOF'
-          set -e  # Exit on any error
+          set -e  # Exit on any error 0
           cd /usr/app/maku_foods_item_processor
           git stash
           git pull origin makufoods  # Use branch explicitly
