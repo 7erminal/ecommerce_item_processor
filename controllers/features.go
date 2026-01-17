@@ -214,6 +214,20 @@ func (c *FeaturesController) GetAll() {
 		}
 	}
 
+	activeQuery := "Active:1"
+	if v := activeQuery; v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
 	l, err := models.GetAllFeatures(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
