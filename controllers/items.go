@@ -749,13 +749,6 @@ func (c *ItemsController) Delete() {
 	if ierr == nil {
 		logs.Info("Item retrieved ")
 
-		if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
-			logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
-			logs.Info("Item Deleted ", id)
-		} else {
-			panic(qerr)
-		}
-
 		if ii, iierr := models.GetItem_imagesByItemId(id); iierr == nil {
 			logs.Info("Item images returned are ")
 			logs.Info(ii)
@@ -804,7 +797,13 @@ func (c *ItemsController) Delete() {
 
 		if err := models.DeleteItems(id); err == nil {
 			logs.Error("Item Deleted ", id)
-			c.Data["json"] = "OK"
+			if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
+				logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
+				logs.Info("Item Deleted ", id)
+				c.Data["json"] = "OK"
+			} else {
+				panic(qerr)
+			}
 		} else {
 			c.Data["json"] = err.Error()
 		}
