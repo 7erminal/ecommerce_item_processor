@@ -169,3 +169,16 @@ func DeleteItem_purposes(id int64) (err error) {
 	}
 	return
 }
+
+func DeleteItem_purposesByItem(id Items) (err error) {
+	o := orm.NewOrm()
+	v := Item_purposes{Item: &id}
+	// ascertain id exists in the database
+	if err = o.Read(&v); err == nil {
+		var num int64
+		if num, err = o.Delete(&Item_purposes{Item: &id}); err == nil {
+			fmt.Println("Number of records deleted in database:", num)
+		}
+	}
+	return
+}

@@ -744,20 +744,6 @@ func (c *ItemsController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 
-	q, gerr := models.GetItem_quantityByItemId(id)
-
-	if gerr == nil {
-		logs.Info("Quantity ID is ", q.ItemQuantityId)
-		if qerr := models.DeleteItem_quantity(q.ItemQuantityId); qerr == nil {
-			logs.Info("Quantity deleted ")
-		} else {
-			panic(qerr)
-		}
-	} else {
-		logs.Error("An error occurred")
-		logs.Error(gerr)
-	}
-
 	i, ierr := models.GetItemsById(id)
 
 	if ierr == nil {
@@ -790,6 +776,35 @@ func (c *ItemsController) Delete() {
 			logs.Error("An error occurred")
 			logs.Error(iierr)
 		}
+
+		q, gerr := models.GetItem_quantityByItemId(id)
+
+		if gerr == nil {
+			logs.Info("Quantity ID is ", q.ItemQuantityId)
+			if qerr := models.DeleteItem_quantity(q.ItemQuantityId); qerr == nil {
+				logs.Info("Quantity deleted ")
+			} else {
+				panic(qerr)
+			}
+		} else {
+			logs.Error("An error occurred")
+			logs.Error(gerr)
+		}
+
+		if qerr := models.DeleteItem_featuresByItem(*i); qerr == nil {
+			logs.Info("Item feature deleted ")
+		} else {
+			logs.Info("No item features to delete ")
+			panic(qerr)
+		}
+
+		if qerr := models.DeleteItem_purposesByItem(*i); qerr == nil {
+			logs.Info("Item purpose deleted ")
+		} else {
+			logs.Info("No item purposes to delete ")
+			panic(qerr)
+		}
+
 	} else {
 		logs.Error("An error occurred")
 		logs.Error(ierr)
