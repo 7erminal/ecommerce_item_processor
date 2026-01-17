@@ -748,6 +748,7 @@ func (c *ItemsController) Delete() {
 
 	if ierr == nil {
 		logs.Info("Item retrieved ")
+		logs.Info(i)
 
 		if ii, iierr := models.GetItem_imagesByItemId(id); iierr == nil {
 			logs.Info("Item images returned are ")
@@ -778,6 +779,8 @@ func (c *ItemsController) Delete() {
 			logs.Error("An error occurred")
 			logs.Error(gerr)
 		}
+
+		logs.Info("Deleting item features and purposes ", i.ItemId)
 
 		if qerr := models.DeleteItem_featuresByItem(*i); qerr == nil {
 			logs.Info("Item feature deleted ")
