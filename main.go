@@ -20,7 +20,7 @@ func main() {
 	logs.SetLogger(logs.AdapterFile, `{"filename":"../logs/item_processor_application.log"}`)
 
 	beego.InsertFilter("*", beego.BeforeRouter, cors.Allow(&cors.Options{
-		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:3001", "http://localhost:8000", "http://localhost:4002", "http://152.67.134.169", "http://13.40.60.131:8001", "http://167.86.115.44", "makufoodsltd.net", "https://makufoodsltd.net", "https://www.makufoodsltd.net", "https://www.makufoodsltd.com", "https://makufoodsltd.com", "makufoodsltd.com", "https://admin.bridgeafrica.group"},
+		AllowOrigins:     []string{"http://localhost:3000", "http://localhost:3001", "http://localhost:8000", "http://localhost:4002", "http://152.67.134.169", "http://13.40.60.131:8001", "http://167.86.115.44", "makufoodsltd.net", "https://makufoodsltd.net", "https://www.makufoodsltd.net", "https://www.makufoodsltd.com", "https://makufoodsltd.com", "makufoodsltd.com", "admin.makufoodsltd.com", "https://admin.makufoodsltd.com", "https://www.admin.makufoodsltd.com"},
 		AllowMethods:     []string{"PUT", "PATCH", "POST", "GET", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "X-Requested-With"},
 		ExposeHeaders:    []string{"Content-Length"},
