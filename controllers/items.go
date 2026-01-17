@@ -455,6 +455,35 @@ func (c *ItemsController) GetAll() {
 		}
 	}
 
+	// set active
+	activeQuery := "Active:1"
+	if v := activeQuery; v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
+	activeQueryt := "Test:1"
+	if v := activeQueryt; v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
 	// search: k:v,k:v
 	if v := c.GetString("search"); v != "" {
 		for _, cond := range strings.Split(v, ",") {
@@ -754,8 +783,15 @@ func (c *ItemsController) Delete() {
 			logs.Info("Item images returned are ")
 			logs.Info(ii)
 			for _, ib := range *ii {
-				if imerr := models.DeleteItem_images(ib.ItemImageId); imerr == nil {
-					logs.Info("Item images deleted")
+				// if imerr := models.DeleteItem_images(ib.ItemImageId); imerr == nil {
+				// 	logs.Info("Item images deleted")
+				// 	logs.Info("Item is ", i.ItemName)
+				// } else {
+				// 	panic(imerr)
+				// }
+				ib.Active = 0
+				if imerr := models.UpdateItem_imagesById(&ib); imerr == nil {
+					logs.Info("Item images deactivated")
 					logs.Info("Item is ", i.ItemName)
 				} else {
 					panic(imerr)
@@ -770,8 +806,14 @@ func (c *ItemsController) Delete() {
 
 		if gerr == nil {
 			logs.Info("Quantity ID is ", q.ItemQuantityId)
-			if qerr := models.DeleteItem_quantity(q.ItemQuantityId); qerr == nil {
-				logs.Info("Quantity deleted ")
+			// if qerr := models.DeleteItem_quantity(q.ItemQuantityId); qerr == nil {
+			// 	logs.Info("Quantity deleted ")
+			// } else {
+			// 	panic(qerr)
+			// }
+			q.Active = 0
+			if qerr := models.UpdateItem_quantityById(q); qerr == nil {
+				logs.Info("Quantity deactivated ")
 			} else {
 				panic(qerr)
 			}
@@ -782,26 +824,78 @@ func (c *ItemsController) Delete() {
 
 		logs.Info("Deleting item features and purposes ", i.ItemId)
 
-		if qerr := models.DeleteItem_featuresByItem(i.ItemId); qerr == nil {
-			logs.Info("Item feature deleted ")
+		// if qerr := models.DeleteItem_featuresByItem(i.ItemId); qerr == nil {
+		// 	logs.Info("Item feature deleted ")
+		// } else {
+		// 	logs.Error("No item features to delete ")
+		// 	logs.Error(qerr)
+		// 	// panic(qerr)
+		// }
+		itf, ferr := models.GetItem_featuresByItemId(i.ItemId)
+		if ferr == nil {
+			for _, ib := range *itf {
+				// if imerr := models.DeleteItem_images(ib.ItemImageId); imerr == nil {
+				// 	logs.Info("Item images deleted")
+				// 	logs.Info("Item is ", i.ItemName)
+				// } else {
+				// 	panic(imerr)
+				// }
+				ib.Active = 0
+				if imerr := models.UpdateItem_featuresById(&ib); imerr == nil {
+					logs.Info("Item feature deactivated")
+					logs.Info("Item is ", i.ItemName)
+				} else {
+					panic(imerr)
+				}
+			}
 		} else {
-			logs.Error("No item features to delete ")
-			logs.Error(qerr)
-			// panic(qerr)
+			logs.Error("An error occurred")
+			logs.Error(ferr)
 		}
 
-		if qerr := models.DeleteItem_purposesByItem(i.ItemId); qerr == nil {
-			logs.Info("Item purpose deleted ")
+		// if qerr := models.DeleteItem_purposesByItem(i.ItemId); qerr == nil {
+		// 	logs.Info("Item purpose deleted ")
+		// } else {
+		// 	logs.Error("No item purposes to delete ")
+		// 	logs.Error(qerr)
+		// 	// panic(qerr)
+		// }
+		itp, perr := models.GetItem_purposesByItemId(i.ItemId)
+		if perr == nil {
+			for _, ib := range *itp {
+				// if imerr := models.DeleteItem_images(ib.ItemImageId); imerr == nil {
+				// 	logs.Info("Item images deleted")
+				// 	logs.Info("Item is ", i.ItemName)
+				// } else {
+				// 	panic(imerr)
+				// }
+				ib.Active = 0
+				if imerr := models.UpdateItem_purposesById(&ib); imerr == nil {
+					logs.Info("Item purpose deactivated")
+					logs.Info("Item is ", i.ItemName)
+				} else {
+					panic(imerr)
+				}
+			}
 		} else {
-			logs.Error("No item purposes to delete ")
-			logs.Error(qerr)
-			// panic(qerr)
+			logs.Error("An error occurred")
+			logs.Error(perr)
 		}
+
+		// Finally delete item
 
 		if err := models.DeleteItems(id); err == nil {
 			logs.Error("Item Deleted ", id)
-			if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
-				logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
+			// if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
+			// 	logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
+			// 	logs.Info("Item Deleted ", id)
+			// 	c.Data["json"] = "OK"
+			// } else {
+			// 	panic(qerr)
+			// }
+			i.Active = 0
+			if qerr := models.UpdateItemsById(i); qerr == nil {
+				logs.Info("Deactivating Item: ", i.ItemPrice.ItemPriceId)
 				logs.Info("Item Deleted ", id)
 				c.Data["json"] = "OK"
 			} else {

@@ -49,7 +49,7 @@ func GetItem_featuresById(id int64) (v *Item_features, err error) {
 func GetItem_featuresByItemId(id int64) (v *[]Item_features, err error) {
 	o := orm.NewOrm()
 	var l []Item_features
-	if _, err = o.QueryTable(new(Item_features)).Filter("Item", Items{ItemId: id}).RelatedSel().All(&l); err == nil {
+	if _, err = o.QueryTable(new(Item_features)).Filter("Item", Items{ItemId: id}).All(&l); err == nil {
 		return &l, nil
 	}
 	return nil, err
