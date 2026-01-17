@@ -470,20 +470,6 @@ func (c *ItemsController) GetAll() {
 		}
 	}
 
-	activeQueryt := "Test:1"
-	if v := activeQueryt; v != "" {
-		for _, cond := range strings.Split(v, ",") {
-			kv := strings.SplitN(cond, ":", 2)
-			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
-				c.ServeJSON()
-				return
-			}
-			k, v := kv[0], kv[1]
-			query[k] = v
-		}
-	}
-
 	// search: k:v,k:v
 	if v := c.GetString("search"); v != "" {
 		for _, cond := range strings.Split(v, ",") {
