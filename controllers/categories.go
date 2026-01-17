@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/responses"
 	"net/http"
 	"path/filepath"
 	"strconv"
@@ -236,7 +237,9 @@ func (c *CategoriesController) Delete() {
 	// }
 	category, err := models.GetCategoriesById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error("An error occurred while deleting ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DEACTIVATING FEATURE"}
+		c.Data["json"] = resp
 		c.ServeJSON()
 		return
 	}
@@ -244,9 +247,12 @@ func (c *CategoriesController) Delete() {
 	category.Active = 0
 
 	if err := models.UpdateCategoriesById(category); err == nil {
-		c.Data["json"] = "OK"
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "Category deactivated successfully"}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error("An error occurred while deleting ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DEACTIVATING FEATURE"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

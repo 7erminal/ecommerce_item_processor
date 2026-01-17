@@ -268,7 +268,9 @@ func (c *PurposesController) Delete() {
 	// }
 	purpose, err := models.GetPurposesById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		logs.Error("An error occurred while deleting ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DEACTIVATING FEATURE"}
+		c.Data["json"] = resp
 		c.ServeJSON()
 		return
 	}
@@ -276,9 +278,12 @@ func (c *PurposesController) Delete() {
 	purpose.Active = 0
 
 	if err := models.UpdatePurposesById(purpose); err == nil {
-		c.Data["json"] = "OK"
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "Purpose deactivated successfully"}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = err.Error()
+		logs.Error("An error occurred while deleting ", err.Error())
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DEACTIVATING FEATURE"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
