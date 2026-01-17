@@ -52,7 +52,7 @@ func GetItem_quantityByItemId(id int64) (v *Item_quantity, err error) {
 	o := orm.NewOrm()
 	v = &Item_quantity{Item: &Items{ItemId: id}}
 	logs.Info("About to go to the db to get quantity for ", id)
-	if err = o.QueryTable(new(Item_quantity)).Filter("Item", Items{ItemId: id}).RelatedSel().One(v); err == nil {
+	if err = o.QueryTable(new(Item_quantity)).Filter("Item", Items{ItemId: id}).One(v); err == nil {
 		return v, nil
 	}
 	return nil, err
