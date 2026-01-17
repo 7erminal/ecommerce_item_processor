@@ -782,7 +782,7 @@ func (c *ItemsController) Delete() {
 
 		logs.Info("Deleting item features and purposes ", i.ItemId)
 
-		if qerr := models.DeleteItem_featuresByItem(*i); qerr == nil {
+		if qerr := models.DeleteItem_featuresByItem(i.ItemId); qerr == nil {
 			logs.Info("Item feature deleted ")
 		} else {
 			logs.Error("No item features to delete ")
@@ -790,7 +790,7 @@ func (c *ItemsController) Delete() {
 			// panic(qerr)
 		}
 
-		if qerr := models.DeleteItem_purposesByItem(*i); qerr == nil {
+		if qerr := models.DeleteItem_purposesByItem(i.ItemId); qerr == nil {
 			logs.Info("Item purpose deleted ")
 		} else {
 			logs.Error("No item purposes to delete ")

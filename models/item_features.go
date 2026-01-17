@@ -170,17 +170,13 @@ func DeleteItem_features(id int64) (err error) {
 	return
 }
 
-// DeleteItem_features deletes Item_features by Id and returns error if
+// DeleteItem_features deletes Item_features by Item Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteItem_featuresByItem(id Items) (err error) {
+func DeleteItem_featuresByItem(itemId int64) (err error) {
 	o := orm.NewOrm()
-	v := Item_features{Item: &id}
-	// ascertain id exists in the database
-	if err = o.Read(&v); err == nil {
-		var num int64
-		if num, err = o.Delete(&Item_features{Item: &id}); err == nil {
-			fmt.Println("Number of records deleted in database:", num)
-		}
+	var num int64
+	if num, err = o.QueryTable(new(Item_features)).Filter("Item", itemId).Delete(); err == nil {
+		fmt.Println("Number of records deleted in database:", num)
 	}
 	return
 }
