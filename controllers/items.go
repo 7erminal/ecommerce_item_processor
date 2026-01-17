@@ -869,27 +869,27 @@ func (c *ItemsController) Delete() {
 		}
 
 		// Finally delete item
-
-		if err := models.DeleteItems(id); err == nil {
-			logs.Error("Item Deleted ", id)
-			// if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
-			// 	logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
-			// 	logs.Info("Item Deleted ", id)
-			// 	c.Data["json"] = "OK"
-			// } else {
-			// 	panic(qerr)
-			// }
-			i.Active = 0
-			if qerr := models.UpdateItemsById(i); qerr == nil {
-				logs.Info("Deactivating Item: ", i.ItemPrice.ItemPriceId)
-				logs.Info("Item Deleted ", id)
-				c.Data["json"] = "OK"
-			} else {
-				panic(qerr)
-			}
+		i.Active = 0
+		if qerr := models.UpdateItemsById(i); qerr == nil {
+			logs.Info("Deactivating Item: ", i.ItemPrice.ItemPriceId)
+			logs.Info("Item Deleted ", id)
+			c.Data["json"] = "OK"
 		} else {
-			c.Data["json"] = err.Error()
+			panic(qerr)
 		}
+
+		// if err := models.DeleteItems(id); err == nil {
+		// 	logs.Error("Item Deleted ", id)
+		// if qerr := models.DeleteItem_prices(i.ItemPrice.ItemPriceId); qerr == nil {
+		// 	logs.Info("Deleting Item price: ", i.ItemPrice.ItemPriceId)
+		// 	logs.Info("Item Deleted ", id)
+		// 	c.Data["json"] = "OK"
+		// } else {
+		// 	panic(qerr)
+		// }
+		// } else {
+		// 	c.Data["json"] = err.Error()
+		// }
 
 	} else {
 		logs.Error("An error occurred")
