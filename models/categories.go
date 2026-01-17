@@ -15,6 +15,8 @@ type Categories struct {
 	CategoryName string    `orm:"size(40)"`
 	ImagePath    string    `orm:"size(250)"`
 	Icon         string    `orm:"size(250)"`
+	Description  string    `orm:"type(text);null"`
+	Active       int8      `orm:"default(1)"`
 	DateCreated  time.Time `orm:"type(datetime);omitempty"`
 	DateModified time.Time `orm:"type(datetime);omitempty"`
 	CreatedBy    int       `orm:"omitempty"`

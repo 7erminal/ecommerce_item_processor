@@ -261,7 +261,21 @@ func (c *PurposesController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	logs.Info("Delete purpose request received ", idStr)
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	if err := models.DeletePurposes(id); err == nil {
+	// if err := models.DeletePurposes(id); err == nil {
+	// 	c.Data["json"] = "OK"
+	// } else {
+	// 	c.Data["json"] = err.Error()
+	// }
+	purpose, err := models.GetPurposesById(id)
+	if err != nil {
+		c.Data["json"] = err.Error()
+		c.ServeJSON()
+		return
+	}
+
+	purpose.Active = 0
+
+	if err := models.UpdatePurposesById(purpose); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()

@@ -77,7 +77,6 @@ func (c *FeaturesController) Post() {
 
 	v := models.Features{FeatureName: c.Ctx.Input.Query("FeatureName"), ImagePath: filePath, Description: c.Ctx.Input.Query("Description"), Active: 1, CreatedBy: 1}
 
-	
 	if _, err := models.AddFeatures(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
 
@@ -283,12 +282,27 @@ func (c *FeaturesController) ChangeVisibility() {
 func (c *FeaturesController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	if err := models.DeleteFeatures(id); err == nil {
-		resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "OK"}
-		c.Data["json"] = resp
+	// if err := models.DeleteFeatures(id); err == nil {
+	// 	resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "OK"}
+	// 	c.Data["json"] = resp
+	// } else {
+	// 	logs.Error("An error occurred while deleting ", err.Error())
+	// 	resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DELETING"}
+	// 	c.Data["json"] = resp
+	// }
+	if q, err := models.GetFeaturesById(id); err == nil {
+		q.Active = 0
+		if err := models.UpdateFeaturesById(q); err == nil {
+			resp := responses.StringResponseDTO{StatusCode: 200, Value: "", StatusDesc: "Feature deactivated successfully"}
+			c.Data["json"] = resp
+		} else {
+			logs.Error("An error occurred while deleting ", err.Error())
+			resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DEACTIVATING FEATURE"}
+			c.Data["json"] = resp
+		}
 	} else {
 		logs.Error("An error occurred while deleting ", err.Error())
-		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DELETING"}
+		resp := responses.StringResponseDTO{StatusCode: 301, Value: "", StatusDesc: "ERROR WHILE DEACTIVATING FEATURE"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

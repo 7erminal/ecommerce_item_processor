@@ -229,7 +229,21 @@ func (c *CategoriesController) Put() {
 func (c *CategoriesController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	if err := models.DeleteCategories(id); err == nil {
+	// if err := models.DeleteCategories(id); err == nil {
+	// 	c.Data["json"] = "OK"
+	// } else {
+	// 	c.Data["json"] = err.Error()
+	// }
+	category, err := models.GetCategoriesById(id)
+	if err != nil {
+		c.Data["json"] = err.Error()
+		c.ServeJSON()
+		return
+	}
+
+	category.Active = 0
+
+	if err := models.UpdateCategoriesById(category); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		c.Data["json"] = err.Error()
