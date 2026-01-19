@@ -80,7 +80,15 @@ func (c *CategoriesController) Post() {
 	// c.Data["json"] = map[string]string{"message": "Image uploaded successfully!"}
 	// c.ServeJSON()
 
-	v := models.Categories{CategoryName: c.Ctx.Input.Query("CategoryName"), Icon: c.Ctx.Input.Query("Icon"), ImagePath: filePath, CreatedBy: 1, DateCreated: time.Now(), DateModified: time.Now()}
+	v := models.Categories{
+		CategoryName: c.Ctx.Input.Query("CategoryName"),
+		Icon:         c.Ctx.Input.Query("Icon"),
+		ImagePath:    filePath,
+		CreatedBy:    1,
+		DateCreated:  time.Now(),
+		DateModified: time.Now(),
+		Active:       1,
+	}
 
 	if _, err := models.AddCategories(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)

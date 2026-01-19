@@ -74,7 +74,13 @@ func (c *PurposesController) Post() {
 		}
 	}
 
-	v := models.Purposes{Purpose: c.Ctx.Input.Query("PurposeName"), ImagePath: filePath, Description: c.Ctx.Input.Query("Description"), Active: 1, CreatedBy: 1}
+	v := models.Purposes{
+		Purpose:     c.Ctx.Input.Query("PurposeName"),
+		ImagePath:   filePath,
+		Description: c.Ctx.Input.Query("Description"),
+		Active:      1,
+		CreatedBy:   1,
+	}
 
 	if _, err := models.AddPurposes(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
