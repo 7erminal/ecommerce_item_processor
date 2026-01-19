@@ -62,7 +62,7 @@ func (c *CategoriesController) Post() {
 		// Save the uploaded file
 		fileName := filepath.Base(header.Filename)
 		filePath = "/uploads/categories/" + time.Now().Format("20060102150405") + fileName // Define your file path
-		err = c.SaveToFile("Image", "../images/"+filePath)
+		err = c.SaveToFile("Image", "/var/www/html/maku-foods-images/"+filePath)
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
 			logs.Error("Error saving file", err)

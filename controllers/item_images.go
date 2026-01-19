@@ -143,7 +143,7 @@ func (c *Item_imagesController) UploadPictures() {
 	logs.Info("File Name Extracted is ", fileName, "Time now is ", time.Now().Format("20060102150405"))
 	filePath := "/uploads/items/" + time.Now().Format("20060102150405") + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
-	err = c.SaveToFile("Image", "../images"+filePath)
+	err = c.SaveToFile("Image", "/var/www/html/maku-foods-images/"+filePath)
 	if err != nil || header.Size < 1 {
 		filePath = ""
 		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
