@@ -59,7 +59,7 @@ func (c *Item_imagesController) Post() {
 	logs.Info("File Name Extracted is ", fileName)
 	filePath := "/uploads/items/" + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
-	err = c.SaveToFile("Image", "."+filePath)
+	err = c.SaveToFile("Image", "/var/www/html/maku-foods-images/"+filePath)
 	if err != nil {
 		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
 		logs.Error("Error saving file", err)
