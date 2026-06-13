@@ -5,15 +5,15 @@ name: Go
 
 on:
   push:
-    branches: [ "makufoods" ]
+    branches: [ "ecommerce" ]
   pull_request:
-    branches: [ "makufoods" ]
+    branches: [ "ecommerce" ]
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
-    environment: makufoods
+    environment: ecommerce
     steps:
     - uses: actions/checkout@v4
 
@@ -26,13 +26,20 @@ jobs:
       env:
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
-          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          SSH_SERVER: ${{ vars.SSH_SERVER }}
+          SSH_USER: ${{ vars.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
-        sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no root@184.174.33.200 << 'EOF'
-          set -e  # Exit on any error 0
-          cd /usr/app/maku_foods_item_processor
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
+
+        ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_SERVER << 'EOF'
+          set -e
+          cd /usr/app/ecommerce/ecommerce_item_processor
           git stash
-          git pull origin makufoods  # Use branch explicitly
-          go build -o maku-foods-item-processing-service
-          pm2 restart maku-foods-item-processing-service || pm2 start maku-foods-item-processing-service --name maku-foods-item-processing-service
-        EOF 
+          git pull origin ecommerce
+          go build -o ecommerce-item-processor
+          pm2 restart ecommerce-item-processor || \
+          pm2 start ecommerce-item-processor --name ecommerce-item-processor
+        EOF
