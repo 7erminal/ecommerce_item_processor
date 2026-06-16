@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
+	"item_processor/controllers/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
 	"item_processor/structs/responses"
@@ -96,7 +97,7 @@ func (c *Item_reviewsController) Post() {
 		return
 	}
 
-	if u, err := models.GetUsersById(reviewBy); err == nil {
+	if u := functions.GetUser(&c.Controller, reviewBy); u.StatusCode == 200 {
 		item := models.Items{}
 		if item_, err := models.GetItemsById(item_); err == nil {
 			// logs.Error("Error returned after attempting to add review is ", err.Error())
@@ -114,7 +115,7 @@ func (c *Item_reviewsController) Post() {
 		if err != nil {
 			logs.Error("An error occurred converting ", referenceStr, " to int ", err.Error())
 		}
-		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: reference, Rating: rating, ReviewBy: u, Active: 1, CreatedBy: int(reviewBy), DateCreated: time.Now(), ModifiedBy: int(reviewBy), DateModified: time.Now()}
+		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: reference, Rating: rating, ReviewBy: u.User.UserId, Active: 1, CreatedBy: int(reviewBy), DateCreated: time.Now(), ModifiedBy: int(reviewBy), DateModified: time.Now()}
 		if _, err := models.AddItem_reviews(&r); err == nil {
 			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &r, StatusDesc: "Review successfully added"}
 			c.Ctx.Output.SetStatus(200)
@@ -124,6 +125,10 @@ func (c *Item_reviewsController) Post() {
 			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 301, ItemReview: nil, StatusDesc: "Review addition failed"}
 			c.Data["json"] = resp
 		}
+	} else {
+		logs.Info("Error::: User not found ")
+		var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 500, ItemReview: nil, StatusDesc: "Review addition failed"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }

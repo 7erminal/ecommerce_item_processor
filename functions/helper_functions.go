@@ -2,6 +2,7 @@ package functions
 
 import (
 	"fmt"
+	"item_processor/controllers/functions"
 	"item_processor/models"
 	"item_processor/structs/responses"
 	"strconv"
@@ -49,70 +50,82 @@ func ConvertParamsToFeatures(params []orm.Params) []responses.FeaturesItemsDTO {
 
 			cat, _ := models.GetCategoriesById(toInt64(param["item_id"]))
 			it_price, _ := models.GetItem_pricesById(toInt64(param["item_price_id"]))
-			countr_, _ := models.GetCountriesById(toInt64(param["country"]))
+			countr_ := functions.GetCountryWithCode(nil, toString(param["country"]))
 
-			item_ := models.Items{
-				ItemId:          toInt64(param["item_id"]),
-				ItemName:        toString(param["item_name"]),
-				Description:     toString(param["description"]),
-				Weight:          toString(param["weight"]),
-				Category:        cat,
-				ItemPrice:       it_price,
-				AvailableSizes:  toString(param["available_sizes"]),
-				AvailableColors: toString(param["available_colors"]),
-				Material:        toString(param["material"]),
-				ImagePath:       toString(param["image_path"]),
-				Quantity:        toInt(param["quantity"]),
-				Active:          toInt(param["active"]),
-				DateCreated:     toTime(param["date_created"]),
-				DateModified:    toTime(param["date_modified"]),
-				CreatedBy:       toInt(param["created_by"]),
-				ModifiedBy:      toInt(param["modified_by"]),
-				Country:         countr_,
+			if countr_.StatusCode != 200 {
+				logs.Error("Error getting country with code ", toString(param["country"]), "Error is ", countr_.StatusDesc)
+			} else {
+				item_ := models.Items{
+					ItemId:          toInt64(param["item_id"]),
+					ItemName:        toString(param["item_name"]),
+					Description:     toString(param["description"]),
+					Weight:          toString(param["weight"]),
+					Category:        cat,
+					ItemPrice:       it_price,
+					AvailableSizes:  toString(param["available_sizes"]),
+					AvailableColors: toString(param["available_colors"]),
+					Material:        toString(param["material"]),
+					ImagePath:       toString(param["image_path"]),
+					Quantity:        toInt(param["quantity"]),
+					Active:          toInt(param["active"]),
+					DateCreated:     toTime(param["date_created"]),
+					DateModified:    toTime(param["date_modified"]),
+					CreatedBy:       toInt(param["created_by"]),
+					ModifiedBy:      toInt(param["modified_by"]),
+					Country:         countr_.Country.CountryId,
+				}
+
+				feature.Items = append(feature.Items, item_)
+
+				features = append(features, feature)
 			}
 
-			feature.Items = append(feature.Items, item_)
-
-			features = append(features, feature)
 		} else {
 			cat, _ := models.GetCategoriesById(toInt64(param["category_id"]))
 			it_price, _ := models.GetItem_pricesById(toInt64(param["item_price_id"]))
-			countr_, _ := models.GetCountriesById(toInt64(param["country"]))
+			countr_ := functions.GetCountryWithCode(nil, toString(param["country"]))
 
-			item_ := models.Items{
-				ItemId:          toInt64(param["item_id"]),
-				ItemName:        toString(param["item_name"]),
-				Description:     toString(param["description"]),
-				Weight:          toString(param["weight"]),
-				Category:        cat,
-				ItemPrice:       it_price,
-				AvailableSizes:  toString(param["available_sizes"]),
-				AvailableColors: toString(param["available_colors"]),
-				Material:        toString(param["material"]),
-				ImagePath:       toString(param["image_path"]),
-				Quantity:        toInt(param["quantity"]),
-				Active:          toInt(param["active"]),
-				DateCreated:     toTime(param["date_created"]),
-				DateModified:    toTime(param["date_modified"]),
-				CreatedBy:       toInt(param["created_by"]),
-				ModifiedBy:      toInt(param["modified_by"]),
-				Country:         countr_,
-			}
+			if countr_.StatusCode != 200 {
+				logs.Error("Error getting country with code ", toString(param["country"]), "Error is ", countr_.StatusDesc)
+			} else {
+				logs.Error("Error getting country with code ", toString(param["country"]), "Error is ", countr_.StatusDesc)
 
-			feature_.Items = append(feature_.Items, item_)
-
-			logs.Info("On feature ", toString(param["feature_name"]), "Feature Items are ", len(feature_.Items), "on Item ", toString(param["item_name"]))
-
-			// Find the feature and update
-			qs := 0
-			for _, it := range features {
-				if it.FeatureId == toInt64(param["feature_id"]) {
-					logs.Info("It matches so replacing and updating")
-
-					features[qs] = feature_
+				item_ := models.Items{
+					ItemId:          toInt64(param["item_id"]),
+					ItemName:        toString(param["item_name"]),
+					Description:     toString(param["description"]),
+					Weight:          toString(param["weight"]),
+					Category:        cat,
+					ItemPrice:       it_price,
+					AvailableSizes:  toString(param["available_sizes"]),
+					AvailableColors: toString(param["available_colors"]),
+					Material:        toString(param["material"]),
+					ImagePath:       toString(param["image_path"]),
+					Quantity:        toInt(param["quantity"]),
+					Active:          toInt(param["active"]),
+					DateCreated:     toTime(param["date_created"]),
+					DateModified:    toTime(param["date_modified"]),
+					CreatedBy:       toInt(param["created_by"]),
+					ModifiedBy:      toInt(param["modified_by"]),
+					Country:         countr_.Country.CountryId,
 				}
-				qs++
+
+				feature_.Items = append(feature_.Items, item_)
+
+				logs.Info("On feature ", toString(param["feature_name"]), "Feature Items are ", len(feature_.Items), "on Item ", toString(param["item_name"]))
+
+				// Find the feature and update
+				qs := 0
+				for _, it := range features {
+					if it.FeatureId == toInt64(param["feature_id"]) {
+						logs.Info("It matches so replacing and updating")
+
+						features[qs] = feature_
+					}
+					qs++
+				}
 			}
+
 		}
 		q++
 	}
@@ -158,70 +171,80 @@ func ConvertParamsToPurposes(params []orm.Params) []responses.PurposesItemsDTO {
 
 			cat, _ := models.GetCategoriesById(toInt64(param["category_id"]))
 			it_price, _ := models.GetItem_pricesById(toInt64(param["item_price_id"]))
-			countr_, _ := models.GetCountriesById(toInt64(param["country"]))
+			countr_ := functions.GetCountryWithCode(nil, toString(param["country"]))
 
-			item_ := models.Items{
-				ItemId:          toInt64(param["item_id"]),
-				ItemName:        toString(param["item_name"]),
-				Description:     toString(param["description"]),
-				Weight:          toString(param["weight"]),
-				Category:        cat,
-				ItemPrice:       it_price,
-				AvailableSizes:  toString(param["available_sizes"]),
-				AvailableColors: toString(param["available_colors"]),
-				Material:        toString(param["material"]),
-				ImagePath:       toString(param["image_path"]),
-				Quantity:        toInt(param["quantity"]),
-				Active:          toInt(param["active"]),
-				DateCreated:     toTime(param["date_created"]),
-				DateModified:    toTime(param["date_modified"]),
-				CreatedBy:       toInt(param["created_by"]),
-				ModifiedBy:      toInt(param["modified_by"]),
-				Country:         countr_,
+			if countr_.StatusCode != 200 {
+				logs.Error("Error getting country with code: %v", countr_.StatusDesc)
+			} else {
+				item_ := models.Items{
+					ItemId:          toInt64(param["item_id"]),
+					ItemName:        toString(param["item_name"]),
+					Description:     toString(param["description"]),
+					Weight:          toString(param["weight"]),
+					Category:        cat,
+					ItemPrice:       it_price,
+					AvailableSizes:  toString(param["available_sizes"]),
+					AvailableColors: toString(param["available_colors"]),
+					Material:        toString(param["material"]),
+					ImagePath:       toString(param["image_path"]),
+					Quantity:        toInt(param["quantity"]),
+					Active:          toInt(param["active"]),
+					DateCreated:     toTime(param["date_created"]),
+					DateModified:    toTime(param["date_modified"]),
+					CreatedBy:       toInt(param["created_by"]),
+					ModifiedBy:      toInt(param["modified_by"]),
+					Country:         countr_.Country.CountryId,
+				}
+
+				purpose.Items = append(purpose.Items, item_)
+
+				purposes = append(purposes, purpose)
 			}
 
-			purpose.Items = append(purpose.Items, item_)
-
-			purposes = append(purposes, purpose)
 		} else {
 			cat, _ := models.GetCategoriesById(toInt64(param["item_id"]))
 			it_price, _ := models.GetItem_pricesById(toInt64(param["item_price_id"]))
-			countr_, _ := models.GetCountriesById(toInt64(param["country"]))
+			countr_ := functions.GetCountryWithCode(nil, toString(param["country"]))
 
-			item_ := models.Items{
-				ItemId:          toInt64(param["item_id"]),
-				ItemName:        toString(param["item_name"]),
-				Description:     toString(param["description"]),
-				Weight:          toString(param["weight"]),
-				Category:        cat,
-				ItemPrice:       it_price,
-				AvailableSizes:  toString(param["available_sizes"]),
-				AvailableColors: toString(param["available_colors"]),
-				Material:        toString(param["material"]),
-				ImagePath:       toString(param["image_path"]),
-				Quantity:        toInt(param["quantity"]),
-				Active:          toInt(param["active"]),
-				DateCreated:     toTime(param["date_created"]),
-				DateModified:    toTime(param["date_modified"]),
-				CreatedBy:       toInt(param["created_by"]),
-				ModifiedBy:      toInt(param["modified_by"]),
-				Country:         countr_,
-			}
-
-			purpose_.Items = append(purpose_.Items, item_)
-
-			logs.Info("On feature ", toString(param["feature_name"]), "Feature Items are ", len(purpose_.Items), "on Item ", toString(param["item_name"]))
-
-			// Find the feature and update
-			qs := 0
-			for _, it := range purposes {
-				if it.PurposeId == toInt64(param["feature_id"]) {
-					logs.Info("It matches so replacing and updating")
-
-					purposes[qs] = purpose_
+			if countr_.StatusCode != 200 {
+				logs.Error("Error getting country with code ", toString(param["country"]), "Error is ", countr_.StatusDesc)
+			} else {
+				item_ := models.Items{
+					ItemId:          toInt64(param["item_id"]),
+					ItemName:        toString(param["item_name"]),
+					Description:     toString(param["description"]),
+					Weight:          toString(param["weight"]),
+					Category:        cat,
+					ItemPrice:       it_price,
+					AvailableSizes:  toString(param["available_sizes"]),
+					AvailableColors: toString(param["available_colors"]),
+					Material:        toString(param["material"]),
+					ImagePath:       toString(param["image_path"]),
+					Quantity:        toInt(param["quantity"]),
+					Active:          toInt(param["active"]),
+					DateCreated:     toTime(param["date_created"]),
+					DateModified:    toTime(param["date_modified"]),
+					CreatedBy:       toInt(param["created_by"]),
+					ModifiedBy:      toInt(param["modified_by"]),
+					Country:         countr_.Country.CountryId,
 				}
-				qs++
+
+				purpose_.Items = append(purpose_.Items, item_)
+
+				logs.Info("On feature ", toString(param["feature_name"]), "Feature Items are ", len(purpose_.Items), "on Item ", toString(param["item_name"]))
+
+				// Find the feature and update
+				qs := 0
+				for _, it := range purposes {
+					if it.PurposeId == toInt64(param["feature_id"]) {
+						logs.Info("It matches so replacing and updating")
+
+						purposes[qs] = purpose_
+					}
+					qs++
+				}
 			}
+
 		}
 		q++
 	}

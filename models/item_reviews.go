@@ -14,7 +14,7 @@ type Item_reviews struct {
 	ItemReviewId int64  `orm:"auto"`
 	Review       string `orm:"size(1000)"`
 	Rating       float64
-	ReviewBy     *Users    `orm:"rel(fk);column(review_by);null"`
+	ReviewBy     int64     `orm:"column(review_by);null"`
 	Item         *Items    `orm:"rel(fk);column(item_id)"`
 	DateCreated  time.Time `orm:"type(datetime)"`
 	DateModified time.Time `orm:"type(datetime)"`

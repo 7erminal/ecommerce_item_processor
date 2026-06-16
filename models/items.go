@@ -44,8 +44,8 @@ type Items struct {
 	DateModified    time.Time      `orm:"type(datetime);omitempty"`
 	CreatedBy       int            `orm:"omitempty"`
 	ModifiedBy      int            `orm:"omitempty"`
-	Country         *Countries     `orm:"rel(fk);column(country)"`
-	Branch          *Branches      `orm:"rel(fk);column(branch);null"`
+	Country         int64          `orm:"column(country)"`
+	Branch          int64          `orm:"column(branch);null"`
 	Status          *Status        `orm:"rel(fk);column(item_status);null"`
 	LastOrderDate   time.Time      `orm:"type(datetime);null"`
 	ItemQuantity    *Item_quantity `orm:"reverse(one)"`
@@ -355,7 +355,7 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 
 // GetAllItems retrieves all Items matches certain condition. Returns empty list if
 // no records exist
-func GetAllItemsByBranch(branch *Branches, query map[string]string, fields []string, sortby []string, order []string,
+func GetAllItemsByBranch(branch int64, query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(Items))

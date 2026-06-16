@@ -18,7 +18,7 @@ type Item_prices struct {
 	Discount      string
 	Discount_type string
 	ExtraCharges  float32
-	Currency      *Currencies `orm:"rel(fk)"`
+	Currency      int64
 	Active        int
 	DateCreated   time.Time `orm:"type(datetime)"`
 	DateModified  time.Time `orm:"type(datetime)"`

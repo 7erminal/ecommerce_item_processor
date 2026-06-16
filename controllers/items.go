@@ -69,17 +69,17 @@ func (c *ItemsController) Post() {
 
 	if err == nil {
 		// Get Currency
-		cr, cerr := models.GetCurrenciesById(int64(1))
+		cr, cerr := functions.GetCurrencyWithName(&c.Controller, "GHC")
 
-		if cerr == nil {
+		if cr.StatusCode == 200 {
 			// Add price for item
 			logs.Info("Adding price for item with price ", t.ItemPrice, " and alt price ", t.AltItemPrice, " and extra charges ", t.ExtraCharges)
-			it := models.Item_prices{ItemPrice: t.ItemPrice, AltItemPrice: t.AltItemPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+			it := models.Item_prices{ItemPrice: t.ItemPrice, AltItemPrice: t.AltItemPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr.Currency.CurrencyId, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 
 			logs.Info("Adding price to item to create at a go")
 			if _, err := models.AddItem_prices(&it); err == nil {
-				country, _ := models.GetCountriesByCode(t.Country)
-				branch, _ := models.GetBranchesById(t.Branch)
+				country := functions.GetCountryWithCode(&c.Controller, t.Country)
+				branch := functions.GetBranch(&c.Controller, t.Branch)
 
 				status := models.Status{}
 
@@ -88,7 +88,7 @@ func (c *ItemsController) Post() {
 				}
 
 				// Add item if getting category and price addition does not result in an error
-				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country, Branch: branch, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator, Status: &status}
+				v := models.Items{ItemName: t.ItemName, Description: t.Description, Weight: t.Weight, Category: p, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Country: country.Country.CountryId, Branch: branch.Branch.BranchId, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: creator, ModifiedBy: creator, Status: &status}
 
 				if _, err := models.AddItems(&v); err == nil {
 					// Add quantity for item
@@ -558,8 +558,8 @@ func (c *ItemsController) GetAllByBranch() {
 		}
 	}
 
-	if branch, err := models.GetBranchesById(branchid); err == nil {
-		l, err := models.GetAllItemsByBranch(branch, query, fields, sortby, order, offset, limit)
+	if branch := functions.GetBranch(&c.Controller, branchid); branch.StatusCode == 200 {
+		l, err := models.GetAllItemsByBranch(branch.Branch.BranchId, query, fields, sortby, order, offset, limit)
 		if err != nil {
 			resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
@@ -569,7 +569,7 @@ func (c *ItemsController) GetAllByBranch() {
 		}
 	} else {
 		logs.Error("Branch does not exist")
-		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: branch.StatusDesc}
 		c.Data["json"] = resp
 	}
 
@@ -607,81 +607,92 @@ func (c *ItemsController) Put() {
 			c.Data["json"] = resp
 		} else {
 			// Get Currency
-			cr, cerr := models.GetCurrenciesById(int64(1))
+			cr, cerr := functions.GetCurrencyWithName(&c.Controller, "GHC")
 
 			if cerr == nil {
 				if ip, err := models.GetItem_pricesById(iv.ItemPrice.ItemPriceId); err == nil {
 					// Add price for item
-					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
+					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr.Currency.CurrencyId, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
 
 					logs.Info("Modifying price for item")
 
 					if err := models.UpdateItem_pricesById(&it); err == nil {
 						// Add item if getting category and price addition does not result in an error
-						country, _ := models.GetCountriesByCode(t.Country)
-						branch, _ := models.GetBranchesById(t.Branch)
-						v := models.Items{ItemId: id, ItemName: t.ItemName, Country: country, Branch: branch, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator, CreatedBy: iv.CreatedBy, DateCreated: iv.DateCreated, Weight: t.Weight}
-
-						if err := models.UpdateItemsById(&v); err == nil {
-							// Add quantity for item
-
-							iq, err := models.GetItem_quantityByItemId(id)
-							if err != nil {
-								resp := models.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
-								c.Data["json"] = resp
-								qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
-								if _, err := models.AddItem_quantity(&qu); err == nil {
-									item, err := models.GetItemsById(v.ItemId)
-									if err != nil {
-
-										logs.Error(err.Error())
-										resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
-										c.Data["json"] = resp
-									} else {
-										logs.Info("Item fetched successfully")
-										logs.Info("Item quantity is ", item.ItemQuantity)
-										logs.Info("Item quantity added successfully")
-									}
-									c.Ctx.Output.SetStatus(200)
-
-									resp := responses.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully added"}
-									c.Data["json"] = resp
-								} else {
-									logs.Error(err.Error())
-									resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
-									c.Data["json"] = resp
-								}
-							} else {
-								qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
-
-								if err := models.UpdateItem_quantityById(&qu); err == nil {
-									item, err := models.GetItemsById(v.ItemId)
-									if err != nil {
-
-										logs.Error(err.Error())
-										resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
-										c.Data["json"] = resp
-									} else {
-										logs.Info("Item fetched successfully")
-										logs.Info("Item quantity is ", item.ItemQuantity)
-										logs.Info("Item quantity added successfully")
-									}
-
-									c.Ctx.Output.SetStatus(200)
-
-									resp := models.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully updated"}
-									c.Data["json"] = resp
-								} else {
-									logs.Error(err.Error())
-									resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
-									c.Data["json"] = resp
-								}
-							}
-
-						} else {
-							logs.Error(err.Error())
-							resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+						country := functions.GetCountryWithCode(&c.Controller, t.Country)
+						branch := functions.GetBranch(&c.Controller, t.Branch)
+						if country.StatusCode != 200 {
+							logs.Error("Country does not exist")
+							resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Country does not exist"}
 							c.Data["json"] = resp
+						} else if branch.StatusCode != 200 {
+							logs.Error("Branch does not exist")
+							resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Branch does not exist"}
+							c.Data["json"] = resp
+						} else {
+							logs.Info("Modifying item with ID ", id)
+							v := models.Items{ItemId: id, ItemName: t.ItemName, Country: country.Country.CountryId, Branch: branch.Branch.BranchId, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator, CreatedBy: iv.CreatedBy, DateCreated: iv.DateCreated, Weight: t.Weight}
+
+							if err := models.UpdateItemsById(&v); err == nil {
+								// Add quantity for item
+
+								iq, err := models.GetItem_quantityByItemId(id)
+								if err != nil {
+									resp := models.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
+									c.Data["json"] = resp
+									qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+									if _, err := models.AddItem_quantity(&qu); err == nil {
+										item, err := models.GetItemsById(v.ItemId)
+										if err != nil {
+
+											logs.Error(err.Error())
+											resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+											c.Data["json"] = resp
+										} else {
+											logs.Info("Item fetched successfully")
+											logs.Info("Item quantity is ", item.ItemQuantity)
+											logs.Info("Item quantity added successfully")
+										}
+										c.Ctx.Output.SetStatus(200)
+
+										resp := responses.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully added"}
+										c.Data["json"] = resp
+									} else {
+										logs.Error(err.Error())
+										resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										c.Data["json"] = resp
+									}
+								} else {
+									qu := models.Item_quantity{ItemQuantityId: iq.ItemQuantityId, Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: iq.CreatedBy, DateCreated: iq.DateCreated, ModifiedBy: creator, DateModified: time.Now()}
+
+									if err := models.UpdateItem_quantityById(&qu); err == nil {
+										item, err := models.GetItemsById(v.ItemId)
+										if err != nil {
+
+											logs.Error(err.Error())
+											resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+											c.Data["json"] = resp
+										} else {
+											logs.Info("Item fetched successfully")
+											logs.Info("Item quantity is ", item.ItemQuantity)
+											logs.Info("Item quantity added successfully")
+										}
+
+										c.Ctx.Output.SetStatus(200)
+
+										resp := models.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully updated"}
+										c.Data["json"] = resp
+									} else {
+										logs.Error(err.Error())
+										resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										c.Data["json"] = resp
+									}
+								}
+
+							} else {
+								logs.Error(err.Error())
+								resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+								c.Data["json"] = resp
+							}
 						}
 					} else {
 						logs.Error(err.Error())
