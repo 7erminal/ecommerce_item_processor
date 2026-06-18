@@ -2,7 +2,7 @@ package models
 
 type CategoriesResponseDTO struct {
 	StatusCode int
-	Categories *[]interface{}
+	Categories *[]Categories
 	StatusDesc string
 }
 

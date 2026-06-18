@@ -217,7 +217,13 @@ func (c *CategoriesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		resp := models.CategoriesResponseDTO{StatusCode: 200, Categories: &l, StatusDesc: "Categories fetched successfully"}
+		categoriesResp := []models.Categories{}
+		for _, urs := range l {
+			m := urs.(models.Categories)
+
+			categoriesResp = append(categoriesResp, m)
+		}
+		resp := models.CategoriesResponseDTO{StatusCode: 200, Categories: &categoriesResp, StatusDesc: "Categories fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

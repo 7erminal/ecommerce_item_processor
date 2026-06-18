@@ -491,11 +491,14 @@ func (c *ItemsController) GetAll() {
 		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		if l == nil {
-			l = []interface{}{}
+		itemsResp := []models.Items{}
+		for _, urs := range l {
+			m := urs.(models.Items)
+
+			itemsResp = append(itemsResp, m)
 		}
 		logs.Info("Items returned are ", l)
-		resp := models.ItemsResponseDTO{StatusCode: 200, Items: &l, StatusDesc: "Items fetched successfully"}
+		resp := models.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -564,7 +567,13 @@ func (c *ItemsController) GetAllByBranch() {
 			resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		} else {
-			resp := models.ItemsResponseDTO{StatusCode: 200, Items: &l, StatusDesc: "Items fetched successfully"}
+			itemsResp := []models.Items{}
+			for _, urs := range l {
+				m := urs.(models.Items)
+
+				itemsResp = append(itemsResp, m)
+			}
+			resp := models.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
 			c.Data["json"] = resp
 		}
 	} else {
