@@ -86,6 +86,7 @@ func (c *CategoriesController) Post() {
 		CategoryName: c.Ctx.Input.Query("CategoryName"),
 		Icon:         c.Ctx.Input.Query("Icon"),
 		ImagePath:    filePath,
+		Description:  c.Ctx.Input.Query("CategoryDescription"),
 		CreatedBy:    1,
 		DateCreated:  time.Now(),
 		DateModified: time.Now(),
