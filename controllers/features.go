@@ -243,7 +243,13 @@ func (c *FeaturesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		var resp = models.FeaturesResponseDTO{StatusCode: 200, Features: &l, StatusDesc: "Features fetched successfully"}
+		featuresResp := []models.Features{}
+		for _, urs := range l {
+			m := urs.(models.Features)
+
+			featuresResp = append(featuresResp, m)
+		}
+		var resp = models.FeaturesResponseDTO{StatusCode: 200, Features: &featuresResp, StatusDesc: "Features fetched successfully"}
 
 		c.Data["json"] = resp
 	}

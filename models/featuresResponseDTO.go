@@ -2,7 +2,7 @@ package models
 
 type FeaturesResponseDTO struct {
 	StatusCode int
-	Features   *[]interface{}
+	Features   *[]Features
 	StatusDesc string
 }
 
