@@ -28,31 +28,44 @@ type ItemBranchCountDTO struct {
 }
 
 type Items struct {
-	ItemId          int64          `orm:"auto"`
-	ItemName        string         `orm:"size(80)"`
-	Description     string         `orm:"size(250);omitempty"`
-	Weight          string         `orm:"size(20);omitempty"`
-	Category        *Categories    `orm:"rel(fk)"`
-	ItemPrice       *Item_prices   `orm:"rel(fk);omitempty"`
-	AvailableSizes  string         `orm:"size(250);omitempty"`
-	AvailableColors string         `orm:"size(250);omitempty"`
-	Material        string         `orm:"size(400);omitempty"`
-	ImagePath       string         `orm:"size(250);omitempty"`
-	Quantity        int            `orm:"omitempty"`
-	Active          int            `orm:"omitempty"`
-	DateCreated     time.Time      `orm:"type(datetime);omitempty"`
-	DateModified    time.Time      `orm:"type(datetime);omitempty"`
-	CreatedBy       int            `orm:"omitempty"`
-	ModifiedBy      int            `orm:"omitempty"`
-	Country         int64          `orm:"column(country)"`
-	Branch          int64          `orm:"column(branch);null"`
-	Status          *Status        `orm:"rel(fk);column(item_status);null"`
-	LastOrderDate   time.Time      `orm:"type(datetime);null"`
-	ItemQuantity    *Item_quantity `orm:"reverse(one)"`
+	ItemId          int64            `orm:"auto"`
+	ItemName        string           `orm:"size(80)"`
+	Description     string           `orm:"size(250);omitempty"`
+	Weight          string           `orm:"size(20);omitempty"`
+	Category        *Categories      `orm:"rel(fk)"`
+	ItemPrice       *Item_prices     `orm:"rel(fk);omitempty"`
+	AvailableSizes  string           `orm:"size(250);omitempty"`
+	AvailableColors string           `orm:"size(250);omitempty"`
+	Material        string           `orm:"size(400);omitempty"`
+	ImagePath       string           `orm:"size(250);omitempty"`
+	Quantity        int              `orm:"omitempty"`
+	Active          int              `orm:"omitempty"`
+	DateCreated     time.Time        `orm:"type(datetime);omitempty"`
+	DateModified    time.Time        `orm:"type(datetime);omitempty"`
+	CreatedBy       int              `orm:"omitempty"`
+	ModifiedBy      int              `orm:"omitempty"`
+	Country         int64            `orm:"column(country)"`
+	Branch          int64            `orm:"column(branch);null"`
+	Status          *Status          `orm:"rel(fk);column(item_status);null"`
+	LastOrderDate   time.Time        `orm:"type(datetime);null"`
+	ItemQuantity    *Item_quantity   `orm:"reverse(one)"`
+	ItemFeatures    []*Item_features `orm:"reverse(many)"`
+	ItemPurposes    []*Item_purposes `orm:"reverse(many)"`
 }
 
 func init() {
 	orm.RegisterModel(new(Items))
+}
+
+func loadItemsReverseRelations(o orm.Ormer, items []Items) {
+	for i := range items {
+		if _, err := o.LoadRelated(&items[i], "ItemFeatures"); err != nil {
+			logs.Error("Error loading related Item features: ", err)
+		}
+		if _, err := o.LoadRelated(&items[i], "ItemPurposes"); err != nil {
+			logs.Error("Error loading related Item purposes: ", err)
+		}
+	}
 }
 
 // AddItems insert a new Items into database and returns
@@ -196,6 +209,12 @@ func GetItemsById(id int64) (v *Items, err error) {
 		if err != nil {
 			logs.Error("Error loading related Item quantity: ", err)
 		}
+		if _, err = o.LoadRelated(v, "ItemFeatures"); err != nil {
+			logs.Error("Error loading related Item features: ", err)
+		}
+		if _, err = o.LoadRelated(v, "ItemPurposes"); err != nil {
+			logs.Error("Error loading related Item purposes: ", err)
+		}
 		return v, nil
 	}
 	return nil, err
@@ -333,6 +352,8 @@ func GetAllItems(query map[string]string, fields []string, sortby []string, orde
 	var l []Items
 	qs = qs.OrderBy(sortFields...).RelatedSel()
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
+		loadItemsReverseRelations(o, l)
+
 		if len(fields) == 0 {
 			for _, v := range l {
 				ml = append(ml, v)
@@ -407,6 +428,8 @@ func GetAllItemsByBranch(branch int64, query map[string]string, fields []string,
 	var l []Items
 	qs = qs.Filter("Branch", branch).OrderBy(sortFields...).RelatedSel()
 	if _, err = qs.All(&l, fields...); err == nil {
+		loadItemsReverseRelations(o, l)
+
 		if len(fields) == 0 {
 			for _, v := range l {
 				ml = append(ml, v)
