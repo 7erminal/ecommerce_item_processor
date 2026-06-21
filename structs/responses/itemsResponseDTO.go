@@ -23,12 +23,6 @@ type ItemsStatsResponseDTO struct {
 	StatusDesc string
 }
 
-type ItemsResponseDTO struct {
-	StatusCode int
-	Items      *[]interface{}
-	StatusDesc string
-}
-
 type ItemResponseDTO struct {
 	StatusCode int
 	Item       *models.Items
@@ -45,4 +39,40 @@ type ItemBranchCountDTO struct {
 	Branch    string
 	Category  string
 	ItemCount int64
+}
+
+type ItemsResponseDTO struct {
+	StatusCode int             `orm:"omitempty"`
+	Items      *[]models.Items `orm:"omitempty"`
+	StatusDesc string          `orm:"size(255)"`
+}
+
+type ItemsResponseDTO2 struct {
+	StatusCode int             `orm:"omitempty"`
+	Items      *[]models.Items `orm:"omitempty"`
+	StatusDesc string          `orm:"size(255)"`
+}
+
+type Item_featureResponseDTO struct {
+	StatusCode  int                   `orm:"omitempty"`
+	ItemFeature *models.Item_features `orm:"omitempty"`
+	StatusDesc  string                `orm:"size(255)"`
+}
+
+type Item_featuresResponseDTO struct {
+	StatusCode   int                     `orm:"omitempty"`
+	ItemFeatures *[]models.Item_features `orm:"omitempty"`
+	StatusDesc   string                  `orm:"size(255)"`
+}
+
+type Item_purposeResponseDTO struct {
+	StatusCode  int                   `orm:"omitempty"`
+	ItemPurpose *models.Item_purposes `orm:"omitempty"`
+	StatusDesc  string                `orm:"size(255)"`
+}
+
+type Item_purposesResponseDTO struct {
+	StatusCode   int                     `orm:"omitempty"`
+	ItemPurposes *[]models.Item_purposes `orm:"omitempty"`
+	StatusDesc   string                  `orm:"size(255)"`
 }

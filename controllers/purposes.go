@@ -93,7 +93,7 @@ func (c *PurposesController) Post() {
 	if _, err := models.AddPurposes(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
 
-		var resp = models.PurposeResponseDTO{StatusCode: 200, Purpose: &v, StatusDesc: "Purpose has been added successfully"}
+		var resp = responses.PurposeResponseDTO{StatusCode: 200, Purpose: &v, StatusDesc: "Purpose has been added successfully"}
 
 		c.Data["json"] = resp
 	} else {
@@ -114,10 +114,10 @@ func (c *PurposesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetPurposesById(id)
 	if err != nil {
-		var resp = models.PurposeResponseDTO{StatusCode: 301, Purpose: nil, StatusDesc: "Error fetching purpose"}
+		var resp = responses.PurposeResponseDTO{StatusCode: 301, Purpose: nil, StatusDesc: "Error fetching purpose"}
 		c.Data["json"] = resp
 	} else {
-		var resp = models.PurposeResponseDTO{StatusCode: 200, Purpose: v, StatusDesc: "Purpose has been added successfully"}
+		var resp = responses.PurposeResponseDTO{StatusCode: 200, Purpose: v, StatusDesc: "Purpose has been added successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -218,7 +218,7 @@ func (c *PurposesController) GetAll() {
 	l, err := models.GetAllPurposes(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		c.Data["json"] = err.Error()
-		var resp = models.PurposesResponseDTO{StatusCode: 302, Purposes: nil, StatusDesc: "Failed to fetch Purposes " + err.Error()}
+		var resp = responses.PurposesResponseDTO{StatusCode: 302, Purposes: nil, StatusDesc: "Failed to fetch Purposes " + err.Error()}
 
 		c.Data["json"] = resp
 	} else {
@@ -228,7 +228,7 @@ func (c *PurposesController) GetAll() {
 
 			purposesResp = append(purposesResp, m)
 		}
-		var resp = models.PurposesResponseDTO{StatusCode: 200, Purposes: &purposesResp, StatusDesc: "Purposes fetched successfully"}
+		var resp = responses.PurposesResponseDTO{StatusCode: 200, Purposes: &purposesResp, StatusDesc: "Purposes fetched successfully"}
 
 		c.Data["json"] = resp
 	}

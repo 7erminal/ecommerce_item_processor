@@ -57,14 +57,18 @@ func init() {
 	orm.RegisterModel(new(Items))
 }
 
+func loadItemReverseRelations(o orm.Ormer, item *Items) {
+	if _, err := o.LoadRelated(item, "ItemFeatures"); err != nil {
+		logs.Error("Error loading related Item features: ", err)
+	}
+	if _, err := o.LoadRelated(item, "ItemPurposes"); err != nil {
+		logs.Error("Error loading related Item purposes: ", err)
+	}
+}
+
 func loadItemsReverseRelations(o orm.Ormer, items []Items) {
 	for i := range items {
-		if _, err := o.LoadRelated(&items[i], "ItemFeatures"); err != nil {
-			logs.Error("Error loading related Item features: ", err)
-		}
-		if _, err := o.LoadRelated(&items[i], "ItemPurposes"); err != nil {
-			logs.Error("Error loading related Item purposes: ", err)
-		}
+		loadItemReverseRelations(o, &items[i])
 	}
 }
 
@@ -209,12 +213,7 @@ func GetItemsById(id int64) (v *Items, err error) {
 		if err != nil {
 			logs.Error("Error loading related Item quantity: ", err)
 		}
-		if _, err = o.LoadRelated(v, "ItemFeatures"); err != nil {
-			logs.Error("Error loading related Item features: ", err)
-		}
-		if _, err = o.LoadRelated(v, "ItemPurposes"); err != nil {
-			logs.Error("Error loading related Item purposes: ", err)
-		}
+		loadItemReverseRelations(o, v)
 		return v, nil
 	}
 	return nil, err

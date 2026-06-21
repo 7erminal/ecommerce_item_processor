@@ -115,22 +115,10 @@ func (c *ItemsController) Post() {
 						c.Ctx.Output.SetStatus(200)
 						logs.Info("Item added successfully with ID ", v.ItemId)
 
-						item, err := models.GetItemsById(v.ItemId)
-						if err != nil {
-
-							logs.Error(err.Error())
-							resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
-							c.Data["json"] = resp
-						} else {
-							logs.Info("Item fetched successfully")
-							logs.Info("Item quantity is ", item.ItemQuantity)
-							logs.Info("Item quantity added successfully")
-						}
-
 						errorCode = 200
 						message = "Item added successfully with ID " + strconv.FormatInt(v.ItemId, 10)
 
-						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: item, StatusDesc: message}
+						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
 						c.Data["json"] = resp
 					} else {
 						logs.Error(err.Error())
@@ -187,10 +175,10 @@ func (c *ItemsController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItemsById(id)
 	if err != nil {
-		resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := models.ItemResponseDTO{StatusCode: 200, Item: v, StatusDesc: "Item fetched successfully"}
+		resp := responses.ItemResponseDTO{StatusCode: 200, Item: v, StatusDesc: "Item fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -361,11 +349,11 @@ func (c *ItemsController) GetItemFeatures() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItemsByFeatureId(id)
 	if err != nil {
-		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		resp := responses.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item features fetched are ", v)
-		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
+		resp := responses.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -383,11 +371,11 @@ func (c *ItemsController) GetItemsByCategory() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItemsByCategoryId(id)
 	if err != nil {
-		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		resp := responses.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Items fetched are ", v)
-		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Items fetched successfully"}
+		resp := responses.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -405,10 +393,10 @@ func (c *ItemsController) GetItemPurposes() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItemsByPurposeId(id)
 	if err != nil {
-		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		resp := responses.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Purposes fetched successfully"}
+		resp := responses.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -505,7 +493,7 @@ func (c *ItemsController) GetAll() {
 
 	l, err := models.GetAllItems(query, fields, sortby, order, offset, limit, search)
 	if err != nil {
-		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+		resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		itemsResp := []models.Items{}
@@ -515,7 +503,7 @@ func (c *ItemsController) GetAll() {
 			itemsResp = append(itemsResp, m)
 		}
 		logs.Info("Items returned are ", l)
-		resp := models.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
+		resp := responses.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -581,7 +569,7 @@ func (c *ItemsController) GetAllByBranch() {
 	if branch := functions.GetBranch(&c.Controller, branchid); branch.StatusCode == 200 {
 		l, err := models.GetAllItemsByBranch(branch.Branch.BranchId, query, fields, sortby, order, offset, limit)
 		if err != nil {
-			resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
+			resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		} else {
 			itemsResp := []models.Items{}
@@ -590,12 +578,12 @@ func (c *ItemsController) GetAllByBranch() {
 
 				itemsResp = append(itemsResp, m)
 			}
-			resp := models.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
+			resp := responses.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
 			c.Data["json"] = resp
 		}
 	} else {
 		logs.Error("Branch does not exist")
-		resp := models.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: branch.StatusDesc}
+		resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: branch.StatusDesc}
 		c.Data["json"] = resp
 	}
 
@@ -629,7 +617,7 @@ func (c *ItemsController) Put() {
 	if err == nil {
 		iv, err := models.GetItemsById(id)
 		if err != nil {
-			resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+			resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		} else {
 			// Get Currency
@@ -648,11 +636,11 @@ func (c *ItemsController) Put() {
 						branch := functions.GetBranch(&c.Controller, t.Branch)
 						if country.StatusCode != 200 {
 							logs.Error("Country does not exist")
-							resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Country does not exist"}
+							resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Country does not exist"}
 							c.Data["json"] = resp
 						} else if branch.StatusCode != 200 {
 							logs.Error("Branch does not exist")
-							resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Branch does not exist"}
+							resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Branch does not exist"}
 							c.Data["json"] = resp
 						} else {
 							logs.Info("Modifying item with ID ", id)
@@ -663,7 +651,7 @@ func (c *ItemsController) Put() {
 
 								iq, err := models.GetItem_quantityByItemId(id)
 								if err != nil {
-									resp := models.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
+									resp := responses.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
 									c.Data["json"] = resp
 									qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 									if _, err := models.AddItem_quantity(&qu); err == nil {
@@ -671,7 +659,7 @@ func (c *ItemsController) Put() {
 										if err != nil {
 
 											logs.Error(err.Error())
-											resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+											resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 											c.Data["json"] = resp
 										} else {
 											logs.Info("Item fetched successfully")
@@ -695,7 +683,7 @@ func (c *ItemsController) Put() {
 										if err != nil {
 
 											logs.Error(err.Error())
-											resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+											resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 											c.Data["json"] = resp
 										} else {
 											logs.Info("Item fetched successfully")
@@ -705,40 +693,40 @@ func (c *ItemsController) Put() {
 
 										c.Ctx.Output.SetStatus(200)
 
-										resp := models.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully updated"}
+										resp := responses.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully updated"}
 										c.Data["json"] = resp
 									} else {
 										logs.Error(err.Error())
-										resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 										c.Data["json"] = resp
 									}
 								}
 
 							} else {
 								logs.Error(err.Error())
-								resp := models.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+								resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
 								c.Data["json"] = resp
 							}
 						}
 					} else {
 						logs.Error(err.Error())
-						resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+						resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 						c.Data["json"] = resp
 					}
 				} else {
 					logs.Error(err.Error())
-					resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+					resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 					c.Data["json"] = resp
 				}
 			} else {
-				resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+				resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 		}
 
 	} else {
 		logs.Error(err.Error())
-		resp := models.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 		// c.Data["json"] = err.Error()
 	}
@@ -763,7 +751,7 @@ func (c *ItemsController) UpdateItemImage() {
 
 	iv, err := models.GetItemsById(id)
 	if err != nil {
-		resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+		resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		iv.ImagePath = t.ImagePath
@@ -773,11 +761,11 @@ func (c *ItemsController) UpdateItemImage() {
 
 			c.Ctx.Output.SetStatus(200)
 
-			resp := models.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
+			resp := responses.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
 			c.Data["json"] = resp
 
 		} else {
-			resp := models.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+			resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		}
 	}

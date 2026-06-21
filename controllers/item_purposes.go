@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/responses"
 	"strconv"
 	"strings"
 	"time"
@@ -189,7 +190,7 @@ func (c *Item_purposesController) GetAll() {
 
 			itemPurposes = append(itemPurposes, m)
 		}
-		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: &itemPurposes, StatusDesc: err.Error()}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, ItemPurposes: &itemPurposes, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

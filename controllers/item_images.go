@@ -97,7 +97,7 @@ func (c *Item_imagesController) Post() {
 
 			if err := models.UpdateItemsById(k); err != nil {
 				logs.Error(err.Error())
-				resp := models.ItemResponseDTO{StatusCode: 302, Item: k, StatusDesc: err.Error()}
+				resp := responses.ItemResponseDTO{StatusCode: 302, Item: k, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 
