@@ -47,6 +47,8 @@ func (c *CategoriesController) Post() {
 	file, header, err := c.GetFile("Image")
 
 	logs.Info("File is ", file)
+	// File path
+	logs.Info("File path is ", header)
 
 	var filePath string = ""
 
@@ -66,6 +68,8 @@ func (c *CategoriesController) Post() {
 		logs.Info("File path is ", filePath)
 		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 		filePath = host + filePath
+		logs.Info("Full file path is ", filePath)
+		logs.Info("Size of file is ", header.Size)
 		err = c.SaveToFile("Image", filePath)
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
