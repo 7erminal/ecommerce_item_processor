@@ -149,10 +149,10 @@ func (c *Item_imagesController) UploadPictures() {
 	filePath := "/uploads/items/" + time.Now().Format("20060102150405") + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
 	host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
-	filePath = host + filePath
 	logs.Info("Full file path is ", filePath)
 	viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
 	viewFilePath := viewHost + filePath
+	filePath = host + filePath
 	err = c.SaveToFile("Image", filePath)
 	if err != nil || header.Size < 1 {
 		filePath = ""

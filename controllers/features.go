@@ -62,9 +62,9 @@ func (c *FeaturesController) Post() {
 		fileName := filepath.Base(header.Filename)
 		filePath = "/uploads/features/" + time.Now().Format("20060102150405") + fileName // Define your file path
 		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
-		filePath = host + filePath
 		viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
 		viewFilePath = viewHost + filePath
+		filePath = host + filePath
 		err = c.SaveToFile("Image", filePath)
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
