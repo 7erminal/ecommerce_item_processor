@@ -62,6 +62,8 @@ func (c *Item_imagesController) Post() {
 	host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 	filePath = host + filePath
 	logs.Info("Full file path is ", filePath)
+	viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
+	viewFilePath := viewHost + filePath
 	err = c.SaveToFile("Image", filePath)
 	if err != nil {
 		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
@@ -84,14 +86,14 @@ func (c *Item_imagesController) Post() {
 
 	logs.Info("Saving ... ", filePath)
 	// json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	v := models.Item_images{ItemId: itemId, ImagePath: filePath, IsDefault: 0, CreatedBy: 1, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
+	v := models.Item_images{ItemId: itemId, ImagePath: viewFilePath, IsDefault: 0, CreatedBy: 1, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
 
 	if _, err := models.AddItem_images(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
 
 		if k, err := models.GetItemsById(itemId); err == nil {
 			// i := models.Items{ItemId: itemId, ImagePath: filePath, ItemName: k.ItemName, Category: k.Category, Description: k.Description, ItemPrice: k.ItemPrice, AvailableSizes: k.AvailableSizes, AvailableColors: k.AvailableColors, Quantity: k.Quantity, DateCreated: k.DateCreated, DateModified: k.DateModified, CreatedBy: k.CreatedBy, ModifiedBy: k.ModifiedBy, Active: k.Active}
-			k.ImagePath = filePath
+			k.ImagePath = viewFilePath
 
 			if err := models.UpdateItemsById(k); err != nil {
 				logs.Error(err.Error())
@@ -146,7 +148,12 @@ func (c *Item_imagesController) UploadPictures() {
 	logs.Info("File Name Extracted is ", fileName, "Time now is ", time.Now().Format("20060102150405"))
 	filePath := "/uploads/items/" + time.Now().Format("20060102150405") + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
-	err = c.SaveToFile("Image", "/var/www/html/maku-foods-images/"+filePath)
+	host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
+	filePath = host + filePath
+	logs.Info("Full file path is ", filePath)
+	viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
+	viewFilePath := viewHost + filePath
+	err = c.SaveToFile("Image", filePath)
 	if err != nil || header.Size < 1 {
 		filePath = ""
 		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
@@ -160,7 +167,7 @@ func (c *Item_imagesController) UploadPictures() {
 		c.ServeJSON()
 		return
 	} else {
-		resp := responses.StringResponseFDTO{StatusCode: 200, Value: &filePath, StatusDesc: "Images uploaded successfully"}
+		resp := responses.StringResponseFDTO{StatusCode: 200, Value: &viewFilePath, StatusDesc: "Images uploaded successfully"}
 		c.Data["json"] = resp
 	}
 

@@ -45,6 +45,7 @@ func (c *PurposesController) Post() {
 	file, header, err := c.GetFile("Image")
 
 	var filePath string = ""
+	var viewFilePath string = ""
 
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
@@ -60,6 +61,8 @@ func (c *PurposesController) Post() {
 		filePath = "/uploads/purposes/" + time.Now().Format("20060102150405") + fileName // Define your file path
 		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 		filePath = host + filePath
+		viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
+		viewFilePath = viewHost + filePath
 
 		err = c.SaveToFile("Image", filePath)
 
@@ -79,7 +82,7 @@ func (c *PurposesController) Post() {
 
 	v := models.Purposes{
 		Purpose:     c.Ctx.Input.Query("PurposeName"),
-		ImagePath:   filePath,
+		ImagePath:   viewFilePath,
 		Description: c.Ctx.Input.Query("Description"),
 		Active:      1,
 		CreatedBy:   1,

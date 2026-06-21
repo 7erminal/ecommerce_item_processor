@@ -47,6 +47,7 @@ func (c *FeaturesController) Post() {
 	file, header, err := c.GetFile("Image")
 
 	var filePath string = ""
+	var viewFilePath string = ""
 
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
@@ -62,7 +63,8 @@ func (c *FeaturesController) Post() {
 		filePath = "/uploads/features/" + time.Now().Format("20060102150405") + fileName // Define your file path
 		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 		filePath = host + filePath
-
+		viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
+		viewFilePath = viewHost + filePath
 		err = c.SaveToFile("Image", filePath)
 		if err != nil {
 			c.Ctx.Output.SetStatus(http.StatusInternalServerError)
@@ -80,7 +82,7 @@ func (c *FeaturesController) Post() {
 
 	v := models.Features{
 		FeatureName: c.Ctx.Input.Query("FeatureName"),
-		ImagePath:   filePath,
+		ImagePath:   viewFilePath,
 		Description: c.Ctx.Input.Query("Description"),
 		Active:      1,
 		CreatedBy:   1,

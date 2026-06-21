@@ -51,6 +51,7 @@ func (c *CategoriesController) Post() {
 	logs.Info("File path is ", header)
 
 	var filePath string = ""
+	var viewFilePath string = ""
 
 	if err != nil {
 		// c.Ctx.Output.SetStatus(http.StatusBadRequest)
@@ -68,6 +69,8 @@ func (c *CategoriesController) Post() {
 		logs.Info("File path is ", filePath)
 		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 		filePath = host + filePath
+		viewHost, _ := beego.AppConfig.String("imagesBaseUrl")
+		viewFilePath = viewHost + filePath
 		logs.Info("Full file path is ", filePath)
 		logs.Info("Size of file is ", header.Size)
 		err = c.SaveToFile("Image", filePath)
@@ -91,7 +94,7 @@ func (c *CategoriesController) Post() {
 	v := models.Categories{
 		CategoryName: c.Ctx.Input.Query("CategoryName"),
 		Icon:         c.Ctx.Input.Query("Icon"),
-		ImagePath:    filePath,
+		ImagePath:    viewFilePath,
 		Description:  c.Ctx.Input.Query("CategoryDescription"),
 		CreatedBy:    1,
 		DateCreated:  time.Now(),
