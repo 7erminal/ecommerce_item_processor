@@ -59,7 +59,10 @@ func (c *Item_imagesController) Post() {
 	logs.Info("File Name Extracted is ", fileName)
 	filePath := "/uploads/items/" + fileName // Define your file path
 	logs.Info("File Path Extracted is ", filePath)
-	err = c.SaveToFile("Image", "/var/www/html/maku-foods-images/"+filePath)
+	host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
+	filePath = host + filePath
+	logs.Info("Full file path is ", filePath)
+	err = c.SaveToFile("Image", filePath)
 	if err != nil {
 		c.Ctx.Output.SetStatus(http.StatusInternalServerError)
 		logs.Error("Error saving file", err)

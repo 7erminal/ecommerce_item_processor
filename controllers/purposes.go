@@ -58,7 +58,7 @@ func (c *PurposesController) Post() {
 		// Save the uploaded file
 		fileName := filepath.Base(header.Filename)
 		filePath = "/uploads/purposes/" + time.Now().Format("20060102150405") + fileName // Define your file path
-		host, _ := beego.AppConfig.String("imagesBaseUrl")
+		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 		filePath = host + filePath
 
 		err = c.SaveToFile("Image", filePath)

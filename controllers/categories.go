@@ -64,7 +64,7 @@ func (c *CategoriesController) Post() {
 		logs.Info("File name is ", fileName)
 		filePath = "/uploads/categories/" + time.Now().Format("20060102150405") + fileName // Define your file path
 		logs.Info("File path is ", filePath)
-		host, _ := beego.AppConfig.String("imagesBaseUrl")
+		host, _ := beego.AppConfig.String("imagesUploadBaseUrl")
 		filePath = host + filePath
 		err = c.SaveToFile("Image", filePath)
 		if err != nil {
