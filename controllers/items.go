@@ -74,7 +74,17 @@ func (c *ItemsController) Post() {
 		if cr.StatusCode == 200 {
 			// Add price for item
 			logs.Info("Adding price for item with price ", t.ItemPrice, " and alt price ", t.AltItemPrice, " and extra charges ", t.ExtraCharges)
-			it := models.Item_prices{ItemPrice: t.ItemPrice, AltItemPrice: t.AltItemPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr.Currency.CurrencyId, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
+			it := models.Item_prices{
+				ItemPrice:    t.ItemPrice,
+				AltItemPrice: t.AltItemPrice,
+				ShowAltPrice: false,
+				ExtraCharges: t.ExtraCharges,
+				Currency:     cr.Currency.CurrencyId,
+				Active:       1,
+				CreatedBy:    creator,
+				DateCreated:  time.Now(),
+				ModifiedBy:   creator,
+				DateModified: time.Now()}
 
 			logs.Info("Adding price to item to create at a go")
 			if _, err := models.AddItem_prices(&it); err == nil {
