@@ -93,7 +93,7 @@ func (c *ItemsController) Post() {
 
 				status := models.Status{}
 
-				if status_, err := models.GetStatusByName("GOOD"); err == nil {
+				if status_, err := models.GetStatusByCode("GOOD"); err == nil {
 					status = *status_
 				}
 

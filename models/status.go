@@ -53,6 +53,15 @@ func GetStatusByName(name string) (v *Status, err error) {
 	return nil, err
 }
 
+func GetStatusByCode(code string) (v *Status, err error) {
+	o := orm.NewOrm()
+	v = &Status{}
+	if err = o.QueryTable(new(Status)).Filter("StatusCode", code).RelatedSel().One(v); err == nil {
+		return v, nil
+	}
+	return nil, err
+}
+
 // GetAllStatus retrieves all Status matches certain condition. Returns empty list if
 // no records exist
 func GetAllStatus(query map[string]string, fields []string, sortby []string, order []string,
