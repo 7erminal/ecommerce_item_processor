@@ -482,7 +482,7 @@ func GetCurrencyWithName(c *beego.Controller, currencyName string) (responses.Cu
 
 	request := api.NewRequest(
 		host,
-		"/v1/currencies/"+currencyName,
+		"/v1/currencies/symbol/"+currencyName,
 		api.GET)
 
 	// request.Params = {"UserId": strconv.Itoa(int(userid))}

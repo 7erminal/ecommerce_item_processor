@@ -69,7 +69,7 @@ func (c *ItemsController) Post() {
 
 	if err == nil {
 		// Get Currency
-		cr, cerr := functions.GetCurrencyWithName(&c.Controller, "GHC")
+		cr, cerr := functions.GetCurrencyWithName(&c.Controller, "GH₵")
 
 		if cr.StatusCode == 200 {
 			// Add price for item
