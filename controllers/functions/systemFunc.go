@@ -116,7 +116,7 @@ func UpdateBranch(c *beego.Controller, req requests.BranchRequestDTO, addedBy in
 }
 
 func GetBranch(c *beego.Controller, branchid int64) (resp responses.BranchOriResponseDTO) {
-	host, _ := beego.AppConfig.String("systemBaseUrl")
+	host, _ := beego.AppConfig.String("customerBaseUrl")
 
 	logs.Info("Getting branch details for ", branchid)
 
