@@ -66,25 +66,25 @@ type Branches struct {
 
 type BranchesOriResponseDTO struct {
 	StatusCode int
-	Branches   *[]Branches
+	Result     *[]Branches
 	StatusDesc string
 }
 
 type BranchOriResponseDTO struct {
 	StatusCode int
-	Branch     *Branches
+	Result     *Branches
 	StatusDesc string
 }
 
 type CountriesOriResponseDTO struct {
 	StatusCode int
-	Countries  *[]Countries
+	Result     *[]Countries
 	StatusDesc string
 }
 
 type CountryResponseDTO struct {
 	StatusCode int
-	Country    *Countries
+	Result     *Countries
 	StatusDesc string
 }
 

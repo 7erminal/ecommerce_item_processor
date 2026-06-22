@@ -107,8 +107,8 @@ func (c *ItemsController) Post() {
 					AvailableSizes:  aSizes,
 					AvailableColors: aColors,
 					Quantity:        t.Quantity,
-					Country:         country.Country.CountryId,
-					Branch:          branch.Branch.BranchId,
+					Country:         country.Result.CountryId,
+					Branch:          branch.Result.BranchId,
 					Active:          1,
 					DateCreated:     time.Now(),
 					DateModified:    time.Now(),
@@ -577,7 +577,7 @@ func (c *ItemsController) GetAllByBranch() {
 	}
 
 	if branch := functions.GetBranch(&c.Controller, branchid); branch.StatusCode == 200 {
-		l, err := models.GetAllItemsByBranch(branch.Branch.BranchId, query, fields, sortby, order, offset, limit)
+		l, err := models.GetAllItemsByBranch(branch.Result.BranchId, query, fields, sortby, order, offset, limit)
 		if err != nil {
 			resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
@@ -654,7 +654,24 @@ func (c *ItemsController) Put() {
 							c.Data["json"] = resp
 						} else {
 							logs.Info("Modifying item with ID ", id)
-							v := models.Items{ItemId: id, ItemName: t.ItemName, Country: country.Country.CountryId, Branch: branch.Branch.BranchId, Description: t.Description, Category: p, ImagePath: iv.ImagePath, ItemPrice: &it, AvailableSizes: aSizes, AvailableColors: aColors, Quantity: t.Quantity, Active: 1, DateModified: time.Now(), ModifiedBy: creator, CreatedBy: iv.CreatedBy, DateCreated: iv.DateCreated, Weight: t.Weight}
+							v := models.Items{
+								ItemId:          id,
+								ItemName:        t.ItemName,
+								Country:         country.Result.CountryId,
+								Branch:          branch.Result.BranchId,
+								Description:     t.Description,
+								Category:        p,
+								ImagePath:       iv.ImagePath,
+								ItemPrice:       &it,
+								AvailableSizes:  aSizes,
+								AvailableColors: aColors,
+								Quantity:        t.Quantity,
+								Active:          1,
+								DateModified:    time.Now(),
+								ModifiedBy:      creator,
+								CreatedBy:       iv.CreatedBy,
+								DateCreated:     iv.DateCreated,
+								Weight:          t.Weight}
 
 							if err := models.UpdateItemsById(&v); err == nil {
 								// Add quantity for item

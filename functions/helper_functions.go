@@ -72,7 +72,7 @@ func ConvertParamsToFeatures(params []orm.Params) []responses.FeaturesItemsDTO {
 					DateModified:    toTime(param["date_modified"]),
 					CreatedBy:       toInt(param["created_by"]),
 					ModifiedBy:      toInt(param["modified_by"]),
-					Country:         countr_.Country.CountryId,
+					Country:         countr_.Result.CountryId,
 				}
 
 				feature.Items = append(feature.Items, item_)
@@ -107,7 +107,7 @@ func ConvertParamsToFeatures(params []orm.Params) []responses.FeaturesItemsDTO {
 					DateModified:    toTime(param["date_modified"]),
 					CreatedBy:       toInt(param["created_by"]),
 					ModifiedBy:      toInt(param["modified_by"]),
-					Country:         countr_.Country.CountryId,
+					Country:         countr_.Result.CountryId,
 				}
 
 				feature_.Items = append(feature_.Items, item_)
@@ -193,7 +193,7 @@ func ConvertParamsToPurposes(params []orm.Params) []responses.PurposesItemsDTO {
 					DateModified:    toTime(param["date_modified"]),
 					CreatedBy:       toInt(param["created_by"]),
 					ModifiedBy:      toInt(param["modified_by"]),
-					Country:         countr_.Country.CountryId,
+					Country:         countr_.Result.CountryId,
 				}
 
 				purpose.Items = append(purpose.Items, item_)
@@ -226,7 +226,7 @@ func ConvertParamsToPurposes(params []orm.Params) []responses.PurposesItemsDTO {
 					DateModified:    toTime(param["date_modified"]),
 					CreatedBy:       toInt(param["created_by"]),
 					ModifiedBy:      toInt(param["modified_by"]),
-					Country:         countr_.Country.CountryId,
+					Country:         countr_.Result.CountryId,
 				}
 
 				purpose_.Items = append(purpose_.Items, item_)
