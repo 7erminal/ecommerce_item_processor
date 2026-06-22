@@ -54,25 +54,25 @@ type ItemsResponseDTO2 struct {
 }
 
 type Item_featureResponseDTO struct {
-	StatusCode  int                   `orm:"omitempty"`
-	ItemFeature *models.Item_features `orm:"omitempty"`
-	StatusDesc  string                `orm:"size(255)"`
+	StatusCode int                   `orm:"omitempty"`
+	Result     *models.Item_features `orm:"omitempty"`
+	StatusDesc string                `orm:"size(255)"`
 }
 
 type Item_featuresResponseDTO struct {
-	StatusCode   int                     `orm:"omitempty"`
-	ItemFeatures *[]models.Item_features `orm:"omitempty"`
-	StatusDesc   string                  `orm:"size(255)"`
+	StatusCode int                     `orm:"omitempty"`
+	Result     *[]models.Item_features `orm:"omitempty"`
+	StatusDesc string                  `orm:"size(255)"`
 }
 
 type Item_purposeResponseDTO struct {
-	StatusCode  int                   `orm:"omitempty"`
-	ItemPurpose *models.Item_purposes `orm:"omitempty"`
-	StatusDesc  string                `orm:"size(255)"`
+	StatusCode int                   `orm:"omitempty"`
+	Result     *models.Item_purposes `orm:"omitempty"`
+	StatusDesc string                `orm:"size(255)"`
 }
 
 type Item_purposesResponseDTO struct {
-	StatusCode   int                     `orm:"omitempty"`
-	ItemPurposes *[]models.Item_purposes `orm:"omitempty"`
-	StatusDesc   string                  `orm:"size(255)"`
+	StatusCode int                     `orm:"omitempty"`
+	Result     *[]models.Item_purposes `orm:"omitempty"`
+	StatusDesc string                  `orm:"size(255)"`
 }

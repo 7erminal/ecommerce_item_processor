@@ -51,27 +51,27 @@ func (c *Item_featuresController) Post() {
 			if _, err := models.AddItem_features(&iff); err == nil {
 				c.Ctx.Output.SetStatus(200)
 
-				if itemFeature, err := models.GetItemsById(itemid); err != nil {
+				if itemFeature, err := models.GetItem_featuresById(iff.ItemFeatureId); err != nil {
 					logs.Error("Failed to get item feature ", err.Error())
-					resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Failed to get item feature"}
+					resp := responses.Item_featureResponseDTO{StatusCode: 301, Result: nil, StatusDesc: "Failed to get item feature"}
 					c.Data["json"] = resp
 				} else {
-					resp := responses.ItemResponseDTO{StatusCode: 200, Item: itemFeature, StatusDesc: "Item feature added successfully"}
+					resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: itemFeature, StatusDesc: "Item feature added successfully"}
 					c.Data["json"] = resp
 				}
 			} else {
 				logs.Error("Failed to add item feature ", err.Error())
-				resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+				resp := responses.Item_featureResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 		} else {
 			logs.Error("Failed to get feature ", err.Error())
-			resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+			resp := responses.Item_featureResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		}
 	} else {
 		logs.Error("Failed to get item ", err.Error())
-		resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
+		resp := responses.Item_featureResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	}
 
@@ -90,10 +90,10 @@ func (c *Item_featuresController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_featuresById(id)
 	if err != nil {
-		resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: nil, StatusDesc: err.Error()}
+		resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: v, StatusDesc: "Item feature fetched successfully"}
+		resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Item feature fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -111,11 +111,11 @@ func (c *Item_featuresController) GetItemFeaturesByFeature() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_featuresByFeatureId(id)
 	if err != nil {
-		resp := models.ItemFeaturesResponseDTO{StatusCode: 301, ItemFeatures: nil, StatusDesc: err.Error()}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item features fetched are ", v)
-		resp := models.ItemFeaturesResponseDTO{StatusCode: 200, ItemFeatures: v, StatusDesc: "Features fetched successfully"}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Features fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -135,11 +135,11 @@ func (c *Item_featuresController) GetItemFeaturesByItem() {
 	v, err := models.GetItem_featuresByItemId(id)
 	if err != nil {
 		logs.Info("No item features ", idStr)
-		resp := models.ItemFeaturesResponseDTO{StatusCode: 301, ItemFeatures: nil, StatusDesc: err.Error()}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item features fetched are ", v)
-		resp := models.ItemFeaturesResponseDTO{StatusCode: 200, ItemFeatures: v, StatusDesc: "Features fetched successfully"}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Features fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -211,7 +211,7 @@ func (c *Item_featuresController) GetAll() {
 			itemsResp = append(itemsResp, m)
 		}
 		logs.Info("Items returned are ", l)
-		resp := responses.Item_featuresResponseDTO{StatusCode: 200, ItemFeatures: &itemsResp, StatusDesc: "Items fetched successfully"}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: &itemsResp, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

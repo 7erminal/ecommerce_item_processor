@@ -49,10 +49,10 @@ func (c *Item_purposesController) Post() {
 
 			if _, err := models.AddItem_purposes(&iff); err == nil {
 				c.Ctx.Output.SetStatus(200)
-				resp := models.ItemPurposeResponseDTO{StatusCode: 200, ItemPurpose: &iff, StatusDesc: "Item purpose added successfully"}
+				resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: &iff, StatusDesc: "Item purpose added successfully"}
 				c.Data["json"] = resp
 			} else {
-				resp := models.ItemFeatureResponseDTO{StatusCode: 200, ItemFeature: nil, StatusDesc: err.Error()}
+				resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: nil, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
 		}
@@ -72,9 +72,15 @@ func (c *Item_purposesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_purposesById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		// c.Data["json"] = err.Error()
+		logs.Error("Failed to get item purpose ", err.Error())
+		resp := responses.Item_purposeResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = v
+		// c.Data["json"] = v
+		logs.Info("Item purpose fetched is ", v)
+		resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Item purpose fetched successfully"}
+		c.Data["json"] = resp
 	}
 	c.ServeJSON()
 }
@@ -91,11 +97,11 @@ func (c *Item_purposesController) GetItemPurposesByPurpose() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_purposesByPurposeId(id)
 	if err != nil {
-		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item purposes are ", v)
-		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: v, StatusDesc: "Purposes fetched successfully"}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -113,11 +119,11 @@ func (c *Item_purposesController) GetItemPurposesByItem() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItem_purposesByItemId(id)
 	if err != nil {
-		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 301, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item purposes are ", v)
-		resp := models.ItemPurposesResponseDTO{StatusCode: 200, ItemPurposes: v, StatusDesc: "Purposes fetched successfully"}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -190,7 +196,7 @@ func (c *Item_purposesController) GetAll() {
 
 			itemPurposes = append(itemPurposes, m)
 		}
-		resp := responses.Item_purposesResponseDTO{StatusCode: 200, ItemPurposes: &itemPurposes, StatusDesc: "Items fetched successfully"}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: &itemPurposes, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
