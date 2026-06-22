@@ -79,7 +79,7 @@ func (c *ItemsController) Post() {
 				AltItemPrice: t.AltItemPrice,
 				ShowAltPrice: false,
 				ExtraCharges: t.ExtraCharges,
-				Currency:     cr.Currency.CurrencyId,
+				Currency:     cr.Result.CurrencyId,
 				Active:       1,
 				CreatedBy:    creator,
 				DateCreated:  time.Now(),
@@ -636,7 +636,7 @@ func (c *ItemsController) Put() {
 			if cerr == nil {
 				if ip, err := models.GetItem_pricesById(iv.ItemPrice.ItemPriceId); err == nil {
 					// Add price for item
-					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr.Currency.CurrencyId, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
+					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr.Result.CurrencyId, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
 
 					logs.Info("Modifying price for item")
 
