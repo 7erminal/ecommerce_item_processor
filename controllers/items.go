@@ -582,6 +582,10 @@ func (c *ItemsController) GetAllByBranch() {
 			resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		} else {
+			// Log response in json
+			logs.Info("Items returned are ", l)
+			itemsJSON, _ := json.Marshal(l)
+			logs.Info("Items JSON: ", string(itemsJSON))
 			itemsResp := []models.Items{}
 			for _, urs := range l {
 				m := urs.(models.Items)
