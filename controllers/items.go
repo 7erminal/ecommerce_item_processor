@@ -542,8 +542,8 @@ func (c *ItemsController) GetAllByBranch() {
 	var limit int64 = 100
 	var offset int64
 
-	order_ := c.GetString("order")
-	order_ = "desc"
+	// order_ := c.GetString("order")
+	order_ := "desc"
 
 	// fields: col1,col2,entity.col3
 	if v := c.GetString("fields"); v != "" {
