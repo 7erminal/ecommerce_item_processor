@@ -544,6 +544,8 @@ func (c *ItemsController) GetAllByBranch() {
 
 	// order_ := c.GetString("order")
 	order_ := "desc"
+	// c.GetString("sortby");
+	sortby_ := "DateCreated"
 
 	// fields: col1,col2,entity.col3
 	if v := c.GetString("fields"); v != "" {
@@ -558,7 +560,7 @@ func (c *ItemsController) GetAllByBranch() {
 		offset = v
 	}
 	// sortby: col1,col2
-	if v := c.GetString("sortby"); v != "" {
+	if v := sortby_; v != "" {
 		sortby = strings.Split(v, ",")
 	}
 	// order: desc,asc
@@ -578,6 +580,8 @@ func (c *ItemsController) GetAllByBranch() {
 			query[k] = v
 		}
 	}
+
+	logs.Info("Getting all items for branch ", branchid, " with query ", query, " and fields ", fields, " and sortby ", sortby, " and order ", order, " and offset ", offset, " and limit ", limit)
 
 	if branch := functions.GetBranch(&c.Controller, branchid); branch.StatusCode == 200 {
 		l, err := models.GetAllItemsByBranch(branch.Result.BranchId, query, fields, sortby, order, offset, limit)
