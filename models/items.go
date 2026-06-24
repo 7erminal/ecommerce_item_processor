@@ -28,29 +28,29 @@ type ItemBranchCountDTO struct {
 }
 
 type Items struct {
-	ItemId          int64            `orm:"auto"`
-	ItemName        string           `orm:"size(80)"`
-	Description     string           `orm:"size(250);omitempty"`
-	Weight          string           `orm:"size(20);omitempty"`
-	Category        *Categories      `orm:"rel(fk)"`
-	ItemPrice       *Item_prices     `orm:"rel(fk);omitempty"`
-	AvailableSizes  string           `orm:"size(250);omitempty"`
-	AvailableColors string           `orm:"size(250);omitempty"`
-	Material        string           `orm:"size(400);omitempty"`
-	ImagePath       string           `orm:"size(250);omitempty"`
-	Quantity        int              `orm:"omitempty"`
-	Active          int              `orm:"omitempty"`
-	DateCreated     time.Time        `orm:"type(datetime);omitempty"`
-	DateModified    time.Time        `orm:"type(datetime);omitempty"`
-	CreatedBy       int              `orm:"omitempty"`
-	ModifiedBy      int              `orm:"omitempty"`
-	Country         int64            `orm:"column(country)"`
-	Branch          int64            `orm:"column(branch);null"`
-	Status          *Status          `orm:"rel(fk);column(item_status);null"`
-	LastOrderDate   time.Time        `orm:"type(datetime);null"`
-	ItemQuantity    *Item_quantity   `orm:"reverse(one)"`
-	ItemFeatures    []*Item_features `orm:"reverse(many)"`
-	ItemPurposes    []*Item_purposes `orm:"reverse(many)"`
+	ItemId          int64          `orm:"auto"`
+	ItemName        string         `orm:"size(80)"`
+	Description     string         `orm:"size(250);omitempty"`
+	Weight          string         `orm:"size(20);omitempty"`
+	Category        *Categories    `orm:"rel(fk)"`
+	ItemPrice       *Item_prices   `orm:"rel(fk);omitempty"`
+	AvailableSizes  string         `orm:"size(250);omitempty"`
+	AvailableColors string         `orm:"size(250);omitempty"`
+	Material        string         `orm:"size(400);omitempty"`
+	ImagePath       string         `orm:"size(250);omitempty"`
+	Quantity        int            `orm:"omitempty"`
+	Active          int            `orm:"omitempty"`
+	DateCreated     time.Time      `orm:"type(datetime);omitempty"`
+	DateModified    time.Time      `orm:"type(datetime);omitempty"`
+	CreatedBy       int            `orm:"omitempty"`
+	ModifiedBy      int            `orm:"omitempty"`
+	Country         int64          `orm:"column(country)"`
+	Branch          int64          `orm:"column(branch);null"`
+	Status          *Status        `orm:"rel(fk);column(item_status);null"`
+	LastOrderDate   time.Time      `orm:"type(datetime);null"`
+	ItemQuantity    *Item_quantity `orm:"reverse(one)"`
+	ItemFeatures    []*Features    `orm:"-"`
+	ItemPurposes    []*Purposes    `orm:"-"`
 }
 
 func init() {
@@ -58,11 +58,40 @@ func init() {
 }
 
 func loadItemReverseRelations(o orm.Ormer, item *Items) {
-	if _, err := o.LoadRelated(item, "ItemFeatures"); err != nil {
+	var itemFeatures []Item_features
+	if _, err := o.QueryTable(new(Item_features)).
+		Filter("Item__ItemId", item.ItemId).
+		RelatedSel().
+		All(&itemFeatures); err != nil {
 		logs.Error("Error loading related Item features: ", err)
+	} else {
+		featureData := make([]*Features, 0, len(itemFeatures))
+		for i := range itemFeatures {
+			// Avoid recursive payloads by omitting the nested item object in each edge row.
+			itemFeatures[i].Item = nil
+			if itemFeatures[i].Feature != nil {
+				featureData = append(featureData, itemFeatures[i].Feature)
+			}
+		}
+		item.ItemFeatures = featureData
 	}
-	if _, err := o.LoadRelated(item, "ItemPurposes"); err != nil {
+
+	var itemPurposes []Item_purposes
+	if _, err := o.QueryTable(new(Item_purposes)).
+		Filter("Item__ItemId", item.ItemId).
+		RelatedSel().
+		All(&itemPurposes); err != nil {
 		logs.Error("Error loading related Item purposes: ", err)
+	} else {
+		purposeData := make([]*Purposes, 0, len(itemPurposes))
+		for i := range itemPurposes {
+			// Avoid recursive payloads by omitting the nested item object in each edge row.
+			itemPurposes[i].Item = nil
+			if itemPurposes[i].Purpose != nil {
+				purposeData = append(purposeData, itemPurposes[i].Purpose)
+			}
+		}
+		item.ItemPurposes = purposeData
 	}
 }
 
