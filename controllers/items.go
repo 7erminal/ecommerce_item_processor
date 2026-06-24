@@ -539,8 +539,11 @@ func (c *ItemsController) GetAllByBranch() {
 	var sortby []string
 	var order []string
 	var query = make(map[string]string)
-	var limit int64 = 10
+	var limit int64 = 100
 	var offset int64
+
+	order_ := c.GetString("order")
+	order_ = "desc"
 
 	// fields: col1,col2,entity.col3
 	if v := c.GetString("fields"); v != "" {
@@ -559,7 +562,7 @@ func (c *ItemsController) GetAllByBranch() {
 		sortby = strings.Split(v, ",")
 	}
 	// order: desc,asc
-	if v := c.GetString("order"); v != "" {
+	if v := order_; v != "" {
 		order = strings.Split(v, ",")
 	}
 	// query: k:v,k:v
