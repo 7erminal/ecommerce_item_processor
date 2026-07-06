@@ -485,6 +485,21 @@ func (c *ItemsController) GetAll() {
 		}
 	}
 
+	// Get only items with active categories
+	activeCategoryQuery := "Category__active:1"
+	if v := activeCategoryQuery; v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
 	// search: k:v,k:v
 	if v := c.GetString("search"); v != "" {
 		for _, cond := range strings.Split(v, ",") {
@@ -539,6 +554,7 @@ func (c *ItemsController) GetAllByBranch() {
 	var sortby []string
 	var order []string
 	var query = make(map[string]string)
+	var search = make(map[string]string)
 	var limit int64 = 100
 	var offset int64
 
@@ -578,6 +594,50 @@ func (c *ItemsController) GetAllByBranch() {
 			}
 			k, v := kv[0], kv[1]
 			query[k] = v
+		}
+	}
+
+	// set active
+	activeQuery := "Active:1"
+	if v := activeQuery; v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
+	// Get only items with active categories
+	activeCategoryQuery := "Category__active:1"
+	if v := activeCategoryQuery; v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid query key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			query[k] = v
+		}
+	}
+
+	// search: k:v,k:v
+	if v := c.GetString("search"); v != "" {
+		for _, cond := range strings.Split(v, ",") {
+			kv := strings.SplitN(cond, ":", 2)
+			if len(kv) != 2 {
+				c.Data["json"] = errors.New("Error: invalid search key/value pair")
+				c.ServeJSON()
+				return
+			}
+			k, v := kv[0], kv[1]
+			search[k] = v
 		}
 	}
 

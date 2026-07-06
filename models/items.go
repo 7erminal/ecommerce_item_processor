@@ -61,6 +61,8 @@ func loadItemReverseRelations(o orm.Ormer, item *Items) {
 	var itemFeatures []Item_features
 	if _, err := o.QueryTable(new(Item_features)).
 		Filter("Item__ItemId", item.ItemId).
+		Filter("Active", 1).
+		Filter("Feature__Active", 1).
 		RelatedSel().
 		All(&itemFeatures); err != nil {
 		logs.Error("Error loading related Item features: ", err)
@@ -79,6 +81,8 @@ func loadItemReverseRelations(o orm.Ormer, item *Items) {
 	var itemPurposes []Item_purposes
 	if _, err := o.QueryTable(new(Item_purposes)).
 		Filter("Item__ItemId", item.ItemId).
+		Filter("Active", 1).
+		Filter("Purpose__Active", 1).
 		RelatedSel().
 		All(&itemPurposes); err != nil {
 		logs.Error("Error loading related Item purposes: ", err)
