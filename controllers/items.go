@@ -824,6 +824,9 @@ func (c *ItemsController) Delete() {
 
 	i, ierr := models.GetItemsById(id)
 
+	statusCode := 200
+	message := "Item successfully deleted"
+
 	if ierr == nil {
 		logs.Info("Item retrieved ")
 		logs.Info(i)
@@ -936,9 +939,12 @@ func (c *ItemsController) Delete() {
 		if qerr := models.UpdateItemsById(i); qerr == nil {
 			logs.Info("Deactivating Item: ", i.ItemPrice.ItemPriceId)
 			logs.Info("Item Deleted ", id)
-			c.Data["json"] = "OK"
+			statusCode = 200
+			message = "Item successfully deactivated"
 		} else {
 			panic(qerr)
+			statusCode = 301
+			message = qerr.Error()
 		}
 
 		// if err := models.DeleteItems(id); err == nil {
@@ -957,7 +963,12 @@ func (c *ItemsController) Delete() {
 	} else {
 		logs.Error("An error occurred")
 		logs.Error(ierr)
+		statusCode = 301
+		message = ierr.Error()
 	}
+
+	resp := responses.StringResponseDTO{StatusCode: statusCode, Value: "OK", StatusDesc: message}
+	c.Data["json"] = resp
 
 	c.ServeJSON()
 }
