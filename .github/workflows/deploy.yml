@@ -5,15 +5,15 @@ name: Go
 
 on:
   push:
-    branches: [ "ecommerce" ]
+    branches: [ "shopmallafrik" ]
   pull_request:
-    branches: [ "ecommerce" ]
+    branches: [ "shopmallafrik" ]
 
 jobs:
 
   build:
     runs-on: ubuntu-latest
-    environment: ecommerce
+    environment: shopmallafrik
     steps:
     - uses: actions/checkout@v4
 
@@ -36,9 +36,9 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_SERVER << 'EOF'
           set -e
-          cd /usr/app/ecommerce/ecommerce_item_processor
+          cd /usr/app/shopmallafrik/ecommerce_item_processor
           git stash
-          git pull origin ecommerce
+          git pull origin shopmallafrik
           go build -o ecommerce-item-processor
           pm2 restart ecommerce-item-processor || \
           pm2 start ecommerce-item-processor --name ecommerce-item-processor
