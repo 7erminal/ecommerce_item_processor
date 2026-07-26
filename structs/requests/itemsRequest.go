@@ -11,7 +11,8 @@ type ItemQuantityRequest struct {
 }
 
 type ItemPriceRequest struct {
-	ItemId   string
-	Price    float32
-	Discount float32
+	ItemId       string
+	Price        float32
+	AltPrice     float32
+	ExtraCharges float32
 }

@@ -942,6 +942,8 @@ func (c *ItemsController) UpdateItemPrice() {
 		c.Data["json"] = resp
 	} else {
 		iv.ItemPrice.ItemPrice = t.Price
+		iv.ItemPrice.AltItemPrice = t.AltPrice
+		iv.ItemPrice.ExtraCharges = t.ExtraCharges
 
 		if err := models.UpdateItemsById(iv); err == nil {
 			// Update price for item
