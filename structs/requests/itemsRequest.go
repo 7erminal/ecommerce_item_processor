@@ -9,3 +9,9 @@ type ItemQuantityRequest struct {
 	ItemId   string
 	Quantity int
 }
+
+type ItemPriceRequest struct {
+	ItemId   string
+	Price    float32
+	Discount float32
+}

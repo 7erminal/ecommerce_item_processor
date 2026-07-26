@@ -873,10 +873,10 @@ func (c *ItemsController) UpdateItemImage() {
 }
 
 // UpdateItemQuantity ...
-// @Title Update Item Image
-// @Description update the Item's image
+// @Title Update Item Quantity
+// @Description update the Item's quantity
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	requests.ImageUpdateRequest	true		"body for Items content"
+// @Param	body		body 	requests.ItemQuantityRequest	true		"body for Items content"
 // @Success 200 {object} models.Items
 // @Failure 403 :id is not int
 // @router /quantity/:id [put]
@@ -907,6 +907,45 @@ func (c *ItemsController) UpdateItemQuantity() {
 			} else {
 				logs.Error("Error fetching item quantity: ", err.Error())
 			}
+			c.Ctx.Output.SetStatus(200)
+
+			resp := responses.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
+			c.Data["json"] = resp
+
+		} else {
+			resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+			c.Data["json"] = resp
+		}
+	}
+
+	c.ServeJSON()
+}
+
+// UpdateItemPrice ...
+// @Title Update Item Price
+// @Description update the Item's price
+// @Param	id		path 	string	true		"The id you want to update"
+// @Param	body		body 	requests.ItemPriceRequest	true		"body for Items content"
+// @Success 200 {object} models.Items
+// @Failure 403 :id is not int
+// @router /price/:id [put]
+func (c *ItemsController) UpdateItemPrice() {
+	idStr := c.Ctx.Input.Param(":id")
+	id, _ := strconv.ParseInt(idStr, 0, 64)
+	var t requests.ItemPriceRequest
+	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
+	logs.Info("Request received. Price is ", t.Price, " Item id is ", idStr)
+
+	iv, err := models.GetItemsById(id)
+	if err != nil {
+		resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
+		c.Data["json"] = resp
+	} else {
+		iv.ItemPrice.ItemPrice = t.Price
+
+		if err := models.UpdateItemsById(iv); err == nil {
+			// Update price for item
+
 			c.Ctx.Output.SetStatus(200)
 
 			resp := responses.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
