@@ -126,7 +126,6 @@ func (c *CategoriesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetCategoriesById(id)
 	if err != nil {
-		logs.Error("An error occurred while fetching category ", err.Error())
 		var resp = models.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
 		c.Data["json"] = resp
 	} else {

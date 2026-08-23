@@ -90,7 +90,7 @@ func (c *FeaturesController) Post() {
 
 	if _, err := models.AddFeatures(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
-		logs.Info("Feature added successfully ", v)
+
 		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: &v, StatusDesc: "Feature has been added successfully"}
 		c.Data["json"] = resp
 	} else {
