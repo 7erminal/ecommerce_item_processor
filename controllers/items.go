@@ -137,7 +137,6 @@ func (c *ItemsController) Post() {
 						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
 						c.Data["json"] = resp
 					}
-
 				} else {
 					logs.Error(err.Error())
 					errorCode = 301
@@ -161,7 +160,6 @@ func (c *ItemsController) Post() {
 			c.Data["json"] = resp
 			logs.Error(cerr.Error())
 		}
-
 	} else {
 		logs.Error(err.Error())
 		errorCode = 301

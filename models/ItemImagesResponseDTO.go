@@ -1,19 +1,19 @@
 package models
 
 type ItemImagesResponseDTO struct {
-	StatusCode int            `orm:"omitempty"`
-	ItemImages *[]interface{} `orm:"omitempty"`
-	StatusDesc string         `orm:"size(255)"`
+	StatusCode int
+	ItemImages *[]interface{}
+	StatusDesc string
 }
 
 type ItemImagesResponseDTO2 struct {
-	StatusCode int            `orm:"omitempty"`
-	ItemImages *[]Item_images `orm:"omitempty"`
-	StatusDesc string         `orm:"size(255)"`
+	StatusCode int
+	ItemImages *[]Item_images
+	StatusDesc string
 }
 
 type ItemImageResponseDTO struct {
-	StatusCode int          `orm:"omitempty"`
-	ItemImage  *Item_images `orm:"omitempty"`
-	StatusDesc string       `orm:"size(255)"`
+	StatusCode int
+	ItemImage  *Item_images
+	StatusDesc string
 }
