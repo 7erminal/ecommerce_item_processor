@@ -71,7 +71,7 @@ func (c *Item_imagesController) Post() {
 		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
 		errorMessage := "Error: Failed to save the image file"
 
-		resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+		resp := responses.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
 
 		c.Data["json"] = resp
 		c.ServeJSON()
@@ -86,7 +86,8 @@ func (c *Item_imagesController) Post() {
 
 	logs.Info("Saving ... ", filePath)
 	// json.Unmarshal(c.Ctx.Input.RequestBody, &v)
-	v := models.Item_images{ItemId: itemId, ImagePath: viewFilePath, IsDefault: 0, CreatedBy: 1, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
+	createdBy := c.Ctx.Input.Query("AddedBy")
+	v := models.Item_images{ItemId: itemId, ImagePath: viewFilePath, IsDefault: 0, CreatedBy: createdBy, Active: 1, DateCreated: time.Now(), DateModified: time.Now()}
 
 	if _, err := models.AddItem_images(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
@@ -97,18 +98,114 @@ func (c *Item_imagesController) Post() {
 
 			if err := models.UpdateItemsById(k); err != nil {
 				logs.Error(err.Error())
-				resp := responses.ItemResponseDTO{StatusCode: 302, Item: k, StatusDesc: err.Error()}
+				categoryData := responses.Categories{
+					CategoryId:   strconv.FormatInt(k.Category.CategoryId, 10),
+					CategoryName: k.Category.CategoryName,
+					Description:  k.Category.Description,
+					ImagePath:    k.Category.ImagePath,
+					Active:       k.Category.Active,
+					Icon:         k.Category.Icon,
+					DateCreated:  k.Category.DateCreated,
+					DateModified: k.Category.DateModified,
+				}
+				price := responses.Item_prices{
+					ItemPriceId:   strconv.FormatInt(k.ItemPrice.ItemPriceId, 10),
+					ItemPrice:     k.ItemPrice.ItemPrice,
+					AltItemPrice:  k.ItemPrice.AltItemPrice,
+					ShowAltPrice:  k.ItemPrice.ShowAltPrice,
+					Discount:      k.ItemPrice.Discount,
+					Discount_type: k.ItemPrice.Discount_type,
+					ExtraCharges:  k.ItemPrice.ExtraCharges,
+					Currency:      k.ItemPrice.Currency,
+					Active:        k.ItemPrice.Active,
+					DateCreated:   k.ItemPrice.DateCreated,
+					DateModified:  k.ItemPrice.DateModified,
+					CreatedBy:     k.ItemPrice.CreatedBy,
+					ModifiedBy:    k.ItemPrice.ModifiedBy,
+				}
+				status := responses.Status{
+					StatusId:     strconv.FormatInt(k.Status.StatusId, 10),
+					Status:       k.Status.Status,
+					StatusCode:   k.Status.StatusCode,
+					DateCreated:  k.Status.DateCreated,
+					DateModified: k.Status.DateModified,
+					Active:       k.Status.Active,
+				}
+				quantity := responses.Item_quantity{
+					ItemQuantityId: strconv.FormatInt(k.ItemQuantity.ItemQuantityId, 10),
+					Quantity:       k.ItemQuantity.Quantity,
+					QuantityAlert:  k.ItemQuantity.QuantityAlert,
+					Active:         k.ItemQuantity.Active,
+					DateCreated:    k.ItemQuantity.DateCreated,
+					DateModified:   k.ItemQuantity.DateModified,
+					CreatedBy:      k.ItemQuantity.CreatedBy,
+					ModifiedBy:     k.ItemQuantity.ModifiedBy,
+				}
+				features := []*responses.Features{}
+				for _, f := range k.ItemFeatures {
+					features = append(features, &responses.Features{
+						FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+						Feature:      f.FeatureName,
+						Description:  f.Description,
+						DateCreated:  f.DateCreated,
+						DateModified: f.DateModified,
+						ImagePath:    f.ImagePath,
+						Active:       f.Active,
+					})
+				}
+
+				purposes := []*responses.Purposes{}
+				for _, p := range k.ItemPurposes {
+					purposes = append(purposes, &responses.Purposes{
+						PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+						Purpose:      p.Purpose,
+						Description:  p.Description,
+						DateCreated:  p.DateCreated,
+						DateModified: p.DateModified,
+						ImagePath:    p.ImagePath,
+						Active:       p.Active,
+					})
+				}
+				respData := responses.Items{
+					ItemId:          strconv.FormatInt(k.ItemId, 10),
+					ItemName:        k.ItemName,
+					Description:     k.Description,
+					Weight:          k.Weight,
+					Category:        &categoryData,
+					ItemPrice:       &price,
+					AvailableSizes:  k.AvailableSizes,
+					AvailableColors: k.AvailableColors,
+					Material:        k.Material,
+					ImagePath:       k.ImagePath,
+					Quantity:        k.Quantity,
+					Active:          k.Active,
+					DateCreated:     k.DateCreated,
+					DateModified:    k.DateModified,
+					CreatedBy:       k.CreatedBy,
+					ModifiedBy:      k.ModifiedBy,
+					Country:         strconv.FormatInt(k.Country, 10),
+					Branch:          strconv.FormatInt(k.Branch, 10),
+					Status:          &status,
+					LastOrderDate:   k.LastOrderDate,
+					ItemQuantity:    &quantity,
+					ItemFeatures:    features,
+					ItemPurposes:    purposes,
+				}
+				resp := responses.ItemResponseDTO{StatusCode: 302, Item: &respData, StatusDesc: err.Error()}
 				c.Data["json"] = resp
 			}
-
-			resp := models.ItemImageResponseDTO{StatusCode: 200, ItemImage: &v, StatusDesc: "Images uploaded successfully"}
+			respData := responses.ItemImagesDTO{
+				ImageName: fileName,
+				ImagePath: viewFilePath,
+			}
+			resp := responses.ItemImageResponseDTO{StatusCode: 200, ItemImage: &respData, StatusDesc: "Images uploaded successfully"}
 			c.Data["json"] = resp
 		} else {
-			resp := models.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
+			resp := responses.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
 			c.Data["json"] = resp
 		}
 	} else {
-		resp := models.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
+		resp := responses.ItemImageResponseDTO{StatusCode: 301, ItemImage: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	}
 
@@ -119,7 +216,7 @@ func (c *Item_imagesController) Post() {
 // @Title Upload Picture
 // @Description Upload a picture to items
 // @Param	Image		formData 	file	true		"Item Image"
-// @Success 200 {int} responses.StringResponseFDTO
+// @Success 200 {int} responses.StringResponseDTO
 // @Failure 403 body is empty
 // @router /upload-pictures [post]
 func (c *Item_imagesController) UploadPictures() {
@@ -161,13 +258,13 @@ func (c *Item_imagesController) UploadPictures() {
 		// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
 		errorMessage := "Error: Failed to save the image file"
 
-		resp := responses.StringResponseFDTO{StatusCode: http.StatusInternalServerError, Value: &errorMessage, StatusDesc: "Internal Server Error"}
+		resp := responses.StringResponseDTO{StatusCode: http.StatusInternalServerError, Value: errorMessage, StatusDesc: "Internal Server Error"}
 
 		c.Data["json"] = resp
 		c.ServeJSON()
 		return
 	} else {
-		resp := responses.StringResponseFDTO{StatusCode: 200, Value: &viewFilePath, StatusDesc: "Images uploaded successfully"}
+		resp := responses.StringResponseDTO{StatusCode: 200, Value: viewFilePath, StatusDesc: "Images uploaded successfully"}
 		c.Data["json"] = resp
 	}
 
@@ -188,7 +285,14 @@ func (c *Item_imagesController) GetOne() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		var resp = models.ItemImagesResponseDTO2{StatusCode: 200, ItemImages: v, StatusDesc: "Images fetched successfully"}
+		respData := []responses.ItemImagesDTO{}
+		for _, img := range *v {
+			respData = append(respData, responses.ItemImagesDTO{
+				ImageName: strconv.FormatInt(img.ItemId, 10),
+				ImagePath: img.ImagePath,
+			})
+		}
+		var resp = responses.ItemImagesResponseDTO2{StatusCode: 200, ItemImages: &respData, StatusDesc: "Images fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -252,7 +356,7 @@ func (c *Item_imagesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		var resp = models.ItemImagesResponseDTO{StatusCode: 200, ItemImages: &l, StatusDesc: "Images fetched successfully"}
+		var resp = responses.ItemImagesResponseDTO{StatusCode: 200, ItemImages: &l, StatusDesc: "Images fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

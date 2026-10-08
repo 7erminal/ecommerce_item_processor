@@ -18,8 +18,8 @@ type Item_images struct {
 	Active       int
 	DateCreated  time.Time `orm:"type(datetime)"`
 	DateModified time.Time `orm:"type(datetime)"`
-	CreatedBy    int
-	ModifiedBy   int
+	CreatedBy    string
+	ModifiedBy   string
 }
 
 func init() {

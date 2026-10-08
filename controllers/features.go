@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	helperFunc "item_processor/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
 	"item_processor/structs/responses"
@@ -29,7 +28,6 @@ func (c *FeaturesController) URLMapping() {
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
-	c.Mapping("GetAllFeaturesAndTheirItems", c.GetAllFeaturesAndTheirItems)
 	c.Mapping("GetOneByName", c.GetOneByName)
 }
 
@@ -72,7 +70,7 @@ func (c *FeaturesController) Post() {
 			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
 			errorMessage := "Error: Failed to save the image file"
 
-			resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+			resp := responses.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
 
 			c.Data["json"] = resp
 			c.ServeJSON()
@@ -80,18 +78,30 @@ func (c *FeaturesController) Post() {
 		}
 	}
 
+	createdBy := c.Ctx.Input.Query("AddedBy")
+
 	v := models.Features{
 		FeatureName: c.Ctx.Input.Query("FeatureName"),
 		ImagePath:   viewFilePath,
 		Description: c.Ctx.Input.Query("Description"),
 		Active:      1,
-		CreatedBy:   1,
+		CreatedBy:   createdBy,
+		ModifiedBy:  createdBy,
 	}
 
 	if _, err := models.AddFeatures(&v); err == nil {
 		c.Ctx.Output.SetStatus(200)
 
-		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: &v, StatusDesc: "Feature has been added successfully"}
+		respData := responses.Features{
+			FeatureId:    strconv.FormatInt(v.FeatureId, 10),
+			Feature:      v.FeatureName,
+			ImagePath:    v.ImagePath,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.FeatureResponseDTO{StatusCode: 200, Feature: &respData, StatusDesc: "Feature has been added successfully"}
 		c.Data["json"] = resp
 	} else {
 		c.Data["json"] = err.Error()
@@ -112,11 +122,20 @@ func (c *FeaturesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetFeaturesById(id)
 	if err != nil {
-		var resp = models.FeatureResponseDTO{StatusCode: 301, Feature: nil, StatusDesc: "Error fetching feature"}
+		var resp = responses.FeatureResponseDTO{StatusCode: 301, Feature: nil, StatusDesc: "Error fetching feature"}
 		logs.Info("Error fetching feature ", err.Error())
 		c.Data["json"] = resp
 	} else {
-		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: v, StatusDesc: "Feature fetched successfully"}
+		respData := responses.Features{
+			FeatureId:    strconv.FormatInt(v.FeatureId, 10),
+			Feature:      v.FeatureName,
+			ImagePath:    v.ImagePath,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.FeatureResponseDTO{StatusCode: 200, Feature: &respData, StatusDesc: "Feature fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -136,36 +155,21 @@ func (c *FeaturesController) GetOneByName() {
 
 	v, err := models.GetFeaturesByName(t.Value)
 	if err != nil {
-		var resp = models.FeatureResponseDTO{StatusCode: 301, Feature: nil, StatusDesc: "Error fetching feature"}
+		var resp = responses.FeatureResponseDTO{StatusCode: 301, Feature: nil, StatusDesc: "Error fetching feature"}
 		logs.Info("Error fetching feature ", err.Error())
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Features fetched:: ", v)
-		var resp = models.FeatureResponseDTO{StatusCode: 200, Feature: v, StatusDesc: "Feature fetched successfully"}
-		c.Data["json"] = resp
-	}
-	c.ServeJSON()
-}
-
-// GetAllFeaturesAndTheirItems ...
-// @Title Get All Features and their items
-// @Description get Features
-// @Success 200 {object} models.FeaturesResponseFDTO
-// @Failure 403 is empty
-// @router /items [get]
-func (c *FeaturesController) GetAllFeaturesAndTheirItems() {
-	logs.Info("Getting all ")
-	v, err := models.GetAllFeaturesWithTheirItems()
-
-	if err != nil {
-		var resp = responses.FeaturesResponseFDTO{StatusCode: 301, Features: nil, StatusDesc: "Failed to fetch features"}
-		logs.Error("Error getting features", err.Error())
-		c.Data["json"] = resp
-	} else {
-		logs.Info("Data is ", v)
-		modified := helperFunc.ConvertParamsToFeatures(v)
-
-		var resp = responses.FeaturesResponseFDTO{StatusCode: 200, Features: &modified, StatusDesc: "Features fetched successfully"}
+		respData := responses.Features{
+			FeatureId:    strconv.FormatInt(v.FeatureId, 10),
+			Feature:      v.FeatureName,
+			ImagePath:    v.ImagePath,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.FeatureResponseDTO{StatusCode: 200, Feature: &respData, StatusDesc: "Feature fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -243,13 +247,22 @@ func (c *FeaturesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		featuresResp := []models.Features{}
+		featuresResp := []responses.Features{}
 		for _, urs := range l {
 			m := urs.(models.Features)
+			respData := responses.Features{
+				FeatureId:    strconv.FormatInt(m.FeatureId, 10),
+				Feature:      m.FeatureName,
+				ImagePath:    m.ImagePath,
+				Description:  m.Description,
+				Active:       m.Active,
+				DateCreated:  m.DateCreated,
+				DateModified: m.DateModified,
+			}
 
-			featuresResp = append(featuresResp, m)
+			featuresResp = append(featuresResp, respData)
 		}
-		var resp = models.FeaturesResponseDTO{StatusCode: 200, Features: &featuresResp, StatusDesc: "Features fetched successfully"}
+		var resp = responses.FeaturesResponseDTO{StatusCode: 200, Features: &featuresResp, StatusDesc: "Features fetched successfully"}
 
 		c.Data["json"] = resp
 	}
@@ -288,10 +301,11 @@ func (c *FeaturesController) Put() {
 func (c *FeaturesController) ChangeVisibility() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v := requests.VisibilityRequestDTO{Id: id}
+	v := requests.VisibilityRequestDTO{Id: idStr}
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 	if q, err := models.GetFeaturesById(id); err == nil {
-		t := models.Features{FeatureId: id, Visible: v.Visibility, FeatureName: q.FeatureName, ImagePath: q.ImagePath, Description: q.Description, Active: q.Active, DateCreated: q.DateCreated, DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+
+		t := models.Features{FeatureId: id, Visible: v.Visibility, FeatureName: q.FeatureName, ImagePath: q.ImagePath, Description: q.Description, Active: q.Active, DateCreated: q.DateCreated, DateModified: time.Now(), ModifiedBy: v.CreatedBy}
 		if err := models.UpdateFeaturesById(&t); err == nil {
 			c.Data["json"] = "OK"
 		} else {

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"item_processor/models"
 	"item_processor/structs/requests"
+	"item_processor/structs/responses"
 	"strconv"
 	"strings"
 	"time"
@@ -44,8 +45,8 @@ func (c *Item_typesController) Post() {
 		Active:       1,
 		DateCreated:  time.Now(),
 		DateModified: time.Now(),
-		CreatedBy:    1,
-		ModifiedBy:   1,
+		CreatedBy:    v.AddedBy,
+		ModifiedBy:   v.AddedBy,
 	}
 	if _, err := models.AddItem_types(&itemType); err == nil {
 		c.Ctx.Output.SetStatus(201)
@@ -132,18 +133,27 @@ func (c *Item_typesController) GetAll() {
 	l, err := models.GetAllItem_types(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		// c.Data["json"] = err.Error()
-		resp := models.ItemTypesResponseDTO{StatusCode: 301, ItemTypes: nil, StatusDesc: "An error occurred while fetching item types: " + err.Error()}
+		resp := responses.ItemTypesResponseDTO{StatusCode: 301, ItemTypes: nil, StatusDesc: "An error occurred while fetching item types: " + err.Error()}
 		c.Data["json"] = resp
 	} else {
-		itemTypes := []models.Item_types{}
+		itemTypes := []*responses.Item_types{}
 		for _, urs := range l {
 			m := urs.(models.Item_types)
 
-			itemTypes = append(itemTypes, m)
+			itemTypes = append(itemTypes, &responses.Item_types{
+				ItemTypeId:   strconv.FormatInt(m.ItemTypeId, 10),
+				Name:         m.Name,
+				Description:  m.Description,
+				Active:       m.Active,
+				DateCreated:  m.DateCreated,
+				DateModified: m.DateModified,
+				CreatedBy:    m.CreatedBy,
+				ModifiedBy:   m.ModifiedBy,
+			})
 		}
 		logs.Info("Item types fetched")
 		logs.Info("Item types fetched: ", itemTypes)
-		resp := models.ItemTypesResponseDTO{StatusCode: 200, ItemTypes: &itemTypes, StatusDesc: "Item types fetched successfully"}
+		resp := responses.ItemTypesResponseDTO{StatusCode: 200, ItemTypes: itemTypes, StatusDesc: "Item types fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

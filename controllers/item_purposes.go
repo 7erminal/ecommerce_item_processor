@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/requests"
 	"item_processor/structs/responses"
 	"strconv"
 	"strings"
@@ -37,7 +38,7 @@ func (c *Item_purposesController) URLMapping() {
 // @Failure 403 body is empty
 // @router / [post]
 func (c *Item_purposesController) Post() {
-	var v models.ItemPurposeRequestDTO
+	var v requests.ItemPurposeRequestDTO
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 
 	itemid, _ := strconv.ParseInt(v.ItemId, 0, 64)
@@ -45,11 +46,24 @@ func (c *Item_purposesController) Post() {
 
 	if it, err := models.GetItemsById(itemid); err == nil {
 		if ft, err := models.GetPurposesById(purposeid); err == nil {
-			iff := models.Item_purposes{Item: it, Purpose: ft, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+			iff := models.Item_purposes{Item: it, Purpose: ft, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: v.AddedBy, ModifiedBy: v.AddedBy}
 
 			if _, err := models.AddItem_purposes(&iff); err == nil {
 				c.Ctx.Output.SetStatus(200)
-				resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: &iff, StatusDesc: "Item purpose added successfully"}
+				respData := responses.Item_purposes{
+					ItemPurposeId: strconv.FormatInt(iff.ItemPurposeId, 10),
+					Purpose: &responses.Purposes{
+						PurposeId:    strconv.FormatInt(ft.PurposeId, 10),
+						Purpose:      ft.Purpose,
+						ImagePath:    ft.ImagePath,
+						Visible:      ft.Visible,
+						Description:  ft.Description,
+						Active:       ft.Active,
+						DateCreated:  ft.DateCreated,
+						DateModified: ft.DateModified,
+					},
+				}
+				resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: &respData, StatusDesc: "Item purpose added successfully"}
 				c.Data["json"] = resp
 			} else {
 				resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: nil, StatusDesc: err.Error()}
@@ -79,7 +93,20 @@ func (c *Item_purposesController) GetOne() {
 	} else {
 		// c.Data["json"] = v
 		logs.Info("Item purpose fetched is ", v)
-		resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Item purpose fetched successfully"}
+		respData := responses.Item_purposes{
+			ItemPurposeId: strconv.FormatInt(v.ItemPurposeId, 10),
+			Purpose: &responses.Purposes{
+				PurposeId:    strconv.FormatInt(v.Purpose.PurposeId, 10),
+				Purpose:      v.Purpose.Purpose,
+				ImagePath:    v.Purpose.ImagePath,
+				Visible:      v.Purpose.Visible,
+				Description:  v.Purpose.Description,
+				Active:       v.Purpose.Active,
+				DateCreated:  v.Purpose.DateCreated,
+				DateModified: v.Purpose.DateModified,
+			},
+		}
+		resp := responses.Item_purposeResponseDTO{StatusCode: 200, Result: &respData, StatusDesc: "Item purpose fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -101,7 +128,23 @@ func (c *Item_purposesController) GetItemPurposesByPurpose() {
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item purposes are ", v)
-		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Purposes fetched successfully"}
+		respData := []*responses.Item_purposes{}
+		for _, item := range *v {
+			respData = append(respData, &responses.Item_purposes{
+				ItemPurposeId: strconv.FormatInt(item.ItemPurposeId, 10),
+				Purpose: &responses.Purposes{
+					PurposeId:    strconv.FormatInt(item.Purpose.PurposeId, 10),
+					Purpose:      item.Purpose.Purpose,
+					ImagePath:    item.Purpose.ImagePath,
+					Visible:      item.Purpose.Visible,
+					Description:  item.Purpose.Description,
+					Active:       item.Purpose.Active,
+					DateCreated:  item.Purpose.DateCreated,
+					DateModified: item.Purpose.DateModified,
+				},
+			})
+		}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: respData, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -123,7 +166,23 @@ func (c *Item_purposesController) GetItemPurposesByItem() {
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item purposes are ", v)
-		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Purposes fetched successfully"}
+		respData := []*responses.Item_purposes{}
+		for _, item := range *v {
+			respData = append(respData, &responses.Item_purposes{
+				ItemPurposeId: strconv.FormatInt(item.ItemPurposeId, 10),
+				Purpose: &responses.Purposes{
+					PurposeId:    strconv.FormatInt(item.Purpose.PurposeId, 10),
+					Purpose:      item.Purpose.Purpose,
+					ImagePath:    item.Purpose.ImagePath,
+					Visible:      item.Purpose.Visible,
+					Description:  item.Purpose.Description,
+					Active:       item.Purpose.Active,
+					DateCreated:  item.Purpose.DateCreated,
+					DateModified: item.Purpose.DateModified,
+				},
+			})
+		}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: respData, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -186,17 +245,30 @@ func (c *Item_purposesController) GetAll() {
 	l, err := models.GetAllItem_purposes(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		// c.Data["json"] = err.Error()
-		resp := models.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
+		resp := responses.ItemPurposesResponseDTO{StatusCode: 301, ItemPurposes: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
 		// c.Data["json"] = l
-		itemPurposes := []models.Item_purposes{}
+		itemPurposes := []*responses.Item_purposes{}
 		for _, urs := range l {
 			m := urs.(models.Item_purposes)
 
-			itemPurposes = append(itemPurposes, m)
+			respItemPurpose := &responses.Item_purposes{
+				ItemPurposeId: strconv.FormatInt(m.ItemPurposeId, 10),
+				Purpose: &responses.Purposes{
+					PurposeId:    strconv.FormatInt(m.Purpose.PurposeId, 10),
+					Purpose:      m.Purpose.Purpose,
+					ImagePath:    m.Purpose.ImagePath,
+					Visible:      m.Purpose.Visible,
+					Description:  m.Purpose.Description,
+					Active:       m.Purpose.Active,
+					DateCreated:  m.Purpose.DateCreated,
+					DateModified: m.Purpose.DateModified,
+				},
+			}
+			itemPurposes = append(itemPurposes, respItemPurpose)
 		}
-		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: &itemPurposes, StatusDesc: "Items fetched successfully"}
+		resp := responses.Item_purposesResponseDTO{StatusCode: 200, Result: itemPurposes, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

@@ -4,7 +4,7 @@ type AddItemRequest struct {
 	ItemName        string
 	Description     string
 	Weight          string
-	Category        int
+	Category        string
 	AvailableSizes  []string
 	AvailableColors []string
 	Quantity        int
@@ -13,8 +13,8 @@ type AddItemRequest struct {
 	AltItemPrice    float32
 	ExtraCharges    float32
 	Country         string
-	Branch          int64
-	CreatedBy       int
+	Branch          string
+	CreatedBy       string
 }
 
 type GetItemCount struct {

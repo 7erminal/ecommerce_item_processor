@@ -1,4 +1,4 @@
-package models
+package responses
 
 type ItemQuantityResponseDTO struct {
 	StatusCode int            `orm: "omitempty"`

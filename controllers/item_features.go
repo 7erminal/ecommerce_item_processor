@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"item_processor/models"
+	"item_processor/structs/requests"
 	"item_processor/structs/responses"
 	"strconv"
 	"strings"
@@ -38,7 +39,7 @@ func (c *Item_featuresController) URLMapping() {
 // @Failure 403 body is empty
 // @router / [post]
 func (c *Item_featuresController) Post() {
-	var v models.ItemFeatureRequestDTO
+	var v requests.ItemFeatureRequestDTO
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 
 	itemid, _ := strconv.ParseInt(v.ItemId, 0, 64)
@@ -46,7 +47,7 @@ func (c *Item_featuresController) Post() {
 
 	if it, err := models.GetItemsById(itemid); err == nil {
 		if ft, err := models.GetFeaturesById(featureid); err == nil {
-			iff := models.Item_features{Item: it, Feature: ft, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+			iff := models.Item_features{Item: it, Feature: ft, Active: 1, DateCreated: time.Now(), DateModified: time.Now(), CreatedBy: v.AddedBy, ModifiedBy: v.AddedBy}
 
 			if _, err := models.AddItem_features(&iff); err == nil {
 				c.Ctx.Output.SetStatus(200)
@@ -56,7 +57,21 @@ func (c *Item_featuresController) Post() {
 					resp := responses.Item_featureResponseDTO{StatusCode: 301, Result: nil, StatusDesc: "Failed to get item feature"}
 					c.Data["json"] = resp
 				} else {
-					resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: itemFeature, StatusDesc: "Item feature added successfully"}
+					feature := responses.Features{
+						FeatureId:    strconv.FormatInt(itemFeature.Feature.FeatureId, 10),
+						Feature:      ft.FeatureName,
+						ImagePath:    ft.ImagePath,
+						Visible:      ft.Visible,
+						Description:  ft.Description,
+						Active:       ft.Active,
+						DateCreated:  ft.DateCreated,
+						DateModified: ft.DateModified,
+					}
+					respData := responses.Item_features{
+						ItemFeatureId: strconv.FormatInt(itemFeature.ItemFeatureId, 10),
+						Feature:       &feature,
+					}
+					resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: &respData, StatusDesc: "Item feature added successfully"}
 					c.Data["json"] = resp
 				}
 			} else {
@@ -93,7 +108,21 @@ func (c *Item_featuresController) GetOne() {
 		resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Item feature fetched successfully"}
+		feature := responses.Features{
+			FeatureId:    strconv.FormatInt(v.Feature.FeatureId, 10),
+			Feature:      v.Feature.FeatureName,
+			ImagePath:    v.Feature.ImagePath,
+			Visible:      v.Feature.Visible,
+			Description:  v.Feature.Description,
+			Active:       v.Feature.Active,
+			DateCreated:  v.Feature.DateCreated,
+			DateModified: v.Feature.DateModified,
+		}
+		respData := responses.Item_features{
+			ItemFeatureId: strconv.FormatInt(v.ItemFeatureId, 10),
+			Feature:       &feature,
+		}
+		resp := responses.Item_featureResponseDTO{StatusCode: 200, Result: &respData, StatusDesc: "Item feature fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -115,7 +144,24 @@ func (c *Item_featuresController) GetItemFeaturesByFeature() {
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item features fetched are ", v)
-		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Features fetched successfully"}
+		var respData []responses.Item_features
+		for _, itemFeature := range *v {
+			feature := responses.Features{
+				FeatureId:    strconv.FormatInt(itemFeature.Feature.FeatureId, 10),
+				Feature:      itemFeature.Feature.FeatureName,
+				ImagePath:    itemFeature.Feature.ImagePath,
+				Visible:      itemFeature.Feature.Visible,
+				Description:  itemFeature.Feature.Description,
+				Active:       itemFeature.Feature.Active,
+				DateCreated:  itemFeature.Feature.DateCreated,
+				DateModified: itemFeature.Feature.DateModified,
+			}
+			respData = append(respData, responses.Item_features{
+				ItemFeatureId: strconv.FormatInt(itemFeature.ItemFeatureId, 10),
+				Feature:       &feature,
+			})
+		}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: &respData, StatusDesc: "Features fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -139,7 +185,24 @@ func (c *Item_featuresController) GetItemFeaturesByItem() {
 		c.Data["json"] = resp
 	} else {
 		logs.Info("Item features fetched are ", v)
-		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: v, StatusDesc: "Features fetched successfully"}
+		var respData []responses.Item_features
+		for _, itemFeature := range *v {
+			feature := responses.Features{
+				FeatureId:    strconv.FormatInt(itemFeature.Feature.FeatureId, 10),
+				Feature:      itemFeature.Feature.FeatureName,
+				ImagePath:    itemFeature.Feature.ImagePath,
+				Visible:      itemFeature.Feature.Visible,
+				Description:  itemFeature.Feature.Description,
+				Active:       itemFeature.Feature.Active,
+				DateCreated:  itemFeature.Feature.DateCreated,
+				DateModified: itemFeature.Feature.DateModified,
+			}
+			respData = append(respData, responses.Item_features{
+				ItemFeatureId: strconv.FormatInt(itemFeature.ItemFeatureId, 10),
+				Feature:       &feature,
+			})
+		}
+		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: &respData, StatusDesc: "Features fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -204,11 +267,25 @@ func (c *Item_featuresController) GetAll() {
 		c.Data["json"] = err.Error()
 	} else {
 		// c.Data["json"] = l
-		itemsResp := []models.Item_features{}
+		itemsResp := []responses.Item_features{}
 		for _, urs := range l {
 			m := urs.(models.Item_features)
 
-			itemsResp = append(itemsResp, m)
+			feature := responses.Features{
+				FeatureId:    strconv.FormatInt(m.Feature.FeatureId, 10),
+				Feature:      m.Feature.FeatureName,
+				ImagePath:    m.Feature.ImagePath,
+				Visible:      m.Feature.Visible,
+				Description:  m.Feature.Description,
+				Active:       m.Feature.Active,
+				DateCreated:  m.Feature.DateCreated,
+				DateModified: m.Feature.DateModified,
+			}
+
+			itemsResp = append(itemsResp, responses.Item_features{
+				ItemFeatureId: strconv.FormatInt(m.ItemFeatureId, 10),
+				Feature:       &feature,
+			})
 		}
 		logs.Info("Items returned are ", l)
 		resp := responses.Item_featuresResponseDTO{StatusCode: 200, Result: &itemsResp, StatusDesc: "Items fetched successfully"}

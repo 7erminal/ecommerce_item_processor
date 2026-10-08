@@ -1,8 +1,8 @@
-package models
+package responses
 
 type ItemImagesDTO struct {
-	ImageName string `orm:"size(40)"`
-	ImagePath    string `orm:"size(250)"`
+	ImageName string
+	ImagePath string
 	// Image      *multipart.File
 	// FileHeader *multipart.FileHeader
 }

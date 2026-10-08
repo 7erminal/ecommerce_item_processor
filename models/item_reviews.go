@@ -19,9 +19,9 @@ type Item_reviews struct {
 	DateCreated  time.Time `orm:"type(datetime)"`
 	DateModified time.Time `orm:"type(datetime)"`
 	Reference    int64     `orm:"null"`
-	CreatedBy    int
-	ModifiedBy   int
-	Active       int
+	CreatedBy    string    `orm:"omitempty"`
+	ModifiedBy   string    `orm:"omitempty"`
+	Active       int       `orm:"omitempty"`
 }
 
 func init() {

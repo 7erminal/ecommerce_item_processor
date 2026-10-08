@@ -26,7 +26,7 @@ func CheckItemCount(itemid int64, itemName string) (status bool) {
 	return status
 }
 
-func SendNotification(serviceName string, status string, category string, itemName string, quantityLeft string, userid *int64) {
+func SendNotification(serviceName string, status string, category string, itemName string, quantityLeft string, userid *string) {
 	notification := requests.NotificationRequest{
 		UserId:   userid,
 		Service:  serviceName,

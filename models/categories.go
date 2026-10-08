@@ -19,8 +19,8 @@ type Categories struct {
 	Active       int8      `orm:"default(1)"`
 	DateCreated  time.Time `orm:"type(datetime);omitempty"`
 	DateModified time.Time `orm:"type(datetime);omitempty"`
-	CreatedBy    int       `orm:"omitempty"`
-	ModifiedBy   int       `orm:"omitempty"`
+	CreatedBy    string    `orm:"omitempty"`
+	ModifiedBy   string    `orm:"omitempty"`
 }
 
 func init() {

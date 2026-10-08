@@ -26,15 +26,11 @@ func (c *ItemsController) URLMapping() {
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetItemQuantity", c.GetItemQuantity)
 	// c.Mapping("GetItemFeaturesByItem", c.GetItemFeaturesByItem)
-	c.Mapping("GetItemFeatures", c.GetItemFeatures)
-	c.Mapping("GetItemPurposes", c.GetItemPurposes)
 	c.Mapping("GetAll", c.GetAll)
 	c.Mapping("Put", c.Put)
 	c.Mapping("Delete", c.Delete)
-	c.Mapping("GetItemsByCategory", c.GetItemsByCategory)
 	c.Mapping("UpdateItemImage", c.UpdateItemImage)
 	c.Mapping("GetItemStats", c.GetItemStats)
-	c.Mapping("GetAllByBranch", c.GetAllByBranch)
 	c.Mapping("GetItemCountByType", c.GetItemCountByType)
 	c.Mapping("GetItemCount", c.GetItemCount)
 	c.Mapping("CheckItemQuantity", c.CheckItemQuantity)
@@ -66,7 +62,8 @@ func (c *ItemsController) Post() {
 	// Structure Available Colors
 	aColors := strings.Join(t.AvailableColors, ",")
 
-	p, err := models.GetCategoriesById(int64(t.Category))
+	categoryId, err := strconv.ParseInt(t.Category, 10, 64)
+	p, err := models.GetCategoriesById(categoryId)
 
 	if err == nil {
 		// Get Currency
@@ -80,7 +77,7 @@ func (c *ItemsController) Post() {
 				AltItemPrice: t.AltItemPrice,
 				ShowAltPrice: false,
 				ExtraCharges: t.ExtraCharges,
-				Currency:     cr.Result.CurrencyId,
+				Currency:     strconv.FormatInt(cr.Result.CurrencyId, 10),
 				Active:       1,
 				CreatedBy:    creator,
 				DateCreated:  time.Now(),
@@ -90,7 +87,16 @@ func (c *ItemsController) Post() {
 			logs.Info("Adding price to item to create at a go")
 			if _, err := models.AddItem_prices(&it); err == nil {
 				country := functions.GetCountryWithCode(&c.Controller, t.Country)
-				branch := functions.GetBranch(&c.Controller, t.Branch)
+				branchId, err := strconv.ParseInt(t.Branch, 10, 64)
+				if err != nil {
+					logs.Error(err.Error())
+					message = "Error parsing branch ID: " + err.Error()
+					resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: nil, StatusDesc: message}
+					c.Data["json"] = resp
+					c.ServeJSON()
+					return
+				}
+				branch := functions.GetBranch(&c.Controller, branchId)
 
 				status := models.Status{}
 
@@ -129,19 +135,112 @@ func (c *ItemsController) Post() {
 						errorCode = 200
 						message = "Item added successfully with ID " + strconv.FormatInt(v.ItemId, 10)
 
-						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
+						categoryData := responses.Categories{
+							CategoryId:   strconv.FormatInt(v.Category.CategoryId, 10),
+							CategoryName: v.Category.CategoryName,
+							Description:  v.Category.Description,
+							ImagePath:    v.Category.ImagePath,
+							Active:       v.Category.Active,
+							Icon:         v.Category.Icon,
+							DateCreated:  v.Category.DateCreated,
+							DateModified: v.Category.DateModified,
+						}
+						price := responses.Item_prices{
+							ItemPriceId:   strconv.FormatInt(v.ItemPrice.ItemPriceId, 10),
+							ItemPrice:     v.ItemPrice.ItemPrice,
+							AltItemPrice:  v.ItemPrice.AltItemPrice,
+							ShowAltPrice:  v.ItemPrice.ShowAltPrice,
+							Discount:      v.ItemPrice.Discount,
+							Discount_type: v.ItemPrice.Discount_type,
+							ExtraCharges:  v.ItemPrice.ExtraCharges,
+							Currency:      v.ItemPrice.Currency,
+							Active:        v.ItemPrice.Active,
+							DateCreated:   v.ItemPrice.DateCreated,
+							DateModified:  v.ItemPrice.DateModified,
+							CreatedBy:     v.ItemPrice.CreatedBy,
+							ModifiedBy:    v.ItemPrice.ModifiedBy,
+						}
+						status := responses.Status{
+							StatusId:     strconv.FormatInt(v.Status.StatusId, 10),
+							Status:       v.Status.Status,
+							StatusCode:   v.Status.StatusCode,
+							DateCreated:  v.Status.DateCreated,
+							DateModified: v.Status.DateModified,
+							Active:       v.Status.Active,
+						}
+						quantity := responses.Item_quantity{
+							ItemQuantityId: strconv.FormatInt(v.ItemQuantity.ItemQuantityId, 10),
+							Quantity:       v.ItemQuantity.Quantity,
+							QuantityAlert:  v.ItemQuantity.QuantityAlert,
+							Active:         v.ItemQuantity.Active,
+							DateCreated:    v.ItemQuantity.DateCreated,
+							DateModified:   v.ItemQuantity.DateModified,
+							CreatedBy:      v.ItemQuantity.CreatedBy,
+							ModifiedBy:     v.ItemQuantity.ModifiedBy,
+						}
+						features := []*responses.Features{}
+						for _, f := range v.ItemFeatures {
+							features = append(features, &responses.Features{
+								FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+								Feature:      f.FeatureName,
+								Description:  f.Description,
+								DateCreated:  f.DateCreated,
+								DateModified: f.DateModified,
+								ImagePath:    f.ImagePath,
+								Active:       f.Active,
+							})
+						}
+
+						purposes := []*responses.Purposes{}
+						for _, p := range v.ItemPurposes {
+							purposes = append(purposes, &responses.Purposes{
+								PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+								Purpose:      p.Purpose,
+								Description:  p.Description,
+								DateCreated:  p.DateCreated,
+								DateModified: p.DateModified,
+								ImagePath:    p.ImagePath,
+								Active:       p.Active,
+							})
+						}
+						respData := responses.Items{
+							ItemId:          strconv.FormatInt(v.ItemId, 10),
+							ItemName:        v.ItemName,
+							Description:     v.Description,
+							Weight:          v.Weight,
+							Category:        &categoryData,
+							ItemPrice:       &price,
+							AvailableSizes:  v.AvailableSizes,
+							AvailableColors: v.AvailableColors,
+							Material:        v.Material,
+							ImagePath:       v.ImagePath,
+							Quantity:        v.Quantity,
+							Active:          v.Active,
+							DateCreated:     v.DateCreated,
+							DateModified:    v.DateModified,
+							CreatedBy:       v.CreatedBy,
+							ModifiedBy:      v.ModifiedBy,
+							Country:         strconv.FormatInt(v.Country, 10),
+							Branch:          strconv.FormatInt(v.Branch, 10),
+							Status:          &status,
+							LastOrderDate:   v.LastOrderDate,
+							ItemQuantity:    &quantity,
+							ItemFeatures:    features,
+							ItemPurposes:    purposes,
+						}
+						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &respData, StatusDesc: message}
 						c.Data["json"] = resp
 					} else {
 						logs.Error(err.Error())
 						message = "Error adding item quantity: " + err.Error()
-						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
+						resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: nil, StatusDesc: message}
 						c.Data["json"] = resp
 					}
 				} else {
 					logs.Error(err.Error())
 					errorCode = 301
 					message = "Error adding item: " + err.Error()
-					resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: &v, StatusDesc: message}
+					resp := responses.ItemResponseDTO{StatusCode: errorCode, Item: nil, StatusDesc: message}
 					c.Data["json"] = resp
 				}
 			} else {
@@ -184,10 +283,104 @@ func (c *ItemsController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetItemsById(id)
 	if err != nil {
+		logs.Error("Error fetching item ", err)
 		resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := responses.ItemResponseDTO{StatusCode: 200, Item: v, StatusDesc: "Item fetched successfully"}
+		categoryData := responses.Categories{
+			CategoryId:   strconv.FormatInt(v.Category.CategoryId, 10),
+			CategoryName: v.Category.CategoryName,
+			Description:  v.Category.Description,
+			ImagePath:    v.Category.ImagePath,
+			Active:       v.Category.Active,
+			Icon:         v.Category.Icon,
+			DateCreated:  v.Category.DateCreated,
+			DateModified: v.Category.DateModified,
+		}
+		price := responses.Item_prices{
+			ItemPriceId:   strconv.FormatInt(v.ItemPrice.ItemPriceId, 10),
+			ItemPrice:     v.ItemPrice.ItemPrice,
+			AltItemPrice:  v.ItemPrice.AltItemPrice,
+			ShowAltPrice:  v.ItemPrice.ShowAltPrice,
+			Discount:      v.ItemPrice.Discount,
+			Discount_type: v.ItemPrice.Discount_type,
+			ExtraCharges:  v.ItemPrice.ExtraCharges,
+			Currency:      v.ItemPrice.Currency,
+			Active:        v.ItemPrice.Active,
+			DateCreated:   v.ItemPrice.DateCreated,
+			DateModified:  v.ItemPrice.DateModified,
+			CreatedBy:     v.ItemPrice.CreatedBy,
+			ModifiedBy:    v.ItemPrice.ModifiedBy,
+		}
+		status := responses.Status{
+			StatusId:     strconv.FormatInt(v.Status.StatusId, 10),
+			Status:       v.Status.Status,
+			StatusCode:   v.Status.StatusCode,
+			DateCreated:  v.Status.DateCreated,
+			DateModified: v.Status.DateModified,
+			Active:       v.Status.Active,
+		}
+		quantity := responses.Item_quantity{
+			ItemQuantityId: strconv.FormatInt(v.ItemQuantity.ItemQuantityId, 10),
+			Quantity:       v.ItemQuantity.Quantity,
+			QuantityAlert:  v.ItemQuantity.QuantityAlert,
+			Active:         v.ItemQuantity.Active,
+			DateCreated:    v.ItemQuantity.DateCreated,
+			DateModified:   v.ItemQuantity.DateModified,
+			CreatedBy:      v.ItemQuantity.CreatedBy,
+			ModifiedBy:     v.ItemQuantity.ModifiedBy,
+		}
+		features := []*responses.Features{}
+		for _, f := range v.ItemFeatures {
+			features = append(features, &responses.Features{
+				FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+				Feature:      f.FeatureName,
+				Description:  f.Description,
+				DateCreated:  f.DateCreated,
+				DateModified: f.DateModified,
+				ImagePath:    f.ImagePath,
+				Active:       f.Active,
+			})
+		}
+
+		purposes := []*responses.Purposes{}
+		for _, p := range v.ItemPurposes {
+			purposes = append(purposes, &responses.Purposes{
+				PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+				Purpose:      p.Purpose,
+				Description:  p.Description,
+				DateCreated:  p.DateCreated,
+				DateModified: p.DateModified,
+				ImagePath:    p.ImagePath,
+				Active:       p.Active,
+			})
+		}
+		respData := responses.Items{
+			ItemId:          strconv.FormatInt(v.ItemId, 10),
+			ItemName:        v.ItemName,
+			Description:     v.Description,
+			Weight:          v.Weight,
+			Category:        &categoryData,
+			ItemPrice:       &price,
+			AvailableSizes:  v.AvailableSizes,
+			AvailableColors: v.AvailableColors,
+			Material:        v.Material,
+			ImagePath:       v.ImagePath,
+			Quantity:        v.Quantity,
+			Active:          v.Active,
+			DateCreated:     v.DateCreated,
+			DateModified:    v.DateModified,
+			CreatedBy:       v.CreatedBy,
+			ModifiedBy:      v.ModifiedBy,
+			Country:         strconv.FormatInt(v.Country, 10),
+			Branch:          strconv.FormatInt(v.Branch, 10),
+			Status:          &status,
+			LastOrderDate:   v.LastOrderDate,
+			ItemQuantity:    &quantity,
+			ItemFeatures:    features,
+			ItemPurposes:    purposes,
+		}
+		resp := responses.ItemResponseDTO{StatusCode: 200, Item: &respData, StatusDesc: "Item fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -208,10 +401,20 @@ func (c *ItemsController) GetItemQuantity() {
 	v, err := models.GetItem_quantityByItemId(id)
 	if err != nil {
 		logs.Error("Error fetching quantity of item ... ", err.Error())
-		resp := models.ItemQuantityResponseDTO{StatusCode: 301, Quantity: nil, StatusDesc: err.Error()}
+		resp := responses.ItemQuantityResponseDTO{StatusCode: 301, Quantity: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		resp := models.ItemQuantityResponseDTO{StatusCode: 200, Quantity: v, StatusDesc: "Quantity fetched successfully"}
+		respData := responses.Item_quantity{
+			ItemQuantityId: strconv.FormatInt(v.ItemQuantityId, 10),
+			Quantity:       v.Quantity,
+			QuantityAlert:  v.QuantityAlert,
+			Active:         v.Active,
+			DateCreated:    v.DateCreated,
+			DateModified:   v.DateModified,
+			CreatedBy:      v.CreatedBy,
+			ModifiedBy:     v.ModifiedBy,
+		}
+		resp := responses.ItemQuantityResponseDTO{StatusCode: 200, Quantity: &respData, StatusDesc: "Quantity fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -319,93 +522,6 @@ func (c *ItemsController) GetItemCountWithTypeAndBranch() {
 		c.Data["json"] = resp
 	} else {
 		resp := responses.StringResponseDTO{StatusCode: 200, Value: count, StatusDesc: "Count fetched successfully"}
-		c.Data["json"] = resp
-	}
-	c.ServeJSON()
-}
-
-// // GetItemFeaturesByItem ...
-// // @Title Get Item Features by item
-// // @Description get Item_features by Item id
-// // @Param	id		path 	string	true		"The key for staticblock"
-// // @Success 200 {object} models.ItemsResponseDTO2
-// // @Failure 403 :id is empty
-// // @router /features/item/:id [get]
-// func (c *ItemsController) GetItemFeaturesByItem() {
-// 	idStr := c.Ctx.Input.Param(":id")
-// 	id, _ := strconv.ParseInt(idStr, 0, 64)
-// 	v, err := models.GetItemsWithItem(id)
-// 	if err != nil {
-// 		resp := models.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
-// 		c.Data["json"] = resp
-// 	} else {
-// 		logs.Info("Item features fetched are ", v)
-// 		resp := models.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
-// 		c.Data["json"] = resp
-// 	}
-// 	c.ServeJSON()
-// }
-
-// GetItemFeatures ...
-// @Title Get Item Features
-// @Description get Item_features by Item id
-// @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ItemsResponseDTO2
-// @Failure 403 :id is empty
-// @router /features/feature/:id [get]
-func (c *ItemsController) GetItemFeatures() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v, err := models.GetItemsByFeatureId(id)
-	if err != nil {
-		resp := responses.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
-		c.Data["json"] = resp
-	} else {
-		logs.Info("Item features fetched are ", v)
-		resp := responses.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Features fetched successfully"}
-		c.Data["json"] = resp
-	}
-	c.ServeJSON()
-}
-
-// GetItemsByCategory ...
-// @Title Get Item Features
-// @Description get Item_features by Item id
-// @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ItemsResponseDTO2
-// @Failure 403 :id is empty
-// @router /categories/:id [get]
-func (c *ItemsController) GetItemsByCategory() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v, err := models.GetItemsByCategoryId(id)
-	if err != nil {
-		resp := responses.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
-		c.Data["json"] = resp
-	} else {
-		logs.Info("Items fetched are ", v)
-		resp := responses.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Items fetched successfully"}
-		c.Data["json"] = resp
-	}
-	c.ServeJSON()
-}
-
-// GetItemPurposes ...
-// @Title Get Item Purposes
-// @Description get Item_purposes by Item id
-// @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.ItemsResponseDTO2
-// @Failure 403 :id is empty
-// @router /purposes/purpose/:id [get]
-func (c *ItemsController) GetItemPurposes() {
-	idStr := c.Ctx.Input.Param(":id")
-	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v, err := models.GetItemsByPurposeId(id)
-	if err != nil {
-		resp := responses.ItemsResponseDTO2{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
-		c.Data["json"] = resp
-	} else {
-		resp := responses.ItemsResponseDTO2{StatusCode: 200, Items: v, StatusDesc: "Purposes fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -520,153 +636,109 @@ func (c *ItemsController) GetAll() {
 		resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
 	} else {
-		itemsResp := []models.Items{}
+		itemsResp := []responses.Items{}
 		for _, urs := range l {
 			m := urs.(models.Items)
 
-			itemsResp = append(itemsResp, m)
+			categoryData := responses.Categories{
+				CategoryId:   strconv.FormatInt(m.Category.CategoryId, 10),
+				CategoryName: m.Category.CategoryName,
+				Description:  m.Category.Description,
+				ImagePath:    m.Category.ImagePath,
+				Active:       m.Category.Active,
+				Icon:         m.Category.Icon,
+				DateCreated:  m.Category.DateCreated,
+				DateModified: m.Category.DateModified,
+			}
+			price := responses.Item_prices{
+				ItemPriceId:   strconv.FormatInt(m.ItemPrice.ItemPriceId, 10),
+				ItemPrice:     m.ItemPrice.ItemPrice,
+				AltItemPrice:  m.ItemPrice.AltItemPrice,
+				ShowAltPrice:  m.ItemPrice.ShowAltPrice,
+				Discount:      m.ItemPrice.Discount,
+				Discount_type: m.ItemPrice.Discount_type,
+				ExtraCharges:  m.ItemPrice.ExtraCharges,
+				Currency:      m.ItemPrice.Currency,
+				Active:        m.ItemPrice.Active,
+				DateCreated:   m.ItemPrice.DateCreated,
+				DateModified:  m.ItemPrice.DateModified,
+				CreatedBy:     m.ItemPrice.CreatedBy,
+				ModifiedBy:    m.ItemPrice.ModifiedBy,
+			}
+			status := responses.Status{
+				StatusId:     strconv.FormatInt(m.Status.StatusId, 10),
+				Status:       m.Status.Status,
+				StatusCode:   m.Status.StatusCode,
+				DateCreated:  m.Status.DateCreated,
+				DateModified: m.Status.DateModified,
+				Active:       m.Status.Active,
+			}
+			quantity := responses.Item_quantity{
+				ItemQuantityId: strconv.FormatInt(m.ItemQuantity.ItemQuantityId, 10),
+				Quantity:       m.ItemQuantity.Quantity,
+				QuantityAlert:  m.ItemQuantity.QuantityAlert,
+				Active:         m.ItemQuantity.Active,
+				DateCreated:    m.ItemQuantity.DateCreated,
+				DateModified:   m.ItemQuantity.DateModified,
+				CreatedBy:      m.ItemQuantity.CreatedBy,
+				ModifiedBy:     m.ItemQuantity.ModifiedBy,
+			}
+			features := []*responses.Features{}
+			for _, f := range m.ItemFeatures {
+				features = append(features, &responses.Features{
+					FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+					Feature:      f.FeatureName,
+					Description:  f.Description,
+					DateCreated:  f.DateCreated,
+					DateModified: f.DateModified,
+					ImagePath:    f.ImagePath,
+					Active:       f.Active,
+				})
+			}
+
+			purposes := []*responses.Purposes{}
+			for _, p := range m.ItemPurposes {
+				purposes = append(purposes, &responses.Purposes{
+					PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+					Purpose:      p.Purpose,
+					Description:  p.Description,
+					DateCreated:  p.DateCreated,
+					DateModified: p.DateModified,
+					ImagePath:    p.ImagePath,
+					Active:       p.Active,
+				})
+			}
+			respData := responses.Items{
+				ItemId:          strconv.FormatInt(m.ItemId, 10),
+				ItemName:        m.ItemName,
+				Description:     m.Description,
+				Weight:          m.Weight,
+				Category:        &categoryData,
+				ItemPrice:       &price,
+				AvailableSizes:  m.AvailableSizes,
+				AvailableColors: m.AvailableColors,
+				Material:        m.Material,
+				ImagePath:       m.ImagePath,
+				Quantity:        m.Quantity,
+				Active:          m.Active,
+				DateCreated:     m.DateCreated,
+				DateModified:    m.DateModified,
+				CreatedBy:       m.CreatedBy,
+				ModifiedBy:      m.ModifiedBy,
+				Country:         strconv.FormatInt(m.Country, 10),
+				Branch:          strconv.FormatInt(m.Branch, 10),
+				Status:          &status,
+				LastOrderDate:   m.LastOrderDate,
+				ItemQuantity:    &quantity,
+				ItemFeatures:    features,
+				ItemPurposes:    purposes,
+			}
+			itemsResp = append(itemsResp, respData)
 		}
 		logs.Info("Items returned are ", l)
 		resp := responses.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
 		c.Data["json"] = resp
 	}
-	c.ServeJSON()
-}
-
-// GetAllByBranch ...
-// @Title Get All Items by branch
-// @Description get Items
-// @Param	branch_id		path 	string	true		"The id you want to update"
-// @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
-// @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
-// @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
-// @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
-// @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
-// @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.Items
-// @Failure 403
-// @router /branch/:branch_id [get]
-func (c *ItemsController) GetAllByBranch() {
-	branchidStr := c.Ctx.Input.Param(":branch_id")
-	branchid, _ := strconv.ParseInt(branchidStr, 0, 64)
-	var fields []string
-	var sortby []string
-	var order []string
-	var query = make(map[string]string)
-	var search = make(map[string]string)
-	var limit int64 = 100
-	var offset int64
-
-	// order_ := c.GetString("order")
-	order_ := "desc"
-	// c.GetString("sortby");
-	sortby_ := "DateCreated"
-
-	// fields: col1,col2,entity.col3
-	if v := c.GetString("fields"); v != "" {
-		fields = strings.Split(v, ",")
-	}
-	// limit: 10 (default is 10)
-	if v, err := c.GetInt64("limit"); err == nil {
-		limit = v
-	}
-	// offset: 0 (default is 0)
-	if v, err := c.GetInt64("offset"); err == nil {
-		offset = v
-	}
-	// sortby: col1,col2
-	if v := sortby_; v != "" {
-		sortby = strings.Split(v, ",")
-	}
-	// order: desc,asc
-	if v := order_; v != "" {
-		order = strings.Split(v, ",")
-	}
-	// query: k:v,k:v
-	if v := c.GetString("query"); v != "" {
-		for _, cond := range strings.Split(v, ",") {
-			kv := strings.SplitN(cond, ":", 2)
-			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
-				c.ServeJSON()
-				return
-			}
-			k, v := kv[0], kv[1]
-			query[k] = v
-		}
-	}
-
-	// set active
-	activeQuery := "Active:1"
-	if v := activeQuery; v != "" {
-		for _, cond := range strings.Split(v, ",") {
-			kv := strings.SplitN(cond, ":", 2)
-			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
-				c.ServeJSON()
-				return
-			}
-			k, v := kv[0], kv[1]
-			query[k] = v
-		}
-	}
-
-	// Get only items with active categories
-	activeCategoryQuery := "Category__active:1"
-	if v := activeCategoryQuery; v != "" {
-		for _, cond := range strings.Split(v, ",") {
-			kv := strings.SplitN(cond, ":", 2)
-			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid query key/value pair")
-				c.ServeJSON()
-				return
-			}
-			k, v := kv[0], kv[1]
-			query[k] = v
-		}
-	}
-
-	// search: k:v,k:v
-	if v := c.GetString("search"); v != "" {
-		for _, cond := range strings.Split(v, ",") {
-			kv := strings.SplitN(cond, ":", 2)
-			if len(kv) != 2 {
-				c.Data["json"] = errors.New("Error: invalid search key/value pair")
-				c.ServeJSON()
-				return
-			}
-			k, v := kv[0], kv[1]
-			search[k] = v
-		}
-	}
-
-	logs.Info("Getting all items for branch ", branchid, " with query ", query, " and fields ", fields, " and sortby ", sortby, " and order ", order, " and offset ", offset, " and limit ", limit)
-
-	if branch := functions.GetBranch(&c.Controller, branchid); branch.StatusCode == 200 {
-		l, err := models.GetAllItemsByBranch(branch.Result.BranchId, query, fields, sortby, order, offset, limit)
-		if err != nil {
-			resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: err.Error()}
-			c.Data["json"] = resp
-		} else {
-			// Log response in json
-			logs.Info("Items returned are ", l)
-			itemsJSON, _ := json.Marshal(l)
-			logs.Info("Items JSON: ", string(itemsJSON))
-			itemsResp := []models.Items{}
-			for _, urs := range l {
-				m := urs.(models.Items)
-
-				itemsResp = append(itemsResp, m)
-			}
-			resp := responses.ItemsResponseDTO{StatusCode: 200, Items: &itemsResp, StatusDesc: "Items fetched successfully"}
-			c.Data["json"] = resp
-		}
-	} else {
-		logs.Error("Branch does not exist")
-		resp := responses.ItemsResponseDTO{StatusCode: 301, Items: nil, StatusDesc: branch.StatusDesc}
-		c.Data["json"] = resp
-	}
-
 	c.ServeJSON()
 }
 
@@ -681,7 +753,7 @@ func (c *ItemsController) GetAllByBranch() {
 func (c *ItemsController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	var t models.ItemsDTO
+	var t requests.ItemsDTO
 	json.Unmarshal(c.Ctx.Input.RequestBody, &t)
 
 	creator := t.CreatedBy
@@ -692,7 +764,8 @@ func (c *ItemsController) Put() {
 	// Structure Available Colors
 	aColors := strings.Join(t.AvailableColors, ",")
 
-	p, err := models.GetCategoriesById(int64(t.Category))
+	categoryInt, err := strconv.ParseInt(t.Category, 10, 64)
+	p, err := models.GetCategoriesById(categoryInt)
 
 	if err == nil {
 		iv, err := models.GetItemsById(id)
@@ -706,15 +779,20 @@ func (c *ItemsController) Put() {
 			if cerr == nil {
 				if ip, err := models.GetItem_pricesById(iv.ItemPrice.ItemPriceId); err == nil {
 					// Add price for item
-					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: cr.Result.CurrencyId, Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
+					it := models.Item_prices{ItemPriceId: iv.ItemPrice.ItemPriceId, ItemPrice: t.ItemPrice, AltItemPrice: t.AltPrice, ShowAltPrice: false, ExtraCharges: t.ExtraCharges, Currency: strconv.FormatInt(cr.Result.CurrencyId, 10), Active: 1, ModifiedBy: creator, DateCreated: ip.DateCreated, CreatedBy: ip.CreatedBy, DateModified: time.Now()}
 
 					logs.Info("Modifying price for item")
 
 					if err := models.UpdateItem_pricesById(&it); err == nil {
 						// Add item if getting category and price addition does not result in an error
 						country := functions.GetCountryWithCode(&c.Controller, t.Country)
-						branch := functions.GetBranch(&c.Controller, t.Branch)
-						if country.StatusCode != 200 {
+						branchid, err := strconv.ParseInt(t.Branch, 10, 64)
+						branch := functions.GetBranch(&c.Controller, branchid)
+						if err != nil {
+							logs.Error("Failed to parse branch ID")
+							resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Invalid branch ID"}
+							c.Data["json"] = resp
+						} else if country.StatusCode != 200 {
 							logs.Error("Country does not exist")
 							resp := responses.ItemResponseDTO{StatusCode: 301, Item: nil, StatusDesc: "Country does not exist"}
 							c.Data["json"] = resp
@@ -748,7 +826,7 @@ func (c *ItemsController) Put() {
 
 								iq, err := models.GetItem_quantityByItemId(id)
 								if err != nil {
-									resp := responses.ItemResponseDTO{StatusCode: 304, Item: &v, StatusDesc: "Item quantity not set"}
+									resp := responses.ItemResponseDTO{StatusCode: 304, Item: nil, StatusDesc: "Item quantity not set"}
 									c.Data["json"] = resp
 									qu := models.Item_quantity{Item: &v, Quantity: t.Quantity, QuantityAlert: t.QuantityAlert, Active: 1, CreatedBy: creator, DateCreated: time.Now(), ModifiedBy: creator, DateModified: time.Now()}
 									if _, err := models.AddItem_quantity(&qu); err == nil {
@@ -756,7 +834,7 @@ func (c *ItemsController) Put() {
 										if err != nil {
 
 											logs.Error(err.Error())
-											resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+											resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 											c.Data["json"] = resp
 										} else {
 											logs.Info("Item fetched successfully")
@@ -765,11 +843,105 @@ func (c *ItemsController) Put() {
 										}
 										c.Ctx.Output.SetStatus(200)
 
-										resp := responses.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully added"}
+										categoryData := responses.Categories{
+											CategoryId:   strconv.FormatInt(v.Category.CategoryId, 10),
+											CategoryName: v.Category.CategoryName,
+											Description:  v.Category.Description,
+											ImagePath:    v.Category.ImagePath,
+											Active:       v.Category.Active,
+											Icon:         v.Category.Icon,
+											DateCreated:  v.Category.DateCreated,
+											DateModified: v.Category.DateModified,
+										}
+										price := responses.Item_prices{
+											ItemPriceId:   strconv.FormatInt(v.ItemPrice.ItemPriceId, 10),
+											ItemPrice:     v.ItemPrice.ItemPrice,
+											AltItemPrice:  v.ItemPrice.AltItemPrice,
+											ShowAltPrice:  v.ItemPrice.ShowAltPrice,
+											Discount:      v.ItemPrice.Discount,
+											Discount_type: v.ItemPrice.Discount_type,
+											ExtraCharges:  v.ItemPrice.ExtraCharges,
+											Currency:      v.ItemPrice.Currency,
+											Active:        v.ItemPrice.Active,
+											DateCreated:   v.ItemPrice.DateCreated,
+											DateModified:  v.ItemPrice.DateModified,
+											CreatedBy:     v.ItemPrice.CreatedBy,
+											ModifiedBy:    v.ItemPrice.ModifiedBy,
+										}
+										status := responses.Status{
+											StatusId:     strconv.FormatInt(v.Status.StatusId, 10),
+											Status:       v.Status.Status,
+											StatusCode:   v.Status.StatusCode,
+											DateCreated:  v.Status.DateCreated,
+											DateModified: v.Status.DateModified,
+											Active:       v.Status.Active,
+										}
+										quantity := responses.Item_quantity{
+											ItemQuantityId: strconv.FormatInt(v.ItemQuantity.ItemQuantityId, 10),
+											Quantity:       v.ItemQuantity.Quantity,
+											QuantityAlert:  v.ItemQuantity.QuantityAlert,
+											Active:         v.ItemQuantity.Active,
+											DateCreated:    v.ItemQuantity.DateCreated,
+											DateModified:   v.ItemQuantity.DateModified,
+											CreatedBy:      v.ItemQuantity.CreatedBy,
+											ModifiedBy:     v.ItemQuantity.ModifiedBy,
+										}
+										features := []*responses.Features{}
+										for _, f := range v.ItemFeatures {
+											features = append(features, &responses.Features{
+												FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+												Feature:      f.FeatureName,
+												Description:  f.Description,
+												DateCreated:  f.DateCreated,
+												DateModified: f.DateModified,
+												ImagePath:    f.ImagePath,
+												Active:       f.Active,
+											})
+										}
+
+										purposes := []*responses.Purposes{}
+										for _, p := range v.ItemPurposes {
+											purposes = append(purposes, &responses.Purposes{
+												PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+												Purpose:      p.Purpose,
+												Description:  p.Description,
+												DateCreated:  p.DateCreated,
+												DateModified: p.DateModified,
+												ImagePath:    p.ImagePath,
+												Active:       p.Active,
+											})
+										}
+										respData := responses.Items{
+											ItemId:          strconv.FormatInt(v.ItemId, 10),
+											ItemName:        v.ItemName,
+											Description:     v.Description,
+											Weight:          v.Weight,
+											Category:        &categoryData,
+											ItemPrice:       &price,
+											AvailableSizes:  v.AvailableSizes,
+											AvailableColors: v.AvailableColors,
+											Material:        v.Material,
+											ImagePath:       v.ImagePath,
+											Quantity:        v.Quantity,
+											Active:          v.Active,
+											DateCreated:     v.DateCreated,
+											DateModified:    v.DateModified,
+											CreatedBy:       v.CreatedBy,
+											ModifiedBy:      v.ModifiedBy,
+											Country:         strconv.FormatInt(v.Country, 10),
+											Branch:          strconv.FormatInt(v.Branch, 10),
+											Status:          &status,
+											LastOrderDate:   v.LastOrderDate,
+											ItemQuantity:    &quantity,
+											ItemFeatures:    features,
+											ItemPurposes:    purposes,
+										}
+
+										resp := responses.ItemResponseDTO{StatusCode: 200, Item: &respData, StatusDesc: "Item successfully added"}
 										c.Data["json"] = resp
 									} else {
 										logs.Error(err.Error())
-										resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 										c.Data["json"] = resp
 									}
 								} else {
@@ -780,7 +952,7 @@ func (c *ItemsController) Put() {
 										if err != nil {
 
 											logs.Error(err.Error())
-											resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+											resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 											c.Data["json"] = resp
 										} else {
 											logs.Info("Item fetched successfully")
@@ -790,18 +962,112 @@ func (c *ItemsController) Put() {
 
 										c.Ctx.Output.SetStatus(200)
 
-										resp := responses.ItemResponseDTO{StatusCode: 200, Item: item, StatusDesc: "Item successfully updated"}
+										categoryData := responses.Categories{
+											CategoryId:   strconv.FormatInt(v.Category.CategoryId, 10),
+											CategoryName: v.Category.CategoryName,
+											Description:  v.Category.Description,
+											ImagePath:    v.Category.ImagePath,
+											Active:       v.Category.Active,
+											Icon:         v.Category.Icon,
+											DateCreated:  v.Category.DateCreated,
+											DateModified: v.Category.DateModified,
+										}
+										price := responses.Item_prices{
+											ItemPriceId:   strconv.FormatInt(v.ItemPrice.ItemPriceId, 10),
+											ItemPrice:     v.ItemPrice.ItemPrice,
+											AltItemPrice:  v.ItemPrice.AltItemPrice,
+											ShowAltPrice:  v.ItemPrice.ShowAltPrice,
+											Discount:      v.ItemPrice.Discount,
+											Discount_type: v.ItemPrice.Discount_type,
+											ExtraCharges:  v.ItemPrice.ExtraCharges,
+											Currency:      v.ItemPrice.Currency,
+											Active:        v.ItemPrice.Active,
+											DateCreated:   v.ItemPrice.DateCreated,
+											DateModified:  v.ItemPrice.DateModified,
+											CreatedBy:     v.ItemPrice.CreatedBy,
+											ModifiedBy:    v.ItemPrice.ModifiedBy,
+										}
+										status := responses.Status{
+											StatusId:     strconv.FormatInt(v.Status.StatusId, 10),
+											Status:       v.Status.Status,
+											StatusCode:   v.Status.StatusCode,
+											DateCreated:  v.Status.DateCreated,
+											DateModified: v.Status.DateModified,
+											Active:       v.Status.Active,
+										}
+										quantity := responses.Item_quantity{
+											ItemQuantityId: strconv.FormatInt(v.ItemQuantity.ItemQuantityId, 10),
+											Quantity:       v.ItemQuantity.Quantity,
+											QuantityAlert:  v.ItemQuantity.QuantityAlert,
+											Active:         v.ItemQuantity.Active,
+											DateCreated:    v.ItemQuantity.DateCreated,
+											DateModified:   v.ItemQuantity.DateModified,
+											CreatedBy:      v.ItemQuantity.CreatedBy,
+											ModifiedBy:     v.ItemQuantity.ModifiedBy,
+										}
+										features := []*responses.Features{}
+										for _, f := range v.ItemFeatures {
+											features = append(features, &responses.Features{
+												FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+												Feature:      f.FeatureName,
+												Description:  f.Description,
+												DateCreated:  f.DateCreated,
+												DateModified: f.DateModified,
+												ImagePath:    f.ImagePath,
+												Active:       f.Active,
+											})
+										}
+
+										purposes := []*responses.Purposes{}
+										for _, p := range v.ItemPurposes {
+											purposes = append(purposes, &responses.Purposes{
+												PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+												Purpose:      p.Purpose,
+												Description:  p.Description,
+												DateCreated:  p.DateCreated,
+												DateModified: p.DateModified,
+												ImagePath:    p.ImagePath,
+												Active:       p.Active,
+											})
+										}
+										respData := responses.Items{
+											ItemId:          strconv.FormatInt(v.ItemId, 10),
+											ItemName:        v.ItemName,
+											Description:     v.Description,
+											Weight:          v.Weight,
+											Category:        &categoryData,
+											ItemPrice:       &price,
+											AvailableSizes:  v.AvailableSizes,
+											AvailableColors: v.AvailableColors,
+											Material:        v.Material,
+											ImagePath:       v.ImagePath,
+											Quantity:        v.Quantity,
+											Active:          v.Active,
+											DateCreated:     v.DateCreated,
+											DateModified:    v.DateModified,
+											CreatedBy:       v.CreatedBy,
+											ModifiedBy:      v.ModifiedBy,
+											Country:         strconv.FormatInt(v.Country, 10),
+											Branch:          strconv.FormatInt(v.Branch, 10),
+											Status:          &status,
+											LastOrderDate:   v.LastOrderDate,
+											ItemQuantity:    &quantity,
+											ItemFeatures:    features,
+											ItemPurposes:    purposes,
+										}
+
+										resp := responses.ItemResponseDTO{StatusCode: 200, Item: &respData, StatusDesc: "Item successfully updated"}
 										c.Data["json"] = resp
 									} else {
 										logs.Error(err.Error())
-										resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+										resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 										c.Data["json"] = resp
 									}
 								}
 
 							} else {
 								logs.Error(err.Error())
-								resp := responses.ItemResponseDTO{StatusCode: 302, Item: &v, StatusDesc: err.Error()}
+								resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 								c.Data["json"] = resp
 							}
 						}
@@ -858,7 +1124,101 @@ func (c *ItemsController) UpdateItemImage() {
 
 			c.Ctx.Output.SetStatus(200)
 
-			resp := responses.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
+			categoryData := responses.Categories{
+				CategoryId:   strconv.FormatInt(iv.Category.CategoryId, 10),
+				CategoryName: iv.Category.CategoryName,
+				Description:  iv.Category.Description,
+				ImagePath:    iv.Category.ImagePath,
+				Active:       iv.Category.Active,
+				Icon:         iv.Category.Icon,
+				DateCreated:  iv.Category.DateCreated,
+				DateModified: iv.Category.DateModified,
+			}
+			price := responses.Item_prices{
+				ItemPriceId:   strconv.FormatInt(iv.ItemPrice.ItemPriceId, 10),
+				ItemPrice:     iv.ItemPrice.ItemPrice,
+				AltItemPrice:  iv.ItemPrice.AltItemPrice,
+				ShowAltPrice:  iv.ItemPrice.ShowAltPrice,
+				Discount:      iv.ItemPrice.Discount,
+				Discount_type: iv.ItemPrice.Discount_type,
+				ExtraCharges:  iv.ItemPrice.ExtraCharges,
+				Currency:      iv.ItemPrice.Currency,
+				Active:        iv.ItemPrice.Active,
+				DateCreated:   iv.ItemPrice.DateCreated,
+				DateModified:  iv.ItemPrice.DateModified,
+				CreatedBy:     iv.ItemPrice.CreatedBy,
+				ModifiedBy:    iv.ItemPrice.ModifiedBy,
+			}
+			status := responses.Status{
+				StatusId:     strconv.FormatInt(iv.Status.StatusId, 10),
+				Status:       iv.Status.Status,
+				StatusCode:   iv.Status.StatusCode,
+				DateCreated:  iv.Status.DateCreated,
+				DateModified: iv.Status.DateModified,
+				Active:       iv.Status.Active,
+			}
+			quantity := responses.Item_quantity{
+				ItemQuantityId: strconv.FormatInt(iv.ItemQuantity.ItemQuantityId, 10),
+				Quantity:       iv.ItemQuantity.Quantity,
+				QuantityAlert:  iv.ItemQuantity.QuantityAlert,
+				Active:         iv.ItemQuantity.Active,
+				DateCreated:    iv.ItemQuantity.DateCreated,
+				DateModified:   iv.ItemQuantity.DateModified,
+				CreatedBy:      iv.ItemQuantity.CreatedBy,
+				ModifiedBy:     iv.ItemQuantity.ModifiedBy,
+			}
+			features := []*responses.Features{}
+			for _, f := range iv.ItemFeatures {
+				features = append(features, &responses.Features{
+					FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+					Feature:      f.FeatureName,
+					Description:  f.Description,
+					DateCreated:  f.DateCreated,
+					DateModified: f.DateModified,
+					ImagePath:    f.ImagePath,
+					Active:       f.Active,
+				})
+			}
+
+			purposes := []*responses.Purposes{}
+			for _, p := range iv.ItemPurposes {
+				purposes = append(purposes, &responses.Purposes{
+					PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+					Purpose:      p.Purpose,
+					Description:  p.Description,
+					DateCreated:  p.DateCreated,
+					DateModified: p.DateModified,
+					ImagePath:    p.ImagePath,
+					Active:       p.Active,
+				})
+			}
+			respData := responses.Items{
+				ItemId:          strconv.FormatInt(iv.ItemId, 10),
+				ItemName:        iv.ItemName,
+				Description:     iv.Description,
+				Weight:          iv.Weight,
+				Category:        &categoryData,
+				ItemPrice:       &price,
+				AvailableSizes:  iv.AvailableSizes,
+				AvailableColors: iv.AvailableColors,
+				Material:        iv.Material,
+				ImagePath:       iv.ImagePath,
+				Quantity:        iv.Quantity,
+				Active:          iv.Active,
+				DateCreated:     iv.DateCreated,
+				DateModified:    iv.DateModified,
+				CreatedBy:       iv.CreatedBy,
+				ModifiedBy:      iv.ModifiedBy,
+				Country:         strconv.FormatInt(iv.Country, 10),
+				Branch:          strconv.FormatInt(iv.Branch, 10),
+				Status:          &status,
+				LastOrderDate:   iv.LastOrderDate,
+				ItemQuantity:    &quantity,
+				ItemFeatures:    features,
+				ItemPurposes:    purposes,
+			}
+
+			resp := responses.ItemResponseDTO{StatusCode: 200, Item: &respData, StatusDesc: "Item successfully updated"}
 			c.Data["json"] = resp
 
 		} else {
@@ -907,7 +1267,100 @@ func (c *ItemsController) UpdateItemQuantity() {
 			}
 			c.Ctx.Output.SetStatus(200)
 
-			resp := responses.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
+			categoryData := responses.Categories{
+				CategoryId:   strconv.FormatInt(iv.Category.CategoryId, 10),
+				CategoryName: iv.Category.CategoryName,
+				Description:  iv.Category.Description,
+				ImagePath:    iv.Category.ImagePath,
+				Active:       iv.Category.Active,
+				Icon:         iv.Category.Icon,
+				DateCreated:  iv.Category.DateCreated,
+				DateModified: iv.Category.DateModified,
+			}
+			price := responses.Item_prices{
+				ItemPriceId:   strconv.FormatInt(iv.ItemPrice.ItemPriceId, 10),
+				ItemPrice:     iv.ItemPrice.ItemPrice,
+				AltItemPrice:  iv.ItemPrice.AltItemPrice,
+				ShowAltPrice:  iv.ItemPrice.ShowAltPrice,
+				Discount:      iv.ItemPrice.Discount,
+				Discount_type: iv.ItemPrice.Discount_type,
+				ExtraCharges:  iv.ItemPrice.ExtraCharges,
+				Currency:      iv.ItemPrice.Currency,
+				Active:        iv.ItemPrice.Active,
+				DateCreated:   iv.ItemPrice.DateCreated,
+				DateModified:  iv.ItemPrice.DateModified,
+				CreatedBy:     iv.ItemPrice.CreatedBy,
+				ModifiedBy:    iv.ItemPrice.ModifiedBy,
+			}
+			status := responses.Status{
+				StatusId:     strconv.FormatInt(iv.Status.StatusId, 10),
+				Status:       iv.Status.Status,
+				StatusCode:   iv.Status.StatusCode,
+				DateCreated:  iv.Status.DateCreated,
+				DateModified: iv.Status.DateModified,
+				Active:       iv.Status.Active,
+			}
+			quantity := responses.Item_quantity{
+				ItemQuantityId: strconv.FormatInt(iv.ItemQuantity.ItemQuantityId, 10),
+				Quantity:       iv.ItemQuantity.Quantity,
+				QuantityAlert:  iv.ItemQuantity.QuantityAlert,
+				Active:         iv.ItemQuantity.Active,
+				DateCreated:    iv.ItemQuantity.DateCreated,
+				DateModified:   iv.ItemQuantity.DateModified,
+				CreatedBy:      iv.ItemQuantity.CreatedBy,
+				ModifiedBy:     iv.ItemQuantity.ModifiedBy,
+			}
+			features := []*responses.Features{}
+			for _, f := range iv.ItemFeatures {
+				features = append(features, &responses.Features{
+					FeatureId:    strconv.FormatInt(f.FeatureId, 10),
+					Feature:      f.FeatureName,
+					Description:  f.Description,
+					DateCreated:  f.DateCreated,
+					DateModified: f.DateModified,
+					ImagePath:    f.ImagePath,
+					Active:       f.Active,
+				})
+			}
+
+			purposes := []*responses.Purposes{}
+			for _, p := range iv.ItemPurposes {
+				purposes = append(purposes, &responses.Purposes{
+					PurposeId:    strconv.FormatInt(p.PurposeId, 10),
+					Purpose:      p.Purpose,
+					Description:  p.Description,
+					DateCreated:  p.DateCreated,
+					DateModified: p.DateModified,
+					ImagePath:    p.ImagePath,
+					Active:       p.Active,
+				})
+			}
+			respData := responses.Items{
+				ItemId:          strconv.FormatInt(iv.ItemId, 10),
+				ItemName:        iv.ItemName,
+				Description:     iv.Description,
+				Weight:          iv.Weight,
+				Category:        &categoryData,
+				ItemPrice:       &price,
+				AvailableSizes:  iv.AvailableSizes,
+				AvailableColors: iv.AvailableColors,
+				Material:        iv.Material,
+				ImagePath:       iv.ImagePath,
+				Quantity:        iv.Quantity,
+				Active:          iv.Active,
+				DateCreated:     iv.DateCreated,
+				DateModified:    iv.DateModified,
+				CreatedBy:       iv.CreatedBy,
+				ModifiedBy:      iv.ModifiedBy,
+				Country:         strconv.FormatInt(iv.Country, 10),
+				Branch:          strconv.FormatInt(iv.Branch, 10),
+				Status:          &status,
+				LastOrderDate:   iv.LastOrderDate,
+				ItemQuantity:    &quantity,
+				ItemFeatures:    features,
+				ItemPurposes:    purposes,
+			}
+			resp := responses.ItemResponseDTO{StatusCode: 200, Item: &respData, StatusDesc: "Item successfully updated"}
 			c.Data["json"] = resp
 
 		} else {
@@ -935,6 +1388,7 @@ func (c *ItemsController) UpdateItemPrice() {
 	logs.Info("Request received. Price is ", t.Price, " Item id is ", idStr)
 
 	iv, err := models.GetItemsById(id)
+	var respData responses.Items
 	if err != nil {
 		resp := responses.ItemResponseDTO{StatusCode: 302, Item: nil, StatusDesc: err.Error()}
 		c.Data["json"] = resp
@@ -942,13 +1396,38 @@ func (c *ItemsController) UpdateItemPrice() {
 		iv.ItemPrice.ItemPrice = t.Price
 		iv.ItemPrice.AltItemPrice = t.AltPrice
 		iv.ItemPrice.ExtraCharges = t.ExtraCharges
+		respData = responses.Items{
+			ItemId:          strconv.FormatInt(iv.ItemId, 10),
+			ItemName:        iv.ItemName,
+			Description:     iv.Description,
+			Weight:          iv.Weight,
+			Category:        nil,
+			ItemPrice:       nil,
+			AvailableSizes:  iv.AvailableSizes,
+			AvailableColors: iv.AvailableColors,
+			Material:        iv.Material,
+			ImagePath:       iv.ImagePath,
+			Quantity:        iv.Quantity,
+			Active:          iv.Active,
+			DateCreated:     iv.DateCreated,
+			DateModified:    iv.DateModified,
+			CreatedBy:       iv.CreatedBy,
+			ModifiedBy:      iv.ModifiedBy,
+			Country:         strconv.FormatInt(iv.Country, 10),
+			Branch:          strconv.FormatInt(iv.Branch, 10),
+			Status:          nil,
+			LastOrderDate:   iv.LastOrderDate,
+			ItemQuantity:    nil,
+			ItemFeatures:    []*responses.Features{},
+			ItemPurposes:    []*responses.Purposes{},
+		}
 
 		if err := models.UpdateItemsById(iv); err == nil {
 			// Update price for item
 
 			c.Ctx.Output.SetStatus(200)
 
-			resp := responses.ItemResponseDTO{StatusCode: 200, Item: iv, StatusDesc: "Item successfully updated"}
+			resp := responses.ItemResponseDTO{StatusCode: 200, Item: &respData, StatusDesc: "Item successfully updated"}
 			c.Data["json"] = resp
 
 		} else {

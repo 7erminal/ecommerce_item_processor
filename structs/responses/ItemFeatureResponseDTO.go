@@ -1,4 +1,4 @@
-package models
+package responses
 
 import (
 	"time"
@@ -23,12 +23,12 @@ type ItemFeatureResponseDTO struct {
 
 type ItemFeaturesResponseDTO struct {
 	StatusCode   int
-	ItemFeatures *[]Item_features
+	ItemFeatures []*Item_features
 	StatusDesc   string
 }
 
 type ItemFeaturesResponse2DTO struct {
 	StatusCode   int
-	ItemFeatures *[]Item_features2
+	ItemFeatures []*Item_features2
 	StatusDesc   string
 }

@@ -115,9 +115,31 @@ func (c *Item_reviewsController) Post() {
 		if err != nil {
 			logs.Error("An error occurred converting ", referenceStr, " to int ", err.Error())
 		}
-		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: reference, Rating: rating, ReviewBy: u.User.UserId, Active: 1, CreatedBy: int(reviewBy), DateCreated: time.Now(), ModifiedBy: int(reviewBy), DateModified: time.Now()}
+		var r models.Item_reviews = models.Item_reviews{Review: c.Ctx.Input.Query("Review"), Item: &item, Reference: reference, Rating: rating, ReviewBy: u.User.UserId, Active: 1, CreatedBy: reviewByStr, DateCreated: time.Now(), ModifiedBy: reviewByStr, DateModified: time.Now()}
 		if _, err := models.AddItem_reviews(&r); err == nil {
-			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &r, StatusDesc: "Review successfully added"}
+			item := responses.Items{
+				ItemId:       strconv.FormatInt(item.ItemId, 10),
+				ItemName:     item.ItemName,
+				Description:  item.Description,
+				ImagePath:    item.ImagePath,
+				Active:       item.Active,
+				DateCreated:  item.DateCreated,
+				DateModified: item.DateModified,
+			}
+			itemReview := responses.Item_reviews{
+				ItemReviewId: strconv.FormatInt(r.ItemReviewId, 10),
+				Review:       r.Review,
+				Item:         &item,
+				Reference:    strconv.FormatInt(r.Reference, 10),
+				Rating:       r.Rating,
+				ReviewBy:     strconv.FormatInt(r.ReviewBy, 10),
+				Active:       r.Active,
+				CreatedBy:    r.CreatedBy,
+				DateCreated:  r.DateCreated,
+				ModifiedBy:   r.ModifiedBy,
+				DateModified: r.DateModified,
+			}
+			var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &itemReview, StatusDesc: "Review successfully added"}
 			c.Ctx.Output.SetStatus(200)
 			c.Data["json"] = resp
 		} else {
@@ -169,8 +191,30 @@ func (c *Item_reviewsController) GetOneWithReference() {
 		c.Ctx.Output.SetStatus(200)
 		c.Data["json"] = resp
 	} else {
-		c.Data["json"] = v
-		var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: v, StatusDesc: "Review successfully added"}
+		logs.Info("Successfully fetched review with reference")
+		item := responses.Items{
+			ItemId:       strconv.FormatInt(v.Item.ItemId, 10),
+			ItemName:     v.Item.ItemName,
+			Description:  v.Item.Description,
+			ImagePath:    v.Item.ImagePath,
+			Active:       v.Item.Active,
+			DateCreated:  v.Item.DateCreated,
+			DateModified: v.Item.DateModified,
+		}
+		itemReview := responses.Item_reviews{
+			ItemReviewId: strconv.FormatInt(v.ItemReviewId, 10),
+			Review:       v.Review,
+			Item:         &item,
+			Reference:    strconv.FormatInt(v.Reference, 10),
+			Rating:       v.Rating,
+			ReviewBy:     strconv.FormatInt(v.ReviewBy, 10),
+			Active:       v.Active,
+			CreatedBy:    v.CreatedBy,
+			DateCreated:  v.DateCreated,
+			ModifiedBy:   v.ModifiedBy,
+			DateModified: v.DateModified,
+		}
+		var resp responses.ItemReviewResponseDTO = responses.ItemReviewResponseDTO{StatusCode: 200, ItemReview: &itemReview, StatusDesc: "Review successfully added"}
 		c.Ctx.Output.SetStatus(200)
 		c.Data["json"] = resp
 	}
@@ -239,7 +283,32 @@ func (c *Item_reviewsController) GetAll() {
 	} else {
 		// logs.Info("Reviews fetched successfully")
 		logs.Info("Reviews fetched successfully ", l)
-		var resp responses.ItemReviewsResponseDTO = responses.ItemReviewsResponseDTO{StatusCode: 200, ItemsReviews: &l, StatusDesc: "Reviews fetched successfully"}
+		respData := []*responses.Item_reviews{}
+		for _, v := range l {
+			m := v.(models.Item_reviews)
+			respData = append(respData, &responses.Item_reviews{
+				ItemReviewId: strconv.FormatInt(m.ItemReviewId, 10),
+				Review:       m.Review,
+				Rating:       m.Rating,
+				ReviewBy:     strconv.FormatInt(m.ReviewBy, 10),
+				Item: &responses.Items{
+					ItemId:       strconv.FormatInt(m.Item.ItemId, 10),
+					ItemName:     m.Item.ItemName,
+					Description:  m.Item.Description,
+					ImagePath:    m.Item.ImagePath,
+					Active:       m.Item.Active,
+					DateCreated:  m.Item.DateCreated,
+					DateModified: m.Item.DateModified,
+				},
+				DateCreated:  m.DateCreated,
+				DateModified: m.DateModified,
+				Reference:    strconv.FormatInt(m.Reference, 10),
+				CreatedBy:    m.CreatedBy,
+				ModifiedBy:   m.ModifiedBy,
+				Active:       m.Active,
+			})
+		}
+		var resp responses.ItemReviewsResponseDTO = responses.ItemReviewsResponseDTO{StatusCode: 200, ItemsReviews: respData, StatusDesc: "Reviews fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

@@ -14,11 +14,11 @@ type Item_purposes struct {
 	ItemPurposeId int64     `orm:"auto"`
 	Item          *Items    `orm:"rel(fk)"`
 	Purpose       *Purposes `orm:"rel(fk)"`
-	Active        int
+	Active        int       `orm:"omitempty"`
 	DateCreated   time.Time `orm:"type(datetime)"`
 	DateModified  time.Time `orm:"type(datetime)"`
-	CreatedBy     int
-	ModifiedBy    int
+	CreatedBy     string    `orm:"omitempty"`
+	ModifiedBy    string    `orm:"omitempty"`
 }
 
 func init() {

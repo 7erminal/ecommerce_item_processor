@@ -1,4 +1,4 @@
-package models
+package responses
 
 type ErrorResponse struct {
 	StatusCode int    `orm:"omitempty"`

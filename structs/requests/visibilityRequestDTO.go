@@ -1,6 +1,7 @@
 package requests
 
 type VisibilityRequestDTO struct {
-	Id         int64
+	Id         string
 	Visibility bool
+	CreatedBy  string
 }

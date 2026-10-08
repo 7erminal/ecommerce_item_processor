@@ -3,7 +3,6 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	helperFunc "item_processor/functions"
 	"item_processor/models"
 	"item_processor/structs/requests"
 	"item_processor/structs/responses"
@@ -74,7 +73,7 @@ func (c *PurposesController) Post() {
 			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
 			errorMessage := "Error: Failed to save the image file"
 
-			resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+			resp := responses.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
 
 			c.Data["json"] = resp
 			c.ServeJSON()
@@ -82,18 +81,29 @@ func (c *PurposesController) Post() {
 		}
 	}
 
+	createdby := c.Ctx.Input.Query("AddedBy")
 	v := models.Purposes{
 		Purpose:     c.Ctx.Input.Query("PurposeName"),
 		ImagePath:   viewFilePath,
 		Description: c.Ctx.Input.Query("Description"),
 		Active:      1,
-		CreatedBy:   1,
+		CreatedBy:   createdby,
 	}
 
 	if _, err := models.AddPurposes(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
 
-		var resp = responses.PurposeResponseDTO{StatusCode: 200, Purpose: &v, StatusDesc: "Purpose has been added successfully"}
+		respData := responses.Purposes{
+			PurposeId:    strconv.FormatInt(v.PurposeId, 10),
+			Purpose:      v.Purpose,
+			ImagePath:    v.ImagePath,
+			Visible:      v.Visible,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.PurposeResponseDTO{StatusCode: 200, Purpose: &respData, StatusDesc: "Purpose has been added successfully"}
 
 		c.Data["json"] = resp
 	} else {
@@ -117,31 +127,17 @@ func (c *PurposesController) GetOne() {
 		var resp = responses.PurposeResponseDTO{StatusCode: 301, Purpose: nil, StatusDesc: "Error fetching purpose"}
 		c.Data["json"] = resp
 	} else {
-		var resp = responses.PurposeResponseDTO{StatusCode: 200, Purpose: v, StatusDesc: "Purpose has been added successfully"}
-		c.Data["json"] = resp
-	}
-	c.ServeJSON()
-}
-
-// GetAllPurposesAndTheirItems ...
-// @Title Get All Purposes and their items
-// @Description get Features
-// @Success 200 {object} models.PurposesResponseFDTO
-// @Failure 403 is empty
-// @router /items [get]
-func (c *PurposesController) GetAllPurposesAndTheirItems() {
-	logs.Info("Getting all ")
-	v, err := models.GetAllPurposesWithTheirItems()
-
-	if err != nil {
-		var resp = responses.PurposesResponseFDTO{StatusCode: 301, Purposes: nil, StatusDesc: "Failed to fetch purposes"}
-		logs.Error("Error getting purposes", err.Error())
-		c.Data["json"] = resp
-	} else {
-		logs.Info("Data is ", v)
-		modified := helperFunc.ConvertParamsToPurposes(v)
-
-		var resp = responses.PurposesResponseFDTO{StatusCode: 200, Purposes: &modified, StatusDesc: "Purposes fetched successfully"}
+		respData := responses.Purposes{
+			PurposeId:    strconv.FormatInt(v.PurposeId, 10),
+			Purpose:      v.Purpose,
+			ImagePath:    v.ImagePath,
+			Visible:      v.Visible,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.PurposeResponseDTO{StatusCode: 200, Purpose: &respData, StatusDesc: "Purpose has been added successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -222,11 +218,21 @@ func (c *PurposesController) GetAll() {
 
 		c.Data["json"] = resp
 	} else {
-		purposesResp := []models.Purposes{}
+		purposesResp := []responses.Purposes{}
 		for _, urs := range l {
 			m := urs.(models.Purposes)
+			respData := responses.Purposes{
+				PurposeId:    strconv.FormatInt(m.PurposeId, 10),
+				Purpose:      m.Purpose,
+				ImagePath:    m.ImagePath,
+				Visible:      m.Visible,
+				Description:  m.Description,
+				Active:       m.Active,
+				DateCreated:  m.DateCreated,
+				DateModified: m.DateModified,
+			}
 
-			purposesResp = append(purposesResp, m)
+			purposesResp = append(purposesResp, respData)
 		}
 		var resp = responses.PurposesResponseDTO{StatusCode: 200, Purposes: &purposesResp, StatusDesc: "Purposes fetched successfully"}
 
@@ -268,10 +274,10 @@ func (c *PurposesController) ChangeVisibility() {
 	logs.Info("Change visibility request received")
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.ParseInt(idStr, 0, 64)
-	v := requests.VisibilityRequestDTO{Id: id}
+	v := requests.VisibilityRequestDTO{Id: idStr}
 	json.Unmarshal(c.Ctx.Input.RequestBody, &v)
 	if q, err := models.GetPurposesById(id); err == nil {
-		t := models.Purposes{PurposeId: id, Visible: v.Visibility, Purpose: q.Purpose, ImagePath: q.ImagePath, Description: q.Description, Active: q.Active, DateCreated: q.DateCreated, DateModified: time.Now(), CreatedBy: 1, ModifiedBy: 1}
+		t := models.Purposes{PurposeId: id, Visible: v.Visibility, Purpose: q.Purpose, ImagePath: q.ImagePath, Description: q.Description, Active: q.Active, DateCreated: q.DateCreated, DateModified: time.Now(), CreatedBy: q.CreatedBy, ModifiedBy: v.CreatedBy}
 		if err := models.UpdatePurposesById(&t); err == nil {
 			c.Data["json"] = "OK"
 		} else {

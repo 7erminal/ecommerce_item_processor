@@ -1,4 +1,4 @@
-package models
+package responses
 
 type ItemPurposeResponseDTO struct {
 	StatusCode  int
@@ -8,12 +8,12 @@ type ItemPurposeResponseDTO struct {
 
 type ItemPurposesResponseDTO struct {
 	StatusCode   int
-	ItemPurposes *[]Item_purposes
+	ItemPurposes []*Item_purposes
 	StatusDesc   string
 }
 
 type ItemTypesResponseDTO struct {
 	StatusCode int
-	ItemTypes  *[]Item_types
+	ItemTypes  []*Item_types
 	StatusDesc string
 }

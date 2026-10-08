@@ -5,5 +5,5 @@ type BranchRequestDTO struct {
 	CountryCode   string
 	PhoneNumber   string
 	Location      string
-	BranchManager int64
+	BranchManager string
 }

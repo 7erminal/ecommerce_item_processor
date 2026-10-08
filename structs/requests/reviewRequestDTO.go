@@ -2,9 +2,9 @@ package requests
 
 type AddReviewRequest struct {
 	Review    string
-	ReviewBy  int64
-	ItemId    int64
-	Reference int64
+	ReviewBy  string
+	ItemId    string
+	Reference string
 	Rating    float64
 	ImagePath string
 }

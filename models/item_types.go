@@ -16,9 +16,9 @@ type Item_types struct {
 	Description  string    `orm:"size(255)"`
 	DateCreated  time.Time `orm:"type(datetime)"`
 	DateModified time.Time `orm:"type(datetime)"`
-	CreatedBy    int
-	ModifiedBy   int
-	Active       int
+	CreatedBy    string    `orm:"omitempty"`
+	ModifiedBy   string    `orm:"omitempty"`
+	Active       int       `orm:"omitempty"`
 }
 
 func init() {

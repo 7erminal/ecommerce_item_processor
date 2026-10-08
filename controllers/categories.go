@@ -80,7 +80,7 @@ func (c *CategoriesController) Post() {
 			// c.Data["json"] = map[string]string{"error": "Failed to save the image file."}
 			errorMessage := "Error: Failed to save the image file"
 
-			resp := models.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
+			resp := responses.ErrorResponse{StatusCode: http.StatusInternalServerError, Error: errorMessage, StatusDesc: "Internal Server Error"}
 
 			c.Data["json"] = resp
 			c.ServeJSON()
@@ -91,12 +91,14 @@ func (c *CategoriesController) Post() {
 	// c.Data["json"] = map[string]string{"message": "Image uploaded successfully!"}
 	// c.ServeJSON()
 
+	createdBy := c.Ctx.Input.Query("AddedBy")
 	v := models.Categories{
 		CategoryName: c.Ctx.Input.Query("CategoryName"),
 		Icon:         c.Ctx.Input.Query("Icon"),
 		ImagePath:    viewFilePath,
 		Description:  c.Ctx.Input.Query("CategoryDescription"),
-		CreatedBy:    1,
+		CreatedBy:    createdBy,
+		ModifiedBy:   createdBy,
 		DateCreated:  time.Now(),
 		DateModified: time.Now(),
 		Active:       1,
@@ -105,7 +107,17 @@ func (c *CategoriesController) Post() {
 	if _, err := models.AddCategories(&v); err == nil {
 		c.Ctx.Output.SetStatus(201)
 
-		var resp = models.CategoryResponseDTO{StatusCode: 200, Category: &v, StatusDesc: "Category has been added successfully"}
+		respData := responses.Categories{
+			CategoryId:   strconv.FormatInt(v.CategoryId, 10),
+			CategoryName: v.CategoryName,
+			ImagePath:    v.ImagePath,
+			Icon:         v.Icon,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.CategoryResponseDTO{StatusCode: 200, Category: &respData, StatusDesc: "Category has been added successfully"}
 		c.Data["json"] = resp
 	} else {
 		logs.Error(err.Error())
@@ -126,10 +138,20 @@ func (c *CategoriesController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetCategoriesById(id)
 	if err != nil {
-		var resp = models.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
+		var resp = responses.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
 		c.Data["json"] = resp
 	} else {
-		var resp = models.CategoryResponseDTO{StatusCode: 200, Category: v, StatusDesc: "Category has been fetched successfully"}
+		respData := responses.Categories{
+			CategoryId:   strconv.FormatInt(v.CategoryId, 10),
+			CategoryName: v.CategoryName,
+			ImagePath:    v.ImagePath,
+			Icon:         v.Icon,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.CategoryResponseDTO{StatusCode: 200, Category: &respData, StatusDesc: "Category has been fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -146,10 +168,20 @@ func (c *CategoriesController) GetCategoryByName() {
 	name := c.Ctx.Input.Param(":name")
 	v, err := models.GetCategoriesByName(name)
 	if err != nil {
-		var resp = models.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
+		var resp = responses.CategoryResponseDTO{StatusCode: 301, Category: nil, StatusDesc: "Error fetching category " + err.Error()}
 		c.Data["json"] = resp
 	} else {
-		var resp = models.CategoryResponseDTO{StatusCode: 200, Category: v, StatusDesc: "Category has been fetched successfully"}
+		respData := responses.Categories{
+			CategoryId:   strconv.FormatInt(v.CategoryId, 10),
+			CategoryName: v.CategoryName,
+			ImagePath:    v.ImagePath,
+			Icon:         v.Icon,
+			Description:  v.Description,
+			Active:       v.Active,
+			DateCreated:  v.DateCreated,
+			DateModified: v.DateModified,
+		}
+		var resp = responses.CategoryResponseDTO{StatusCode: 200, Category: &respData, StatusDesc: "Category has been fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()
@@ -227,13 +259,22 @@ func (c *CategoriesController) GetAll() {
 	if err != nil {
 		c.Data["json"] = err.Error()
 	} else {
-		categoriesResp := []models.Categories{}
+		categoriesResp := []*responses.Categories{}
 		for _, urs := range l {
 			m := urs.(models.Categories)
-
-			categoriesResp = append(categoriesResp, m)
+			respData := responses.Categories{
+				CategoryId:   strconv.FormatInt(m.CategoryId, 10),
+				CategoryName: m.CategoryName,
+				ImagePath:    m.ImagePath,
+				Icon:         m.Icon,
+				Description:  m.Description,
+				Active:       m.Active,
+				DateCreated:  m.DateCreated,
+				DateModified: m.DateModified,
+			}
+			categoriesResp = append(categoriesResp, &respData)
 		}
-		resp := models.CategoriesResponseDTO{StatusCode: 200, Categories: &categoriesResp, StatusDesc: "Categories fetched successfully"}
+		resp := responses.CategoriesResponseDTO{StatusCode: 200, Categories: categoriesResp, StatusDesc: "Categories fetched successfully"}
 		c.Data["json"] = resp
 	}
 	c.ServeJSON()

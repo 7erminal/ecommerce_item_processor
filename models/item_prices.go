@@ -18,12 +18,12 @@ type Item_prices struct {
 	Discount      string
 	Discount_type string
 	ExtraCharges  float32
-	Currency      int64
-	Active        int
+	Currency      string
+	Active        int       `orm:"omitempty"`
 	DateCreated   time.Time `orm:"type(datetime)"`
 	DateModified  time.Time `orm:"type(datetime)"`
-	CreatedBy     int
-	ModifiedBy    int
+	CreatedBy     string    `orm:"omitempty"`
+	ModifiedBy    string    `orm:"omitempty"`
 }
 
 func init() {

@@ -1,17 +1,31 @@
 package responses
 
 import (
-	"item_processor/models"
+	"time"
 )
+
+type Item_reviews struct {
+	ItemReviewId string
+	Review       string
+	Rating       float64
+	ReviewBy     string
+	Item         *Items
+	DateCreated  time.Time
+	DateModified time.Time
+	Reference    string
+	CreatedBy    string
+	ModifiedBy   string
+	Active       int
+}
 
 type ItemReviewsResponseDTO struct {
 	StatusCode   int
-	ItemsReviews *[]interface{}
+	ItemsReviews []*Item_reviews
 	StatusDesc   string
 }
 
 type ItemReviewResponseDTO struct {
 	StatusCode int
-	ItemReview *models.Item_reviews
+	ItemReview *Item_reviews
 	StatusDesc string
 }

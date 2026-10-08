@@ -42,8 +42,8 @@ type Items struct {
 	Active          int            `orm:"omitempty"`
 	DateCreated     time.Time      `orm:"type(datetime);omitempty"`
 	DateModified    time.Time      `orm:"type(datetime);omitempty"`
-	CreatedBy       int            `orm:"omitempty"`
-	ModifiedBy      int            `orm:"omitempty"`
+	CreatedBy       string         `orm:"omitempty"`
+	ModifiedBy      string         `orm:"omitempty"`
 	Country         int64          `orm:"column(country)"`
 	Branch          int64          `orm:"column(branch);null"`
 	Status          *Status        `orm:"rel(fk);column(item_status);null"`

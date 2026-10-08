@@ -1,4 +1,4 @@
-package models
+package responses
 
 type ItemImagesResponseDTO struct {
 	StatusCode int
@@ -8,12 +8,12 @@ type ItemImagesResponseDTO struct {
 
 type ItemImagesResponseDTO2 struct {
 	StatusCode int
-	ItemImages *[]Item_images
+	ItemImages *[]ItemImagesDTO
 	StatusDesc string
 }
 
 type ItemImageResponseDTO struct {
 	StatusCode int
-	ItemImage  *Item_images
+	ItemImage  *ItemImagesDTO
 	StatusDesc string
 }

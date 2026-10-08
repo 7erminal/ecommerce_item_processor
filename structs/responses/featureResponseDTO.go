@@ -2,9 +2,9 @@ package responses
 
 import "time"
 
-type Purposes struct {
-	PurposeId    string
-	Purpose      string
+type Features struct {
+	FeatureId    string
+	Feature      string
 	ImagePath    string
 	Visible      bool
 	Description  string
@@ -13,14 +13,14 @@ type Purposes struct {
 	DateModified time.Time
 }
 
-type PurposesResponseDTO struct {
+type FeaturesResponseDTO struct {
 	StatusCode int
-	Purposes   *[]Purposes
+	Features   *[]Features
 	StatusDesc string
 }
 
-type PurposeResponseDTO struct {
+type FeatureResponseDTO struct {
 	StatusCode int
-	Purpose    *Purposes
+	Feature    *Features
 	StatusDesc string
 }
