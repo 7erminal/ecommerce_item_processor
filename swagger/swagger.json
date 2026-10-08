@@ -351,26 +351,6 @@
                 }
             }
         },
-        "/features/items": {
-            "get": {
-                "tags": [
-                    "features"
-                ],
-                "description": "get Features\n\u003cbr\u003e",
-                "operationId": "FeaturesController.Get All Features and their items",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.FeaturesResponseFDTO"
-                        }
-                    },
-                    "403": {
-                        "description": "is empty"
-                    }
-                }
-            }
-        },
         "/features/name": {
             "post": {
                 "tags": [
@@ -824,7 +804,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "{int} responses.StringResponseFDTO"
+                        "description": "{int} responses.StringResponseDTO"
                     },
                     "403": {
                         "description": "body is empty"
@@ -1653,100 +1633,6 @@
                 }
             }
         },
-        "/items/branch/{branch_id}": {
-            "get": {
-                "tags": [
-                    "items"
-                ],
-                "description": "get Items\n\u003cbr\u003e",
-                "operationId": "ItemsController.Get All Items by branch",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "branch_id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.Items"
-                        }
-                    },
-                    "403": {
-                        "description": ""
-                    }
-                }
-            }
-        },
-        "/items/categories/{id}": {
-            "get": {
-                "tags": [
-                    "items"
-                ],
-                "description": "get Item_features by Item id\n\u003cbr\u003e",
-                "operationId": "ItemsController.Get Item Features",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.ItemsResponseDTO2"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            }
-        },
         "/items/check-item-quantity/{item_id}": {
             "get": {
                 "tags": [
@@ -1877,35 +1763,6 @@
                 }
             }
         },
-        "/items/features/feature/{id}": {
-            "get": {
-                "tags": [
-                    "items"
-                ],
-                "description": "get Item_features by Item id\n\u003cbr\u003e",
-                "operationId": "ItemsController.Get Item Features",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.ItemsResponseDTO2"
-                        }
-                    },
-                    "403": {
-                        "description": ":id is empty"
-                    }
-                }
-            }
-        },
         "/items/get-item-stats/{branch_id}": {
             "get": {
                 "tags": [
@@ -1935,31 +1792,40 @@
                 }
             }
         },
-        "/items/purposes/purpose/{id}": {
-            "get": {
+        "/items/price/{id}": {
+            "put": {
                 "tags": [
                     "items"
                 ],
-                "description": "get Item_purposes by Item id\n\u003cbr\u003e",
-                "operationId": "ItemsController.Get Item Purposes",
+                "description": "update the Item's price\n\u003cbr\u003e",
+                "operationId": "ItemsController.Update Item Price",
                 "parameters": [
                     {
                         "in": "path",
                         "name": "id",
-                        "description": "The key for staticblock",
+                        "description": "The id you want to update",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Items content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ItemPriceRequest"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.ItemsResponseDTO2"
+                            "$ref": "#/definitions/models.Items"
                         }
                     },
                     "403": {
-                        "description": ":id is empty"
+                        "description": ":id is not int"
                     }
                 }
             }
@@ -1989,6 +1855,42 @@
                     },
                     "403": {
                         "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "items"
+                ],
+                "description": "update the Item's quantity\n\u003cbr\u003e",
+                "operationId": "ItemsController.Update Item Quantity",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Items content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ItemQuantityRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Items"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
                     }
                 }
             }
@@ -2242,26 +2144,6 @@
                 }
             }
         },
-        "/purposes/items": {
-            "get": {
-                "tags": [
-                    "purposes"
-                ],
-                "description": "get Features\n\u003cbr\u003e",
-                "operationId": "PurposesController.Get All Purposes and their items",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.PurposesResponseFDTO"
-                        }
-                    },
-                    "403": {
-                        "description": "is empty"
-                    }
-                }
-            }
-        },
         "/purposes/{id}": {
             "get": {
                 "tags": [
@@ -2353,66 +2235,22 @@
         }
     },
     "definitions": {
-        "1231.\u003cnil\u003e.0x140008bb530": {
-            "title": "0x140008bb530",
+        "3421.\u003cnil\u003e.0x40f909070528": {
+            "title": "0x40f909070528",
             "type": "object"
         },
-        "1278.\u003cnil\u003e.0x140008bb560": {
-            "title": "0x140008bb560",
+        "3468.\u003cnil\u003e.0x40f909070558": {
+            "title": "0x40f909070558",
             "type": "object"
-        },
-        "1388.\u003cnil\u003e.Item_purposes": {
-            "title": "Item_purposes",
-            "type": "object"
-        },
-        "511.\u003cnil\u003e.Item_features": {
-            "title": "Item_features",
-            "type": "object"
-        },
-        "73940.\u003cnil\u003e.Items": {
-            "title": "Items",
-            "type": "object"
-        },
-        "models.Branches": {
-            "title": "Branches",
-            "type": "object",
-            "properties": {
-                "Active": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Branch": {
-                    "type": "string"
-                },
-                "BranchId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Country": {
-                    "$ref": "#/definitions/models.Countries"
-                },
-                "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "DateCreated": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "DateModified": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
         },
         "models.Categories": {
             "title": "Categories",
             "type": "object",
             "properties": {
+                "Active": {
+                    "type": "integer",
+                    "format": "int32"
+                },
                 "CategoryId": {
                     "type": "integer",
                     "format": "int64"
@@ -2421,8 +2259,7 @@
                     "type": "string"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2431,6 +2268,9 @@
                 "DateModified": {
                     "type": "string",
                     "format": "datetime"
+                },
+                "Description": {
+                    "type": "string"
                 },
                 "Icon": {
                     "type": "string"
@@ -2439,82 +2279,6 @@
                     "type": "string"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "models.Countries": {
-            "title": "Countries",
-            "type": "object",
-            "properties": {
-                "Country": {
-                    "type": "string"
-                },
-                "CountryCode": {
-                    "type": "string"
-                },
-                "CountryId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "DateCreated": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "DateModified": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "DefaultCurrency": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Description": {
-                    "type": "string"
-                },
-                "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "models.Currencies": {
-            "title": "Currencies",
-            "type": "object",
-            "properties": {
-                "Active": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Currency": {
-                    "type": "string"
-                },
-                "CurrencyId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "DateCreated": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "DateModified": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Symbol": {
                     "type": "string"
                 }
             }
@@ -2528,8 +2292,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2553,89 +2316,32 @@
                     "type": "string"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Visible": {
                     "type": "boolean"
                 }
             }
         },
-        "models.FeaturesResponseFDTO": {
-            "title": "FeaturesResponseFDTO",
-            "type": "object"
-        },
         "models.ItemFeatureRequestDTO": {
             "title": "ItemFeatureRequestDTO",
-            "type": "object",
-            "properties": {
-                "FeatureId": {
-                    "type": "string"
-                },
-                "ItemId": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "models.ItemFeaturesResponseDTO": {
             "title": "ItemFeaturesResponseDTO",
-            "type": "object",
-            "properties": {
-                "ItemFeatures": {
-                    "$ref": "#/definitions/511.\u003cnil\u003e.Item_features"
-                },
-                "StatusCode": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "StatusDesc": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "models.ItemPurposeRequestDTO": {
             "title": "ItemPurposeRequestDTO",
-            "type": "object",
-            "properties": {
-                "ItemId": {
-                    "type": "string"
-                },
-                "PurposeId": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "models.ItemPurposesResponseDTO": {
             "title": "ItemPurposesResponseDTO",
-            "type": "object",
-            "properties": {
-                "ItemPurposes": {
-                    "$ref": "#/definitions/1388.\u003cnil\u003e.Item_purposes"
-                },
-                "StatusCode": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "StatusDesc": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "models.ItemQuantityResponseDTO": {
             "title": "ItemQuantityResponseDTO",
-            "type": "object",
-            "properties": {
-                "Quantity": {
-                    "$ref": "#/definitions/models.Item_quantity"
-                },
-                "StatusCode": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "StatusDesc": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "models.Item_features": {
             "title": "Item_features",
@@ -2646,8 +2352,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2668,8 +2373,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 }
             }
         },
@@ -2682,8 +2386,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2709,8 +2412,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 }
             }
         },
@@ -2727,11 +2429,10 @@
                     "format": "float"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Currency": {
-                    "$ref": "#/definitions/models.Currencies"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2760,8 +2461,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "ShowAltPrice": {
                     "type": "boolean"
@@ -2777,8 +2477,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2796,8 +2495,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Purpose": {
                     "$ref": "#/definitions/models.Purposes"
@@ -2813,8 +2511,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2832,8 +2529,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Quantity": {
                     "type": "integer",
@@ -2854,8 +2550,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2873,8 +2568,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Rating": {
                     "type": "number",
@@ -2888,7 +2582,8 @@
                     "type": "string"
                 },
                 "ReviewBy": {
-                    "$ref": "#/definitions/models.Users"
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -2901,8 +2596,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2920,8 +2614,7 @@
                     "format": "int64"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Name": {
                     "type": "string"
@@ -2943,17 +2636,18 @@
                     "type": "string"
                 },
                 "Branch": {
-                    "$ref": "#/definitions/models.Branches"
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "Category": {
                     "$ref": "#/definitions/models.Categories"
                 },
                 "Country": {
-                    "$ref": "#/definitions/models.Countries"
-                },
-                "CreatedBy": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "CreatedBy": {
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -2969,6 +2663,12 @@
                 "ImagePath": {
                     "type": "string"
                 },
+                "ItemFeatures": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Features"
+                    }
+                },
                 "ItemId": {
                     "type": "integer",
                     "format": "int64"
@@ -2979,6 +2679,15 @@
                 "ItemPrice": {
                     "$ref": "#/definitions/models.Item_prices"
                 },
+                "ItemPurposes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Purposes"
+                    }
+                },
+                "ItemQuantity": {
+                    "$ref": "#/definitions/models.Item_quantity"
+                },
                 "LastOrderDate": {
                     "type": "string",
                     "format": "datetime"
@@ -2987,8 +2696,7 @@
                     "type": "string"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Quantity": {
                     "type": "integer",
@@ -3004,109 +2712,7 @@
         },
         "models.ItemsDTO": {
             "title": "ItemsDTO",
-            "type": "object",
-            "properties": {
-                "AltPrice": {
-                    "type": "number",
-                    "format": "float"
-                },
-                "AvailableColors": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "AvailableSizes": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "Branch": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Category": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Country": {
-                    "type": "string"
-                },
-                "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Description": {
-                    "type": "string"
-                },
-                "ItemName": {
-                    "type": "string"
-                },
-                "ItemPrice": {
-                    "type": "number",
-                    "format": "float"
-                },
-                "Quantity": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "QuantityAlert": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "models.ItemsResponseDTO2": {
-            "title": "ItemsResponseDTO2",
-            "type": "object",
-            "properties": {
-                "Items": {
-                    "$ref": "#/definitions/73940.\u003cnil\u003e.Items"
-                },
-                "StatusCode": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "StatusDesc": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.Object": {
-            "title": "Object",
-            "type": "object",
-            "properties": {
-                "ObjectId": {
-                    "type": "string"
-                },
-                "PlayerName": {
-                    "type": "string"
-                },
-                "Score": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "models.Profile": {
-            "title": "Profile",
-            "type": "object",
-            "properties": {
-                "Address": {
-                    "type": "string"
-                },
-                "Age": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Email": {
-                    "type": "string"
-                },
-                "Gender": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "models.Purposes": {
             "title": "Purposes",
@@ -3117,8 +2723,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -3135,8 +2740,7 @@
                     "type": "string"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Purpose": {
                     "type": "string"
@@ -3150,10 +2754,6 @@
                 }
             }
         },
-        "models.PurposesResponseFDTO": {
-            "title": "PurposesResponseFDTO",
-            "type": "object"
-        },
         "models.Status": {
             "title": "Status",
             "type": "object",
@@ -3163,8 +2763,7 @@
                     "format": "int64"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "DateCreated": {
                     "type": "string",
@@ -3175,8 +2774,7 @@
                     "format": "datetime"
                 },
                 "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Status": {
                     "type": "string"
@@ -3187,95 +2785,6 @@
                 "StatusId": {
                     "type": "integer",
                     "format": "int64"
-                }
-            }
-        },
-        "models.User": {
-            "title": "User",
-            "type": "object",
-            "properties": {
-                "Id": {
-                    "type": "string"
-                },
-                "Password": {
-                    "type": "string"
-                },
-                "Profile": {
-                    "$ref": "#/definitions/models.Profile"
-                },
-                "Username": {
-                    "type": "string"
-                }
-            }
-        },
-        "models.Users": {
-            "title": "Users",
-            "type": "object",
-            "properties": {
-                "Active": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Address": {
-                    "type": "string"
-                },
-                "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "DateCreated": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "DateModified": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "Dob": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "Email": {
-                    "type": "string"
-                },
-                "FullName": {
-                    "type": "string"
-                },
-                "Gender": {
-                    "type": "string"
-                },
-                "IdNumber": {
-                    "type": "string"
-                },
-                "IdType": {
-                    "type": "string"
-                },
-                "IsVerified": {
-                    "type": "boolean"
-                },
-                "MaritalStatus": {
-                    "type": "string"
-                },
-                "ModifiedBy": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Password": {
-                    "type": "string"
-                },
-                "PhoneNumber": {
-                    "type": "string"
-                },
-                "UserId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "UserType": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Username": {
-                    "type": "string"
                 }
             }
         },
@@ -3300,19 +2809,16 @@
                     }
                 },
                 "Branch": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Category": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Country": {
                     "type": "string"
                 },
                 "CreatedBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Description": {
                     "type": "string"
@@ -3349,23 +2855,20 @@
                     "type": "string"
                 },
                 "ItemId": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Rating": {
                     "type": "number",
                     "format": "double"
                 },
                 "Reference": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Review": {
                     "type": "string"
                 },
                 "ReviewBy": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 }
             }
         },
@@ -3390,10 +2893,47 @@
                 }
             }
         },
+        "requests.ItemPriceRequest": {
+            "title": "ItemPriceRequest",
+            "type": "object",
+            "properties": {
+                "AltPrice": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "ExtraCharges": {
+                    "type": "number",
+                    "format": "float"
+                },
+                "ItemId": {
+                    "type": "string"
+                },
+                "Price": {
+                    "type": "number",
+                    "format": "float"
+                }
+            }
+        },
+        "requests.ItemQuantityRequest": {
+            "title": "ItemQuantityRequest",
+            "type": "object",
+            "properties": {
+                "ItemId": {
+                    "type": "string"
+                },
+                "Quantity": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
         "requests.ItemTypeRequest": {
             "title": "ItemTypeRequest",
             "type": "object",
             "properties": {
+                "AddedBy": {
+                    "type": "string"
+                },
                 "Description": {
                     "type": "string"
                 },
@@ -3415,9 +2955,11 @@
             "title": "VisibilityRequestDTO",
             "type": "object",
             "properties": {
+                "CreatedBy": {
+                    "type": "string"
+                },
                 "Id": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "string"
                 },
                 "Visibility": {
                     "type": "boolean"
@@ -3445,10 +2987,10 @@
             "type": "object",
             "properties": {
                 "BranchStats": {
-                    "$ref": "#/definitions/1231.\u003cnil\u003e.0x140008bb530"
+                    "$ref": "#/definitions/3421.\u003cnil\u003e.0x40f909070528"
                 },
                 "CategoryStats": {
-                    "$ref": "#/definitions/1278.\u003cnil\u003e.0x140008bb560"
+                    "$ref": "#/definitions/3468.\u003cnil\u003e.0x40f909070558"
                 }
             }
         },

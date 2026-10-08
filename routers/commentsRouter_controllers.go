@@ -117,15 +117,6 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"],
         beego.ControllerComments{
-            Method: "GetAllFeaturesAndTheirItems",
-            Router: "/items",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:FeaturesController"],
-        beego.ControllerComments{
             Method: "GetOneByName",
             Router: "/name",
             AllowHTTPMethods: []string{"post"},
@@ -504,18 +495,18 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
-            Method: "Post",
+            Method: "GetAll",
             Router: "/",
-            AllowHTTPMethods: []string{"post"},
+            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
-            Method: "GetAll",
+            Method: "Post",
             Router: "/",
-            AllowHTTPMethods: []string{"get"},
+            AllowHTTPMethods: []string{"post"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
@@ -543,24 +534,6 @@ func init() {
             Method: "Put",
             Router: "/:id",
             AllowHTTPMethods: []string{"put"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
-        beego.ControllerComments{
-            Method: "GetAllByBranch",
-            Router: "/branch/:branch_id",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
-        beego.ControllerComments{
-            Method: "GetItemsByCategory",
-            Router: "/categories/:id",
-            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
@@ -603,15 +576,6 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
-            Method: "GetItemFeatures",
-            Router: "/features/feature/:id",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
-        beego.ControllerComments{
             Method: "GetItemStats",
             Router: "/get-item-stats/:branch_id",
             AllowHTTPMethods: []string{"get"},
@@ -621,9 +585,18 @@ func init() {
 
     beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
         beego.ControllerComments{
-            Method: "GetItemPurposes",
-            Router: "/purposes/purpose/:id",
-            AllowHTTPMethods: []string{"get"},
+            Method: "UpdateItemPrice",
+            Router: "/price/:id",
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["item_processor/controllers:ItemsController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ItemsController"],
+        beego.ControllerComments{
+            Method: "UpdateItemQuantity",
+            Router: "/quantity/:id",
+            AllowHTTPMethods: []string{"put"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
@@ -642,51 +615,6 @@ func init() {
             Method: "UpdateItemImage",
             Router: "/update-item-image/:id",
             AllowHTTPMethods: []string{"put"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ObjectController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ObjectController"],
-        beego.ControllerComments{
-            Method: "Post",
-            Router: "/",
-            AllowHTTPMethods: []string{"post"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ObjectController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ObjectController"],
-        beego.ControllerComments{
-            Method: "GetAll",
-            Router: "/",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ObjectController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ObjectController"],
-        beego.ControllerComments{
-            Method: "Get",
-            Router: "/:objectId",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ObjectController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ObjectController"],
-        beego.ControllerComments{
-            Method: "Put",
-            Router: "/:objectId",
-            AllowHTTPMethods: []string{"put"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:ObjectController"] = append(beego.GlobalControllerRouter["item_processor/controllers:ObjectController"],
-        beego.ControllerComments{
-            Method: "Delete",
-            Router: "/:objectId",
-            AllowHTTPMethods: []string{"delete"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
@@ -741,78 +669,6 @@ func init() {
             Method: "ChangeVisibility",
             Router: "/change-visibility/:id",
             AllowHTTPMethods: []string{"put"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:PurposesController"] = append(beego.GlobalControllerRouter["item_processor/controllers:PurposesController"],
-        beego.ControllerComments{
-            Method: "GetAllPurposesAndTheirItems",
-            Router: "/items",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "Post",
-            Router: "/",
-            AllowHTTPMethods: []string{"post"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "GetAll",
-            Router: "/",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "Get",
-            Router: "/:uid",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "Put",
-            Router: "/:uid",
-            AllowHTTPMethods: []string{"put"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "Delete",
-            Router: "/:uid",
-            AllowHTTPMethods: []string{"delete"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "Login",
-            Router: "/login",
-            AllowHTTPMethods: []string{"get"},
-            MethodParams: param.Make(),
-            Filters: nil,
-            Params: nil})
-
-    beego.GlobalControllerRouter["item_processor/controllers:UserController"] = append(beego.GlobalControllerRouter["item_processor/controllers:UserController"],
-        beego.ControllerComments{
-            Method: "Logout",
-            Router: "/logout",
-            AllowHTTPMethods: []string{"get"},
             MethodParams: param.Make(),
             Filters: nil,
             Params: nil})
